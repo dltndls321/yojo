@@ -100,4 +100,11 @@ public class TestController {
 		return model;
 	}
 	
+	@RequestMapping(value = "maptest.do")
+	public String maptest(HttpServletResponse response) throws Exception{
+		return "/maptest/maptest";
+	}
+	
+	
+	
 }
