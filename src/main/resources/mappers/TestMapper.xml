@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="testMapperNS">
+   <insert id="insertTest" parameterType="testVO">
+    	Insert Into test(num,name)
+    	values(
+    		#{num},
+    		#{name}
+    	)
+    </insert>
+    <select id="selectTest" parameterType="testVO" resultType="testVO">
+    	select
+    		*
+    	from
+    		test
+    	where
+    		num = #{num}
+    </select>
+    <select id="selectTestAll" resultType="testVO">
+    	select
+    		*
+    	from
+    		test
+    </select>
+    <delete id="deleteTest" parameterType="int">
+    	delete
+    		from test
+    	where
+    		num = #{num}
+    </delete>
+    <update id="updateTest" parameterType="testVO">
+    	update test set
+    		name = #{name}
+    	where
+    		num = #{num}
+    </update>
+    
+</mapper>
