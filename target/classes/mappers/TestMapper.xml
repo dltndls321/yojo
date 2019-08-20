@@ -37,5 +37,5 @@
     	where
     		num = #{num}
     </update>
-    <!-- 주석 -->
+    <!-- 주석1 -->
 </mapper>
