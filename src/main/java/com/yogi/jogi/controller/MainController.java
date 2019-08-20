@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	@RequestMapping(value = "main")
 	public String moveMain() {
-		return "main/index";
+		return "index/index.do";
+	}
+	@RequestMapping(value = "index3")
+	public String moveMain2() {
+		return "index/index3.do";
 	}
 }

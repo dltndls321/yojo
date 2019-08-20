@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<head>
-
 <!-- Basic Page Needs
 ================================================== -->
 <title>Listeo</title>
@@ -10,7 +8,6 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="/resources/css/main-color.css" id="colors">
+<link rel="stylesheet" href="/resources/css/style.css"/>
+<link rel="stylesheet" href="/resources/css/main-color.css" id="colors"/>
 
-</head>
