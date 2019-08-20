@@ -18,6 +18,5 @@
 <input type="button" value="update로 이동" onclick="location.href='http://localhost:8080/index4.do'">
 <br>
 <input type="button" value="maptest로 이동" onclick="location.href='http://localhost:9080/maptest.do'">
-<!--  -->
 </body>
 </html>
