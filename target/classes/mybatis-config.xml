@@ -5,7 +5,7 @@
     <configuration>
     	 
     	 <typeAliases>
-    	 	<typeAlias type="com.yogi.jogi.vo.TestVO" alias="testVO"/>
+    	 	<typeAlias type="com.yogi.jogi.common.model.TestModel" alias="testVO"/>
         </typeAliases>
         <!-- <mappers>
         	<mapper resource="/mappers/Login_Register_Mapper.xml"/>
