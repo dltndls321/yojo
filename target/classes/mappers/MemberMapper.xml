@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="memberMapperNS">
-  <insert id="insertMember" parameterType="memberVO">
+  <insert id="insertMember" parameterType="memberModel">
     	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate)
     	values(
     		memberSeq.NEXTVAL,

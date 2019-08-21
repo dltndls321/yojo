@@ -6,7 +6,8 @@
     	 
     	 <typeAliases>
     	 	<typeAlias type="com.yogi.jogi.common.model.TestModel" alias="testVO"/>
-    	 	<typeAlias type="com.yogi.jogi.member.model.MemberModel" alias="memberVO"/>
+    	 	<typeAlias type="com.yogi.jogi.member.model.MemberModel" alias="memberModel"/>
+    	 	<typeAlias type="com.yogi.jogi.map.model.MapModel" alias="mapModel"/>
         </typeAliases>
         <!-- <mappers>
         	<mapper resource="/mappers/Login_Register_Mapper.xml"/>

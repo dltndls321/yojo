@@ -9,4 +9,7 @@ import com.yogi.jogi.map.service.MapService;
 public class MapServiceImpl implements MapService{
 	@Autowired
 	private MapDao dao;
+	
+	
+	
 }
