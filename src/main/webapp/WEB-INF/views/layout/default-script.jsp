@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/resources/scripts/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="/resources/scripts/custom.js"></script>
+<script type="text/javascript" src="/resources/scripts/loginregister.js"></script>
 
 
 <!-- Google Autocomplete -->
