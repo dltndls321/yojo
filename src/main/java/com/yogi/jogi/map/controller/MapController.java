@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.map.service.MapService;
-import com.yogi.jogi.member.service.MemberService;
+
 
 
 
 @Controller
-@RequestMapping("map")
 public class MapController {
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	ModelAndView mv = new ModelAndView();
@@ -30,5 +29,4 @@ public class MapController {
 		
 		return mv;
 	}
-	
 }
