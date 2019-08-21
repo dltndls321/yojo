@@ -4,28 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="memberMapperNS">
-  <!--  <insert id="insertTest" parameterType="testVO">
-    	Insert Into test(num,name)
+  <insert id="insertMember" parameterType="memberModel">
+    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate)
     	values(
-    		#{num},
-    		#{name}
+    		memberSeq.NEXTVAL,
+    		#{id},
+    		#{passwd},
+    		#{name},
+    		#{jumin},
+    		#{address},
+    		#{phone},
+    		#{email},
+    		sysdate
     	)
     </insert>
-    <select id="selectTest" parameterType="testVO" resultType="testVO">
+  <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
     	select
     		*
     	from
     		test
     	where
     		num = #{num}
-    </select>
-    <select id="selectTestAll" resultType="testVO">
+    </select> -->
+    <select id="selectMemberList" resultType="memberModel">
     	select
     		*
     	from
-    		test
+    		member
     </select>
-    <delete id="deleteTest" parameterType="int">
+    <!--  <delete id="deleteTest" parameterType="int">
     	delete
     		from test
     	where
@@ -37,5 +44,5 @@
     	where
     		num = #{num}
     </update>
-     -->
+      -->
 </mapper>

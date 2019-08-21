@@ -66,6 +66,12 @@ public class MemberModel {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	@Override
+	public String toString() {
+		return "MemberModel [memnum=" + memnum + ", id=" + id + ", passwd=" + passwd + ", name=" + name + ", jumin="
+				+ jumin + ", address=" + address + ", phone=" + phone + ", email=" + email + ", regdate=" + regdate
+				+ "]";
+	}
 	
 	
 }
