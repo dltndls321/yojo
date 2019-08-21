@@ -18,21 +18,21 @@
     		sysdate
     	)
     </insert>
-   <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
+  <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
     	select
     		*
     	from
     		test
     	where
     		num = #{num}
-    </select>
-    <select id="selectTestAll" resultType="testVO">
+    </select> -->
+    <select id="selectMemberList" resultType="memberModel">
     	select
     		*
     	from
-    		test
+    		member
     </select>
-    <delete id="deleteTest" parameterType="int">
+    <!--  <delete id="deleteTest" parameterType="int">
     	delete
     		from test
     	where

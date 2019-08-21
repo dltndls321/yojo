@@ -1,5 +1,7 @@
 package com.yogi.jogi.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,9 @@ public class MemberDao {
 	
 	public int insertMember(MemberModel memberModel) throws Exception{
 		return sqlSession.insert(Namespace+".insertMember",memberModel);
+	}
+	
+	public List<MemberModel> selectMemberList() throws Exception {
+		return sqlSession.selectList(Namespace + ".selectMemberList");
 	}
 }

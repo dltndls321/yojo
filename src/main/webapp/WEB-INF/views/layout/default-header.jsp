@@ -126,44 +126,44 @@
 							<form method="post" class="register" action="/member/registemember">
 							
 							<p class="form-row form-row-wide">
-								<label for="nameLabel">이름:
+								<label for="nameLabel" >이름:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="name" id="name" value="" />
+									<input type="text" class="input-text" name="name" id="nameRegister" value="" onblur=""/>
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="phoneLabel">번호:
 									<i class="im im-icon-Phone"></i>
-									<input type="text" class="input-text" name="phone" id="phone" value="" />
+									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" />
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="addressLabel">주소:
 									<i class="im im-icon-Address-Book"></i>
-									<input type="text" class="input-text" name="address" id="address" value="" />
+									<input type="text" class="input-text" name="address" id="addressRegister" value="" />
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="juminLabel">주민번호:
 									<i class="im im-icon-Credit-Card3"></i>
-									<input type="text" class="input-text" name="jumin" id="jumin" value="" />
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" />
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="idLabel">아이디:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="id" id="id" value="" />
+									<input type="text" class="input-text" name="id" id="idRegister" value="" />
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="emailLabel">이메일:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="email" value="" />
+									<input type="text" class="input-text" name="email" id="emailRegister" value="" />
 								</label>
 							</p>
 							
@@ -172,14 +172,14 @@
 							<p class="form-row form-row-wide">
 								<label for="passwdLabel">비밀번호:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd" id="passwd"/>
+									<input class="input-text" type="password" name="passwd" id="passwdRegister"/>
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd2" id="passwd2"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2Register"/>
 								</label>
 							</p>
 
