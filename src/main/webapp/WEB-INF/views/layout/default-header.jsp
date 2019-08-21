@@ -128,42 +128,42 @@
 							<p class="form-row form-row-wide">
 								<label for="nameLabel" >이름:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="name" id="nameRegister" value="" onblur=""/>
+									<input type="text" class="input-text" name="name" id="nameRegister" value="" onblur="emptyCheck('nameRegister','nameRegister','이름을 입력하세요.')" onclick="resetSelect('nameRegister','nameRegister','이름을 입력하세요.')"/>
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="phoneLabel">번호:
 									<i class="im im-icon-Phone"></i>
-									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" />
+									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onclick="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="addressLabel">주소:
 									<i class="im im-icon-Address-Book"></i>
-									<input type="text" class="input-text" name="address" id="addressRegister" value="" />
+									<input type="text" class="input-text" name="address" id="addressRegister" value="" onblur="emptyCheck('addressRegister','addressRegister','주소를 입력하세요.')" onclick="resetSelect('addressRegister','addressRegister','주소를 입력하세요.')"/>
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="juminLabel">주민번호:
 									<i class="im im-icon-Credit-Card3"></i>
-									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" />
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onclick="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="idLabel">아이디:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="id" id="idRegister" value="" />
+									<input type="text" class="input-text" name="id" id="idRegister" value="" onblur="emptyCheck('idRegister','idRegister','아이디를 입력하세요.')" onclick="resetSelect('idRegister','idRegister','아이디를 입력하세요.')"/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="emailLabel">이메일:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="emailRegister" value="" />
+									<input type="text" class="input-text" name="email" id="emailRegister" value="" onblur="emptyCheck('emailRegister','emailRegister','이메일을 입력하세요.')" onclick="resetSelect('emailRegister','emailRegister','이메일을 입력하세요.')"/>
 								</label>
 							</p>
 							
@@ -172,14 +172,14 @@
 							<p class="form-row form-row-wide">
 								<label for="passwdLabel">비밀번호:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd" id="passwdRegister"/>
+									<input class="input-text" type="password" name="passwd" id="passwdRegister" onblur="emptyCheckPasswd('passwdRegister','passwdRegister','비밀번호를 입력하세요.')" onclick="resetSelectPasswd('passwdRegister','passwdRegister','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd2" id="passwd2Register"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="emptyCheckPasswd('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onclick="resetSelectPasswd('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
 
