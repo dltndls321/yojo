@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapperNS">
+
+
+	<select id="selectBoardCount" parameterType="boardModel"
+		resultType="boardModel">
+		select nvl(count(*),0) from board where boardid =
+		#{boardid}
+	</select>
+
+
+	<select id="selectBoardList" parameterType="boardModel"
+		resultType="boardModel">
+		select * from 
+		(select rownum rnum ,a.*
+		from(select*from board
+		where boardid = #{boardid}
+		order by ref desc , reStep) a )
+		<!-- where  rnum between 1 and 3 -->
+	</select>
+
+	<select id="selectArticle" parameterType="boardModel"
+		resultType="boardModel">
+		select * from board where boardNum = #{boardNum} and boardid =
+		#{boardid}
+
+	</select>
+
+
+
+	<select id="selectMaxBoardNum" resultType="int">
+		select
+		nvl(max(boardNum),0) from
+		board
+	</select>
+
+	<update id="updateArticle" parameterType="boardModel">
+		update board set
+		reStep=reStep+1 where ref= #{ref} and reStep> #{reStep}
+	</update>
+
+
+	<insert id="insertArticle" parameterType="boardModel">
+		insert into
+		board values
+		(#{boardNum},#{memNum},#{boardid}
+		,#{subject},#{writer},#{passwd},#{content},
+		#{fname},#{fsize},#{readcount},,sysdate,0,
+		#{ref},#{reStep},#{reLevel})
+	</insert>
+
+
+	<select id="selectPasswdOneNum" parameterType="boardModel"
+		resultType="boardModel">
+		select 
+			passwd 
+		from 
+			board 
+		where 
+			boardNum = #{boardNum}
+	</select>
+
+
+
+	<update id="updateReadcount" parameterType="hashmap">
+		update board set
+		readcount=readcount+1 where num = #{num}
+	</update>
+
+
+
+	<update id="updateBoard" parameterType="hashmap">
+		update 
+			board 
+		set
+			writer=#{writer},
+			email=#{email},
+			subject=#{subject},
+			passwd=#{passwd},
+			content=#{content}
+		where 
+			boardNum=#{boardNum}
+	</update>
+
+	<select id="deleteBoard" parameterType="hashmap">
+		delete from board where boardNum =
+		#{boardNum}
+	</select>
+
+
+
+
+</mapper>
