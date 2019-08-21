@@ -123,7 +123,7 @@
 						<!-- Register -->
 						<div class="tab-content" id="tab2" style="display: none;">
 
-							<form method="post" class="register">
+							<form method="post" class="register" action="/member/registemember">
 							
 							<p class="form-row form-row-wide">
 								<label for="nameLabel">이름:

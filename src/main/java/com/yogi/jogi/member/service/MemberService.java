@@ -1,5 +1,7 @@
 package com.yogi.jogi.member.service;
 
-public interface MemberService {
+import com.yogi.jogi.member.model.MemberModel;
 
+public interface MemberService {
+	public int insertMember(MemberModel memberModel) throws Exception;
 }
