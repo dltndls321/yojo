@@ -7,8 +7,6 @@ public class MapModel {
 	private String addr;
 	private long x;
 	private long y;
-	
-
 	public String getName() {
 		return name;
 	}
@@ -43,6 +41,9 @@ public class MapModel {
 	public String toString() {
 		return "MapModel [name=" + name + ", food=" + food + ", addr=" + addr + ", x=" + x + ", y=" + y + "]";
 	}
+	
+
+	
 	
 	
 	
