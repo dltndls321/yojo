@@ -204,32 +204,62 @@
 						<div class="tab-content" id="tab2" style="display: none;">
 
 							<form method="post" class="register">
-								
+							
 							<p class="form-row form-row-wide">
-								<label for="username2">Username:
+								<label for="nameLabel">이름:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="username2" value="" />
+									<input type="text" class="input-text" name="name" id="name" value="" />
+								</label>
+							</p>
+							
+							<p class="form-row form-row-wide">
+								<label for="phoneLabel">번호:
+									<i class="im im-icon-Phone"></i>
+									<input type="text" class="input-text" name="phone" id="phone" value="" />
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
-								<label for="email2">Email Address:
+								<label for="addressLabel">주소:
+									<i class="im im-icon-Address-Book"></i>
+									<input type="text" class="input-text" name="address" id="address" value="" />
+								</label>
+							</p>
+							
+							<p class="form-row form-row-wide">
+								<label for="juminLabel">주민번호:
+									<i class="im im-icon-Credit-Card3"></i>
+									<input type="text" class="input-text" name="jumin" id="jumin" value="" />
+								</label>
+							</p>
+								
+							<p class="form-row form-row-wide">
+								<label for="idLabel">아이디:
+									<i class="im im-icon-Male"></i>
+									<input type="text" class="input-text" name="id" id="id" value="" />
+								</label>
+							</p>
+								
+							<p class="form-row form-row-wide">
+								<label for="emailLabel">이메일:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="email2" value="" />
+									<input type="text" class="input-text" name="email" id="email" value="" />
+								</label>
+							</p>
+							
+							
+
+							<p class="form-row form-row-wide">
+								<label for="passwdLabel">비밀번호:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="passwd" id="passwd"/>
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
-								<label for="password1">Password:
+								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" id="password1"/>
-								</label>
-							</p>
-
-							<p class="form-row form-row-wide">
-								<label for="password2">Repeat Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="password2"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2"/>
 								</label>
 							</p>
 
