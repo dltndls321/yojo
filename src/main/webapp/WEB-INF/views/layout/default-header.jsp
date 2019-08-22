@@ -163,7 +163,7 @@
 							<p class="form-row form-row-wide">
 								<label for="emailLabel">이메일:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="emailRegister" value="" onblur="emptyCheck('emailRegister','emailRegister','이메일을 입력하세요.')" onclick="resetSelect('emailRegister','emailRegister','이메일을 입력하세요.')"/>
+									<input type="text" class="input-text" name="email" id="emailRegister" value="" onblur="emailCheck('emailRegister','이메일을 입력하세요.')" onclick="emailResetCheck('emailRegister','이메일을 입력하세요.')"/>
 								</label>
 							</p>
 							
@@ -172,14 +172,14 @@
 							<p class="form-row form-row-wide">
 								<label for="passwdLabel">비밀번호:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd" id="passwdRegister" onblur="emptyCheckPasswd('passwdRegister','passwdRegister','비밀번호를 입력하세요.')" onclick="resetSelectPasswd('passwdRegister','passwdRegister','비밀번호를 입력하세요.')"/>
+									<input class="input-text" type="password" name="passwd" id="passwdRegister" onblur="passwdCheck('passwdRegister','passwdRegister','비밀번호를 입력하세요.')" onclick="resetpasswdSelect('passwdRegister','passwdRegister','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="emptyCheckPasswd('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onclick="resetSelectPasswd('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdCheck('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onclick="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
 
