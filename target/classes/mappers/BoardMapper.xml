@@ -28,7 +28,7 @@
 		select
 		 	* from board 
 		 where 
-		 	boardNum = #{boardNum} and boardid =#{boardid}
+		 	boardNum = #{boardNum} 
 
 	</select>
 
@@ -58,7 +58,7 @@
 		#{fname},#{fsize},#{readcount},,sysdate,0,
 		#{ref},#{reStep},#{reLevel})
 	</insert>
-
+	
 
 	<select id="selectPasswdOneNum" parameterType="boardModel"
 		resultType="boardModel">
@@ -69,7 +69,16 @@
 		where 
 			boardNum = #{boardNum}
 	</select>
-
+	<select id="selectOneBoardNum" parameterType="boardModel"
+		resultType="boardModel">
+		select 
+			*
+		from 
+			board 
+		where 
+			boardNum = #{boardNum}
+	</select>
+	
 
 
 	<update id="updateReadcount" parameterType="boardModel">
@@ -96,13 +105,7 @@
 			boardNum=#{boardNum}
 	</update>
 
-	<select id="deleteBoard" parameterType="boardModel">
-		delete 
-			from board 
-		where 
-			boardNum =#{boardNum}
-	</select>
-
+	
 
 
 

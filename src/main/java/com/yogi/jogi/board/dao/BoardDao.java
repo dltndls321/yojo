@@ -14,7 +14,7 @@ import com.yogi.jogi.board.model.BoardModel;
 @Repository
 public class BoardDao {
 	@Autowired
-	private SqlSession sqlSession;
+	private static SqlSession sqlSession;
 
 	private static final String Namespace = "boardMapperNS";
 
@@ -23,19 +23,8 @@ public class BoardDao {
 	}
 
 	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
+		return sqlSession.selectOne(Namespace+".selectBoard");
 		
-		HashMap map = new HashMap();
-		map.put("boardNum", boardModel.getBoardNum());
-		map.put("boardid", boardModel.getBoardid());
-		BoardModel article = new BoardModel();
-		try {
-			int result = sqlSession.update(Namespace + ".update_readcount", boardModel);
-			article = (BoardModel) sqlSession.selectOne(Namespace + ".selectBoard ", boardModel);
-		} finally {
-			sqlSession.commit();
-			sqlSession.close();
-			return article;
-		}
 	}
 
 	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
