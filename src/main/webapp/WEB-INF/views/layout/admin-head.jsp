@@ -10,3 +10,4 @@
 ================================================== -->
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/main-color.css" id="colors">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
