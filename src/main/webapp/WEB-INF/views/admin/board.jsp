@@ -6,12 +6,12 @@
 		<div id="titlebar">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Howdy, Tom!</h2>
+					<h2>Admin Main</h2>
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
 							<li><a href="#">Home</a></li>
-							<li>Dashboard</li>
+							<li>Admin</li>
 						</ul>
 					</nav>
 				</div>
@@ -19,48 +19,47 @@
 		</div>
 
 		<!-- Notice -->
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<div class="notification success closeable margin-bottom-30">
 					<p>Your listing <strong>Hotel Govendor</strong> has been approved!</p>
 					<a class="close" href="#"></a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- Content -->
 		<div class="row">
-
-			<!-- Item -->
-			<div class="col-lg-3 col-md-6">
-				<div class="dashboard-stat color-1">
-					<div class="dashboard-stat-content"><h4>6</h4> <span>Active Listings</span></div>
-					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
-				</div>
-			</div>
-
-			<!-- Item -->
+		
+		<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-2">
-					<div class="dashboard-stat-content"><h4>726</h4> <span>Total Views</span></div>
+					<div class="dashboard-stat-content"><h4>1000</h4> <span>Total Visitor</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
 				</div>
 			</div>
-
 			
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-3">
-					<div class="dashboard-stat-content"><h4>95</h4> <span>Total Reviews</span></div>
+					<div class="dashboard-stat-content"><h4>5</h4> <span>Total Member</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
 				</div>
 			</div>
 
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
-				<div class="dashboard-stat color-4">
-					<div class="dashboard-stat-content"><h4>126</h4> <span>Times Bookmarked</span></div>
-					<div class="dashboard-stat-icon"><i class="im im-icon-Heart"></i></div>
+				<div class="dashboard-stat color-1">
+					<div class="dashboard-stat-content"><h4>25</h4> <span>Total Course</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
+				</div>
+			</div>
+
+			<!-- Item -->
+			<div class="col-lg-3 col-md-6">
+				<div class="dashboard-stat color-1">
+					<div class="dashboard-stat-content"><h4>50</h4> <span>Total TripInfo</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 				</div>
 			</div>
 		</div>
@@ -71,42 +70,51 @@
 			<!-- Recent Activity -->
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box with-icons margin-top-20">
-					<h4>Recent Activities</h4>
+					<h4>New Board</h4>
 					<ul>
+
 						<li>
-							<i class="list-box-icon sl sl-icon-layers"></i> Your listing <strong><a href="#">Hotel Govendor</a></strong> has been approved!
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+							<i class="list-box-icon sl sl-icon-layers"></i> 출발 에서 도착  on <strong><a href="#">TripInfo</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+						<li>
+							<i class="list-box-icon sl sl-icon-layers"></i> 출발 에서 도착   on <strong><a href="#">TripInfo</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
 						</li>
 
 						<li>
-							<i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Burger House</a></strong>
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+						<li>
+							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
 						</li>
 
 						<li>
-							<i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger House</a></strong> listing!
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
 						</li>
-
+						
 						<li>
-							<i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating" data-rating="3.0"></div> on <strong><a href="#">Airport</a></strong>
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
 						</li>
-
-						<li>
-							<i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger House</a></strong> listing!
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-						</li>
-
-						<li>
-							<i class="list-box-icon sl sl-icon-star"></i> John Doe left a review <div class="numerical-rating" data-rating="4.0"></div> on <strong><a href="#">Burger House</a></strong>
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-						</li>
-
-						<li>
-							<i class="list-box-icon sl sl-icon-star"></i> Jack Perry left a review <div class="numerical-rating" data-rating="2.5"></div> on <strong><a href="#">Tom's Restaurant</a></strong>
-							<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -114,54 +122,42 @@
 			<!-- Invoices -->
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box invoices with-icons margin-top-20">
-					<h4>Invoices</h4>
+					<h4>New Member</h4>
 					<ul>
 						
 						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>Professional Plan</strong>
+							<strong>hyeyeon8752</strong>
 							<ul>
-								<li class="unpaid">Unpaid</li>
-								<li>Order: #00124</li>
-								<li>Date: 20/07/2019</li>
+								<li class="paid">이혜연</li>
+								<li>MemNum: 01</li>
+								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="dashboard-invoice.html" class="button gray">View Invoice</a>
+								<a href="/admin/" class="button gray">View Info</a>
 							</div>
 						</li>
 						
 						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>Extended Plan</strong>
+							<strong>euny</strong>
 							<ul>
-								<li class="paid">Paid</li>
-								<li>Order: #00108</li>
-								<li>Date: 14/07/2019</li>
+								<li class="paid">송은희</li>
+								<li>MemNum: 02</li>
+								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="dashboard-invoice.html" class="button gray">View Invoice</a>
+								<a href="/admin/" class="button gray">View Info</a>
 							</div>
 						</li>
 
 						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>Extended Plan</strong>
+							<strong>winsun</strong>
 							<ul>
-								<li class="paid">Paid</li>
-								<li>Order: #00097</li>
-								<li>Date: 10/07/2019</li>
+								<li class="paid">이승해</li>
+								<li>MemNum: 03</li>
+								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="dashboard-invoice.html" class="button gray">View Invoice</a>
-							</div>
-						</li>
-						
-						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>Basic Plan</strong>
-							<ul>
-								<li class="paid">Paid</li>
-								<li>Order: #00091</li>
-								<li>Date: 30/06/2019</li>
-							</ul>
-							<div class="buttons-to-right">
-								<a href="dashboard-invoice.html" class="button gray">View Invoice</a>
+								<a href="/admin/" class="button gray">View Info</a>
 							</div>
 						</li>
 
