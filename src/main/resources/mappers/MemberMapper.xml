@@ -32,6 +32,22 @@
     	from
     		member
     </select>
+     <select id="selectMemberWithId" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		id = #{id}
+    </select>
+     <select id="selectMemberWithEmail" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		email = #{email}
+    </select>
     <!--  <delete id="deleteTest" parameterType="int">
     	delete
     		from test

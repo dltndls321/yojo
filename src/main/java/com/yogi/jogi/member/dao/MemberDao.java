@@ -22,4 +22,12 @@ public class MemberDao {
 	public List<MemberModel> selectMemberList() throws Exception {
 		return sqlSession.selectList(Namespace + ".selectMemberList");
 	}
+	
+	public MemberModel selectMemberWithId(MemberModel memberModel) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectMemberWithId",memberModel);
+	}
+	
+	public MemberModel selectMemberWithEmail(MemberModel memberModel) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectMemberWithEmail",memberModel);
+	}
 }
