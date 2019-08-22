@@ -10,8 +10,8 @@
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Admin</a></li>
+							<li><a href="/main/main">Home</a></li>
+							<li><a href="/abmin/main">Admin</a></li>
 							<li>Customer Center</li>
 						</ul>
 					</nav>
