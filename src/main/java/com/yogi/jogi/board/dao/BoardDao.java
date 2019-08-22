@@ -14,7 +14,7 @@ import com.yogi.jogi.board.model.BoardModel;
 @Repository
 public class BoardDao {
 	@Autowired
-	private static SqlSession sqlSession;
+	private SqlSession sqlSession;
 
 	private static final String Namespace = "boardMapperNS";
 
