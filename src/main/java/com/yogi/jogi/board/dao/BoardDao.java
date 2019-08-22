@@ -1,9 +1,6 @@
 package com.yogi.jogi.board.dao;
 
-import java.util.HashMap;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,78 +19,90 @@ public class BoardDao {
 		return sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
 	}
 
-	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace+".selectBoard");
-		
-	}
+	private static final String Namespace = "boardMapperNS";
 
-	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectMaxBoardNum", boardModel);
-	}
+	public List selectBoardList(BoardModel boardModel) throws Exception {
+		System.out.println("before quering" + boardModel.toString());
+		String boardid = boardModel.getBoardid();
+		List returnValue = sqlSession.selectList(Namespace + ".selectBoardList");
 
-	public int updateReStep(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".updateReStep", boardModel);
+		System.out.println(returnValue.toString());
+		return returnValue;
 
 	}
 
-	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
-		int num = boardModel.getBoardNum();
-		int ref = boardModel.getRef();
-		int reStep = boardModel.getReStep();
-		int reLevel = boardModel.getReLevel();
-		try {
-			HashMap map = new HashMap();
-			int number = sqlSession.selectOne(Namespace + ".selectMaxBoardNum");
-			if (number != 0)
-				number = number + 1;
-			else
-				number = 1;
-			if (num != 0) {
-				map.put("ref", ref);
-				map.put("reStep", reStep);
-				sqlSession.update(Namespace + ".updateReStep", map);
-				reStep = reStep + 1;
-				reLevel = reLevel + 1;
-			} else {
-				ref = number;
-				reStep = 0;
-				reLevel = 0;
-			}
-			boardModel.setBoardNum(number);
-			boardModel.setRef(ref);
-			boardModel.setReStep(reStep);
-			boardModel.setReLevel(reLevel);
-			boardModel.setBoardid(boardid);
-			int result = sqlSession.insert(Namespace + ".insertBoard", boardModel);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			sqlSession.commit();
-			sqlSession.close();
-		}
-		return sqlSession.selectOne(Namespace + ".insertBoard",boardModel);
-	}
-
-	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
-		try {
-			return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	public int updateReadCount(BoardModel boardModel) throws Exception {
-		
-		
-		return sqlSession.selectOne(Namespace + ".updateReadCount", boardModel);
-
-	}
-	public int updateBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
-
-	}
-	public int deleteBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".deleteBoard", boardModel);
-
-	}
+//	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
+//		return sqlSession.selectOne(Namespace+".selectBoard",boardModel);
+//		
+//	}
+//
+//	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
+//		return sqlSession.selectOne(Namespace + ".selectMaxBoardNum", boardModel);
+//	}
+//
+//	public int updateReStep(BoardModel boardModel) throws Exception {
+//		return sqlSession.selectOne(Namespace + ".updateReStep", boardModel);
+//
+//	}
+//
+//	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
+//		int num = boardModel.getBoardNum();
+//		int ref = boardModel.getRef();
+//		int reStep = boardModel.getReStep();
+//		int reLevel = boardModel.getReLevel();
+//		try {
+//			HashMap map = new HashMap();
+//			int number = sqlSession.selectOne(Namespace + ".selectMaxBoardNum");
+//			if (number != 0)
+//				number = number + 1;
+//			else
+//				number = 1;
+//			if (num != 0) {
+//				map.put("ref", ref);
+//				map.put("reStep", reStep);
+//				sqlSession.update(Namespace + ".updateReStep", map);
+//				reStep = reStep + 1;
+//				reLevel = reLevel + 1;
+//			} else {
+//				ref = number;
+//				reStep = 0;
+//				reLevel = 0;
+//			}
+//			boardModel.setBoardNum(number);
+//			boardModel.setRef(ref);
+//			boardModel.setReStep(reStep);
+//			boardModel.setReLevel(reLevel);
+//			boardModel.setBoardid(boardid);
+//			int result = sqlSession.insert(Namespace + ".insertBoard", boardModel);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			sqlSession.commit();
+//			sqlSession.close();
+//		}
+//		return sqlSession.selectOne(Namespace + ".insertBoard",boardModel);
+//	}
+//
+//	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
+//		try {
+//			return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
+//		} finally {
+//			sqlSession.close();
+//		}
+//	}
+//
+//	public int updateReadCount(BoardModel boardModel) throws Exception {
+//		
+//		
+//		return sqlSession.selectOne(Namespace + ".updateReadCount", boardModel);
+//
+//	}
+//	public int updateBoard(BoardModel boardModel) throws Exception {
+//		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
+//
+//	}
+//	public int deleteBoard(BoardModel boardModel) throws Exception {
+//		return sqlSession.selectOne(Namespace + ".deleteBoard", boardModel);
+//
+//	}
 }

@@ -2,6 +2,7 @@ package com.yogi.jogi.board.controller;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,18 +30,11 @@ public class BoardController {
 	ModelAndView mv = new ModelAndView();
 	private String boardid;
 	private int pageNum;
+	
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping("board1")
-	public void board1() throws Exception {
-		BoardModel boardModel = new BoardModel();
-		boardModel.setBoardid("1");
-		List<BoardModel> list = boardService.selectBoardList(boardModel);
-		int a = list.size();
-		System.out.println(list);
-		System.out.println(a);
-	}
+	
 
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
@@ -63,9 +57,15 @@ public class BoardController {
 
 	@RequestMapping("list")
 	public ModelAndView list() throws Exception {
-
+		BoardModel boardModel = new BoardModel();
+		boardid="1";
+		boardModel.setBoardid(boardid);
+		System.out.println(boardModel);
+		List AllList = boardService.selectBoardList(boardModel);
+		System.out.println("성공");
 		mv.setViewName("board/list");
-
+	    mv.addObject("articleList", AllList);
+		
 		return mv;
 	}
 
@@ -73,8 +73,8 @@ public class BoardController {
 	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
 		mv.clear(); 
 		BoardModel a = new BoardModel();
-		a = boardService.selectBoard(boardModel);
-		System.out.println(boardService.selectBoard(boardModel));
+//		a = boardService.selectBoard(boardModel);
+//		System.out.println(boardService.selectBoard(boardModel));
 		
 		
 		mv.addObject("num", boardModel.getBoardNum());
