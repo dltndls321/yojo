@@ -10,7 +10,7 @@ public class BoardModel {
 	private String writer;
 	private String passwd;
 	private String fname;
-	private String fsize;
+	private int fsize;
 	private int readcount;
 	private Date regdate;
 	private int ref;
@@ -58,10 +58,10 @@ public class BoardModel {
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
-	public String getFsize() {
+	public int getFsize() {
 		return fsize;
 	}
-	public void setFsize(String fsize) {
+	public void setFsize(int fsize) {
 		this.fsize = fsize;
 	}
 	public int getReadcount() {

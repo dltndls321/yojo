@@ -5,18 +5,21 @@
 <script>
 
 $(document).ready(function(){
-	
-	$.ajax({        
-        url: 'test.do',
-        type: 'get',
-        data : {},
-        success: function(data){
-            	$('#festival').html(data);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown);
-        }
-        });	
+	$('#search').click( function(){
+		var areaCode = $("#areacode option:selected").val();
+		var date = $("#date-picker").val();
+		$.ajax({        
+	        url: 'test.do',
+	        type: 'get',
+	        data : {"areaCode" : areaCode, "eventStartDate" :date},
+	        success: function(data){
+	            	$('#festival').html(data);
+	            },
+	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+	        }
+	        });	
+	});
 });
 
 </script>
@@ -52,29 +55,35 @@ $(document).ready(function(){
 		<div class="col-md-12">
 			<div class="main-search-input gray-style margin-top-0 margin-bottom-10">
 
+				
 				<div class="main-search-input-item">
-					<input type="text" placeholder="What are you looking for?" value=""/>
-				</div>
-
-				<div class="main-search-input-item location">
-					<div id="autocomplete-container">
-						<input id="autocomplete-input" type="text" placeholder="Location">
-					</div>
-					<a href="#"><i class="fa fa-map-marker"></i></a>
-				</div>
-
-				<div class="main-search-input-item">
-					<select data-placeholder="All Categories" class="chosen-select" >
-						<option>All Categories</option>	
-						<option>Shops</option>
-						<option>Hotels</option>
-						<option>Restaurants</option>
-						<option>Fitness</option>
-						<option>Events</option>
+					<select data-placeholder="All Categories" class="chosen-select" id="areacode" >
+						<option value = "">지역 선택</option>	
+						<option value ="1">서울</option>
+						<option value ="2">인천</option>
+						<option value ="3">대전</option>
+						<option value ="4">대구</option>
+						<option value ="5">광주</option>
+						<option value ="6">부산</option>
+						<option value ="7">울산</option>
+						<option value ="8">세종특별자치시</option>
+						<option value ="31">경기도</option>
+						<option value ="32">강원도</option>
+						<option value ="33">충청북도</option>
+						<option value ="34">충청남도</option>
+						<option value ="35">경상북도</option>
+						<option value ="36">경상남도</option>
+						<option value ="37">전라북도</option>
+						<option value ="38">전라남도</option>
+						<option value ="39">제주도</option>
 					</select>
 				</div>
+				<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+					<div class="main-search-input-item">
+						<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+					</div>
 
-				<button class="button">Search</button>
+				<button class="button" id = "search">Search</button>
 			</div>
 		</div>
 		<!-- Search Section / End -->
