@@ -22,6 +22,16 @@ public class AdminController {
 		return "admin/memberProfile.admin";
 	}
 	
+	@RequestMapping(value = "customerCenter")
+	public String moveCustomerCenter() {
+		return "admin/customerCenter.admin";
+	}
+	
+	@RequestMapping(value = "bookings")
+	public String moveBookings() {
+		return "admin/bookings.admin";
+	}
+	
 	
 }
 
