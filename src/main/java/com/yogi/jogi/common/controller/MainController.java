@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -37,7 +38,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "test.do")
-	public void test(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void test(HttpServletRequest request, HttpServletResponse response, @RequestParam String areaCode, @RequestParam String eventStartDate) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
         String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?serviceKey=";
@@ -49,9 +50,11 @@ public class MainController {
         parameter = parameter + "&" + "MobileApp=AppTest";
         parameter = parameter + "&" + "arrange=O";       
         parameter = parameter + "&" + "listYN=Y" ;
-        parameter = parameter + "&" + "eventStartDate=20170901" ;
+        parameter = parameter + "&" + "eventStartDate=" + eventStartDate ;
+        parameter = parameter + "&" + "areaCode=" + areaCode ;
+        parameter = parameter + "&" + "numOfRows=9999999";
         parameter = parameter + "&" + "_type=json";
- 
+        
         addr = addr + serviceKey + parameter;
         URL url = new URL(addr);
  
@@ -82,8 +85,7 @@ public class MainController {
         System.out.println("2"+parse_body.toString());
         System.out.println("3"+parse_items.toString());
         System.out.println("5"+parse_item.size());
-        JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
-        System.out.println(totalCount.toString());
+
 		 
         String finaldata="";
         for (int i = 0; i < parse_item.size(); i++) { // 해당 JSONArray객체에 값을 차례대로 가져와서 읽습니다. 
