@@ -123,7 +123,7 @@
 						<!-- Register -->
 						<div class="tab-content" id="tab2" style="display: none;">
 
-							<form method="post" class="register" action="/member/registemember">
+							<form method="post" id="registerForm" class="register" action="/member/registemember">
 							
 							<p class="form-row form-row-wide">
 								<label for="nameLabel" >이름:<a id="nameRegisterWarn" style="color: red; display: none;" >한글로만 입력 가능합니다.</a>
@@ -156,7 +156,7 @@
 							<p class="form-row form-row-wide">
 								<label for="idLabel">아이디:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="id" id="idRegister" value="" onblur="IDOverlapCheck('idRegister','idRegister','아이디를 입력하세요.')" onfocus="resetSelect('idRegister','idRegister','아이디를 입력하세요.')" onkeypress=""/>
+									<input type="text" class="input-text" name="id" id="idRegister" value="" onblur="IDOverlapCheck('idRegister','아이디를 입력하세요.')" onfocus="resetSelect('idRegister','idRegister','아이디를 입력하세요.')" onkeypress=""/>
 								</label>
 							</p>
 								
@@ -179,10 +179,10 @@
 							<p class="form-row form-row-wide">
 								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdOverlapCheck('passwdRegister','passwd2Register')" onfocus="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdOverlapCheck('passwdRegister','passwd2Register');emptyCheck('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onfocus="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
-							<button name="register" class="button border fw margin-top-10" id="registerSubmit" type="button">회원가입</button>
+							<button name="register" class="button border fw margin-top-10" id="registerSubmit" type="button" onclick="onclickRegister('nameRegister','phoneRegister','addressRegister','juminRegister','idRegister','emailRegister','passwdRegister','passwd2Register','registerForm')">회원가입</button>
 							<!-- <input type="submit" class="button border fw margin-top-10" name="register" value="회원가입" /> -->
 	
 							</form>
