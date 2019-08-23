@@ -19,17 +19,6 @@ public class BoardDao {
 		return sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
 	}
 
-	private static final String Namespace = "boardMapperNS";
-
-	public List selectBoardList(BoardModel boardModel) throws Exception {
-		System.out.println("before quering" + boardModel.toString());
-		String boardid = boardModel.getBoardid();
-		List returnValue = sqlSession.selectList(Namespace + ".selectBoardList");
-
-		System.out.println(returnValue.toString());
-		return returnValue;
-
-	}
 
 //	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
 //		return sqlSession.selectOne(Namespace+".selectBoard",boardModel);
