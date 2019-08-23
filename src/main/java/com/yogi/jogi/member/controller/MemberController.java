@@ -69,7 +69,13 @@ public class MemberController {
 		return model;
 	}
 	
-	//ajax 메소드들
+	@RequestMapping(value = "logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/main/main";
+	}
+	
+	//ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
 	public void IDOverlapCheck(@RequestParam String id,HttpServletResponse response)throws Exception{
 		PrintWriter out = response.getWriter();
