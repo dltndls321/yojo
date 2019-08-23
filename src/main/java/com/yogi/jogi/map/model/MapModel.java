@@ -5,8 +5,8 @@ public class MapModel {
 	private String name;
 	private String food;
 	private String addr;
-	private long x;
-	private long y;
+	private float x;
+	private float y;
 	public String getName() {
 		return name;
 	}
@@ -25,16 +25,17 @@ public class MapModel {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public long getX() {
+
+	public float getX() {
 		return x;
 	}
-	public void setX(long x) {
+	public void setX(float x) {
 		this.x = x;
 	}
-	public long getY() {
+	public float getY() {
 		return y;
 	}
-	public void setY(long y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 	@Override

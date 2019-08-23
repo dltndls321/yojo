@@ -32,7 +32,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberModel memberModel) throws Exception{
-		System.out.println("registemember : Á¤º¸È®ÀÎ");
+		System.out.println("registemember : ì‹œìž‘");
 		model.clear();
 		memberService.insertMember(memberModel);
 
@@ -44,13 +44,13 @@ public class MemberController {
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(id);
-		System.out.println("IDOverlapCheck¿¡¼­ Ãâ·Â : "+memberService.selectMemberWithId(memberModel));
+		System.out.println("IDOverlapCheck : "+memberService.selectMemberWithId(memberModel));
 		if(memberService.selectMemberWithId(memberModel)==null) {
-			System.out.println("À¯È¿¼º °Ë»ç :NotOverlap");
+			System.out.println("IDOverlapCheck :NotOverlap");
 			out.append("0");
 			out.flush();
 		}else {
-			System.out.println("À¯È¿¼º °Ë»ç :Overlap");
+			System.out.println("IDOverlapCheck :Overlap");
 			out.append("1");
 			out.flush();
 		}
@@ -58,18 +58,18 @@ public class MemberController {
 	}
 	@RequestMapping(value = "EmailOverlapCheck",method = RequestMethod.POST)
 	public void EmailOverlapCheck(@RequestParam String email,HttpServletResponse response)throws Exception{
-		System.out.println("EmailOverlapCheck : ±¸µ¿");
+		System.out.println("EmailOverlapCheck : ì‹œìž‘");
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setEmail(email);
-		System.out.println("EmailOverlapCheck¿¡¼­ Ãâ·Â : "+memberService.selectMemberWithEmail(memberModel));
+		System.out.println("EmailOverlapCheck : "+memberService.selectMemberWithEmail(memberModel));
 		if(memberService.selectMemberWithEmail(memberModel)==null) {
-			System.out.println("À¯È¿¼º °Ë»ç :NotOverlap");
-			out.append("0");
+			System.out.println("EmailOverlapCheck :NotOverlap");
+			out.append("2");
 			out.flush();
 		}else {
-			System.out.println("À¯È¿¼º °Ë»ç :Overlap");
-			out.append("1");
+			System.out.println("EmailOverlapCheck :Overlap");
+			out.append("3");
 			out.flush();
 		}
 		out.close();
