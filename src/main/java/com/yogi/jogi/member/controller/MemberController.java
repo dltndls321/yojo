@@ -46,9 +46,26 @@ public class MemberController {
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
 		model.setViewName("redirect:/main/main");
-		
+		model.addObject("InfoMember",memberModel);
 		return model;
 	}
+	@RequestMapping(value = "loginmember")
+	public ModelAndView loginmember(MemberModel memberModel,HttpSession session) throws Exception{
+		System.out.println("loginmember : 시작");
+		model.clear();
+		memberModel = memberService.selectMemberWithId(memberModel);
+		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
+		System.out.println("아이디 >>" + memberModel.getId());
+		System.out.println("비밀번호 >>" + memberModel.getPasswd());
+		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
+		session.setAttribute("SessionMemberId", memberModel.getId());
+		session.setAttribute("SessionMemberName", memberModel.getName());
+		model.setViewName("redirect:/main/main");
+		model.addObject("InfoMember",memberModel);
+		return model;
+	}
+	
+	//ajax 메소드들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
 	public void IDOverlapCheck(@RequestParam String id,HttpServletResponse response)throws Exception{
 		PrintWriter out = response.getWriter();
@@ -82,6 +99,32 @@ public class MemberController {
 			System.out.println("EmailOverlapCheck :Overlap");
 			out.append("3");
 			System.out.println(3);
+			out.flush();
+		}
+		out.close();
+	}
+	@RequestMapping(value = "loginCheck",method = RequestMethod.POST)
+	public void loginCheck(@RequestParam String id,@RequestParam String passwd,HttpServletResponse response)throws Exception{
+		System.out.println("loginCheck : 시작");
+		PrintWriter out = response.getWriter();
+		MemberModel memberModel = new MemberModel();
+		MemberModel dataModel = memberService.selectMemberWithId(memberModel);
+		memberModel.setId(id);
+		System.out.println("loginCheck  : "+dataModel);
+		if(memberService.selectMemberWithId(memberModel)==null) {
+			System.out.println("loginCheck :id null");
+			out.append("0");
+			System.out.println(0);
+			out.flush();
+		}else if(!dataModel.getPasswd().equals(passwd)){
+			System.out.println("loginCheck :passwdWrong");
+			out.append("1");
+			System.out.println(1);
+			out.flush();
+		}else {
+			System.out.println("loginCheck :success");
+			out.append("2");
+			System.out.println(2);
 			out.flush();
 		}
 		out.close();

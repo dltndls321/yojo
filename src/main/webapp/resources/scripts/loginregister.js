@@ -189,5 +189,45 @@ function onclickRegister(target1,target2,target3,target4,target5,target6,target7
 	}
 	
 }
-
+function onclickloginSubmit(target1,target2,target3){
+	var1 = document.getElementById(target1);
+	var2 = document.getElementById(target2);
+	var3 = document.getElementById(target3);
+	if(var1.value == ""||var1.value=='아이디를 입력하세요.'){
+		$('#idLogin').val('아이디를 입력하세요.');
+		$('#idLogin').css('color','red');
+		$('#idLogin').css('borderColor','red');
+		return false;
+	}else if(var2.value == ""||var2.value=='비밀번호를 입력하세요.'){
+		var2.type="text";
+		$('#passwdLogin').val('비밀번호를 입력하세요.');
+		$('#passwdLogin').css('color','red');
+		$('#passwdLogin').css('borderColor','red');
+		return false;
+	}else{
+		$.ajax({
+			url : '/member/loginCheck',
+			type : 'post',
+			data: {'id' : var1.value,'passwd' : var2.value},
+			success:function(data){
+				if(data == '0'){
+					$('#idLogin').css('color','red');
+					$('#idLogin').css('borderColor','red');
+					$('#idLogin').val('아이디가 존재하지 않습니다.');
+				}
+				else if(data == '1'){
+					var2.type="text";
+					$('#passwdLogin').val('비밀번호가 다릅니다.');
+					$('#passwdLogin').css('color','red');
+					$('#passwdLogin').css('borderColor','red');
+				}else if(data == '2'){
+					var3.submit();
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown){
+	        	alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+	        }
+	});
+	}
+}
 

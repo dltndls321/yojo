@@ -90,19 +90,19 @@
 
 						<!-- Login -->
 						<div class="tab-content" id="tab1" style="display: none;">
-							<form method="post" class="login">
+							<form method="post" class="login" id="loginForm" action="/member/loginmember">
 
 								<p class="form-row form-row-wide">
 									<label for="username">아이디:
 										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="username" id="username" value="" />
+										<input type="text" class="input-text" name="id" id="idLogin" value="" />
 									</label>
 								</p>
 
 								<p class="form-row form-row-wide">
 									<label for="password">비밀번호:
 										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" id="password"/>
+										<input class="input-text" type="password" name="passwd" id="passwdLogin"/>
 									</label>
 									<span class="lost_password">
 										<a href="#" >Lost Your Password?</a>
@@ -110,7 +110,7 @@
 								</p>
 
 								<div class="form-row">
-									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
+									<button name="login" class="button border fw margin-top-10" id="loginSubmit" type="button" onclick="onclickloginSubmit('idLogin','passwdLogin','loginForm')">로그인</button>
 									<div class="checkboxes margin-top-10">
 										<input id="remember-me" type="checkbox" name="check">
 										<label for="remember-me">Remember Me</label>
