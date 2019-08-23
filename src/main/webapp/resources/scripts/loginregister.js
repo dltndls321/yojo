@@ -231,3 +231,11 @@ function onclickloginSubmit(target1,target2,target3){
 	}
 }
 
+function onclickColorChange(target1){
+	var1 = document.getElementById(target1);
+	var1.style.color="#808080";
+	var1.style.borderColor="#DBDBDB";
+	var1.value="";
+	var1.type="text";
+}
+

@@ -60,7 +60,11 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
-		model.setViewName("redirect:/main/main");
+		if(memberModel.getId().equals("admin")) {
+			model.setViewName("redirect:/admin/main");
+		}else {
+			model.setViewName("redirect:/main/main");
+		}
 		model.addObject("InfoMember",memberModel);
 		return model;
 	}
@@ -108,8 +112,8 @@ public class MemberController {
 		System.out.println("loginCheck : 시작");
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
-		MemberModel dataModel = memberService.selectMemberWithId(memberModel);
 		memberModel.setId(id);
+		MemberModel dataModel = memberService.selectMemberWithId(memberModel);
 		System.out.println("loginCheck  : "+dataModel);
 		if(memberService.selectMemberWithId(memberModel)==null) {
 			System.out.println("loginCheck :id null");
