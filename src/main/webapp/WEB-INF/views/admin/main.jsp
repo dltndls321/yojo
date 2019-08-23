@@ -1,0 +1,175 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div class="dashboard-content">
+
+		<!-- Titlebar -->
+		<div id="titlebar">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Admin Main</h2>
+					<!-- Breadcrumbs -->
+					<nav id="breadcrumbs">
+						<ul>
+							<li><a href="/main/main">Home</a></li>
+							<li>Admin</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<!-- Notice -->
+		<!-- <div class="row">
+			<div class="col-md-12">
+				<div class="notification success closeable margin-bottom-30">
+					<p>Your listing <strong>Hotel Govendor</strong> has been approved!</p>
+					<a class="close" href="#"></a>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- Content -->
+		<div class="row">
+		
+		<!-- Item -->
+			<div class="col-lg-3 col-md-6">
+				<div class="dashboard-stat color-2">
+					<div class="dashboard-stat-content"><h4>1000</h4> <span>Total Visitor</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
+				</div>
+			</div>
+			
+			<!-- Item -->
+			<div class="col-lg-3 col-md-6">
+				<div class="dashboard-stat color-3">
+					<div class="dashboard-stat-content"><h4>5</h4> <span>Total Member</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
+				</div>
+			</div>
+
+			<!-- Item -->
+			<div class="col-lg-3 col-md-6">
+				<div class="dashboard-stat color-1">
+					<div class="dashboard-stat-content"><h4>25</h4> <span>Total Course</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
+				</div>
+			</div>
+
+			<!-- Item -->
+			<div class="col-lg-3 col-md-6">
+				<div class="dashboard-stat color-1">
+					<div class="dashboard-stat-content"><h4>50</h4> <span>Total TripInfo</span></div>
+					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			
+			<!-- Recent Activity -->
+			<div class="col-lg-6 col-md-12">
+				<div class="dashboard-list-box with-icons margin-top-20">
+					<h4>New Board</h4>
+					<ul>
+
+						<li>
+							<i class="list-box-icon sl sl-icon-layers"></i> 출발 에서 도착  on <strong><a href="#">TripInfo</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+						<li>
+							<i class="list-box-icon sl sl-icon-layers"></i> 출발 에서 도착   on <strong><a href="#">TripInfo</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+
+						<li>
+							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+						<li>
+							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+
+						<li>
+							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+						<li>
+							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Detail</a>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Invoices -->
+			<div class="col-lg-6 col-md-12">
+				<div class="dashboard-list-box invoices with-icons margin-top-20">
+					<h4>New Member</h4>
+					<ul>
+						
+						<li><i class="list-box-icon sl sl-icon-doc"></i>
+							<strong>hyeyeon8752</strong>
+							<ul>
+								<li class="paid">이혜연</li>
+								<li>MemNum: 01</li>
+								<li>Date: 2019/08/22</li>
+							</ul>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Info</a>
+							</div>
+						</li>
+						
+						<li><i class="list-box-icon sl sl-icon-doc"></i>
+							<strong>euny</strong>
+							<ul>
+								<li class="paid">송은희</li>
+								<li>MemNum: 02</li>
+								<li>Date: 2019/08/22</li>
+							</ul>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Info</a>
+							</div>
+						</li>
+
+						<li><i class="list-box-icon sl sl-icon-doc"></i>
+							<strong>winsun</strong>
+							<ul>
+								<li class="paid">이승해</li>
+								<li>MemNum: 03</li>
+								<li>Date: 2019/08/22</li>
+							</ul>
+							<div class="buttons-to-right">
+								<a href="/admin/" class="button gray">View Info</a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+
+			<!-- Copyrights -->
+			<div class="col-md-12">
+				<div class="copyrights">© 2019 Listeo. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>

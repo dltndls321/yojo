@@ -13,7 +13,7 @@ public class MapDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String Namespace = "MapMapperNS";
+	private final String Namespace = "MapMapperNS";
 	
 	public List<MapModel> getFoodList() throws Exception {
 		return sqlSession.selectList(Namespace+".getFoodList");

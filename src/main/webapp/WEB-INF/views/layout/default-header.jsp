@@ -40,7 +40,7 @@
 						<li><a href="#">TripInfo</a>
 							<ul>
 								<li><a href="dashboard.html">Eat</a></li>
-								<li><a href="dashboard-messages.html">Festival</a></li>
+								<li><a href="festival">Festival</a></li>
 								<li><a href="dashboard-bookings.html">Tourist Spot</a></li>
 							</ul>
 						</li>
@@ -123,47 +123,47 @@
 						<!-- Register -->
 						<div class="tab-content" id="tab2" style="display: none;">
 
-							<form method="post" class="register" action="/member/registemember">
+							<form method="post" id="registerForm" class="register" action="/member/registemember">
 							
 							<p class="form-row form-row-wide">
-								<label for="nameLabel" >이름:
+								<label for="nameLabel" >이름:<a id="nameRegisterWarn" style="color: red; display: none;" >한글로만 입력 가능합니다.</a>
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="name" id="nameRegister" value="" onblur="emptyCheck('nameRegister','nameRegister','이름을 입력하세요.')" onclick="resetSelect('nameRegister','nameRegister','이름을 입력하세요.')"/>
+									<input type="text" class="input-text" name="name" id="nameRegister" value="" onblur="emptyCheck('nameRegister','nameRegister','이름을 입력하세요.')" onfocus="resetSelect('nameRegister','nameRegister','이름을 입력하세요.')" onkeypress="hangul('nameRegisterWarn');"/>
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="phoneLabel">번호:
 									<i class="im im-icon-Phone"></i>
-									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onclick="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>
+									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="addressLabel">주소:
 									<i class="im im-icon-Address-Book"></i>
-									<input type="text" class="input-text" name="address" id="addressRegister" value="" onblur="emptyCheck('addressRegister','addressRegister','주소를 입력하세요.')" onclick="resetSelect('addressRegister','addressRegister','주소를 입력하세요.')"/>
+									<input type="text" class="input-text" name="address" id="addressRegister" value="" onblur="emptyCheck('addressRegister','addressRegister','주소를 입력하세요.')" onfocus="resetSelect('addressRegister','addressRegister','주소를 입력하세요.')"/>
 								</label>
 							</p>
 							
 							<p class="form-row form-row-wide">
 								<label for="juminLabel">주민번호:
 									<i class="im im-icon-Credit-Card3"></i>
-									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onclick="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"/>
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="idLabel">아이디:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="id" id="idRegister" value="" onblur="emptyCheck('idRegister','idRegister','아이디를 입력하세요.')" onclick="resetSelect('idRegister','idRegister','아이디를 입력하세요.')"/>
+									<input type="text" class="input-text" name="id" id="idRegister" value="" onblur="IDOverlapCheck('idRegister','아이디를 입력하세요.')" onfocus="resetSelect('idRegister','idRegister','아이디를 입력하세요.')" onkeypress=""/>
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="emailLabel">이메일:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="emailRegister" value="" onblur="emailCheck('emailRegister','이메일을 입력하세요.')" onclick="emailResetCheck('emailRegister','이메일을 입력하세요.')"/>
+									<input type="text" class="input-text" name="email" id="emailRegister" value="" onblur="EmailOverlapCheck('emailRegister','이메일을 입력하세요.')" onfocus="emailResetCheck('emailRegister','이메일을 입력하세요.')"/>
 								</label>
 							</p>
 							
@@ -172,18 +172,18 @@
 							<p class="form-row form-row-wide">
 								<label for="passwdLabel">비밀번호:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd" id="passwdRegister" onblur="passwdCheck('passwdRegister','passwdRegister','비밀번호를 입력하세요.')" onclick="resetpasswdSelect('passwdRegister','passwdRegister','비밀번호를 입력하세요.')"/>
+									<input class="input-text" type="password" name="passwd" id="passwdRegister" onblur="passwdCheck('passwdRegister','passwd2Register','비밀번호를 입력하세요.')" onfocus="resetpasswdSelect('passwdRegister','passwdRegister','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="passwd2Label">비밀번호 확인:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdCheck('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onclick="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
+									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdOverlapCheck('passwdRegister','passwd2Register');emptyCheck('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onfocus="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
-
-							<input type="submit" class="button border fw margin-top-10" name="register" value="회원가입" />
+							<button name="register" class="button border fw margin-top-10" id="registerSubmit" type="button" onclick="onclickRegister('nameRegister','phoneRegister','addressRegister','juminRegister','idRegister','emailRegister','passwdRegister','passwd2Register','registerForm')">회원가입</button>
+							<!-- <input type="submit" class="button border fw margin-top-10" name="register" value="회원가입" /> -->
 	
 							</form>
 						</div>
