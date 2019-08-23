@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: sist
-=======
 Built-By: PC
->>>>>>> fddc901f3caba009b7729366f28e749097909bfe
 Build-Jdk: 1.8.0_201
 Created-By: Maven Integration for Eclipse
 

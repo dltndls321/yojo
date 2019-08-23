@@ -9,5 +9,6 @@ public interface MemberService {
 	public List<MemberModel> selectMemberList() throws Exception;
 	public MemberModel selectMemberWithId(MemberModel memberModel) throws Exception;
 	public MemberModel selectMemberWithEmail(MemberModel memberModel) throws Exception;
+	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception;
 	
 }

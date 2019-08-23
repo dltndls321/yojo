@@ -43,6 +43,9 @@ function passwdCheck(target1,target2,comment) {
 		var1.value = "6~12자리로 입력해 주세요";
 		return false;
 	}
+	else{
+		var1.style.borderColor="blue";
+	}
 }
 /*비밀번호 중복 체크*/
 function passwdOverlapCheck(target1,target2){
@@ -90,12 +93,13 @@ function EmailOverlapCheck(target1,comment){
 			data: {'email' : var1.value},
 			success:function(data){
 				if(data == '3'){
-					var2.style.color="red";
-					var2.style.borderColor="red";
-					var2.value = "이미 존재하는 이메일 입니다.";
+					$('#emailRegister').val("이미 존재하는 이메일 입니다.");
+					$('#emailRegister').css('color','red');
+					$('#emailRegister').css('borderColor','red');
+					
 				}
 				else if(data == '2'){
-					var2.style.borderColor="blue";
+					$('#emailRegister').css('borderColor','blue');
 				}
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown){
@@ -181,7 +185,7 @@ function onclickRegister(target1,target2,target3,target4,target5,target6,target7
 	}else if(var8.value == ""||var8.value=='비밀번호를 입력하세요.'||var8.value=="6~12자리로 입력해 주세요"||var8.value=="동일한 비밀번호를 입력해 주세요."){
 		return false;
 	}else{
-		var9.submit;
+		var9.submit();
 	}
 	
 }

@@ -48,6 +48,16 @@
     	where
     		email = #{email}
     </select>
+     <select id="selectMemberWithMemNum" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		memnum=#{memnum}
+    </select>
+    
+    
     <!--  <delete id="deleteTest" parameterType="int">
     	delete
     		from test

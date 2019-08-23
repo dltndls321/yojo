@@ -30,4 +30,8 @@ public class MemberDao {
 	public MemberModel selectMemberWithEmail(MemberModel memberModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectMemberWithEmail",memberModel);
 	}
+	
+	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectMemberWithId",memberModel);
+	}
 }
