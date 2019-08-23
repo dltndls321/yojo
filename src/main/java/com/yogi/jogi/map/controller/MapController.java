@@ -13,6 +13,7 @@ import com.yogi.jogi.map.service.MapService;
 
 
 @Controller
+@RequestMapping("map")
 public class MapController {
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	ModelAndView mv = new ModelAndView();
