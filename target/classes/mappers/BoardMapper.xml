@@ -5,24 +5,24 @@
 <mapper namespace="boardMapperNS">
 
 	<select id="selectBoardList" 
-		resultType="hashMap">
-		SELECT
-		  boardnum,
-		  memnum,
-		  boardid,
-		  subject,
-		  writer,
-		  passwd,
-		  content,
-		  fname,
-		  fsize,
-		  readcount,
-		  regdate,
-		  ref,
-		  restep,
-		  relevel
-		FROM BOARD
-		
+		resultType="boardModel">
+		select * from 
+		(select rownum rnum ,a.*
+		from(select boardNum,writer,subject,passwd,
+		regdate,readcount,ref,reStep,reLevel,content,fname from board
+		where 
+			boardid = #{boardid}
+		order 
+			by ref desc , reStep) a )
+	</select>
+		<insert id="insertBoard" parameterType="boardModel">
+		insert 
+			into board values
+		(#{boardNum},#{memNum},#{boardid}
+		,#{subject},#{writer},#{passwd},#{content},
+		#{fname},#{fsize},#{readcount},sysdate,0,
+		#{ref},#{reStep},#{reLevel})
+	</insert>
 		
 		
 		
@@ -36,7 +36,6 @@
 			by ref desc , reStep) a )
 			 -->
 		<!-- where  rnum between 1 and 3 -->
-	</select>
 	
 	<!-- <select id="selectBoardCount" parameterType="boardModel"
 		resultType="boardModel">
@@ -75,14 +74,7 @@
 	</update>
 
 
-	<insert id="insertBoard" parameterType="boardModel">
-		insert 
-			into board values
-		(#{boardNum},#{memNum},#{boardid}
-		,#{subject},#{writer},#{passwd},#{content},
-		#{fname},#{fsize},#{readcount},,sysdate,0,
-		#{ref},#{reStep},#{reLevel})
-	</insert>
+	
 	
 
 	<select id="selectPasswdOneNum" parameterType="boardModel"
