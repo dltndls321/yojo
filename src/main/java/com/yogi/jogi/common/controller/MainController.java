@@ -52,7 +52,7 @@ public class MainController {
         parameter = parameter + "&" + "listYN=Y" ;
         parameter = parameter + "&" + "eventStartDate=" + eventStartDate ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
-        parameter = parameter + "&" + "numOfRows=9999999";
+        //parameter = parameter + "&" + "numOfRows=9999999";
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;

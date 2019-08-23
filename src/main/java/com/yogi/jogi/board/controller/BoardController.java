@@ -18,10 +18,6 @@ import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
 
-
-
-
-
 @Controller
 @RequestMapping("board")
 public class BoardController {
@@ -30,69 +26,57 @@ public class BoardController {
 	ModelAndView mv = new ModelAndView();
 	private String boardid;
 	private int pageNum;
-	
+
 	@Autowired
 	private BoardService boardService;
 
-	
-
-	@ModelAttribute
-	public void setAttr(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String reqboardid = request.getParameter("boardid");
-
-		if (reqboardid != null)
-			session.setAttribute("boardid", reqboardid);
-		if (session.getAttribute("boardid") == null)
-			boardid = "1";
-		else
-			boardid = (String) session.getAttribute("boardid");
-		try {
-			pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		} catch (Exception e) {
-			// TODO: handle exception
-			pageNum = 1;
-		}
-	}
+	@ModelAttribute public void setAttr(HttpServletRequest request) { HttpSession
+	  session = request.getSession(); String reqboardid =
+	  request.getParameter("boardid");
+	 
+	 if 
+	   (reqboardid != null) session.setAttribute("boardid", reqboardid); 
+	 if
+	  (session.getAttribute("boardid") == null) boardid = "1";
+	 else boardid = (String) session.getAttribute("boardid"); 
+	 try { pageNum = Integer.parseInt(request.getParameter("pageNum")); } 
+	 catch (Exception e) { 
+	  pageNum = 1; 
+	 } }
 
 	@RequestMapping("list")
 	public ModelAndView list() throws Exception {
 		BoardModel boardModel = new BoardModel();
-		boardid="1";
+		boardid = "1";
 		boardModel.setBoardid(boardid);
 		System.out.println(boardModel);
-		List AllList = boardService.selectBoardList(boardModel);
-		System.out.println("성공");
+		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
+
 		mv.setViewName("board/list");
-	    mv.addObject("articleList", AllList);
-		
+		mv.addObject("AllList", AllList);
+
 		return mv;
 	}
 
 	@RequestMapping("writeForm")
 	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
-		mv.clear(); 
+		mv.clear();
 		BoardModel a = new BoardModel();
-//		a = boardService.selectBoard(boardModel);
-//		System.out.println(boardService.selectBoard(boardModel));
-		
-		
+
 		mv.addObject("num", boardModel.getBoardNum());
-		mv.addObject("pageNum", pageNum);
 		mv.addObject("ref", boardModel.getRef());
 		mv.addObject("reStep", boardModel.getReStep());
 		mv.addObject("reLevel", boardModel.getReLevel());
 		mv.setViewName("board/writeUploadForm");
-		
+
 		return mv;
 	}
+
 	@RequestMapping("writePro")
-	   public String writePro(BoardModel boardModel) throws Exception{
-	      
-	      
-//		BoardDao.selectBoard(boardModel);
-	      return "redirect:list?pageNum=" + pageNum; 
-	   }
-	
-	
+	public String writePro(BoardModel boardModel) throws Exception {
+		
+		boardService.insertBoard(boardModel, boardid);
+		return "redirect:list";
+	}
+
 }

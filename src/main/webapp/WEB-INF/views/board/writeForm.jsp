@@ -1,77 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>°Ô½ÃÆÇ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>boardList</title>
 </head>
-
-<p class="w3-left"  style="padding-left:30px;">></p>
-
-<div class="w3-center">
-
-<b>±Û¾²±â</b>
-<br>
-<form method="post" name="writeform" 
-action="<%=request.getContextPath() %>/board/writePro" >
-<input type="hidden" name="num" value="${num}">
-<input type="hidden" name="pageNum" value="${pageNum}">
-<input type="hidden" name="ref" value="${ref}">
-<input type="hidden" name="re_step" value="${re_step}">
-<input type="hidden" name="re_level" value="${re_level}">
-
-
-<table class="w3-table-all"   style="width:70%">
-   <tr>
-    <td align="right" colspan="2" >
-	    <a href="<%=request.getContextPath() %>/board/list?pageNum=${pageNum}"> ±Û¸ñ·Ï</a> 
-   </td>
-   </tr>
-   <tr>
-    <td     align="center">ÀÌ ¸§</td>
-    <td >
-       <input type="text" size="10" maxlength="10" name="writer"></td>
-  </tr>
-  <tr>
-    <td     align="center" >Á¦ ¸ñ
-    </td>
-    <td >
- <c:if test="${num==0 }">
-       <input type="text" size="40" maxlength="50" name="subject">
- </c:if>
- <c:if test="${num>0 }">
-    <input type="text" size="40" maxlength="50" name="subject"  value="[´äº¯]">
-   </c:if>   </td>
-   
-  </tr>
-  <tr>
-    <td    align="center">Email</td>
-    <td  >
-       <input type="text" size="40" maxlength="30" name="email" ></td>
-  </tr>
-  <tr>
-    <td     align="center" >³» ¿ë</td>
-    <td  >
-     <textarea name="content" rows="13" cols="40"></textarea> </td>
-  </tr>
-  <tr>
-    <td     align="center" >ºñ¹Ð¹øÈ£</td>
-    <td   >
-     <input type="password" size="8" maxlength="12" name="passwd"> 
-	 </td>
-  </tr>
-<tr>      
- <td colspan=2  align="center"> 
-  <input type="submit" value="±Û¾²±â" >  
-  <input type="reset" value="´Ù½ÃÀÛ¼º">
-  <input type="button" value="¸ñ·Ïº¸±â" 
-  OnClick="window.location='<%=request.getContextPath()%>/board/list?pageNum=${pageNum}'">
-</td></tr></table>    
-     
-</form>  </div>  
-
+<body>
+<body>
+	<div class="page-wrapper">
+		<div class="container-fluid">
+			<div class="col-lg-8">
+				<!--ê²Œì‹œíŒ ë„“ì´ -->
+				<div class="col-lg-12">
+					<h1 class="page-header">ê³µì§€ì‚¬í•­ ê´€ë¦¬</h1>
+				</div>
+				<div class="row">
+					<div class="col-lg-12"></div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">ê³µì§€ì‚¬í•­</div>
+					<div class="panel-body">
+						<form method="post" name="writeform"
+							action="<%=request.getContextPath()%>/board/writePro">
+							<div class="row form-group">
+								<label class="col-lg-2">ì œëª©</label>
+								<div class="col-lg-8">
+									<input type="text" class="form-control" id="subject"
+										name="subject" min="1" max="3">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-lg-2">ë‚´ìš©</label>
+								<div class="col-lg-8">
+									<textarea class="form-control" id="content" name="content"></textarea>
+								</div>
+							</div>
+						</form>
+						<button class="btn btn-outline btn-info"
+							onclick="fn_MoveToUrl('/board/writePro','ì €ìž¥')">ì €ìž¥í•˜ê¸°</button>
+						<button class="btn btn-outline btn-primary"
+							onclick="location.href='/board/list'">ë¦¬ìŠ¤íŠ¸</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
 </body>
-</html>      
+</html>
