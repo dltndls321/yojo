@@ -13,7 +13,7 @@ public class MemberDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String Namespace = "memberMapperNS";
+	private final String Namespace = "memberMapperNS";
 	
 	public int insertMember(MemberModel memberModel) throws Exception{
 		return sqlSession.insert(Namespace+".insertMember",memberModel);
@@ -29,5 +29,9 @@ public class MemberDao {
 	
 	public MemberModel selectMemberWithEmail(MemberModel memberModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectMemberWithEmail",memberModel);
+	}
+	
+	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectMemberWithId",memberModel);
 	}
 }

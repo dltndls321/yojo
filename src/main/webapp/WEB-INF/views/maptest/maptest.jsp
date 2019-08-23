@@ -13,7 +13,8 @@
 <c:forEach var="foodLists" items="${foodList}">
 
 <tr>
-					<td>&nbsp;${foodLists.addr}</td>
+					<td>&nbsp;${foodLists.addr}</td><br>
+					<td>&nbsp;${foodLists.name}</td><br>
 </tr>
 </c:forEach>
 
@@ -33,9 +34,19 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-// 주소로 좌표를 검색합니다
 
-geocoder.addressSearch('경기 하남시 춘궁동 501-6', function(result, status) {
+//리스트 주소 받아오기
+var foodAddr = new Array();
+var foodName = new Array();
+<c:forEach items="${foodList}" var="foodLists" >
+	foodAddr.push("${foodLists.addr}")
+	foodName.push("${foodLists.name}")
+</c:forEach>
+
+
+// 주소로 좌표를 검색합니다
+for(var i=0; i<5; i++){
+geocoder.addressSearch(foodAddr[i], function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -50,7 +61,7 @@ geocoder.addressSearch('경기 하남시 춘궁동 501-6', function(result, stat
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">뭿집</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+foodName[i]+'</div>'
         });
         infowindow.open(map, marker);
 
@@ -58,30 +69,8 @@ geocoder.addressSearch('경기 하남시 춘궁동 501-6', function(result, stat
         
     } 
 });    
+}
 
-geocoder.addressSearch('경기도 하남시 춘궁동 서하남로418번길 30', function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">커피</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        
-    } 
-});  
 </script>
 </body>
 </html>

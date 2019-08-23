@@ -19,8 +19,9 @@
 		</p>
 
 
+		
 
-		<table class="w3-table-all" width="700">
+		<table class="table table-striped table-bordered table-hover" width="700">
 			<tr class="table table-striped" style="text-align: center;">
 				<th>번호</th>
 				<th>제 목</th>
@@ -34,7 +35,7 @@
 				<tr height="30">
 					<td align="center" width="50">${list.boardNum }</td>
 					
-					<td width="250" align="center">${list.subject }</td>
+					<td width="250">${list.subject }</td>
 					<td align="center" width="100">${list.writer}</td>
 
 

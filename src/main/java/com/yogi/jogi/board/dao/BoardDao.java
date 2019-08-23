@@ -10,9 +10,9 @@ import com.yogi.jogi.board.model.BoardModel;
 
 @Repository
 public class BoardDao {
-
+	
 	private SqlSession sqlSession;
-
+	
 	@Autowired
 	public BoardDao(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -23,7 +23,7 @@ public class BoardDao {
 	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
 		System.out.println("before quering" + boardModel.toString());
 		String boardid = boardModel.getBoardid();
-		List returnValue = sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
+		List<BoardModel> returnValue = sqlSession.selectList(Namespace + ".selectBoardList",boardModel);
 
 		System.out.println(returnValue.toString());
 		return returnValue;
@@ -31,13 +31,9 @@ public class BoardDao {
 	}
 
 	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectBoard", boardModel);
-
+		return sqlSession.selectOne(Namespace+".selectBoard",boardModel);
 	}
-	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
-		return sqlSession.selectOne(Namespace + ".insertBoard", boardModel);
-	}
-
+//
 //	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
 //		return sqlSession.selectOne(Namespace + ".selectMaxBoardNum", boardModel);
 //	}
@@ -47,6 +43,10 @@ public class BoardDao {
 //
 //	}
 //
+	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
+
+		return sqlSession.selectOne(Namespace + ".insertBoard",boardModel);
+	}
 //
 //	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
 //		try {

@@ -46,7 +46,7 @@
 
 <!-- Scripts
 ================================================== -->
-
+<tiles:insertAttribute name="script"/>
 
 </body>
 </html>
