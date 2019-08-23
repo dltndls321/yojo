@@ -21,7 +21,7 @@
 						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
 					</ul>	
 				</li>
-				<li><a href="dashboard-reviews.html"><i class="sl sl-icon-star"></i> Reviews</a></li>
+				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Reviews</a></li>
 				<li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
 				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
 			</ul>	

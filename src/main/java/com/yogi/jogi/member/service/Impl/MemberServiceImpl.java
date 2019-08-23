@@ -37,6 +37,12 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.selectMemberWithEmail(memberModel);
 	}
+
+	@Override
+	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectMemberWithMemNum(memberModel);
+	}
 	
 	
 }

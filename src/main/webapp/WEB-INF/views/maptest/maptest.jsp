@@ -13,8 +13,15 @@
 <c:forEach var="foodLists" items="${foodList}">
 
 <tr>
-					<td>&nbsp;${foodLists.addr}</td><br>
-					<td>&nbsp;${foodLists.name}</td><br>
+					<%-- <td>&nbsp;${foodLists.addr}</td><br>
+					<td>&nbsp;${foodLists.name}</td><br> --%>
+<c:set var="count" value="${count + 1}"/>	
+	
+	<td>${foodList[count].name }</td><br>
+
+				
+			
+					
 </tr>
 </c:forEach>
 
@@ -45,9 +52,11 @@ var foodName = new Array();
 
 
 // 주소로 좌표를 검색합니다
-for(var i=0; i<5; i++){
-geocoder.addressSearch(foodAddr[i], function(result, status) {
 
+for(var i=0; i<5; i++){
+
+geocoder.addressSearch(foodAddr[i], function(result, status) {
+	
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
 
@@ -58,11 +67,14 @@ geocoder.addressSearch(foodAddr[i], function(result, status) {
             map: map,
             position: coords
         });
-
+		
         // 인포윈도우로 장소에 대한 설명을 표시합니다
+      
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+foodName[i]+'</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${foodList[0].name}</div>'
         });
+        
+     
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다

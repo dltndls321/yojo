@@ -32,9 +32,19 @@ public class AdminController {
 		return "admin/customerCenter.admin";
 	}
 	
+	@RequestMapping(value = "customerCenterMessage")
+	public String moveCustomerCenterMessage() {
+		return "admin/customerCenterMessage.admin";
+	}
+	
 	@RequestMapping(value = "booking")
 	public String moveBookings() {
 		return "admin/booking.admin";
+	}
+	
+	@RequestMapping(value = "reviews")
+	public String moveReviews() {
+		return "admin/reviews.admin";
 	}
 	
 	

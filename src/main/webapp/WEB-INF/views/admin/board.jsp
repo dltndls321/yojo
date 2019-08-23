@@ -67,26 +67,6 @@
 							</div>
 						</li>
 						
-						<li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-03.jpg" alt=""></a></div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3><a href="#">글 제목</a></h3>
-										<span>작성자</span>
-										<span>작성일</span>
-										<div class="star-rating" data-rating="2.0">
-											<div class="rating-counter">(17 Reply)</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
-							</div>
-						</li>
-
 					</ul>
 				</div>
 			</div>
