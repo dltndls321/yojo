@@ -30,12 +30,11 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+
+	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberModel memberModel,HttpSession session) throws Exception{
 		System.out.println("registemember : 시작");
-		
-		
 		model.clear();
 		memberService.insertMember(memberModel);
 		memberModel = memberService.selectMemberWithEmail(memberModel);
@@ -68,12 +67,14 @@ public class MemberController {
 		model.addObject("InfoMember",memberModel);
 		return model;
 	}
-	
 	@RequestMapping(value = "logout")
 	public String logout(HttpSession session){
 		session.invalidate();
 		return "redirect:/main/main";
 	}
+	
+	/* 멤버프로필 */
+	
 	
 	//ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
