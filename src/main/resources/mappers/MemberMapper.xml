@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="memberMapperNS">
+  <insert id="insertMember" parameterType="memberModel">
+    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate)
+    	values(
+    		memberSeq.NEXTVAL,
+    		#{id},
+    		#{passwd},
+    		#{name},
+    		#{jumin},
+    		#{address},
+    		#{phone},
+    		#{email},
+    		sysdate
+    	)
+    </insert>
+  <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
+    	select
+    		*
+    	from
+    		test
+    	where
+    		num = #{num}
+    </select> -->
+    <select id="selectMemberList" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    </select>
+     <select id="selectMemberWithId" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		id = #{id}
+    </select>
+     <select id="selectMemberWithEmail" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		email = #{email}
+    </select>
+     <select id="selectMemberWithMemNum" parameterType="memberModel" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		memnum=#{memnum}
+    </select>
+    
+    
+    <!--  <delete id="deleteTest" parameterType="int">
+    	delete
+    		from test
+    	where
+    		num = #{num}
+    </delete>
+    <update id="updateTest" parameterType="testVO">
+    	update test set
+    		name = #{name}
+    	where
+    		num = #{num}
+    </update>
+      -->
+</mapper>
