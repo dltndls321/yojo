@@ -79,13 +79,6 @@
 								<a href="/admin/" class="button gray">View Detail</a>
 							</div>
 						</li>
-						
-						<li>
-							<i class="list-box-icon sl sl-icon-layers"></i> 출발 에서 도착   on <strong><a href="#">TripInfo</a></strong>
-							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Detail</a>
-							</div>
-						</li>
 
 						<li>
 							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
@@ -93,21 +86,7 @@
 								<a href="/admin/" class="button gray">View Detail</a>
 							</div>
 						</li>
-						
-						<li>
-							<i class="list-box-icon sl sl-icon-star"></i> 게시판 제목 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Board</a></strong>
-							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Detail</a>
-							</div>
-						</li>
 
-						<li>
-							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
-							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Detail</a>
-							</div>
-						</li>
-						
 						<li>
 							<i class="list-box-icon sl sl-icon-heart"></i> 댓글 <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Reply</a></strong>
 							<div class="buttons-to-right">

@@ -26,14 +26,14 @@
 
 				<div class="messages-container margin-top-0">
 					<div class="messages-headline">
-						<h4>Ask</h4>
+						<h4>Message List</h4>
 					</div>
 					
 					<div class="messages-inbox">
 
 						<ul>
 							<li class="unread">
-								<a href="dashboard-messages-conversation.html">
+								<a href="/admin/customerCenterMessage">
 									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 
 									<div class="message-by">
@@ -47,7 +47,7 @@
 							</li>
 
 							<li class="unread">
-								<a href="dashboard-messages-conversation.html">
+								<a href="/admin/customerCenterMessage">
 									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 
 									<div class="message-by">
@@ -60,47 +60,6 @@
 								</a>
 							</li>
 							
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>이승해 </h5>
-											<span>2018/05/24</span>
-										</div>
-										<p>문의 내용 .. </p>
-									</div>
-								</a>
-							</li>
-
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>송은희</h5>
-											<span>2017/08/08</span>
-										</div>
-										<p>문의 내용 .. </p>
-									</div>
-								</a>
-							</li>
-
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>이혜연</h5>
-											<span>2017/07/07</span>
-										</div>
-										<p>문의 내용 .. </p>
-									</div>
-								</a>
-							</li>
 						</ul>
 						
 					</div>

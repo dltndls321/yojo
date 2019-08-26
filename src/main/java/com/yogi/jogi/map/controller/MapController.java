@@ -1,5 +1,6 @@
 package com.yogi.jogi.map.controller;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.map.service.MapService;
+
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 
 
 
@@ -21,12 +25,14 @@ public class MapController {
 	@Autowired
 	private MapService mapService;
 	
-	@RequestMapping("test") //2. url에 board/test를 치면
+	@RequestMapping("test") //
 	public ModelAndView test() throws Exception {
+		
 		mv.clear();
 		System.out.println(mapService.getFoodList());
+	
 		mv.addObject("foodList",mapService.getFoodList());
-		mv.setViewName("maptest/maptest.do"); //3. board폴더아래의 test.jsp를 찾음
+		mv.setViewName("maptest/maptest.do"); //
 		
 		return mv;
 	}
