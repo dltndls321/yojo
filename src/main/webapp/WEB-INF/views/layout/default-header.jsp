@@ -183,15 +183,16 @@
 							
 							<p class="form-row form-row-wide">
 								<label for="phoneLabel">번호:
-									<div class="col-fs-2">
-									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>-
-									</div>
-									<div class="col-fs-2">
-									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>-
-									</div>
-									<div class="col-fs-2">
-									<input type="text" class="input-text" name="phone" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')"/>
-									</div>
+								<br>
+									
+									<input type="text" class="input-text" name="phone1" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/> -
+									
+									
+									<input type="text" class="input-text" name="phone2" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width : 130px;display: inline;"/> -
+									
+									
+									<input type="text" class="input-text" name="phone3" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/>
+									
 								</label>
 								
 							</p>
@@ -210,8 +211,9 @@
 							
 							<p class="form-row form-row-wide">
 								<label for="juminLabel">주민번호:
-									<i class="im im-icon-Credit-Card3"></i>
-									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"/>
+								<br/>
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"style="width: 260px;display: inline;"/>-
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"style="width: 10px;display: inline;"/>● ● ● ● ● ●
 								</label>
 							</p>
 								
