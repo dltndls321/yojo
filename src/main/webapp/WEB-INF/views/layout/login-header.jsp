@@ -149,9 +149,8 @@
 					<div class="user-menu">
 						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
 						<ul>
-							<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-							<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-							<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
+							
+							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
 							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
 						</ul>
 					</div>
