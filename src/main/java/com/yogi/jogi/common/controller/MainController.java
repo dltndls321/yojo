@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yogi.jogi.common.model.FestivalValueModel;
 
 
 
@@ -41,8 +40,8 @@ public class MainController {
 	public String moveFest() {
 		return "euny/festival.do";
 	}
-	
-	@RequestMapping(value = "festival.do")
+	//축제리스트뽑기
+	@RequestMapping(value = "festival.do")	
 	public void test(HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String eventStartDate) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
@@ -140,7 +139,7 @@ public class MainController {
 	        model.clear();
 	        List img = new ArrayList();
 	        //축제 정보
-	        for(int i=0;i<=1;i++) {
+	        for(int i=0;i<=2;i++) {
 	        	if(i==0) {
 	        		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 	    	        String serviceKey = "Tua5fEDly3iKvvzpx%2F7OOnK7t6QMYcBuGsaiBl%2BQalNS5gZamN1jCFjTpyrafwkC4dhvs4vd59C4cMGKikSx1g%3D%3D";
@@ -173,16 +172,12 @@ public class MainController {
 	    	        
 	    	        JSONParser paser = new JSONParser();
 	    	        JSONObject obj = (JSONObject) paser.parse(s);
-	    	        System.out.println(obj.toString());
+
 	    	        
 	    	        JSONObject parse_response = (JSONObject) obj.get("response"); 
 	    	        JSONObject parse_body = (JSONObject) parse_response.get("body");
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONObject parse_item = (JSONObject) parse_items.get("item");
-	    	        System.out.println("1"+parse_response.toString());
-	    	        System.out.println("2"+parse_body.toString());
-	    	        System.out.println("3"+parse_items.toString());
-	    	        System.out.println("4"+parse_item.size());
 	    	        
 	    			
 	    	        String addr1 = (String) parse_item.get("addr1"); 
@@ -190,29 +185,24 @@ public class MainController {
 	    	        String firstimage = (String) parse_item.get("firstimage"); 
 	    	        String overview = (String) parse_item.get("overview"); 
 	    	        String tel = (String) parse_item.get("tel"); 
-	    	        	String telname = (String) parse_item.get("telname"); 
-	    	        	Object mapX = parse_item.get("mapx");
-	    	        	Object mapY = parse_item.get("mapy");
-	    	        	float mapx = Float.parseFloat(mapX.toString());
-	    	        	float mapy = Float.parseFloat(mapY.toString());
+	    	        String telname = (String) parse_item.get("telname"); 
+	    	        Object mapX = parse_item.get("mapx");
+	    	        Object mapY = parse_item.get("mapy");
+	    	        float mapx = Float.parseFloat(mapX.toString());
+	    	        float mapy = Float.parseFloat(mapY.toString());
+	    	        String link = (String) parse_item.get("homepage");	
 	    	        	
-	    	        	System.out.println("주소: " +addr1);
-	    	        	System.out.println("이미지: "+firstimage);
-	    	        	System.out.println("소개: "+overview);
-	    	        	System.out.println("전번: "+tel);
-	    	        	System.out.println("어디: "+telname);
-	    	        	System.out.println("지도x: "+mapx);
-	    	        	System.out.println("지도y: "+mapy);
-	    	        	
-	    	        	model.addObject("title",title);
-	    	        	model.addObject("addr1",addr1);
-	    	        	model.addObject("firstimage",firstimage);
-	    	        	model.addObject("overview",overview);
-	    	        	model.addObject("tel",tel);
-	    	        	model.addObject("telname",telname);
-	    	        	model.addObject("mapx",mapx);
-	    	        	model.addObject("mapy",mapy);
-	        	}else {
+	    	        model.addObject("title",title);
+	    	        model.addObject("addr1",addr1);
+	    	        model.addObject("firstimage",firstimage);
+	    	        model.addObject("overview",overview);
+	    	        model.addObject("tel",tel);
+	    	        model.addObject("telname",telname);
+	    	        model.addObject("mapx",mapx);
+	    	        model.addObject("mapy",mapy);
+	    	        model.addObject("link",link);
+	    	        
+	        	}else if(i==1) { //이미지를 출력하기 위한 다른 api
 	        		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
 	    	        String serviceKey = "Tua5fEDly3iKvvzpx%2F7OOnK7t6QMYcBuGsaiBl%2BQalNS5gZamN1jCFjTpyrafwkC4dhvs4vd59C4cMGKikSx1g%3D%3D";
 	    	        String parameter = "";
@@ -250,22 +240,71 @@ public class MainController {
 	    	        JSONObject parse_body = (JSONObject) parse_response.get("body");
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONArray parse_item = (JSONArray) parse_items.get("item");
-	    	        System.out.println("1"+parse_response.toString());
-	    	        System.out.println("2"+parse_body.toString());
-	    	        System.out.println("3"+parse_items.toString());
-	    	        System.out.println("4"+parse_item.size());
+
 	    	        
 	    	        for (int j = 0; j < parse_item.size(); j++) { 
 	    	        	JSONObject imsi = (JSONObject) parse_item.get(j);
 	    	        	String originimgurl = (String) imsi.get("originimgurl"); 
 	    	        	img.add(originimgurl);
-	    	        	System.out.println("하이"+j + ":" +originimgurl);
 	    	        	
 	    	        }
+	    	        model.addObject("img",img);
+	    	        
+	        	}else {
+	        		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
+	    	        String serviceKey = "Tua5fEDly3iKvvzpx%2F7OOnK7t6QMYcBuGsaiBl%2BQalNS5gZamN1jCFjTpyrafwkC4dhvs4vd59C4cMGKikSx1g%3D%3D";
+	    	        String parameter = "";
+	    	       
+	    	        parameter = parameter + "&" + "MobileOS=ETC";
+	    	        parameter = parameter + "&" + "MobileApp=AppTest";     
+	    	        parameter = parameter + "&" + "introYN=Y" ;
+	    	        parameter = parameter + "&" + "contentTypeId=" + typeid ;
+	    	        parameter = parameter + "&" + "contentId=" + contid ;
+	    	        parameter = parameter + "&" + "_type=json";
+	    	        
+	    	        addr = addr + serviceKey + parameter;
+	    	        URL url = new URL(addr);
+	    	 
+	    	        System.out.println(addr);
+	    	 
+	    	        InputStream in = url.openStream();                           
+	    	 
+	    	        ByteArrayOutputStream bos1 = new ByteArrayOutputStream();     
+	    	        IOUtils.copy(in, bos1);           
+	    	        in.close();
+	    	        bos1.close();
+	    	 
+	    	        String mbos = bos1.toString("UTF-8");
+	    	 
+	    	        byte[] b = mbos.getBytes("UTF-8");
+	    	        String s = new String(b, "UTF-8"); 
+	    	        //out.println(s);
+	    	        
+	    	        JSONParser paser = new JSONParser();
+	    	        JSONObject obj = (JSONObject) paser.parse(s);
+	    	        System.out.println(obj.toString());
+	    	        
+	    	        JSONObject parse_response = (JSONObject) obj.get("response"); 
+	    	        JSONObject parse_body = (JSONObject) parse_response.get("body");
+	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
+	    	        JSONObject parse_item = (JSONObject) parse_items.get("item");
+
+	    	        
+	    	        Object fdate1 = parse_item.get("eventstartdate"); 
+	    	        Object fdate2 = parse_item.get("eventenddate");
+    	        	String fee = (String) parse_item.get("usetimefestival"); 
+    	        	String agelimit = (String) parse_item.get("agelimit"); 
+    	        	String playtime = (String) parse_item.get("playtime");
+    	        	
+    	        	model.addObject("fdate1",fdate1);
+    		        model.addObject("fdate2",fdate2);
+    		        model.addObject("fee",fee);
+    		        model.addObject("agelimit",agelimit);
+    		        model.addObject("playtime",playtime);
 	        	}
 	        }
-	        System.out.println(img);
-	        model.addObject("img",img);
+
+	  
 	        model.setViewName("euny/festCont.do");	
 	        return model;
 	     
