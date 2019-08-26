@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+$(document).ready(function () {
+    $("input:radio[name=rating]").click(function () {
+      var star = $(this).val();
+      alert(star)
+      $('#add-comment').prepend("<input type='hidden' id = 'star' value =" + star +">")
+      
+    });
+
+ 
+  });
+
+</script>
 <!-- Slider
 ================================================== -->
 
@@ -15,7 +28,7 @@
 ================================================== -->
 <div class="container">
 	<div class="row sticky-wrapper">
-		<div class="col-lg-8 col-md-8 padding-right-30">
+		<div class="col-lg-12 col-md-12 padding-right-30">
 
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar">
@@ -24,7 +37,7 @@
 					<span>
 						<a href="#listing-location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
-							2726 Shinn Street, New York
+							${addr1}
 						</a>
 					</span>
 					<div class="star-rating" data-rating="5">
@@ -37,7 +50,7 @@
 			<div id="listing-nav" class="listing-nav-container">
 				<ul class="listing-nav">
 					<li><a href="#listing-overview" class="active">Overview</a></li>
-					<li><a href="#listing-pricing-list">Pricing</a></li>
+					<li><a href="#listing-pricing-list">Detail</a></li>
 					<li><a href="#listing-location">Location</a></li>
 					<li><a href="#listing-reviews">Reviews</a></li>
 					<li><a href="#add-review">Add Review</a></li>
@@ -49,80 +62,50 @@
 
 				<!-- Description -->
 
-				<p>
-					Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.
-				</p>
-
-				<p>
-					 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.
-				</p>
+				${overview}
 				
 				
 				<!-- Listing Contacts -->
 				<div class="listing-links-container">
 
 					<ul class="listing-links contact-links">
-						<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> +12 345 6578</a></li>
-						<li><a href="mailto:mail@example.com" class="listing-links"><i class="fa fa-envelope-o"></i> mail@example.com</a>
-						</li>
-						<li><a href="#" target="_blank"  class="listing-links"><i class="fa fa-link"></i> www.example.com</a></li>
+						<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> ${tel}</a></li>
+						<li><i class="fa fa-link"></i> ${link }</li>
 					</ul>
 					<div class="clearfix"></div>
 
-					<ul class="listing-links">
-						<li><a href="#" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-						<li><a href="#" target="_blank" class="listing-links-yt"><i class="fa fa-youtube-play"></i> YouTube</a></li>
-						<li><a href="#" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a></li>
-						<li><a href="#" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a></li>
-					</ul>
+			
 					<div class="clearfix"></div>
 
 				</div>
 				<div class="clearfix"></div>
-
-
-				<!-- Amenities -->
-				<h3 class="listing-desc-headline">Amenities</h3>
-				<ul class="listing-features checkboxes margin-top-0">
-					<li>Elevator in building</li>
-					<li>Friendly workspace</li>
-					<li>Instant Book</li>
-					<li>Wireless Internet</li>
-					<li>Free parking on premises</li>
-					<li>Free parking on street</li>
-				</ul>
 			</div>
 
 
 			<!-- Food Menu -->
 			<div id="listing-pricing-list" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Pricing</h3>
+				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Detail</h3>
 
 					<div class="pricing-list-container">
 						
 						<!-- Food List -->
-						<h4>Wedding Photography</h4>
+						<h4>Detail Info</h4>
 						<ul>
 							<li>
-								<h5>Basic</h5>
-								<p>up to 3 hours of coverage, 1 photographers, photo book</p>
-								<span>$1000</span>
+								<h5>연령제한</h5>
+								<p>${agelimit}</p>
+								
 							</li>
 							<li>
-								<h5>Classic</h5>
-								<p>up to 5 hours of coverage, 1 photographer, photo book</p>
-								<span>$1500</span>
+								<h5>요금</h5>
+								<span>${fee}</span>
 							</li>
 							<li>
-								<h5>Standard</h5>
-								<p>up to 8 hours of coverage, 2 photographers, photo book, engagement session, 16x20 canvas print of your choice</p>
-								<span>$2000</span>
+								<h5>행사기간</h5>
+								<p>${fdate1 } ~ ${fdate2 }</p>
+								
 							</li>
-							<li>
-								<h5>Premium</h5>
-								<p>up to 10 hours of coverage, 2 photographers, photo book, engagement session, 16x20 canvas print of your choice</p>
-								<span>$2500</span>
-							</li>
+							
 						</ul>
 
 					</div>
@@ -281,103 +264,34 @@
 			<div id="add-review" class="add-review-box">
 
 				<!-- Add Review -->
-				<h3 class="listing-desc-headline margin-bottom-10">Add Review</h3>
-				<p class="comment-notes">Your email address will not be published.</p>
+				<h3 class="listing-desc-headline margin-bottom-10">후기 작성하기</h3>
+				<p class="comment-notes">다른 회원분들을 위해 후기를 작성해 주세요!</p>
 
 				<!-- Subratings Container -->
 				<div class="sub-ratings-container">
 
 					<!-- Subrating #1 -->
 					<div class="add-sub-rating">
-						<div class="sub-rating-title">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+						<div class="sub-rating-title">rating <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
 						<div class="sub-rating-stars">
 							<!-- Leave Rating -->
 							<div class="clearfix"></div>
 							<form class="leave-rating">
-								<input type="radio" name="rating" id="rating-1" value="1"/>
-								<label for="rating-1" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-2" value="2"/>
-								<label for="rating-2" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-3" value="3"/>
-								<label for="rating-3" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-4" value="4"/>
-								<label for="rating-4" class="fa fa-star"></label>
 								<input type="radio" name="rating" id="rating-5" value="5"/>
 								<label for="rating-5" class="fa fa-star"></label>
+								<input type="radio" name="rating" id="rating-4" value="4"/>
+								<label for="rating-4" class="fa fa-star"></label>
+								<input type="radio" name="rating" id="rating-3" value="3"/>
+								<label for="rating-3" class="fa fa-star"></label>
+								<input type="radio" name="rating" id="rating-2" value="2"/>
+								<label for="rating-2" class="fa fa-star"></label>
+								<input type="radio" name="rating" id="rating-1" value="1"/>
+								<label for="rating-1" class="fa fa-star"></label>
 							</form>
 						</div>
 					</div>
 
-					<!-- Subrating #2 -->
-					<div class="add-sub-rating">
-						<div class="sub-rating-title">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></div>
-						<div class="sub-rating-stars">
-							<!-- Leave Rating -->
-							<div class="clearfix"></div>
-							<form class="leave-rating">
-								<input type="radio" name="rating" id="rating-11" value="1"/>
-								<label for="rating-11" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-12" value="2"/>
-								<label for="rating-12" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-13" value="3"/>
-								<label for="rating-13" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-14" value="4"/>
-								<label for="rating-14" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-15" value="5"/>
-								<label for="rating-15" class="fa fa-star"></label>
-							</form>
-						</div>
-					</div>
-
-					<!-- Subrating #3 -->
-					<div class="add-sub-rating">
-						<div class="sub-rating-title">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></div>
-						<div class="sub-rating-stars">
-							<!-- Leave Rating -->
-							<div class="clearfix"></div>
-							<form class="leave-rating">
-								<input type="radio" name="rating" id="rating-21" value="1"/>
-								<label for="rating-21" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-22" value="2"/>
-								<label for="rating-22" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-23" value="3"/>
-								<label for="rating-23" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-24" value="4"/>
-								<label for="rating-24" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-25" value="5"/>
-								<label for="rating-25" class="fa fa-star"></label>
-							</form>
-						</div>
-					</div>
 					
-					<!-- Subrating #4 -->
-					<div class="add-sub-rating">
-						<div class="sub-rating-title">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></div>
-						<div class="sub-rating-stars">
-							<!-- Leave Rating -->
-							<div class="clearfix"></div>
-							<form class="leave-rating">
-								<input type="radio" name="rating" id="rating-31" value="1"/>
-								<label for="rating-31" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-32" value="2"/>
-								<label for="rating-32" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-33" value="3"/>
-								<label for="rating-33" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-34" value="4"/>
-								<label for="rating-34" class="fa fa-star"></label>
-								<input type="radio" name="rating" id="rating-35" value="5"/>
-								<label for="rating-35" class="fa fa-star"></label>
-							</form>
-						</div>
-					</div>	
-
-					<!-- Uplaod Photos -->
-	                <div class="uploadButton margin-top-15">
-	                    <input class="uploadButton-input" type="file"  name="attachments[]" accept="image/*, application/pdf" id="upload" multiple/>
-	                    <label class="uploadButton-button ripple-effect" for="upload">Add Photos</label>
-	                    <span class="uploadButton-file-name"></span>
-	                </div>
-	                <!-- Uplaod Photos / End -->
 
 				</div>
 				<!-- Subratings Container / End -->
@@ -386,26 +300,14 @@
 				<form id="add-comment" class="add-comment">
 					<fieldset>
 
-						<div class="row">
-							<div class="col-md-6">
-								<label>Name:</label>
-								<input type="text" value=""/>
-							</div>
-								
-							<div class="col-md-6">
-								<label>Email:</label>
-								<input type="text" value=""/>
-							</div>
-						</div>
-
 						<div>
 							<label>Review:</label>
-							<textarea cols="40" rows="3"></textarea>
+							<textarea cols="40" rows="3" id ="review"></textarea>
 						</div>
 
 					</fieldset>
 
-					<button class="button">Submit Review</button>
+					<input type="submit" class="button" id ="writeReview">Submit Review</button>
 					<div class="clearfix"></div>
 				</form>
 
@@ -414,131 +316,6 @@
 
 
 		</div>
-
-
-		<!-- Sidebar
-		================================================== -->
-		<div class="col-lg-4 col-md-4 margin-top-75 sticky">
-
-				
-			<!-- Verified Badge -->
-			<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
-				<i class="sl sl-icon-check"></i> Verified Listing
-			</div>
-
-			<!-- Message Vendor -->
-			<div id="booking-widget-anchor" class="boxed-widget booking-widget message-vendor margin-top-35">
-				<h3><i class="fa fa-envelope-o"></i> Message Vendor</h3>
-				<div class="row with-forms  margin-top-0">
-
-					<div class="col-lg-12">
-						<input type="text" placeholder="First and Last Name" value="Tom Smith">
-						<input type="text" placeholder="Email" value="mail@example.com">
-						<input type="text" placeholder="Phone" value="+12 345 678 910">
-						<textarea name="" id="" cols="10" rows="2" placeholder="Message"></textarea>
-					</div>
-					
-					<!-- Preferred Contact Methos Radios -->
-					<div class="col-lg-12">
-						<div class="preferred-contact-method">
-							<h5>Preferred contact method</h5>
-
-							<div class="preferred-contact-radios">
-								<div class="radio">
-									<input id="radio-1" name="radio" type="radio" checked>
-									<label for="radio-1"><span class="radio-label"></span> Email</label>
-								</div>
-
-								<div class="radio">
-									<input id="radio-2" name="radio" type="radio">
-									<label for="radio-2"><span class="radio-label"></span> Phone</label>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-				<!-- Recaptcha Holder -->
-				<div class="captcha-holder">
-					<!-- Recaptcha goes here -->
-				</div>
-				
-				<!-- Book Now -->
-				<a href="#" class="button book-now fullwidth margin-top-5">Request Pricing</a>
-			</div>
-			<!-- Book Now / End -->
-		
-
-			<!-- Opening Hours -->
-			<div class="boxed-widget opening-hours margin-top-35">
-				<div class="listing-badge now-open">Now Open</div>
-				<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
-				<ul>
-					<li>Monday <span>9 AM - 5 PM</span></li>
-					<li>Tuesday <span>9 AM - 5 PM</span></li>
-					<li>Wednesday <span>9 AM - 5 PM</span></li>
-					<li>Thursday <span>9 AM - 5 PM</span></li>
-					<li>Friday <span>9 AM - 5 PM</span></li>
-					<li>Saturday <span>9 AM - 3 PM</span></li>
-					<li>Sunday <span>Closed</span></li>
-				</ul>
-			</div>
-			<!-- Opening Hours / End -->
-
-
-			<!-- Contact -->
-			<div class="boxed-widget margin-top-35">
-				<div class="hosted-by-title">
-					<h4><span>Hosted by</span> <a href="pages-user-profile.html">Tom Perrin</a></h4>
-					<a href="pages-user-profile.html" class="hosted-by-avatar"><img src="images/dashboard-avatar.jpg" alt=""></a>
-				</div>
-				<ul class="listing-details-sidebar">
-					<li><i class="sl sl-icon-phone"></i> (123) 123-456</li>
-					<!-- <li><i class="sl sl-icon-globe"></i> <a href="#">http://example.com</a></li> -->
-					<li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>
-				</ul>
-
-				<ul class="listing-details-sidebar social-profiles">
-					<li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-					<li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>
-					<!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
-				</ul>
-
-				<!-- Reply to review popup -->
-				<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-					<div class="small-dialog-header">
-						<h3>Send Message</h3>
-					</div>
-					<div class="message-reply margin-top-0">
-						<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
-						<button class="button">Send Message</button>
-					</div>
-				</div>
-
-				<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
-			</div>
-			<!-- Contact / End-->
-
-
-			<!-- Share / Like -->
-			<div class="listing-share margin-top-40 margin-bottom-40 no-border">
-				<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
-				<span>159 people bookmarked this place</span>
-
-					<!-- Share Buttons -->
-					<ul class="share-buttons margin-top-40 margin-bottom-0">
-						<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>
-						<li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>
-						<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>
-						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
-					</ul>
-					<div class="clearfix"></div>
-			</div>
-
-		</div>
-		<!-- Sidebar / End -->
 
 	</div>
 </div>
