@@ -304,17 +304,18 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
     infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
+ 
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
 // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+    	
         if (status === kakao.maps.services.Status.OK) {
             var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
             detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-            detailAddr += '<div><center><a href="#">출발지로 설정</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">도착지로 설정</a></center></div>';
+            detailAddr += '<div><center><a href="#" onclick="markerImg('+result[0].address.address_name+')">출발지로 설정</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="markerImg()">도착지로 설정</a></center></div>';
             
             var content = '<div class="bAddr">' +
                             '<span class="title">주소정보</span>' + 
@@ -322,7 +323,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                         '</div>';
 
             // 마커를 클릭한 위치에 표시합니다 
-            /* addMarker2(mouseEvent.latLng); */
+           //addMarker2(mouseEvent.latLng);
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
 
@@ -334,10 +335,10 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 });
 
 // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', function() {
+/* kakao.maps.event.addListener(map, 'idle', function() {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 });
-
+ */
 function searchAddrFromCoords(coords, callback) {
     // 좌표로 행정동 주소 정보를 요청합니다
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
@@ -356,40 +357,51 @@ function displayCenterInfo(result, status) {
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
             if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
+                /* infoDiv.innerHTML = result[i].address.address_name; */
                 break;
             }
         }
     }    
 }
 
-//지도에 표시된 마커 객체를 가지고 있을 배열입니다
-var markers2 = [];
 
-// 마커 하나를 지도위에 표시합니다 
-addMarker2(new kakao.maps.LatLng(33.450701, 126.570667));
+var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+var InfoPos = infowindow.getPosition();
 
-// 마커를 생성하고 지도위에 표시하는 함수입니다
-function addMarker2(position) {
-    
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        position: position
-    });
+function markerImg(addrX){  
+//마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-    
-    // 생성된 마커를 배열에 추가합니다
-    markers2.push(marker);
+geocoder.addressSearch(addrX, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+    	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    	 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
+    	 // 결과값으로 받은 위치를 마커로 표시합니다
+         var marker = new kakao.maps.Marker({
+             map: map,
+             position: coords,
+             image: markerImage// 마커이미지 설정 
+         });
+    	 
+        
+
+
+/* var markerImg = new kakao.maps.Marker({
+    position: markerPosition, 
+    image: markerImage // 마커이미지 설정 
+}); */
+
+markerImg.setMap(map); 
+
+}
+});
 }
 
-// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-function setMarkers(map) {
-    for (var i = 0; i < markers2.length; i++) {
-        markers2[i].setMap(map);
-    }            
-}
+
 </script>
 </body>
 </html>
