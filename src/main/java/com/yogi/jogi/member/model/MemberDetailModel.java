@@ -109,4 +109,5 @@ public class MemberDetailModel {
 				+ phone3 + ", email=" + email + ", regdate=" + regdate + "]";
 	}
 	
+	
 }

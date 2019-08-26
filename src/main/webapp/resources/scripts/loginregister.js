@@ -25,6 +25,14 @@ function resetSelect(target1,target2,comment){
 		var2.value="";
 	}
 }
+function resetSelectPhone(target1,target2,comment){
+	var1 = document.getElementById(target1);
+	var2 = document.getElementById(target2);
+	if(var1.value==""){
+		var1.style.color="#808080";
+		var2.innerHTML = "";
+	}
+}
 /*비밀번호체크*/
 function passwdCheck(target1,target2,comment) {
 	
@@ -127,6 +135,11 @@ function hangul(target1){
 		event.returnValue = false;
 	}
 }
+/*한글체크*/
+function donotkeyin(){
+	event.returnValue = false;
+	
+}
 
 /*아이디중복,유효성 체크*/
 function IDOverlapCheck(target1,comment){
@@ -141,7 +154,7 @@ function IDOverlapCheck(target1,comment){
 		$.ajax({
 			url : '/member/IDOverlapCheck',
 			type : 'post',
-			data: {'id' : var1.value},
+			data: {'id' : var2.value},
 			success:function(data){
 				if(data == '1'){
 					var2.style.color="red";
@@ -158,7 +171,7 @@ function IDOverlapCheck(target1,comment){
 	});
 	}
 }
-function onclickRegister(target1,target2,target3,target4,target5,target6,target7,target8,target9){
+function onclickRegister(target1,target2,target3,target4,target5,target6,target7,target8,target9,target10,target11,target12,target13,target14,target15){
 	var1 = document.getElementById(target1);
 	var2 = document.getElementById(target2);
 	var3 = document.getElementById(target3);
@@ -168,24 +181,40 @@ function onclickRegister(target1,target2,target3,target4,target5,target6,target7
 	var7 = document.getElementById(target7);
 	var8 = document.getElementById(target8);
 	var9 = document.getElementById(target9);
+	var10 = document.getElementById(target10);
+	var11 = document.getElementById(target11);
+	var12 = document.getElementById(target12);
+	var13 = document.getElementById(target13);
+	var14 = document.getElementById(target14);
+	var15 = document.getElementById(target15);
 	if(var1.value == ""||var1.value=='이름을 입력하세요.'){
+		var1.type="text";
+		var1.style.borderColor="red";
+		var1.style.color="red";
+		var1.value = "이름을 입력하세요."
 		return false;
-	}else if(var2.value == ""||var2.value=='전화번호를 입력하세요.'){
+	}else if(var2.value == ""||var3.value==''||var4.value==''|| var15.value=='전화번호를 입력하세요.'){
+		var15.innerHTML ="전화번호를 입력하세요."
 		return false;
-	}else if(var3.value == ""||var3.value=='주소를 입력하세요.'){
+	}else if(var5.value == ""||var6.value == ""||var7.value == ""||var7.value == "주소를 입력하세요."){
+		var7.type="text";
+		var7.style.borderColor="red";
+		var7.style.color="red";
+		var7.value = "주소를 입력하세요."
 		return false;
-	}else if(var4.value == ""||var4.value=='주민번호를 입력하세요.'){
+	}else if(var8.value == ""||var9.value==''||var8.value == "주민번호를 입력하세요."){
+		var8.value == "주민번호를 입력하세요."
 		return false;
-	}else if(var5.value == ""||var5.value=='아이디를 입력하세요.'||var5.value=="이미 존재하는 아이디 입니다."){
+	}else if(var10.value == ""||var10.value=='아이디를 입력하세요.'||var10.value=="이미 존재하는 아이디 입니다."){
 		return false;
-	}else if(var6.value == ""||var6.value=='이메일을 입력하세요.'||var6.value=='이메일을 입력하세요.'||var6.value=="이미 존재하는 이메일 입니다."){
+	}else if(var11.value == ""||var11.value=='이메일을 입력하세요.'||var11.value=='이메일을 입력하세요.'||var11.value=="이미 존재하는 이메일 입니다."){
 		return false;
-	}else if(var7.value == ""||var7.value=='비밀번호를 입력하세요.'||var7.value=="6~12자리로 입력해 주세요"||var7.value=="동일한 비밀번호를 입력해 주세요."){
+	}else if(var12.value == ""||var12.value=='비밀번호를 입력하세요.'||var12.value=="6~12자리로 입력해 주세요"||var12.value=="동일한 비밀번호를 입력해 주세요."){
 		return false;
-	}else if(var8.value == ""||var8.value=='비밀번호를 입력하세요.'||var8.value=="6~12자리로 입력해 주세요"||var8.value=="동일한 비밀번호를 입력해 주세요."){
+	}else if(var13.value == ""||var13.value=='비밀번호를 입력하세요.'||var13.value=="6~12자리로 입력해 주세요"||var13.value=="동일한 비밀번호를 입력해 주세요."){
 		return false;
 	}else{
-		var9.submit();
+		var14.submit();
 	}
 	
 }
