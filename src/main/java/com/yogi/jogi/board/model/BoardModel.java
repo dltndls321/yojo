@@ -9,7 +9,7 @@ public class BoardModel {
 	private String subject;
 	private String writer;
 	private String passwd;
-	private String conetent;
+	private String content;
 	private String fname;
 	private int fsize;
 	private int readcount;
@@ -66,12 +66,12 @@ public class BoardModel {
 		this.passwd = passwd;
 	}
 
-	public String getConetent() {
-		return conetent;
+	public String getContent() {
+		return content;
 	}
 
-	public void setConetent(String conetent) {
-		this.conetent = conetent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getFname() {
@@ -133,7 +133,7 @@ public class BoardModel {
 	@Override
 	public String toString() {
 		return "BoardModel [boardNum=" + boardNum + ", memNum=" + memNum + ", boardid=" + boardid + ", subject="
-				+ subject + ", writer=" + writer + ", passwd=" + passwd + ", conetent=" + conetent + ", fname=" + fname
+				+ subject + ", writer=" + writer + ", passwd=" + passwd + ", content=" + content + ", fname=" + fname
 				+ ", fsize=" + fsize + ", readcount=" + readcount + ", regdate=" + regdate + ", ref=" + ref
 				+ ", reStep=" + reStep + ", reLevel=" + reLevel + "]";
 	}
