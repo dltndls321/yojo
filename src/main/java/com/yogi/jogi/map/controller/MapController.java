@@ -36,4 +36,26 @@ public class MapController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("test2") //
+	public ModelAndView test2() throws Exception {
+		
+		mv.clear();
+		System.out.println(mapService.getFoodList2());
+	
+		mv.addObject("foodList",mapService.getFoodList2());
+		mv.setViewName("maptest/maptest.do"); //
+		
+		return mv;
+	}
+	
+	@RequestMapping("search") //
+	public ModelAndView search() throws Exception {
+		
+		mv.clear();
+		
+		mv.setViewName("maptest/mapSearch.do"); //
+		
+		return mv;
+	}
 }

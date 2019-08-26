@@ -8,6 +8,18 @@
   <select id="getFoodList"  resultType="mapModel">
     	select * from foodtest3 where rownum between 1 and 5
    </select>
+     
+   <select id="getFoodList2"  resultType="mapModel" >
+   	 <![CDATA[
+    select * from foodtest3 where x>37.50219 and x<37.525517 and y>127.05289 and y<127.05642
+    ]]>	
+   </select>
+   
+   
+  
+
+
+
    
    <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
     	select

@@ -18,7 +18,11 @@ public class MapServiceImpl implements MapService{
 		// TODO Auto-generated method stub
 		return dao.getFoodList();
 	}
-	
+	@Override
+	public List<MapModel> getFoodList2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getFoodList2();
+	}
 	
 	
 }
