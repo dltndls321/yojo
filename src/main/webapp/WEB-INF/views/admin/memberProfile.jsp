@@ -42,31 +42,31 @@
 						<div class="my-profile">
 						
 							<label>ID</label>
-							<input value="hyeyeon8752" type="text" id="id" name="id">
+							<input value="아이디" type="text" id="id" name="id">
 							
 							<label>Password</label>
-							<input value="qaz0036900" type="text" id="passwd" name="passwd">
+							<input value="비밀번호" type="text" id="passwd" name="passwd">
 
 							<label>Name</label>
-							<input value="이혜연" type="text" id="name" name="name">
+							<input value="이름" type="text" id="name" name="name">
 
 							<label>Phone</label>
-							<input value="010-6823-0650" type="text" id="phone" name="phone">
+							<input value="전화번호" type="text" id="phone" name="phone">
 							
 							<label>Jumin</label>
-							<input value="951005-2000000" type="text" id="jumin" name="jumin">
+							<input value="주민-번호" type="text" id="jumin" name="jumin">
 							
 							<label>Address</label>
-							<input value="경기도 남양주시 평내동" type="text" id="address" name="address">
+							<input value="주소" type="text" id="address" name="address">
 
 							<label>Email</label>
-							<input value="hyeyeon8752@naver.com" type="text" id="email" name="email">
+							<input value="이@메.일" type="text" id="email" name="email">
 							
 							<label>RegDate</label>
-							<input value="20190822" type="date" id="regdate" name="regdate">
+							<input value="가입일" type="date" id="regdate" name="regdate">
 
 							<label>Notes</label>
-							<textarea name="notes" id="notes" cols="30" rows="10">혜연이는 이쁘다.</textarea>
+							<textarea name="notes" id="notes" cols="30" rows="10">추가정보</textarea>
 
 						</div>
 	
@@ -120,7 +120,7 @@
 						<!-- Change Password -->
 						<div class="my-profile">
 							<label class="margin-top-0">Current Password</label>
-							<input type="password" value="qaz0036900" name="" id="">
+							<input type="password" value="0000" name="" id="">
 
 							<label>New Password</label>
 							<input type="password" name="" id="">

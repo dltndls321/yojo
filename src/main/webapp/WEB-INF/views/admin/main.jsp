@@ -112,7 +112,7 @@
 								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
+								<a href="/admin/memberProfile" class="button gray">View Info</a>
 							</div>
 						</li>
 						
@@ -124,7 +124,7 @@
 								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
+								<a href="/admin/memberProfile" class="button gray">View Info</a>
 							</div>
 						</li>
 
@@ -136,7 +136,7 @@
 								<li>Date: 2019/08/22</li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
+								<a href="/admin/memberProfile" class="button gray">View Info</a>
 							</div>
 						</li>
 
