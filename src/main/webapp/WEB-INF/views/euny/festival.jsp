@@ -9,7 +9,7 @@ $(document).ready(function(){
 		var areaCode = $("#areacode option:selected").val();
 		var date = $("#date-picker").val();
 		$.ajax({        
-	        url: 'test.do',
+	        url: 'festival.do',
 	        type: 'get',
 	        data : {"areaCode" : areaCode, "eventStartDate" :date},
 	        success: function(data){

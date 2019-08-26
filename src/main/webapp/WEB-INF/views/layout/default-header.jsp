@@ -65,8 +65,7 @@
 			<!-- Right Side Content / End -->
 			<div class="right-side">
 				<div class="header-widget">
-					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>
+					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><i class="sl sl-icon-login"></i> Sign In</a>
 				</div>
 			</div>
 			<!-- Right Side Content / End -->
