@@ -1,53 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
 <html>
 <head>
-<title>°Ô½ÃÆÇ</title>
+<title>ê²Œì‹œíŒ</title>
 </head>
 
 <body>
 	<br>
 	<br>
-	<b>±Û³»¿ë º¸±â</b>
+	<b>ê¸€ë‚´ìš© ë³´ê¸°</b>
 	<div class="w3-container w3-display-middle">
 		<table class="w3-table-all">
 			<tr height="30">
-				<td align="center">±Û¹øÈ£</td>
+				<td align="center">ê¸€ë²ˆí˜¸</td>
 				<td align="center">${article.num}</td>
-				<td>Á¶È¸¼ö</td>
+				<td>ì¡°íšŒìˆ˜</td>
 				<td align="center">${article.readcount}</td>
 			</tr>
 			<tr height="30">
-				<td>ÀÛ¼ºÀÚ</td>
+				<td>ì‘ì„±ì</td>
 				<td align="center">${article.writer}</td>
-				<td align="center">ÀÛ¼ºÀÏ</td>
+				<td align="center">ì‘ì„±ì¼</td>
 				<td align="center" align="center">${article.reg_date}</td>
 			</tr>
 			<tr height="30">
-				<td align="center">±ÛÁ¦¸ñ</td>
+				<td align="center">ê¸€ì œëª©</td>
 				<td align="center" colspan="3">${article.subject}</td>
 			</tr>
 			<tr height="30">
-				<td align="center">±Û³»¿ë</td>
+				<td align="center">ê¸€ë‚´ìš©</td>
 				<td align="left" colspan="3"><pre>${article.content}</pre></td>
 			</tr>
 			<tr height="30">
-				<td align="center">ÀÌ¹ÌÁö</td>
+				<td align="center">ì´ë¯¸ì§€</td>
 				<td align="left" colspan="3">
 				<img src="<%=request.getContextPath() %>/images/${article.filename}"></td>
 			</tr>
 			<tr height="30">
 				<td colspan="4" class="w3-center"><input type="button"
-					value="±Û¼öÁ¤"
+					value="ê¸€ìˆ˜ì •"
 					onclick="document.location.href='<%=request.getContextPath()%>/board/update?num=${article.num}&pageNum=${pageNum}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="±Û»èÁ¦"
+					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="ê¸€ì‚­ì œ"
 					onclick="document.location.href='<%=request.getContextPath()%>/board/delete?num=${article.num}&pageNum=${pageNum}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="´ä±Û¾²±â"
+					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="ë‹µê¸€ì“°ê¸°"
 					onclick="document.location.href
 					='${pageContext.request.contextPath}/board/writeForm?num=${article.num}&pageNum=${pageNum}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="±Û¸ñ·Ï"
+					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="ê¸€ëª©ë¡"
 					onclick="document.location.href='<%=request.getContextPath()%>/board/list?pageNum=${pageNum}'"></td>
 			</tr>
 		</table>
