@@ -334,6 +334,11 @@ public class FestController {
     }
 	@RequestMapping(value = "/review")
 	public void setFestival(FestivalModel festmodel,FestReviewModel freviewmodel, HttpSession session)throws Exception {
+		//insert전에 중복확인
+		FestivalModel checkfest = festService.selectFestWithsubject(festmodel);
+		int chkNum = checkfest.getFestNum();
+		if( chkNum)
+		
 		//먼저 축제정보 insert
 		festService.insertFest(festmodel);
 		festmodel = festService.selectFestWithsubject(festmodel);
