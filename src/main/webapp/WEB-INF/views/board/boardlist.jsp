@@ -24,9 +24,9 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<a class="fa fa-edit fa-fw"
-							href="<%=request.getContextPath()%>/board/writeUploadForm">게시판 작성</a>
-					
+						<a class="fa fa-edit fa-fw"href="<%=request.getContextPath()%>/board/writeUploadForm?boardid=1">게시판
+							작성</a>
+
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -40,22 +40,21 @@
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
-								
-								</tr>
-							</thead>
-									
-								<c:forEach items="${list}" var="AllList">
-									<tr>
-									
-										<td align="center" width="100">${list.boardNum}</td>
-										<td align="center" width="150">${list.subject}</td>
-										<td align="center" width="100">${list.writer}</td>
-										<td align="center" width="100">
-										<fmt:formatDate type="date" value="${list.regdate}" /></td>
-										<td align="center" width="50">${list.readcount}</td>
 									</tr>
-								</c:forEach>
-							
+							</thead>
+
+							<c:forEach items="${AllList}" var="li">
+								<tr>
+
+									<td width="100">${li.boardNum}</td>
+									<td width="150">${li.subject}</td>
+									<td width="100">${li.writer}</td>
+									<td width="100"><fmt:formatDate type="date"
+											value="${li.regdate}" /></td>
+									<td width="50">${li.readcount}</td>
+								</tr>
+							</c:forEach>
+
 						</table>
 					</div>
 				</div>

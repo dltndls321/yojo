@@ -14,7 +14,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>boardList</title>
 </head>
-
+<body>
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
@@ -31,7 +31,6 @@
 					<div class="panel-body">
 						<form method="post" name="writeform"
 							action="<%=request.getContextPath()%>/board/writePro">
-						
 							<div class="row form-group">
 								<label class="col-lg-2">제목</label>
 								<div class="col-lg-8">
@@ -47,7 +46,7 @@
 							</div>
 						</form>
 						<button class="btn btn-outline btn-info"
-							onclick="location.href='/board/writePro'">저장하기</button>
+							onclick="fn_MoveToUrl('/board/writePro','저장')">저장하기</button>
 						<button class="btn btn-outline btn-primary"
 							onclick="location.href='/board/list'">리스트</button>
 					</div>

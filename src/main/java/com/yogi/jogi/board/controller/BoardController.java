@@ -14,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
+import com.yogi.jogi.board.model.NoticeModel;
 import com.yogi.jogi.board.service.BoardService;
 
 
@@ -35,6 +37,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
 
 	@ModelAttribute // 이 어노테이션을 사용하면 메소드에서 선언한 객체가 뷰로 넘어감 글구 가장먼저 실행됨
 	public void setAttr(HttpServletRequest request) {
@@ -69,7 +72,7 @@ public class BoardController {
 		mv.setViewName("board/boardlist");
 		mv.addObject("AllList", AllList);
 		System.out.println(AllList);
-	
+
 		return mv;
 	}
 
@@ -87,35 +90,45 @@ public class BoardController {
 		 * mv.addObject("readcount", boardModel.getReadcount()); mv.addObject("regdate",
 		 * boardModel.getRegdate()); mv.setViewName("board/writeUploadForm");
 		 */
-
 		return mv;
 	}
 
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel) throws Exception {
-		System.out.println("*************"+boardModel);
+		System.out.println("2" + boardModel);
 		boardService.insertBoard(boardModel);
-		return "redirect:/board/list?pageNum=" + pageNum;
-		
+		return "redirect:/board/list";
+
+		// return "redirect:/board/list?pageNum=" + pageNum;
+
 	}
+
 	@RequestMapping("writeUploadPro")
-	 public String writeUploadPro(MultipartHttpServletRequest multipart,BoardModel boardModel) throws Exception{
-	      MultipartFile multi = multipart.getFile("uploadfile");
-	      String filename = multi.getOriginalFilename();
-	      if(filename != null && !filename.equals("")) {
-	    	  
-	    	  String uploadPath = multipart.getRealPath("/") + "WEB-INF/views/board/fileSave";
-	    	  System.out.println(uploadPath);
-	    	  FileCopyUtils.copy(multi.getInputStream(), new FileOutputStream(uploadPath + "/" + multi.getOriginalFilename()));
-	    	  boardModel.setFname(filename);
-	    	  boardModel.setFsize((int)multi.getSize());
-	      }else {
-	    	  boardModel.setFname("");
-	    	  boardModel.setFsize(0);
-	      }
-	      boardService.insertBoard(boardModel);
-	      return "redirect:list?pageNum=" + pageNum; 
-	   }
+	public String writeUploadPro(MultipartHttpServletRequest multipart, BoardModel boardModel) throws Exception {
+		
+		MultipartFile multi = multipart.getFile("uploadfile");
+		String fname = multi.getOriginalFilename();
+		System.out.println(fname);
+		if (fname != null && !fname.equals("")) {
+
+			String uploadPath = multipart.getRealPath("/") + "WEB-INF/views/board/fileSave";
+			System.out.println(uploadPath);
+
+			FileCopyUtils.copy(multi.getInputStream(),
+					new FileOutputStream(uploadPath + "/" + multi.getOriginalFilename()));
+			System.out.println("in : "+fname);
+			boardModel.setFname(fname);
+			boardModel.setFsize((int) multi.getSize());
+		} else {
+			boardModel.setFname("");
+			boardModel.setFsize(0);
+		}
+		System.out.println("3" + boardModel);
+		boardService.insertBoard(boardModel);
+		return "redirect:/board/boardlist";
+		// return "redirect:list?pageNum=" + pageNum;
+	}
+
 	@RequestMapping("content")
 	public ModelAndView content(BoardModel boardModel, HttpServletRequest request) throws Exception {
 		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
