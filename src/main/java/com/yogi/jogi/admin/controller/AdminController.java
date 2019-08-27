@@ -22,6 +22,11 @@ public class AdminController {
 		return "admin/board.admin";
 	}
 	
+	@RequestMapping(value = "memberList")
+	public String moveMemberList() {
+		return "admin/memberList.admin";
+	}
+	
 	@RequestMapping(value = "memberProfile")
 	public String moveMemberProfile() {
 		return "admin/memberProfile.admin";
