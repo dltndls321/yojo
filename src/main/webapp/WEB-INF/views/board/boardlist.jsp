@@ -24,15 +24,9 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<a class="fa fa-edit fa-fw"
-<<<<<<< HEAD
-							href="<%=request.getContextPath()%>/board/writeUploadForm?boardid=1">게시판
+						<a class="fa fa-edit fa-fw"href="<%=request.getContextPath()%>/board/writeUploadForm?boardid=1">게시판
 							작성</a>
 
-=======
-							href="<%=request.getContextPath()%>/board/writeUploadForm">게시판 작성</a>
-					
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -46,9 +40,7 @@
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
-<<<<<<< HEAD
-
-								</tr>
+									</tr>
 							</thead>
 
 							<c:forEach items="${AllList}" var="li">
@@ -63,24 +55,6 @@
 								</tr>
 							</c:forEach>
 
-=======
-								
-								</tr>
-							</thead>
-									
-								<c:forEach items="${list}" var="AllList">
-									<tr>
-									
-										<td align="center" width="100">${list.boardNum}</td>
-										<td align="center" width="150">${list.subject}</td>
-										<td align="center" width="100">${list.writer}</td>
-										<td align="center" width="100">
-										<fmt:formatDate type="date" value="${list.regdate}" /></td>
-										<td align="center" width="50">${list.readcount}</td>
-									</tr>
-								</c:forEach>
-							
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 						</table>
 					</div>
 				</div>
