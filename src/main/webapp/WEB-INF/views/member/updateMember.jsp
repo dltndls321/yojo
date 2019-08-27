@@ -36,19 +36,21 @@
 						<!-- Details -->
 						<div class="my-profile">
 
-							<label>Your Name</label>
-							<input value="Tom Perrin" type="text">
+							<label>이름</label>
+							<input value="${memberInfo.name }" type="text">
 
-							<label>Phone</label>
-							<input value="(123) 123-456" type="text">
+							<label>번호</label>
+							<input value="${memberInfo.phone }" type="text">
 
-							<label>Email</label>
-							<input value="tom@example.com" type="text">
-
+							<label>이메일</label>
+							<input value="${memberInfo.email }" type="text">
+							
+							<label>주소</label>
+							<input value="${memberInfo.address }" type="text">
 							
 						</div>
 	
-						<button class="button margin-top-15">Save Changes</button>
+						<button class="button margin-top-15">회원정보 수정</button>
 
 					</div>
 				</div>
@@ -57,21 +59,21 @@
 			<!-- Change Password -->
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
-					<h4 class="gray">Change Password</h4>
+					<h4 class="gray">비밀번호 변경</h4>
 					<div class="dashboard-list-box-static">
 
 						<!-- Change Password -->
 						<div class="my-profile">
-							<label class="margin-top-0">Current Password</label>
+							<label class="margin-top-0">현재 비밀번호</label>
+							<input type="password" value="${memberInfo.passwd }">
+
+							<label>새 비밀번호</label>
 							<input type="password">
 
-							<label>New Password</label>
+							<label>비밀번호 확인</label>
 							<input type="password">
 
-							<label>Confirm New Password</label>
-							<input type="password">
-
-							<button class="button margin-top-15">Change Password</button>
+							<button class="button margin-top-15">비밀번호 변경</button>
 						</div>
 
 					</div>

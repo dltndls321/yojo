@@ -265,7 +265,7 @@
 				<div class="header-widget">
 					<!-- User Menu -->
 					<div class="user-menu">
-						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
+						<div class="user-name"><span><img src="/resources/images/user-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
 						<ul>
 							
 							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
