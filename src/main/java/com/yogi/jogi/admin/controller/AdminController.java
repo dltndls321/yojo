@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
@@ -24,6 +25,8 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	ModelAndView mv = new ModelAndView();
 	private int pageNum;
+
+	MemberDetailModel memberDetailModel = new MemberDetailModel();
 
 	@Autowired
 	private MemberService memberService;
@@ -84,14 +87,39 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "memberProfile/{memnum}")
-	public ModelAndView moveMemberProfile(MemberModel memberModel,@PathVariable("memnum") int memnum)throws Exception{
+	public ModelAndView moveMemberProfile(MemberModel memberModel, @PathVariable("memnum") int memnum)
+			throws Exception {
 
 		mv.clear();
-		
+
 		memberModel.setMemnum(memnum);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
-		
+
+		String[] splitAddress = memberModel.getAddress().split("/");
+		String[] splitPhone = memberModel.getPhone().split("-");
+
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				memberDetailModel.setPostcode(splitAddress[i]);
+			} else if (i == 1) {
+				memberDetailModel.setAddress1(splitAddress[i]);
+			} else {
+				memberDetailModel.setDetailAddress(splitAddress[i]);
+			}
+		}
+
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				memberDetailModel.setPhone1(splitPhone[i]);
+			} else if (i == 1) {
+				memberDetailModel.setPhone2(splitPhone[i]);
+			} else {
+				memberDetailModel.setPhone3(splitPhone[i]);
+			}
+		}
+
 		mv.addObject("memberInfo", memberModel);
+		mv.addObject("memberDetailInfo", memberDetailModel);
 		mv.setViewName("admin/memberProfile.admin");
 
 		return mv;
