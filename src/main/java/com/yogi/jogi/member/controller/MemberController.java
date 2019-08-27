@@ -74,7 +74,20 @@ public class MemberController {
 	}
 	
 	/* 멤버프로필 */
-	
+	@RequestMapping(value = "profile")
+	public ModelAndView profile(HttpSession session) throws Exception{
+		System.out.println("member/profile  : 시작");
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println("memberModel셋 memNum  : " + memberModel);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		System.out.println("memberModel 다시 : " + memberModel);
+		model.addObject("memberInfo",memberModel);
+		model.setViewName("member/memberprofile.do");
+		return model;
+	}
 	
 	//ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
