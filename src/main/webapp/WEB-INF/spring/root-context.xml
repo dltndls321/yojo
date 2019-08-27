@@ -17,20 +17,12 @@
 	<bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-<<<<<<< HEAD
-       <property name="url"
+         <!-- <property name="url"
             value="jdbc:oracle:thin:@127.0.0.1:1521:orcl">
-=======
-       <!--  <property name="url"
-            value="jdbc:oracle:thin:@127.0.0.1:1521:orcl">
-        </property> -->
-        <property name="url"
+        </property>  -->
+         <property name="url"
             value="jdbc:oracle:thin:@127.0.0.1:1521:xe">
->>>>>>> parent of ec3ca44... 커밋 08-27
         </property>
-       <!-- <property name="url"
-            value="jdbc:oracle:thin:@127.0.0.1:1521:xe">
-        </property> -->
         <property name="username" value="scott"></property>
         <property name="password" value="1111"></property>
     </bean>  
@@ -49,5 +41,7 @@
     
    <!--  파일 업로드 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-   
+    <!-- <context:component-scan base-package="dao"></context:component-scan>
+	<context:component-scan base-package="service"></context:component-scan> -->
+
 </beans>
