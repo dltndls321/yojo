@@ -1,11 +1,11 @@
 package com.yogi.jogi.common.model;
 
 public class FestivalValueModel {
-	private String addr1;
-	private String firstimage;
-	private String title;
-	private int typeid;
-	private int contid;
+	String addr1;
+	String firstimage;
+	String title;
+	int typeid;
+	int contid;
 	public String getAddr1() {
 		return addr1;
 	}

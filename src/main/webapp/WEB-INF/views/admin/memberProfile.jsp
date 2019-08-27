@@ -28,7 +28,7 @@
 					<div class="dashboard-list-box-static">
 						
 						<!-- Avatar -->
-						<div class="edit-profile-photo">
+						<!-- <div class="edit-profile-photo">
 							<img src="images/user-avatar.jpg" alt="">
 							<div class="change-photo-btn">
 								<div class="photoUpload">
@@ -36,37 +36,37 @@
 								    <input type="file" class="upload" />
 								</div>
 							</div>
-						</div>
+						</div> -->
 	
 						<!-- Details -->
 						<div class="my-profile">
 						
 							<label>ID</label>
-							<input value="hyeyeon8752" type="text" id="id" name="id">
+							<input value="${memberInfo.id }" type="text" id="id" name="id">
 							
 							<label>Password</label>
-							<input value="qaz0036900" type="text" id="passwd" name="passwd">
+							<input value="${memberInfo.passwd }" type="text" id="passwd" name="passwd">
 
 							<label>Name</label>
-							<input value="이혜연" type="text" id="name" name="name">
+							<input value="${memberInfo.name }" type="text" id="name" name="name">
 
 							<label>Phone</label>
-							<input value="010-6823-0650" type="text" id="phone" name="phone">
+							<input value="${memberInfo.phone }" type="text" id="phone" name="phone">
 							
 							<label>Jumin</label>
-							<input value="951005-2000000" type="text" id="jumin" name="jumin">
+							<input value="${memberInfo.jumin }" type="text" id="jumin" name="jumin">
 							
 							<label>Address</label>
-							<input value="경기도 남양주시 평내동" type="text" id="address" name="address">
+							<input value="${memberInfo.address }" type="text" id="address" name="address">
 
 							<label>Email</label>
-							<input value="hyeyeon8752@naver.com" type="text" id="email" name="email">
+							<input value="${memberInfo.email }" type="text" id="email" name="email">
 							
 							<label>RegDate</label>
-							<input value="20190822" type="date" id="regdate" name="regdate">
+							<input value="${memberInfo.regdate }" type="text" id="regdate" name="regdate">
 
 							<label>Notes</label>
-							<textarea name="notes" id="notes" cols="30" rows="10">혜연이는 이쁘다.</textarea>
+							<textarea name="notes" id="notes" cols="30" rows="10">추가정보</textarea>
 
 						</div>
 	
@@ -84,24 +84,24 @@
 						<div class="my-profile">
 							<div class="col-lg-6">
 								<label class="margin-top-0">Companion</label>
-								<input type="text" value="연인" name="" id="">
+								<input type="text" value="이" name="" id="">
 
 								<label>Prefer Style</label>
-								<input type="text" value="휴식" name="" id="">
+								<input type="text" value="지" name="" id="">
 	
 								<label>Prefer Place</label>
-								<input type="text" value="바다" name="" id="">
+								<input type="text" value="까" name="" id="">
 							</div>
 							
 							<div class="col-lg-6">
 								<label class="margin-top-0">Prefer Festival</label>
-								<input type="text" value="음주 페스티벌" name="" id="">
+								<input type="text" value="거" name="" id="">
 
 								<label>Prefer Food</label>
-								<input type="text" value="한식" name="" id="">
+								<input type="text" value="울" name="" id="">
 	
 								<label>Prefer Spot</label>
-								<input type="text" value="체험관" name="" id="">
+								<input type="text" value="?" name="" id="">
 							</div>
 
 							<button class="button margin-top-15">Save</button>
@@ -120,13 +120,13 @@
 						<!-- Change Password -->
 						<div class="my-profile">
 							<label class="margin-top-0">Current Password</label>
-							<input type="password" value="qaz0036900" name="" id="">
+							<input type="text" value="0000" name="" id="">
 
 							<label>New Password</label>
-							<input type="password" name="" id="">
+							<input type="text" name="" id="">
 
 							<label>Confirm New Password</label>
-							<input type="password" name="" id="">
+							<input type="text" name="" id="">
 
 							<button class="button margin-top-15">Change Password</button>
 						</div>

@@ -10,24 +10,15 @@
 </head>
 <body>
 
-<c:forEach var="foodLists" items="${foodList}">
-
-<tr>
-					<%-- <td>&nbsp;${foodLists.addr}</td><br>
-					<td>&nbsp;${foodLists.name}</td><br> --%>
-<c:set var="count" value="${count + 1}"/>	
-	
-	<td>${foodList[count].name }</td><br>
-
-				
-			
-					
-</tr>
-</c:forEach>
 
 <div id="map" style="width:100%;height:800px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bc09144cd9cfda6282302724d67e683c&libraries=services"></script>
+
+
+
+
+<!--스크립트 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13cd4e6df49574ac7ccc468bb2a978a2&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -36,6 +27,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };  
 
 // 지도를 생성합니다    
+
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 // 주소-좌표 변환 객체를 생성합니다
@@ -43,19 +35,16 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 
 //리스트 주소 받아오기
-var foodAddr = new Array();
-var foodName = new Array();
-<c:forEach items="${foodList}" var="foodLists" >
-	foodAddr.push("${foodLists.addr}")
-	foodName.push("${foodLists.name}")
-</c:forEach>
+
 
 
 // 주소로 좌표를 검색합니다
 
-for(var i=0; i<5; i++){
-
-geocoder.addressSearch(foodAddr[i], function(result, status) {
+/* for(; jj<foodAddr.length; jj++){ */
+	
+<c:forEach items="${foodList}" var="foodLists" >	
+geocoder.addressSearch("${foodLists.addr}", function(result, status) {
+	
 	
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -71,17 +60,19 @@ geocoder.addressSearch(foodAddr[i], function(result, status) {
         // 인포윈도우로 장소에 대한 설명을 표시합니다
       
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${foodList[0].name}</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${foodLists.name}"+'</div>'
         });
         
-     
+       
         infowindow.open(map, marker);
-
+        
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         
     } 
+   
 });    
-}
+</c:forEach>
+/* }//for end */
 
 </script>
 </body>

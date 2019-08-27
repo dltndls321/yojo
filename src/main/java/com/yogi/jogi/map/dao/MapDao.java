@@ -18,4 +18,8 @@ public class MapDao {
 	public List<MapModel> getFoodList() throws Exception {
 		return sqlSession.selectList(Namespace+".getFoodList");
 	}
+	
+	public List<MapModel> getFoodList2() throws Exception {
+		return sqlSession.selectList(Namespace+".getFoodList2");
+	}
 }
