@@ -100,7 +100,7 @@
 									<input maxlength="4" type="text" class="input-text" name="phone3" id="phoneRegister3" value="${memberDetailInfo.phone3 }" onblur="" onfocus="" style="width: 130px;display: inline;"/>
 
 							<label>이메일</label>
-							<input name="email" value="${memberInfo.email }" type="text">
+							<input name="email" value="${memberInfo.email }" type="text" onkeypress="">
 							
 							<label>주소</label>
 							<input type="text" class="input-text" name="postcode" id="postcode" value="${memberDetailInfo.postcode }" onblur="" onfocus="" placeholder="우편번호" onkeypress="donotkeyin();"/>									

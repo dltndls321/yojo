@@ -278,4 +278,29 @@ function onclickUpdate(target1,target2,target3,target4,target5,target6){
 	var4 = document.getElementById(target4);
 	var5 = document.getElementById(target5);
 	var6 = document.getElementById(target6);
+	if(var1.value == ""||var1.value=='이름을 입력하세요.'){
+		var1.style.color="red";
+		var1.value='이름을 입력하세요.';
+		return false;
+	}
+	if(var2.value == ""){
+		var2.style.borderColor="red";
+		return false;
+	}
+	if(var3.value == ""){
+		var3.style.borderColor="red";
+		return false;
+	}if(var4.value == ""){
+		var4.style.borderColor="red";
+		return false;
+	}if(var5.value == ""||var5.value == "이메일을 입력해 주세요."){
+		var5.style.borderColor="red";
+		var5.value='이메일을 입력하세요.';
+		return false;
+	}if(var6.value == ""||var6.value == "주소를 입력해 주세요."){
+		var5.style.borderColor="red";
+		var5.value='주소를 입력하세요.';
+		return false;
+	}
+	
 }
