@@ -17,53 +17,59 @@ public class BoardModel {
 	private int ref;
 	private int reStep;
 	private int reLevel;
+
 	public int getBoardNum() {
 		return boardNum;
 	}
+
 	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
 	}
+
 	public int getMemNum() {
 		return memNum;
 	}
+
 	public void setMemNum(int memNum) {
 		this.memNum = memNum;
 	}
+
 	public String getBoardid() {
 		return boardid;
 	}
+
 	public void setBoardid(String boardid) {
 		this.boardid = boardid;
 	}
+
 	public String getSubject() {
 		return subject;
 	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public String getPasswd() {
 		return passwd;
 	}
+
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-<<<<<<< HEAD
-	public String getContent() {
-		return content;
-	}
-=======
 
 	public String getContent() {
 		return content;
 	}
 
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 	public void setContent(String content) {
 		this.content = content;
 	public String getConetent() {
@@ -73,48 +79,63 @@ public class BoardModel {
 	public void setConetent(String conetent) {
 		this.conetent = conetent;
 	}
+
 	public String getFname() {
 		return fname;
 	}
+
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+
 	public int getFsize() {
 		return fsize;
 	}
+
 	public void setFsize(int fsize) {
 		this.fsize = fsize;
 	}
+
 	public int getReadcount() {
 		return readcount;
 	}
+
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
+
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+
 	public int getRef() {
 		return ref;
 	}
+
 	public void setRef(int ref) {
 		this.ref = ref;
 	}
+
 	public int getReStep() {
 		return reStep;
 	}
+
 	public void setReStep(int reStep) {
 		this.reStep = reStep;
 	}
+
 	public int getReLevel() {
 		return reLevel;
 	}
+
 	public void setReLevel(int reLevel) {
 		this.reLevel = reLevel;
 	}
+
 	@Override
 	public String toString() {
 		return "BoardModel [boardNum=" + boardNum + ", memNum=" + memNum + ", boardid=" + boardid + ", subject="
@@ -122,8 +143,5 @@ public class BoardModel {
 				+ ", fsize=" + fsize + ", readcount=" + readcount + ", regdate=" + regdate + ", ref=" + ref
 				+ ", reStep=" + reStep + ", reLevel=" + reLevel + "]";
 	}
-	
-
-
 
 }

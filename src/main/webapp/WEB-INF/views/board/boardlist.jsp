@@ -25,14 +25,8 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<a class="fa fa-edit fa-fw"
-<<<<<<< HEAD
-							href="<%=request.getContextPath()%>/board/writeUploadForm?boardid=1">게시판
-							작성</a>
-
-=======
 							href="<%=request.getContextPath()%>/board/writeUploadForm">게시판 작성</a>
 					
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 					</div>
 				</div>
 				<div class="panel panel-default">
