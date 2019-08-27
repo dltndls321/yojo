@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yogi.jogi.board.model.BoardModel;
-import com.yogi.jogi.board.model.NoticeModel;
 
 @Repository
 public class BoardDao {
@@ -29,7 +28,6 @@ public class BoardDao {
 
 	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectBoard", boardModel);
-<<<<<<< HEAD
 	}
 
 	public void insertBoard(BoardModel boardModel) throws Exception {
@@ -39,18 +37,6 @@ public class BoardDao {
 		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
 
 	}
-=======
-	}
-
-	public int insertBoard(BoardModel boardModel) throws Exception {
-        System.out.println();
-		return sqlSession.selectOne(Namespace + ".insertBoard", boardModel);
-	}
-	public BoardModel updateBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
-
-	}
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 	public int deleteBoard(BoardModel boardModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".deleteBoard", boardModel);
 
@@ -61,13 +47,7 @@ public class BoardDao {
 		} finally {
 			sqlSession.close();
 		}
-<<<<<<< HEAD
 		
-	}
-	public List<NoticeModel> selectNoticeList(NoticeModel noticeModel) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectNoticeList", noticeModel);
-=======
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 	}
 
 

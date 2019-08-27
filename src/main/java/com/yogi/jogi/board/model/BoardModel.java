@@ -53,17 +53,9 @@ public class BoardModel {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-<<<<<<< HEAD
 	public String getContent() {
 		return content;
 	}
-=======
-
-	public String getContent() {
-		return content;
-	}
-
->>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 	public void setContent(String content) {
 		this.content = content;
 	}

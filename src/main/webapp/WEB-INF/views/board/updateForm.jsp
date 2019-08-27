@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
@@ -12,30 +12,33 @@
 <p class="w3-left"  style="padding-left:30px;">></p> 
 <div class="w3-container">
 
-<center><b>Í∏ÄÏàòÏ†ï</b>
+<center><b>±€ºˆ¡§</b>
 <br>
 <form method="post" name="writeform" action="<%=request.getContextPath() %>/board/updatePro" >
-<input type="hidden" name="num" value="${list.boardNum}">
+<input type="hidden" name="num" value="${article.num}">
 <input type="hidden" name="pageNum" value="${pageNum }">
 <table class="w3-table-all"  style="width:70%;" >
-   <tr>    <td align="right" colspan="2" >	 <a href="<%=request.getContextPath() %>/board/list"> Í∏ÄÎ™©Î°ù</a>   </td>  </tr>
-   <tr>    <td  width="70"   align="center">Ïù¥ Î¶Ñ</td>
+   <tr>    <td align="right" colspan="2" >	 <a href="<%=request.getContextPath() %>/board/list"> ±€∏Ò∑œ</a>   </td>  </tr>
+   <tr>    <td  width="70"   align="center">¿Ã ∏ß</td>
     <td  width="330">       <input type="text" size="10" maxlength="10" 
        name="writer"   value="${article.writer}"></td>  </tr>
-  <tr>    <td  width="70"   align="center" >Ï†ú Î™©    </td>    <td width="330">
+  <tr>    <td  width="70"   align="center" >¡¶ ∏Ò    </td>    <td width="330">
        <input type="text" size="40" maxlength="50" 
-       name="subject"    value="${list.subject}">   </td>  </tr>
-   <tr>
-    <td  width="70"   align="center" >ÎÇ¥ Ïö©</td>
+       name="subject"    value="${article.subject}">   </td>  </tr>
+  <tr>    <td  width="70"   align="center">Email</td>
+    <td  width="330">
+       <input type="text" size="40" maxlength="30" 
+       name="email" value="${article.email}"></td>  </tr>  <tr>
+    <td  width="70"   align="center" >≥ª øÎ</td>
     <td  width="330" >
-     <textarea name="content" rows="13" cols="40">${list.content}</textarea>
+     <textarea name="content" rows="13" cols="40">${article.content}</textarea>
       </td>  </tr>  <tr>
-    <td  width="70"   align="center" >ÎπÑÎ∞ÄÎ≤àÌò∏</td>
+    <td  width="70"   align="center" >∫Òπ–π¯»£</td>
     <td  width="330" >
      <input type="password" size="8" maxlength="12" name="passwd"> 	 </td>  </tr><tr>      
- <td colspan=2  align="center">   <input type="submit" value="Í∏ÄÏì∞Í∏∞" >  
-  <input type="reset" value="Îã§ÏãúÏûëÏÑ±">
-    <input type="button" value="Î™©Î°ùÎ≥¥Í∏∞" OnClick="window.location='<%=request.getContextPath() %>/board/list'">
+ <td colspan=2  align="center">   <input type="submit" value="±€æ≤±‚" >  
+  <input type="reset" value="¥ŸΩ√¿€º∫">
+    <input type="button" value="∏Ò∑œ∫∏±‚" OnClick="window.location='<%=request.getContextPath() %>/board/list'">
 </td></tr></table>    
      
 </form>  </center></div>  
