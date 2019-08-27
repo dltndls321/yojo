@@ -1,58 +1,120 @@
 package com.yogi.jogi.admin.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-
+import com.yogi.jogi.member.model.MemberModel;
+import com.yogi.jogi.member.service.MemberService;
 
 @Controller
-@RequestMapping(value="admin")
+@RequestMapping(value = "admin")
 public class AdminController {
+
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
+	ModelAndView mv = new ModelAndView();
+	private int pageNum;
+
+	@Autowired
+	private MemberService memberService;
+
+	@ModelAttribute
+	public void setAttr(HttpServletRequest request) {
+
+		try {
+			pageNum = Integer.parseInt(request.getParameter("pageNum")); // pageNum을 세팅하는데 넘어오지않으면 1을 집어넣음
+		} catch (Exception e) {
+			pageNum = 1;
+		}
+	}
+
 	@RequestMapping(value = "main")
 	public String moveMain() {
 		return "admin/main.admin";
 	}
-	
+
 	@RequestMapping(value = "board")
 	public String moveBoard() {
 		return "admin/board.admin";
 	}
-	
+
 	@RequestMapping(value = "memberList")
-	public String moveMemberList() {
-		return "admin/memberList.admin";
+	public ModelAndView moveMemberList() throws Exception {
+
+		mv.clear();
+
+		/*
+		 * int pageSize = 6; int currentPage = pageNum; int count =
+		 * memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		 * int startRow = (currentPage - 1) * pageSize; int endRow = currentPage *
+		 * pageSize; if (count < endRow) endRow = count;
+		 */
+		List memberList = memberService.selectMemberList();
+		/*
+		 * int number = count - ((currentPage - 1) * pageSize);
+		 * 
+		 * int bottomLine = 3; // 5 page int pageCount = count / pageSize + (count %
+		 * pageSize == 0 ? 0 : 1); int startPage = 1 + (currentPage - 1) / bottomLine *
+		 * bottomLine; int endPage = startPage + bottomLine - 1; if (endPage >
+		 * pageCount) endPage = pageCount;
+		 */
+
+		/*
+		 * mv.addObject("count", count); mv.addObject("pageNum", pageNum);
+		 */
+		mv.addObject("memberList", memberList);
+		/*
+		 * mv.addObject("number", number); mv.addObject("startPage", startPage);
+		 * mv.addObject("bottomLine", bottomLine); mv.addObject("endPage", endPage);
+		 */
+
+		mv.setViewName("admin/memberList.admin");
+
+		return mv;
 	}
-	
-	@RequestMapping(value = "memberProfile")
-	public String moveMemberProfile() {
-		return "admin/memberProfile.admin";
+
+	@RequestMapping(value = "memberProfile/{memnum}")
+	public ModelAndView moveMemberProfile(MemberModel memberModel,@PathVariable("memnum") int memnum)throws Exception{
+
+		mv.clear();
+		
+		memberModel.setMemnum(memnum);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		
+		mv.addObject("memberInfo", memberModel);
+		mv.setViewName("admin/memberProfile.admin");
+
+		return mv;
 	}
-	
+
 	@RequestMapping(value = "customerCenter")
 	public String moveCustomerCenter() {
 		return "admin/customerCenter.admin";
 	}
-	
+
 	@RequestMapping(value = "customerCenterMessage")
 	public String moveCustomerCenterMessage() {
 		return "admin/customerCenterMessage.admin";
 	}
-	
+
 	@RequestMapping(value = "booking")
 	public String moveBookings() {
 		return "admin/booking.admin";
 	}
-	
+
 	@RequestMapping(value = "reviews")
 	public String moveReviews() {
 		return "admin/reviews.admin";
 	}
-	
-	
-	
-}
 
+}

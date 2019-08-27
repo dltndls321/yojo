@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="FestMapperNS">
+  	<insert id="insertFest" parameterType="festModel">
+  		Insert into festival(festNum,subject,fdate1,area,link,fdate2,fmapx,fmapy)	
+  		values(
+	  		festSeq.NEXTVAL,
+	  		#{subject},
+	  		#{fdate1},
+	  		#{area},
+	  		#{link},
+	  		#{fdate2},
+	  		#{fmapx},
+	  		#{fmapy}
+  		)
+  	</insert>
+  	
+  	<select id="selectFestList" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    </select>
+    <select id="selectFestWithFestNum" parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		festNum=#{festNum}
+    </select>
+     <select id="selectFestWithsubject" parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		subject=#{subject}
+    </select>
+</mapper>
