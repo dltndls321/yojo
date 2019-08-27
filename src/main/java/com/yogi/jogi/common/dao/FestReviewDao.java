@@ -19,12 +19,18 @@ public class FestReviewDao {
 		return sqlSession.insert(Namespace + ".insertFestReview" , festReviewModel);
 	}
 	public int updateFestReview(FestReviewModel festReviewModel) {
-		return sqlSession.update(Namespace + ".updateTest",festReviewModel);
+		return sqlSession.update(Namespace + ".updateFestReview",festReviewModel);
 	}
 	public List<FestReviewModel> selectFestReviewList() {
 		return sqlSession.selectList(Namespace + ".selectFestReviewList");
 	}
-	public FestReviewModel selectFestReviewWithMemNum(FestReviewModel festReviewModel) {
+	public List<FestReviewModel> selectFestReviewListWithFestNum(FestReviewModel festReviewModel) {
+		return sqlSession.selectList(Namespace + ".selectFestReviewListWithFestNum", festReviewModel);
+	}
+	public List<FestReviewModel> selectFestReviewWithMemNum(FestReviewModel festReviewModel) {
+		return sqlSession.selectList(Namespace + ".selectFestReviewWithMemNum", festReviewModel);
+	}
+	public FestReviewModel selectFestReviewOne(FestReviewModel festReviewModel) {
 		return sqlSession.selectOne(Namespace + ".selectFestReviewWithMemNum",festReviewModel);
 	}
 }

@@ -32,6 +32,8 @@ import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.member.model.MemberModel;
+import com.yogi.jogi.member.service.MemberService;
 
 @Controller
 @RequestMapping(value = "festival")
@@ -40,7 +42,8 @@ public class FestController {
 	private FestService festService;
 	@Autowired
 	private FestReviewService festReviewService;
-	
+	@Autowired
+	private MemberService memberService;
 	ModelAndView model = new ModelAndView();
 	
 	@InitBinder
@@ -147,7 +150,7 @@ public class FestController {
 	
 	// @RequestParam String areaCode, @RequestParam String eventStartDate
 	@RequestMapping(value = "content/{typeid}/{contid}")
-	public ModelAndView test1(HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
+	public ModelAndView test1(FestivalModel festivalModel, FestReviewModel festReviewModel, MemberModel memberModel, HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
 		 request.setCharacterEncoding("utf-8");
 	     response.setContentType("text/html; charset=utf-8");
 	        model.clear();
@@ -206,8 +209,9 @@ public class FestController {
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
 	    	        
-	
+	    	        
 	    	        	
+	    	        festivalModel.setSubject(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
 	    	        model.addObject("firstimage",firstimage);
@@ -328,13 +332,18 @@ public class FestController {
     		        model.addObject("playtime",playtime);
 	        	}
 	        }
-	        
-	        
+	        if(festService.selectFestWithsubject(festivalModel) != null) {
+	        	festivalModel = festService.selectFestWithsubject(festivalModel);
+		        int festNum = festivalModel.getFestNum();
+		        festReviewModel.setFestNum(festNum);  
+		        List reviewList = festReviewService.selectFestReviewListWithFestNum(festReviewModel);
+		        model.addObject("reviewList", reviewList);
+	        }
 	        model.setViewName("euny/festCont.do");	
 	        return model;
     }
 	@RequestMapping(value = "/review")
-	public void setFestival(FestivalModel festmodel,FestReviewModel freviewmodel, HttpSession session)throws Exception {
+	public void setFestival(FestivalModel festmodel,FestReviewModel festReviewModel, HttpSession session)throws Exception {
 		
 		//먼저 축제정보 insert
 		if(festService.selectFestWithsubject(festmodel)==null) {
@@ -345,14 +354,14 @@ public class FestController {
 		System.out.println(festmodel);
 		int festNum = festmodel.getFestNum();
 		// 축제 고유번호 select
-		freviewmodel.setFestNum(festNum);
+		festReviewModel.setFestNum(festNum);
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
-		freviewmodel.setMemNum(memNum);
+		festReviewModel.setMemNum(memNum);
 		
-		if(festReviewService.selectFestReviewWithMemNum(freviewmodel) == null) {
-			festReviewService.insertFestReview(freviewmodel);
+		if(festReviewService.selectFestReviewOne(festReviewModel) == null) {
+			festReviewService.insertFestReview(festReviewModel);
 		} else {
-			festReviewService.updateFestReview(freviewmodel);
+			festReviewService.updateFestReview(festReviewModel);
 		}
 		
 
