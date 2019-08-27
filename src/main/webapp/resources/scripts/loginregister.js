@@ -139,7 +139,11 @@ function hangul(target1){
 		event.returnValue = false;
 	}
 }
-
+function hangul2(){
+	if((event.keyCode < 12592) || (event.keyCode > 12687)){
+		event.returnValue = false;
+	}
+}
 /*아이디중복,유효성 체크*/
 function IDOverlapCheck(target1,comment){
 	var1 = document.getElementById(target1);
@@ -264,6 +268,14 @@ function onclickColorChange(target1){
 	var1.style.color="#808080";
 	var1.style.borderColor="#DBDBDB";
 	var1.value="";
-	var1.type="text";
+	var1.type="password";
 }
 
+function onclickUpdate(target1,target2,target3,target4,target5,target6){
+	var1 = document.getElementById(target1);
+	var2 = document.getElementById(target2);
+	var3 = document.getElementById(target3);
+	var4 = document.getElementById(target4);
+	var5 = document.getElementById(target5);
+	var6 = document.getElementById(target6);
+}

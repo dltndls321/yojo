@@ -102,15 +102,56 @@ public class MemberController {
 		System.out.println("member/updateMember  : 시작");
 		model.clear();
 		MemberModel memberModel = new MemberModel();
+		MemberDetailModel memberDetailModel = new MemberDetailModel();
 		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
 		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
+		
+		String[] splitAddress = memberModel.getAddress().split("/");
+		String[] splitPhone = memberModel.getPhone().split("-");
+		for(int i=0;i<3;i++) {
+			if(i==0) {
+				memberDetailModel.setPostcode(splitAddress[i]);
+			}else if(i==1) {
+				memberDetailModel.setAddress1(splitAddress[i]);
+			}else {
+				memberDetailModel.setDetailAddress(splitAddress[i]);
+			}
+		}
+		for(int i=0;i<3;i++) {
+			if(i==0) {
+				memberDetailModel.setPhone1(splitPhone[i]);;
+			}else if(i==1) {
+				memberDetailModel.setPhone2(splitPhone[i]);
+			}else {
+				memberDetailModel.setPhone3(splitPhone[i]);
+			}
+		}
 		model.addObject("memberInfo",memberModel);
+		model.addObject("memberDetailInfo",memberDetailModel);
 		model.setViewName("member/updateMember.do");
 		return model;
 	}
+	@RequestMapping(value = "updateMemberDone")
+	public ModelAndView updateMemberDone(MemberDetailModel memberDetailModel,HttpSession session) throws Exception{
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		memberModel.setName(memberDetailModel.getName());
+		memberModel.setEmail(memberDetailModel.getEmail());
+		memberModel.setPhone(memberDetailModel.getPhone1() + "-"+memberDetailModel.getPhone2() + "-" + memberDetailModel.getPhone3());
+		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/" + memberDetailModel.getDetailAddress());
+		System.out.println(memberModel);
+		memberService.updateMember(memberModel);
+		model.setViewName("member/updateMember.do");
+		model.addObject("memberInfo",memberModel);
+		model.addObject("memberDetailInfo",memberDetailModel);
+		return model;
+	}
+	
 	
 	//ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
