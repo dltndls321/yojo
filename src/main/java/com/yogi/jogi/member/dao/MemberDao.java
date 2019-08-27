@@ -34,4 +34,8 @@ public class MemberDao {
 	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectMemberWithMemNum",memberModel);
 	}
+	
+	public int updateMember(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMember",memberModel);
+	}
 }

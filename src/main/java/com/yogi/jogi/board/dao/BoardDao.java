@@ -30,9 +30,8 @@ public class BoardDao {
 		return sqlSession.selectOne(Namespace + ".selectBoard", boardModel);
 	}
 
-	public int insertBoard(BoardModel boardModel) throws Exception {
-        System.out.println();
-		return sqlSession.selectOne(Namespace + ".insertBoard", boardModel);
+	public void insertBoard(BoardModel boardModel) throws Exception {
+		
 	}
 	public BoardModel updateBoard(BoardModel boardModel) throws Exception {
 		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
@@ -48,6 +47,7 @@ public class BoardDao {
 		} finally {
 			sqlSession.close();
 		}
+		
 	}
 
 

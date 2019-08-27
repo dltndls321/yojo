@@ -51,8 +51,8 @@
 			</tr>
 			<tr>
 				<td colspan=2 align="center"><input type="submit" value="글쓰기">
-					<input type="reset" value="다시작성"> <input type="button"
-					value="목록보기" OnClick="window.location='list?pageNum=${pageNum}'">
+					<input type="reset" value="다시작성"> <input type="button" value="목록보기" OnClick="window.location='list'">
+
 				</td>
 			</tr>
 		</table>

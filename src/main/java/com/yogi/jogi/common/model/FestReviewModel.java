@@ -1,11 +1,15 @@
 package com.yogi.jogi.common.model;
 
+import java.util.Date;
+
 public class FestReviewModel {
 	private int frNum;
 	private int festNum;
 	private int memNum;
 	private int star;
 	private String fReview;
+	private Date regDate;
+	
 	public int getFrNum() {
 		return frNum;
 	}
@@ -36,11 +40,19 @@ public class FestReviewModel {
 	public void setfReview(String fReview) {
 		this.fReview = fReview;
 	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "FestReviewModel [frNum=" + frNum + ", festNum=" + festNum + ", memNum=" + memNum + ", star=" + star
-				+ ", fReview=" + fReview + "]";
+				+ ", fReview=" + fReview + ", regDate=" + regDate + "]";
 	}
+	
 	
 	
 	
