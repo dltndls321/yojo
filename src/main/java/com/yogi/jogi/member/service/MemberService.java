@@ -18,5 +18,7 @@ public interface MemberService {
 	public MemberModel selectMemberWithEmail(MemberModel memberModel) throws Exception;
 
 	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception;
-
+	
+	public int updateMember(MemberModel memberModel)throws Exception;
+	
 }

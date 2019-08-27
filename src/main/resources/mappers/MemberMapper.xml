@@ -56,7 +56,19 @@
     	where
     		memnum=#{memnum}
     </select>
-    
+	<update id="updateMember" parameterType="memberModel">
+		update member set
+    		id = #{id},
+    		passwd = #{passwd},
+    		name = #{name},
+    		jumin = #{jumin},
+    		address = #{address},
+    		phone = #{phone},
+    		email = #{email}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
     
     <!--  <delete id="deleteTest" parameterType="int">
     	delete

@@ -35,7 +35,31 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	 
+
+	@ModelAttribute // 이 어노테이션을 사용하면 메소드에서 선언한 객체가 뷰로 넘어감 글구 가장먼저 실행됨
+	public void setAttr(HttpServletRequest request) {
+
+		// boardid와 pageNum 세팅하는 메소드
+
+		HttpSession session = request.getSession();
+		String reqboardid = request.getParameter("boardid"); // boardid가 넘어오는지
+
+		if (reqboardid != null)
+			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
+		if (session.getAttribute("boardid") == null)
+			boardid = "1"; // null 이면 boardid = 1
+		else
+			boardid = (String) session.getAttribute("boardid"); // 오브젝트로 받아오기떄문에 String으로 형변환
+
+		try {
+			pageNum = Integer.parseInt(request.getParameter("pageNum")); // pageNum을 세팅하는데 넘어오지않으면 1을 집어넣음
+		} catch (Exception e) {
+			// TODO: handle exception
+			pageNum = 1;
+		}
+
+	}
+
 	@RequestMapping("boardlist")
 	public ModelAndView list() throws Exception {
 		BoardModel boardModel = new BoardModel();
@@ -50,17 +74,20 @@ public class BoardController {
 	}
 
 	@RequestMapping("writeUploadForm")
+
 	public ModelAndView writeForm(BoardModel boardModel,@RequestParam String boardid) throws Exception {
 		System.out.println("1" + boardModel);
 		mv.clear(); 
 		System.out.println(boardid);
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
+
 		return mv;
 	}
 
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel) throws Exception {
+
 		System.out.println("2" + boardModel);
 		boardService.insertBoard(boardModel);
 		return "redirect:/board/list";
@@ -152,6 +179,5 @@ public class BoardController {
 		return mv;
 
 	}
-	
 
 }
