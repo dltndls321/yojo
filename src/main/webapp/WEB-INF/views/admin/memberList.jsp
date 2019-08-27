@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="dashboard-content">
 
 		<!-- Titlebar -->
@@ -32,7 +33,25 @@
 					<div class="messages-inbox">
 
 						<ul>
+						
+						<c:forEach var="member" items="${memberList }">
+						
 							<li class="unread">
+								<a href="/admin/memberProfile/${member.memnum }">
+									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+
+									<div class="message-by">
+										<div class="message-by-headline">
+											<h5>${member.id} <i>new</i></h5>
+											<span>${member.regdate}</span>
+										</div>
+										<p>신상정보? </p>
+									</div>
+								</a>
+							</li>
+							
+						</c:forEach>
+							<!-- <li class="unread">
 								<a href="/admin/memberProfile">
 									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 
@@ -44,21 +63,7 @@
 										<p>신상정보? </p>
 									</div>
 								</a>
-							</li>
-
-							<li class="unread">
-								<a href="/admin/memberProfile">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>아이디 <i>new</i></h5>
-											<span>가/입/일</span>
-										</div>
-										<p>신상정보? </p>
-									</div>
-								</a>
-							</li>
+							</li> -->
 							
 						</ul>
 						
