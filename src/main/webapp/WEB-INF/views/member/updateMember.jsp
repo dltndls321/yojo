@@ -46,9 +46,10 @@
 							<input value="${memberInfo.email }" type="text">
 							
 							<label>주소</label>
-							<input value="${memberInfo.address }" type="text">
-							
-						</div>
+							<input type="text" class="input-text" name="postcode" id="postcode" value="" onblur="" onfocus="" placeholder="우편번호" disabled="disabled"/>									
+							<input type="text" class="input-text" name="address1" id="address1" value="" onblur="" onfocus="" placeholder="주소" disabled="disabled"/>									
+							<input type="text" class="input-text" name="detailAddress" id="addressRegister" value="" onblur="emptyCheck('addressRegister','addressRegister','주소를 입력하세요.')" onfocus="resetSelect('addressRegister','addressRegister','주소를 입력하세요.')" placeholder="상세주소"/>							
+							</div>
 	
 						<button class="button margin-top-15">회원정보 수정</button>
 
