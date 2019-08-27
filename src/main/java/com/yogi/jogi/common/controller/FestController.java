@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.ibatis.mapping.FetchType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -334,13 +335,12 @@ public class FestController {
     }
 	@RequestMapping(value = "/review")
 	public void setFestival(FestivalModel festmodel,FestReviewModel freviewmodel, HttpSession session)throws Exception {
-		//insert전에 중복확인
-		FestivalModel checkfest = festService.selectFestWithsubject(festmodel);
-		int chkNum = checkfest.getFestNum();
-		if( chkNum)
 		
 		//먼저 축제정보 insert
-		festService.insertFest(festmodel);
+		if(festService.selectFestWithsubject(festmodel)==null) {
+			festService.insertFest(festmodel);
+		}
+		
 		festmodel = festService.selectFestWithsubject(festmodel);
 		System.out.println(festmodel);
 		int festNum = festmodel.getFestNum();
@@ -349,7 +349,12 @@ public class FestController {
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		freviewmodel.setMemNum(memNum);
 		
-		festReviewService.insertFestReview(freviewmodel);
+		if(festReviewService.selectFestReviewWithMemNum(freviewmodel) == null) {
+			festReviewService.insertFestReview(freviewmodel);
+		} else {
+			festReviewService.updateFestReview(freviewmodel);
+		}
+		
 
 	}
 	

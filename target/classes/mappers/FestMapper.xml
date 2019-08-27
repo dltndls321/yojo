@@ -40,4 +40,6 @@
     	where
     		subject=#{subject}
     </select>
+    
+    
 </mapper>

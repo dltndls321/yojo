@@ -14,4 +14,29 @@
 	  		#{fReview}
   		)
   	</insert>
+  	
+  	<select id="selectFestReviewList" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    </select>
+    
+    <select id="selectFestReviewWithMemNum" parameterType="festReviewModel" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    	where
+    		memNum=#{memNum}
+    </select>
+  	
+  	<update id="updateFestReview" parameterType="festReviewModel">
+    	update festReview set
+    		star = #{star},
+    		fReview = #{fReview}
+    	where
+    		memNum = #{memNum},
+    		festNum = #{festNum}
+    </update>
 </mapper>
