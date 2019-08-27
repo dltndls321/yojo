@@ -37,10 +37,21 @@ public class BoardServiceImpl implements BoardService {
 		return dao.updateBoard(boardModel);
 	}
 
+//	@Override
+//	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
+//		// TODO Auto-generated method stub
+//		return dao.selectMaxBoardNum(boardModel);
+//	}
+//	
+//	@Override
+//	public int updateReStep(BoardModel boardModel) throws Exception {
+//		// TODO Auto-generated method stub
+//		return dao.updateReStep(boardModel);
+//	}
 	@Override
-	public int deleteBoard(BoardModel boardModel) throws Exception {
+	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.deleteBoard(boardModel);
+		return dao.insertBoard(boardModel, boardid);
 	}
 
 	@Override

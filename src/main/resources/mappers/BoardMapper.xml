@@ -4,81 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapperNS">
 
-	<select id="selectBoardList" 
-		resultType="boardModel">
-		select * from 
-		(select rownum rnum ,a.*
-		from(select boardNum,writer,subject,passwd,
-		regdate,readcount,ref,reStep,reLevel,content,fname from board
-		where 
-			boardid = #{boardid}
-		order 
-			by ref desc , reStep) a )
+	<select id="selectBoardList" resultType="boardModel">
+		
+		select boardNum,memNum,boardid,subject,writer,passwd,content,fname,fsize,readcount
+		,regdate,ref,reStep,reLevel from board
 	</select>
-		<insert id="insertBoard" parameterType="boardModel">
-		insert 
-			into board values
-		(#{boardNum},#{memNum},#{boardid}
+	
+	<insert id="insertBoard"  parameterType="boardModel">
+		insert
+		into board values
+		(boardSeq.NEXTVAL,#{memNum},'1'
 		,#{subject},#{writer},#{passwd},#{content},
-		#{fname},#{fsize},#{readcount},sysdate,0,
+		#{fname},#{fsize},
+		#{readcount},sysdate,
 		#{ref},#{reStep},#{reLevel})
 	</insert>
-		
-		
-		
-		
-		<!-- 
-		select 
-			* from (select rownum rnum ,a.* from(select * from board
-		where 
-			boardid = #{boardid}
-		order 
-			by ref desc , reStep) a )
-			 -->
-		<!-- where  rnum between 1 and 3 -->
-	
-	<!-- <select id="selectBoardCount" parameterType="boardModel"
-		resultType="boardModel">
-		select 
-			nvl(count(*),0) from board where boardid =
-		#{boardid}
-	</select>
 
+	<update id="updateBoard" parameterType="boardModel">
+		update
+		board
+		set
+		writer=#{writer},
+		subject=#{subject},
+		passwd=#{passwd},
+		content=#{content}
+		where
+		boardNum=#{boardNum}
+	</update>
 
-	
-
+	<select parameterType="boardModel" id="delete"> 
+	delete from board where num
+		=#{num} 
+		</select>
 	<select id="selectBoard" parameterType="boardModel"
 		resultType="boardModel">
 		select
-		 	* from board 
-		 where 
-		 	boardNum = #{boardNum} 
+		* from board
+		where
+		boardNum = #{boardNum}
 
 	</select>
 
-
-
-	<select id="selectMaxBoardNum" resultType="int">
-		select
-			nvl(max(boardNum),0) from
-		board
-	</select>
-
-	<update id="updateReStep" parameterType="boardModel">
-		update 
-			board 
-		set
-			reStep=reStep+1 
-		where 
-			ref= #{ref} and reStep> #{reStep}
-	</update>
-
-
-	
-	
-
-	<select id="selectPasswdOneNum" parameterType="boardModel"
-		resultType="boardModel">
+<select id="selectPasswdOneNum" parameterType="boardModel"
+		resultType="int">
 		select 
 			passwd 
 		from 
@@ -86,44 +54,51 @@
 		where 
 			boardNum = #{boardNum}
 	</select>
+	<!-- <select id="selectBoardCount" parameterType="boardModel"
+		resultType="boardModel">
+		select
+		nvl(count(*),0) from board where boardid =
+		#{boardid}
+	</select>
+
+
+	<select id="selectMaxBoardNum" resultType="int">
+		select
+		nvl(max(boardNum),0) from
+		board
+	</select>
+
+	<update id="updateReStep" parameterType="boardModel">
+		update
+		board
+		set
+		reStep=reStep+1
+		where
+		ref= #{ref} and reStep> #{reStep}
+	</update>
+
+
 	<select id="selectOneBoardNum" parameterType="boardModel"
 		resultType="boardModel">
-		select 
-			*
-		from 
-			board 
-		where 
-			boardNum = #{boardNum}
+		select
+		*
+		from
+		board
+		where
+		boardNum = #{boardNum}
 	</select>
-	
-
 
 	<update id="updateReadcount" parameterType="boardModel">
-		update 
-			board 
+		update
+		board
 		set
-			readcount=readcount+1 
-		where 
-			num = #{num}
-	</update>
+		readcount=readcount+1
+		where
+		num = #{num}
+	</update> -->
 
 
-
-	<update id="updateBoard" parameterType="boardModel">
-		update 
-			board 
-		set
-			writer=#{writer},
-			email=#{email},
-			subject=#{subject},
-			passwd=#{passwd},
-			content=#{content}
-		where 
-			boardNum=#{boardNum}
-	</update>
-
-	 -->
-
-
+	
 
 </mapper>
+
