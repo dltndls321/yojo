@@ -25,8 +25,14 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<a class="fa fa-edit fa-fw"
+<<<<<<< HEAD
+							href="<%=request.getContextPath()%>/board/writeUploadForm?boardid=1">게시판
+							작성</a>
+
+=======
 							href="<%=request.getContextPath()%>/board/writeUploadForm">게시판 작성</a>
 					
+>>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -40,6 +46,24 @@
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
+<<<<<<< HEAD
+
+								</tr>
+							</thead>
+
+							<c:forEach items="${AllList}" var="li">
+								<tr>
+
+									<td width="100">${li.boardNum}</td>
+									<td width="150">${li.subject}</td>
+									<td width="100">${li.writer}</td>
+									<td width="100"><fmt:formatDate type="date"
+											value="${li.regdate}" /></td>
+									<td width="50">${li.readcount}</td>
+								</tr>
+							</c:forEach>
+
+=======
 								
 								</tr>
 							</thead>
@@ -56,6 +80,7 @@
 									</tr>
 								</c:forEach>
 							
+>>>>>>> 58807e42f796fa06f0a504f84566e3a8c8561a74
 						</table>
 					</div>
 				</div>
