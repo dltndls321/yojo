@@ -69,7 +69,7 @@
     
 </div>
 
-<p>출발지 <input type="text" value="마커를 클릭해 설정하세요"> 도착지 <input type="text" value="마커를 클릭해 설정하세요"></p>
+<p>출발지 <input id ="startPoint"type="text" value="마커를 클릭해 설정하세요"> 도착지 <input id ="endPoint"type="text" value="마커를 클릭해 설정하세요"></p>
 <button value="검색하기">검색하기</button>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13cd4e6df49574ac7ccc468bb2a978a2&libraries=services"></script>
 <script>
@@ -395,6 +395,9 @@ geocoder.addressSearch(addrX, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
+    	 document.getElementById("startPoint").value = addrX;
+
+    	 출처: https://jdkblog.tistory.com/39 [JDK's blog]
     	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
     	 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
@@ -427,6 +430,7 @@ function markerImg2(addrX){
 
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
+	    	 document.getElementById("endPoint").value = addrX;
 	    	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	    	 var markerImage = new kakao.maps.MarkerImage(imageSrc2, imageSize, imageOption),
 	    	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
