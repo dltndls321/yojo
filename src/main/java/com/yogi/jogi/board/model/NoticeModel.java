@@ -2,26 +2,30 @@ package com.yogi.jogi.board.model;
 
 import java.util.Date;
 
-public class BoardModel {
-	private int boardNum;
-	private int memNum;
-	private String boardid;
-	private String subject;
-	private String writer;
-	private String passwd;
-	private String content;
-	private String fname;
-	private int fsize;
-	private int readcount;
-	private Date regdate;
-	private int ref;
-	private int reStep;
-	private int reLevel;
+public class NoticeModel {
+	int boardNum;
+	int noticeNum;
+	int memNum;
+	String boardid;
+	String subject;
+	String writer;
+	String passwd;
+	String content;
+	String fname;
+	int fsize;
+	int readcount;
+	Date regdate;
 	public int getBoardNum() {
 		return boardNum;
 	}
 	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
+	}
+	public int getNoticeNum() {
+		return noticeNum;
+	}
+	public void setNoticeNum(int noticeNum) {
+		this.noticeNum = noticeNum;
 	}
 	public int getMemNum() {
 		return memNum;
@@ -83,33 +87,13 @@ public class BoardModel {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getRef() {
-		return ref;
-	}
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-	public int getReStep() {
-		return reStep;
-	}
-	public void setReStep(int reStep) {
-		this.reStep = reStep;
-	}
-	public int getReLevel() {
-		return reLevel;
-	}
-	public void setReLevel(int reLevel) {
-		this.reLevel = reLevel;
-	}
 	@Override
 	public String toString() {
-		return "BoardModel [boardNum=" + boardNum + ", memNum=" + memNum + ", boardid=" + boardid + ", subject="
-				+ subject + ", writer=" + writer + ", passwd=" + passwd + ", content=" + content + ", fname=" + fname
-				+ ", fsize=" + fsize + ", readcount=" + readcount + ", regdate=" + regdate + ", ref=" + ref
-				+ ", reStep=" + reStep + ", reLevel=" + reLevel + "]";
+		return "NoticeModel [boardNum=" + boardNum + ", noticeNum=" + noticeNum + ", memNum=" + memNum + ", boardid="
+				+ boardid + ", subject=" + subject + ", writer=" + writer + ", passwd=" + passwd + ", content="
+				+ content + ", fname=" + fname + ", fsize=" + fsize + ", readcount=" + readcount + ", regdate="
+				+ regdate + "]";
 	}
 	
-
-
-
+	
 }
