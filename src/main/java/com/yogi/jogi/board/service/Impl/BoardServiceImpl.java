@@ -27,9 +27,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoard(boardModel);
 	}
 	@Override
-	public int insertBoard(BoardModel boardModel) throws Exception {
+	public void insertBoard(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.insertBoard(boardModel);
+		
 	}
 	@Override
 	public BoardModel updateBoard(BoardModel boardModel) throws Exception {
@@ -37,21 +37,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.updateBoard(boardModel);
 	}
 
-//	@Override
-//	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.selectMaxBoardNum(boardModel);
-//	}
-//	
-//	@Override
-//	public int updateReStep(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.updateReStep(boardModel);
-//	}
 	@Override
-	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
+	public int deleteBoard(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.insertBoard(boardModel, boardid);
+		return dao.deleteBoard(boardModel);
 	}
 
 	@Override
@@ -59,5 +48,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectPasswdOneNum(boardModel);
 	}
+
+	
 
 }
