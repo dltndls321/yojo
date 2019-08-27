@@ -31,7 +31,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
+	
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel,HttpSession session) throws Exception{
@@ -95,6 +95,20 @@ public class MemberController {
 		System.out.println("memberModel 다시 : " + memberModel);
 		model.addObject("memberInfo",memberModel);
 		model.setViewName("member/memberprofile.do");
+		return model;
+	}
+	@RequestMapping(value = "updateMember")
+	public ModelAndView updateMember(HttpSession session) throws Exception{
+		System.out.println("member/updateMember  : 시작");
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println("memberModel셋 memNum  : " + memberModel);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		System.out.println("memberModel 다시 : " + memberModel);
+		model.addObject("memberInfo",memberModel);
+		model.setViewName("member/updateMember.do");
 		return model;
 	}
 	

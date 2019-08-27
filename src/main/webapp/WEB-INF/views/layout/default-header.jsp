@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
@@ -61,7 +62,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="/resources/images/logo.png" alt=""></a>
+					<a href="/main/main"><img src="/resources/images/logo.png" alt=""></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -113,6 +114,7 @@
 
 
 			<!-- Right Side Content / End -->
+			<c:if test="${empty SessionMemberMemnum }">
 			<div class="right-side">
 				<div class="header-widget">
 					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><i class="sl sl-icon-login"></i> Sign In</a>
@@ -257,7 +259,25 @@
 				</div>
 			</div>
 			<!-- Sign In Popup / End -->
-
+			</c:if>
+			<c:if test="${not empty SessionMemberMemnum }">
+			<!-- Right Side Content / End -->
+			<div class="right-side">
+				<div class="header-widget">
+					<!-- User Menu -->
+					<div class="user-menu">
+						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
+						<ul>
+							
+							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
+							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Right Side Content / End -->
+			</c:if>
+			
 		</div>
 	</div>
 	<!-- Header / End -->

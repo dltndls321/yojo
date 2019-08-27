@@ -49,19 +49,9 @@
 					<li><i class="fa fa-envelope-o"></i> 이메일 : ${memberInfo.email}</a></li>
 					<li><i class="fa fa-envelope-o"></i> <a href="#">빨간색 : ${memberInfo.email}</a></li>
 				</ul>
-
-				<!-- Reply to review popup -->
-				<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-					<div class="small-dialog-header">
-						<h3>회원 정보 수정</h3>
-					</div>
-					<div class="message-reply margin-top-0">
-						<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
-						<button class="button">회원정보 수정</button>
-					</div>
-				</div>
-
-				<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-user"></i> 회원정보 수정</a>
+				<br/>
+				<br/>
+				<a href="/member/updateMember" class="button"><i class="sl sl-icon-user"></i> 회원정보 수정</a>
 			</div>
 			<!-- Contact / End-->
 
