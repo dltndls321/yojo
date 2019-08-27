@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
@@ -31,20 +30,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
+	
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
-	public ModelAndView registemember(MemberDetailModel memberDetailModel,HttpSession session) throws Exception{
+	public ModelAndView registemember(MemberModel memberModel,HttpSession session) throws Exception{
 		System.out.println("registemember : 시작");
 		model.clear();
-		MemberModel memberModel = new MemberModel();
-		memberModel.setId(memberDetailModel.getId());
-		memberModel.setEmail(memberDetailModel.getEmail());
-		memberModel.setName(memberDetailModel.getName());
-		memberModel.setPhone(memberDetailModel.getPhone1() + "-"+memberDetailModel.getPhone2() + "-" + memberDetailModel.getPhone3());
-		memberModel.setPasswd(memberDetailModel.getPasswd());
-		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/" + memberDetailModel.getDetailAddress());
-		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
 		memberService.insertMember(memberModel);
 		memberModel = memberService.selectMemberWithEmail(memberModel);
 		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
@@ -97,11 +88,24 @@ public class MemberController {
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
+	@RequestMapping(value = "updateMember")
+	public ModelAndView updateMember(HttpSession session) throws Exception{
+		System.out.println("member/updateMember  : 시작");
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println("memberModel셋 memNum  : " + memberModel);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		System.out.println("memberModel 다시 : " + memberModel);
+		model.addObject("memberInfo",memberModel);
+		model.setViewName("member/updateMember.do");
+		return model;
+	}
 	
 	//ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
 	public void IDOverlapCheck(@RequestParam String id,HttpServletResponse response)throws Exception{
-		System.out.println("IDOverlapCheck : 시작" );
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(id);

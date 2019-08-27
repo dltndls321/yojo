@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
@@ -34,10 +35,10 @@
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                  
                 
                 } else {
-                	 document.getElementById("sample6_extraAddress").value = '';
+                  
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -61,7 +62,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="/resources/images/logo.png" alt=""></a>
+					<a href="/main/main"><img src="/resources/images/logo.png" alt=""></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -90,7 +91,7 @@
 						<li><a href="#">TripInfo</a>
 							<ul>
 								<li><a href="dashboard.html">Eat</a></li>
-								<li><a href="festival">Festival</a></li>
+								<li><a href="/festival/list">Festival</a></li>
 								<li><a href="dashboard-bookings.html">Tourist Spot</a></li>
 							</ul>
 						</li>
@@ -113,6 +114,7 @@
 
 
 			<!-- Right Side Content / End -->
+			<c:if test="${empty SessionMemberMemnum }">
 			<div class="right-side">
 				<div class="header-widget">
 					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><i class="sl sl-icon-login"></i> Sign In</a>
@@ -182,16 +184,16 @@
 							</p>
 							
 							<p class="form-row form-row-wide">
-								<label for="phoneLabel">번호:<a id="phoneRegisterWarn" style="color: red;"></a>
+								<label for="phoneLabel">번호:
 								<br>
 									
-									<input maxlength="3" type="text" class="input-text" name="phone1" id="phoneRegister1" value="" onblur="emptyCheck('phoneRegister1','phoneRegister1','')" onfocus="resetSelectPhone('phoneRegister1','phoneRegisterWarn','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/> -
+									<input type="text" class="input-text" name="phone1" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/> -
 									
 									
-									<input maxlength="4" type="text" class="input-text" name="phone2" id="phoneRegister2" value="" onblur="emptyCheck('phoneRegister2','phoneRegister2','')" onfocus="resetSelectPhone('phoneRegister2','phoneRegisterWarn','전화번호를 입력하세요.')" style="width : 130px;display: inline;"/> -
+									<input type="text" class="input-text" name="phone2" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width : 130px;display: inline;"/> -
 									
 									
-									<input maxlength="4" type="text" class="input-text" name="phone3" id="phoneRegister3" value="" onblur="emptyCheck('phoneRegister3','phoneRegister3','')" onfocus="resetSelectPhone('phoneRegister3','phoneRegisterWarn','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/>
+									<input type="text" class="input-text" name="phone3" id="phoneRegister" value="" onblur="emptyCheck('phoneRegister','phoneRegister','전화번호를 입력하세요.')" onfocus="resetSelect('phoneRegister','phoneRegister','전화번호를 입력하세요.')" style="width: 130px;display: inline;"/>
 									
 								</label>
 								
@@ -200,10 +202,9 @@
 								
 							<p class="form-row form-row-wide">
 								<label for="addressLabel">주소:
-									<input type="text" class="input-text" name="postcode" id="postcode" value="" onblur="" onfocus="" placeholder="우편번호"  onkeypress="donotkeyin()"/>									
-									<input type="text" class="input-text" name="address1" id="address1" value="" onblur="" onfocus="" placeholder="주소"  onkeypress="donotkeyin()"/>									
-									<input type="text" class="input-text" name="detailAddress" id="detailAddress" value="" onblur="emptyCheck('detailAddress','detailAddress','주소를 입력하세요.')" onfocus="resetSelect('detailAddress','detailAddress','주소를 입력하세요.')" placeholder="상세주소"/>
-									<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="display: none;">
+									<input type="text" class="input-text" name="postcode" id="postcode" value="" onblur="" onfocus="" placeholder="우편번호" disabled="disabled"/>									
+									<input type="text" class="input-text" name="address1" id="address1" value="" onblur="" onfocus="" placeholder="주소" disabled="disabled"/>									
+									<input type="text" class="input-text" name="detailAddress" id="addressRegister" value="" onblur="emptyCheck('addressRegister','addressRegister','주소를 입력하세요.')" onfocus="resetSelect('addressRegister','addressRegister','주소를 입력하세요.')" placeholder="상세주소"/>
 								</label>
 							</p>
 							<button class="button border fw margin-top-10"  type="button" onclick="execDaumPostcode()" >주소찾기</button>
@@ -213,8 +214,8 @@
 							<p class="form-row form-row-wide">
 								<label for="juminLabel">주민번호:
 								<br/>
-									<input  maxlength="6" type="text" class="input-text" name="jumin1" id="juminRegister1" value="" onblur="emptyCheck('juminRegister1','juminRegister1','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister1','juminRegister1','주민번호를 입력하세요.')" style="width: 260px;display: inline;"/>-
-									<input  maxlength="1" type="text" class="input-text" name="jumin2" id="juminRegister2" value="" onblur="emptyCheck('juminRegister2','juminRegister2','')" onfocus="resetSelect('juminRegister2','juminRegister2','')" style=" width: 50px; display: inline;padding-left: 5px;"/>● ● ● ● ● ●
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"style="width: 260px;display: inline;"/>-
+									<input type="text" class="input-text" name="jumin" id="juminRegister" value="" onblur="emptyCheck('juminRegister','juminRegister','주민번호를 입력하세요.')" onfocus="resetSelect('juminRegister','juminRegister','주민번호를 입력하세요.')"style="width: 10px;display: inline;"/>● ● ● ● ● ●
 								</label>
 							</p>
 								
@@ -247,7 +248,7 @@
 									<input class="input-text" type="password" name="passwd2" id="passwd2Register" onblur="passwdOverlapCheck('passwdRegister','passwd2Register');emptyCheck('passwd2Register','passwd2Register','비밀번호를 입력하세요.')" onfocus="resetpasswdSelect('passwd2Register','passwd2Register','비밀번호를 입력하세요.')"/>
 								</label>
 							</p>
-							<button name="register" class="button border fw margin-top-10" id="registerSubmit" type="button" onclick="onclickRegister('nameRegister','phoneRegister1','phoneRegister2','phoneRegister3','postcode','address1','detailAddress','juminRegister1','juminRegister2','idRegister','emailRegister','passwdRegister','passwd2Register','registerForm','phoneRegisterWarn')">회원가입</button>
+							<button name="register" class="button border fw margin-top-10" id="registerSubmit" type="button" onclick="onclickRegister('nameRegister','phoneRegister','addressRegister','juminRegister','idRegister','emailRegister','passwdRegister','passwd2Register','registerForm')">회원가입</button>
 							<!-- <input type="submit" class="button border fw margin-top-10" name="register" value="회원가입" /> -->
 	
 							</form>
@@ -257,7 +258,25 @@
 				</div>
 			</div>
 			<!-- Sign In Popup / End -->
-
+			</c:if>
+			<c:if test="${not empty SessionMemberMemnum }">
+			<!-- Right Side Content / End -->
+			<div class="right-side">
+				<div class="header-widget">
+					<!-- User Menu -->
+					<div class="user-menu">
+						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
+						<ul>
+							
+							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
+							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Right Side Content / End -->
+			</c:if>
+			
 		</div>
 	</div>
 	<!-- Header / End -->
