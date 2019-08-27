@@ -27,7 +27,7 @@
 			</ul>	
 
 			<ul data-submenu-title="Account">
-				<li><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
+				<li><a href="/admin/memberList"><i class="sl sl-icon-user"></i> Member List</a></li>
 				<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
 			</ul>
 			
