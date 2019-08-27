@@ -40,7 +40,7 @@
 						<li><a href="#">TripInfo</a>
 							<ul>
 								<li><a href="dashboard.html">Eat</a></li>
-								<li><a href="festival">Festival</a></li>
+								<li><a href="/festival/list">Festival</a></li>
 								<li><a href="dashboard-bookings.html">Tourist Spot</a></li>
 							</ul>
 						</li>

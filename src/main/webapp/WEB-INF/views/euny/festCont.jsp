@@ -6,7 +6,7 @@ $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
       var star = $(this).val();
       alert(star)
-      $('#add-comment').prepend("<input type='hidden' id = 'star' value =" + star +">")
+      $('#add-comment').prepend("<input type='hidden' name = 'star' value =" + star +">")
       
     });
 
@@ -102,10 +102,8 @@ $(document).ready(function () {
 							</li>
 							<li>
 								<h5>행사기간</h5>
-								<p>${fdate1 } ~ ${fdate2 }</p>
-								
+								<p>${fdate1} ~ ${fdate2}</p>					
 							</li>
-							
 						</ul>
 
 					</div>
@@ -297,12 +295,19 @@ $(document).ready(function () {
 				<!-- Subratings Container / End -->
 
 				<!-- Review Comment -->
-				<form id="add-comment" class="add-comment">
+				<form id="add-comment" class="add-comment" action ="/festival/review">
 					<fieldset>
-
+						<input type="hidden" name="subject" value="${title}">
+						<input type="hidden" name="area" value="${addr1}">
+						<input type="hidden" name="fdate1" value="${fdate1}" >
+						<input type="hidden" name="fdate2" value="${fdate2}">
+						<input type="hidden" name="link" value='${link}'>
+						<input type="hidden" name="fmapx" value="${mapx}">
+						<input type="hidden" name="fmapy" value="${mapy}">
+						
 						<div>
 							<label>Review:</label>
-							<textarea cols="40" rows="3" id ="review"></textarea>
+							<textarea cols="40" rows="3" id ="review" name = "fReview"></textarea>
 						</div>
 
 					</fieldset>
