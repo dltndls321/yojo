@@ -72,7 +72,7 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="쌍용교육센터" id="keyword" size="15"/> 
-                    <button type="submit">검색하기</button> <button onclick="hideMarkers()" >마커지우기</button>
+                    <button type="submit">검색하기</button>
                 </form>
             </div>
         </div>
@@ -83,8 +83,11 @@
     
 </div>
 
-<p>출발지 <input id ="startPoint"type="text" value="마커를 클릭해 설정하세요"> 도착지 <input id ="endPoint"type="text" value="마커를 클릭해 설정하세요"></p>
-<button value="검색하기">검색하기</button>
+<form method="post" name="mapSearch"
+				action="/map/test2">
+<p>출발지 <input id ="startPoint" name="startPoint" type="text" value="마커를 클릭해 설정하세요"> 도착지 <input id ="endPoint" name="endPoint" type="text" value="마커를 클릭해 설정하세요"></p>
+<button type ="submit">검색하기</button>
+</form>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13cd4e6df49574ac7ccc468bb2a978a2&libraries=services"></script>
 <script>
 
