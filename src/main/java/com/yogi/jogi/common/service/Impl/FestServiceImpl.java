@@ -1,6 +1,8 @@
 package com.yogi.jogi.common.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,17 @@ public class FestServiceImpl implements FestService{
 	public FestivalModel selectFestWithsubject(FestivalModel festivalModel) throws Exception {
 		// TODO Auto-generated method stub
 		return  dao.selectFestWithsubject(festivalModel);
+	}
+
+	@Override
+	public List<FestivalModel> selectFestListXY(float startX, float startY, float endX, float endY) throws Exception {
+		// TODO Auto-generated method stub
+		Map map = new HashMap();
+		map.put("startX", startX);
+		map.put("startY", startY);
+		map.put("endX", endX);
+		map.put("endY", endY);
+		return dao.selectFestListXY(map); 
 	}
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.common.service.FestService;
 import com.yogi.jogi.map.model.MapModel;
 import com.yogi.jogi.map.service.MapService;
 
@@ -30,6 +31,9 @@ public class MapController {
 
 	@Autowired
 	private MapService mapService;
+	
+	@Autowired
+	private FestService festService;
 
 	@RequestMapping("test") //
 	public ModelAndView test() throws Exception {
@@ -54,12 +58,16 @@ public class MapController {
 
 		if(startX > endX && startY > endY) {
 			mv.addObject("foodList", mapService.getFoodList2(endY,endX,startY,startX));
+			mv.addObject("festList", festService.selectFestListXY(endY,endX,startY,startX));
 		}else if(startX < endX && startY > endY) {
 			mv.addObject("foodList", mapService.getFoodList2(endY,startX,startY,endX));
+			mv.addObject("festList", festService.selectFestListXY(endY,startX,startY,endX));
 		}else if(startX < endX && startY < endY) {
 			mv.addObject("foodList", mapService.getFoodList2(startY,startX,endY,endX));
+			mv.addObject("festList", festService.selectFestListXY(startY,startX,endY,endX));
 		}else { 
 			mv.addObject("foodList", mapService.getFoodList2(startY,endX,endY,startX));
+			mv.addObject("festList", festService.selectFestListXY(startY,endX,endY,startX));
 		}
 
 		mv.setViewName("maptest/maptest.do"); //
