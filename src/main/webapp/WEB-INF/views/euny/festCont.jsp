@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> 
 <script>
 $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
@@ -121,55 +122,37 @@ $(document).ready(function () {
 					<a href="#" id="streetView">Street View</a>
 				</div>
 			</div>
+		<c:if test="${not empty reviewList}">
 			<!-- Reviews -->
 			<div id="listing-reviews" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>(12)</span></h3>
+				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span></span></h3>
 
 				<!-- Rating Overview -->
 				<div class="rating-overview">
 					<div class="rating-overview-box">
-						<span class="rating-overview-box-total">4.2</span>
+						<span class="rating-overview-box-total">${avg}</span>
 						<span class="rating-overview-box-percent">out of 5.0</span>
 						<div class="star-rating" data-rating="5"></div>
 					</div>
 
 					<div class="rating-bars">
 							<div class="rating-bars-item">
-								<span class="rating-bars-name">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></span>
+								<span class="rating-bars-name">${size}명의 회원이 평가하였습니다 </span>
 								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.2">
+									<span class="rating-bars-rating" data-rating="${avg}">
 										<span class="rating-bars-rating-inner"></span>
 									</span>
-									<strong>4.2</strong>
+									<strong>${avg}</strong>
 								</span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="2.8">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>2.8</strong>
-								</span>
+							<div class="glyph fs1">
+							<div class="clearfix bshadow0 pbs">
+							<span class="im im-icon-${emotion}"></span><span class="mls"></span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="3.7">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>3.7</strong>
-								</span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.0">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.5</strong>
-								</span>
-							</div>
+							
+							
+							
 					</div>
 				</div>
 				<!-- Rating Overview / End -->
@@ -180,11 +163,11 @@ $(document).ready(function () {
 				<!-- Reviews -->
 				<section class="comments listing-reviews">
 					<ul>
-					<c:forEach var="review" items="${reviewList }">
+					<c:forEach var="review" items="${reviewList }" varStatus="status">
 						<li>
 							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">${review.memNum } <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">June 2019</span>
+								<div class="comment-by">${memList[status.index]} <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date"><fmt:formatDate value="${review.regDate}" pattern="yyyy년 MM월 dd일" /></span>
 									<div class="star-rating" data-rating="${review.star}"></div>
 								</div>
 								<p>${review.fReview }</p>
@@ -193,6 +176,7 @@ $(document).ready(function () {
 					</c:forEach>
 					 </ul>
 				</section>
+		</c:if>
 
 				<!-- Pagination -->
 				<div class="clearfix"></div>
@@ -226,7 +210,7 @@ $(document).ready(function () {
 
 					<!-- Subrating #1 -->
 					<div class="add-sub-rating">
-						<div class="sub-rating-title">rating <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+						<div class="sub-rating-title">rating <i class="tip" data-tip-content="1-5개까지 설정하실 수 있습니다."></i></div>
 						<div class="sub-rating-stars">
 							<!-- Leave Rating -->
 							<div class="clearfix"></div>
@@ -268,7 +252,7 @@ $(document).ready(function () {
 
 					</fieldset>
 
-					<input type="submit" class="button" id ="writeReview">Submit Review</button>
+					<input type="submit" class="button" id ="writeReview"></button>
 					<div class="clearfix"></div>
 				</form>
 

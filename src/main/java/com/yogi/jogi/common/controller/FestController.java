@@ -130,10 +130,8 @@ public class FestController {
         			"<a href=\"content/"+typeid+"/"+contid+"\"class=\"listing-item-container compact\" >"+
         			"<div class=\"listing-item\">"+
         			"<img src=\"" +firstimage+"\" alt=\"\">"+
-        			"<div class=\"listing-badge now-open\">Now Open</div>"+
         			"<div class=\"listing-item-content\">"+
-        			"<div class=\"numerical-rating\" data-rating=\"3.5\"></div>"+
-        			"<h3>"+title+" <i class=\"verified-icon\"></i></h3>"+
+        			"<h3>"+title+"</h3>"+
         			"<span>"+addr1+"</span>"+
         			"</div>"+
         			"<span class=\"like-icon\"></span>"+
@@ -150,7 +148,7 @@ public class FestController {
 	
 	// @RequestParam String areaCode, @RequestParam String eventStartDate
 	@RequestMapping(value = "content/{typeid}/{contid}")
-	public ModelAndView test1(FestivalModel festivalModel, FestReviewModel festReviewModel, MemberModel memberModel, HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
+	public ModelAndView festContent(FestivalModel festivalModel, FestReviewModel festReviewModel, MemberModel memberModel, HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
 		 request.setCharacterEncoding("utf-8");
 	     response.setContentType("text/html; charset=utf-8");
 	        model.clear();
@@ -189,14 +187,11 @@ public class FestController {
 	    	        
 	    	        JSONParser paser = new JSONParser();
 	    	        JSONObject obj = (JSONObject) paser.parse(s);
-
-	    	        
 	    	        JSONObject parse_response = (JSONObject) obj.get("response"); 
 	    	        JSONObject parse_body = (JSONObject) parse_response.get("body");
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONObject parse_item = (JSONObject) parse_items.get("item");
-	    	        
-	    			
+
 	    	        String addr1 = (String) parse_item.get("addr1"); 
 	    	        String title = (String) parse_item.get("title");
 	    	        String firstimage = (String) parse_item.get("firstimage"); 
@@ -209,8 +204,6 @@ public class FestController {
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
 	    	        
-	    	        
-	    	        	
 	    	        festivalModel.setSubject(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
@@ -261,7 +254,6 @@ public class FestController {
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONArray parse_item = (JSONArray) parse_items.get("item");
 
-	    	        
 	    	        for (int j = 0; j < parse_item.size(); j++) { 
 	    	        	JSONObject imsi = (JSONObject) parse_item.get(j);
 	    	        	String originimgurl = (String) imsi.get("originimgurl"); 
@@ -308,23 +300,16 @@ public class FestController {
 	    	        JSONObject parse_body = (JSONObject) parse_response.get("body");
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONObject parse_item = (JSONObject) parse_items.get("item");
-
 	    	        
 	    	        Object eventstartdate = parse_item.get("eventstartdate"); 
 	    	        Object eventenddate = parse_item.get("eventenddate");
 	    	        String fdate1 = eventstartdate.toString();
 	    	        String fdate2 = eventenddate.toString();
-	    	        //System.out.println(startdate);
-	    	        //SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	    	       
-	    	        //Date fdate1 = sdf.parse(startdate);
-	    	        //Date fdate2 = sdf.parse(enddate);
-
+	    	
     	        	String fee = (String) parse_item.get("usetimefestival"); 
     	        	String agelimit = (String) parse_item.get("agelimit"); 
     	        	String playtime = (String) parse_item.get("playtime");
     	        	
-    	        
     	        	model.addObject("fdate1",fdate1);
     		        model.addObject("fdate2",fdate2);
     		        model.addObject("fee",fee);
@@ -336,8 +321,44 @@ public class FestController {
 	        	festivalModel = festService.selectFestWithsubject(festivalModel);
 		        int festNum = festivalModel.getFestNum();
 		        festReviewModel.setFestNum(festNum);  
-		        List reviewList = festReviewService.selectFestReviewListWithFestNum(festReviewModel);
-		        model.addObject("reviewList", reviewList);
+		        List<FestReviewModel> reviewList = festReviewService.selectFestReviewListWithFestNum(festReviewModel);
+		        int star = 0;
+		        int size = reviewList.size();
+		        int memNum = 0;
+		        List<String> memList = new ArrayList<String>();
+		        String id = "";
+		        for(int i = 0 ; i <reviewList.size();i++) {
+		        	star = star + reviewList.get(i).getStar();
+		        	memNum = reviewList.get(i).getMemNum();
+		        	memberModel.setMemnum(memNum);
+				    memberModel = memberService.selectMemberWithMemNum(memberModel);
+				    id = memberModel.getId();
+				    memList.add(id);
+		        }
+		        
+		        if(size > 0) {
+		        	int avg1 = (star*10)/reviewList.size();
+			        
+			        double avg = ((double)avg1)/10;
+			        
+			        String emotion = "";
+			        if(avg >= 4.5) {
+			        	emotion = "Humor";
+			        }else if(avg >= 3.5) {
+			        	emotion = "Humor";
+			        }else if(avg >= 2.5) {
+			        	emotion = "Confused";
+			        }else {
+			        	emotion = "Angry ";
+			        }
+			        model.addObject("avg", avg);
+			        model.addObject("size", size);
+			        model.addObject("emotion", emotion);
+			        model.addObject("reviewList", reviewList);
+		        }
+		        
+		       
+		        
 	        }
 	        model.setViewName("euny/festCont.do");	
 	        return model;
