@@ -66,14 +66,14 @@ public class AdminController {
 
 	@RequestMapping(value = "board")
 	public ModelAndView moveBoard() throws Exception {
-		
+
 		mv.clear();
-		
+
 		BoardModel boardModel = new BoardModel();
 
 		boardid = "1";
 		boardModel.setBoardid(boardid);
-		
+
 		int pageSize = 6;
 		int currentPage = pageNum;
 		int count = boardService.selectBoardList(boardModel).size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
@@ -106,20 +106,38 @@ public class AdminController {
 		mv.setViewName("admin/board.admin");
 
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(value = "boardContent/{boardnum}")
-	public ModelAndView moveBoardContent(BoardModel boardModel, @PathVariable("boardnum") int boardnum)
+
+	@RequestMapping(value = "boardContent/{boardNum}")
+	public ModelAndView moveBoardContent(BoardModel boardModel, @PathVariable("boardNum") int boardNum)
 			throws Exception {
 
 		mv.clear();
 
-		boardModel.setBoardNum(boardnum);
-		boardModel = boardService.selectBoard(boardnum);
+		boardModel.setBoardNum(boardNum);
+		boardModel = boardService.selectBoard(boardNum);
 
 		mv.addObject("boardModel", boardModel);
-		mv.setViewName("admin/boardContent.admin");
+		mv.setViewName("admin/boardContent");
+
+		return mv;
+	}
+
+	@RequestMapping(value = "boardDelete/{boardNum}")
+	public ModelAndView moveBoardDelete(BoardModel boardModel, @PathVariable("boardNum") int boardNum)
+			throws Exception {
+
+		mv.clear();
+
+		boardModel.setBoardNum(boardNum);
+		boardModel = boardService.selectBoard(boardNum);
+		boardService.deleteBoard(boardModel);
+
+		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+
+		mv.addObject("boardlist", boardlist);
+		mv.setViewName("admin/board.admin");
 
 		return mv;
 	}
@@ -275,17 +293,6 @@ public class AdminController {
 	@RequestMapping(value = "reviews")
 	public String moveReviews() {
 		return "admin/reviews.admin";
-	}
-	
-	@RequestMapping(value = "updateBoard")
-	public ModelAndView moveUpdateBoard() throws Exception {
-
-		mv.clear();
-
-		
-		mv.setViewName("admin/updateBoard");
-
-		return mv;
 	}
 
 }

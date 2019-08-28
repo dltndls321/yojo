@@ -109,8 +109,6 @@ public class BoardModel {
 				+ ", reStep=" + reStep + ", reLevel=" + reLevel + "]";
 	}
 	
-	
-	
 
 
 
