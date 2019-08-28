@@ -22,14 +22,15 @@
 		<div class="row">
 
 			<!-- Profile -->
-			<form action="/admin/updateMember" id="updateMember">
+			
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
+				<form action="/admin/updateMember" id="updateMember">
 					<h4 class="gray">Member Profile</h4>
 					<div class="dashboard-list-box-static">
 						
 						<!-- Avatar -->
-						<!-- <div class="edit-profile-photo">
+						<div class="edit-profile-photo">
 							<img src="images/user-avatar.jpg" alt="">
 							<div class="change-photo-btn">
 								<div class="photoUpload">
@@ -37,7 +38,7 @@
 								    <input type="file" class="upload" />
 								</div>
 							</div>
-						</div> -->
+						</div>
 	
 						<!-- Details -->
 						<div class="my-profile">
@@ -55,19 +56,17 @@
 							<input maxlength="3" type="text" class="input-text" name="phone1" id="phone1" value="${memberDetailInfo.phone1 }" onblur="" onfocus="" style="width: 130px;display: inline;"/> -
 							<input maxlength="4" type="text" class="input-text" name="phone2" id="phone2" value="${memberDetailInfo.phone2 }" onblur="" onfocus="" style="width : 130px;display: inline;"/> -
 							<input maxlength="4" type="text" class="input-text" name="phone3" id="phone3" value="${memberDetailInfo.phone3 }" onblur="" onfocus="" style="width: 130px;display: inline;"/>
-							<input value="${memberInfo.phone }" type="text" id="phone" name="phone">
 							
 							<label>Jumin</label>
-							<input value="${memberInfo.jumin }" type="text" id="jumin1" name="jumin1"> - 
-							<input value="${memberInfo.jumin }" type="text" id="jumin2" name="jumin2">
+							<input value="${memberDetailInfo.jumin1 }" type="text" id="jumin1" name="jumin1" style="width: 200px; display: inline;"> - 
+							<input value="${memberDetailInfo.jumin2 }" type="text" id="jumin2" name="jumin2" style="width: 200px; display: inline;">
 							
 							<label>Address</label>
 							<input type="text" class="input-text" name="postcode" id="postcode" value="${memberDetailInfo.postcode }" onblur="" onfocus="" placeholder="우편번호" onkeypress="donotkeyin();"/>									
 							<input type="text" class="input-text" name="address1" id="address1" value="${memberDetailInfo.address1 }" onblur="" onfocus="" placeholder="주소" onkeypress="donotkeyin();"/>									
 							<input type="text" class="input-text" name="detailAddress" id="detailAddress" value="${memberDetailInfo.detailAddress }" onblur="emptyCheck('detailAddress','detailAddress','주소를 입력하세요.')" onfocus="resetSelect('detailAddress','detailAddress','주소를 입력하세요.')" placeholder="상세주소"/>							
-							</div>
-							<button class="button border fw margin-top-10"  type="button" onclick="execDaumPostcode()" >주소찾기</button>
-							<input value="${memberInfo.address }" type="text" id="address" name="address">
+							
+							<button class="button border fw margin-top-10"  type="button" onclick="execDaumPostcode()" style="margin-bottom: 20px">주소찾기</button>
 
 							<label>Email</label>
 							<input value="${memberInfo.email }" type="text" id="email" name="email">
@@ -81,11 +80,11 @@
 						</div>
 	
 						<button class="button margin-top-15" type="submit">Save</button>
-
+					</form>
 					</div>
 				</div>
 			</div>
-			</form>
+			
 			
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
