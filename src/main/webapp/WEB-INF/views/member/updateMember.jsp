@@ -121,7 +121,7 @@
 			</form>
 
 			<!-- Change Password -->
-			<form action="" id="passwdChangeForm">
+			<form action="/member/changePasswdDone" id="passwdChangeForm">
 				<div class="col-lg-6 col-md-12">
 					<div class="dashboard-list-box margin-top-0">
 						<h4 class="gray">비밀번호 변경</h4>
@@ -134,12 +134,33 @@
 								<input type="password" id="nowpasswd" value="${memberInfo.passwd }" disabled="disabled">
 	
 								<label>새 비밀번호</label>
-								<input type="password" id="newpasswd" onblur=""onfocus="">
+								<input type="password" name="passwd" id="newpasswd" onblur="passcheckcheck();"onfocus="resetpasswdSelect2()">
 	
 								<label>비밀번호 확인</label>
-								<input type="password" id="newpasswd2" onblur=""onfocus="">
+								<input type="password" id="newpasswd2" onblur="passcheckcheck2();"onfocus="resetpasswdSelect3()">
 	
-								<button class="button margin-top-15">비밀번호 변경</button>
+								<input type="button" class="button margin-top-15" id="changepasswdSubmit" onclick="onclickUpdatePasswd();" value="비밀번호 변경">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<form action="/member/deleteMember" id="deleteMemberForm">
+				<div class="col-lg-6 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<h4 class="gray">회원 탈퇴</h4>
+						<div class="dashboard-list-box-static">
+	
+							<!-- Change Password -->
+							<div class="my-profile">
+	
+								<label>비밀번호</label>
+								<input type="password" name="passwd"  id="deletepasswd" onblur="passcheckcheck3();"onfocus="resetpasswdSelect4()">
+	
+								<label>비밀번호 확인</label>
+								<input type="password" name="passwd2" id="deletepasswd2" onblur="passcheckcheck4();"onfocus="resetpasswdSelect5()">
+	
+								<input type="button" class="button margin-top-15" id="deleteMemberSubmit" onclick="onclickDeleteMember();" value="회원 탈퇴">
 							</div>
 						</div>
 					</div>

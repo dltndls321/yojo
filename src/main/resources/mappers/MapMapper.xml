@@ -9,9 +9,9 @@
     	select * from foodtest3
    </select>
      
-   <select id="getFoodList2"  parameterType="mapModel"  resultType="mapModel" >
+   <select id="getFoodList2"  parameterType="float"  resultType="mapModel" >
    	 <![CDATA[
-    select * from foodtest3 where x>#{x} and x<#{x} and y>#{y} and y<#{y}
+    select * from foodtest3 where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
     ]]>	
    </select>
    

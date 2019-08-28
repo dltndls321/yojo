@@ -85,21 +85,7 @@ public class BoardController {
 		
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
-		return mv;
-	}
-	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
-		mv.clear();
-		BoardModel a = new BoardModel();
-		mv.clear(); // ModelAndView 초기화
-		
-		
-		
-		/*
-		 * mv.addObject("memNum", boardModel.getMemNum()); mv.addObject("fname",
-		 * boardModel.getFname()); mv.addObject("fsize", boardModel.getFsize());
-		 * mv.addObject("readcount", boardModel.getReadcount()); mv.addObject("regdate",
-		 * boardModel.getRegdate()); mv.setViewName("board/writeUploadForm");
-		 */
+
 		return mv;
 	}
 

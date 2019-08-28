@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,15 +35,15 @@ $(document).ready(function () {
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar">
 				<div class="listing-titlebar-title">
-					<h2>${title}<span class="listing-tag">Services</span></h2>
+					<h2>${title}<span class="listing-tag">festival</span></h2>
 					<span>
 						<a href="#listing-location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
 							${addr1}
 						</a>
 					</span>
-					<div class="star-rating" data-rating="5">
-						<div class="rating-counter"><a href="#listing-reviews">(12 reviews)</a></div>
+					<div class="star-rating" data-rating="${avg}">
+						<div class="rating-counter"><a href="#listing-reviews">(${size} reviews)</a></div>
 					</div>
 				</div>
 			</div>
@@ -133,7 +134,7 @@ $(document).ready(function () {
 					<div class="rating-overview-box">
 						<span class="rating-overview-box-total">${avg}</span>
 						<span class="rating-overview-box-percent">out of 5.0</span>
-						<div class="star-rating" data-rating="5"></div>
+						<div class="star-rating" data-rating="${avg}"></div>
 					</div>
 
 					<div class="rating-bars">
@@ -177,7 +178,7 @@ $(document).ready(function () {
 					</c:forEach>
 					 </ul>
 				</section>
-		</c:if>
+		
 
 				<!-- Pagination -->
 				<div class="clearfix"></div>
@@ -197,6 +198,7 @@ $(document).ready(function () {
 				</div>
 				<div class="clearfix"></div>
 				<!-- Pagination / End -->
+			</c:if>
 			</div>
 
 			<!-- Add Review Box -->
@@ -245,7 +247,8 @@ $(document).ready(function () {
 						<input type="hidden" name="link" value='${link}'>
 						<input type="hidden" name="fmapx" value="${mapx}">
 						<input type="hidden" name="fmapy" value="${mapy}">
-						
+						<input type="hidden" name="typeid" value="${typeid}">
+						<input type="hidden" name="contid" value="${contid}">
 						<div>
 							<label>Review:</label>
 							<textarea cols="40" rows="3" id ="review" name = "fReview"></textarea>

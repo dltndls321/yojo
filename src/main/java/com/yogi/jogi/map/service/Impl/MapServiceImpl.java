@@ -18,11 +18,13 @@ public class MapServiceImpl implements MapService{
 		// TODO Auto-generated method stub
 		return dao.getFoodList();
 	}
+
 	@Override
-	public List<MapModel> getFoodList2(MapModel mapModel) throws Exception {
+	public List<MapModel> getFoodList2(float startX, float startY, float endX, float endY) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.getFoodList2(mapModel);
+		return dao.getFoodList2(startX,startY,endX,endY);
 	}
+	
 	
 	
 }
