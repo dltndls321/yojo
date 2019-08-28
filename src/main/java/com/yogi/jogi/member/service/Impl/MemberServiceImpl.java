@@ -49,6 +49,12 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.updateMember(memberModel);
 	}
+
+	@Override
+	public int deleteMember(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(memberModel);
+	}
 	
 	
 }
