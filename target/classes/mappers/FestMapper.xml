@@ -5,16 +5,16 @@
  
 <mapper namespace="FestMapperNS">
   	<insert id="insertFest" parameterType="festModel">
-  		Insert into festival(festNum,subject,fdate1,area,link,fdate2,fmapx,fmapy)	
+  		Insert into festival(festNum,subject,fdate1,area,fdate2,fmapx,fmapy,zcode)	
   		values(
 	  		festSeq.NEXTVAL,
 	  		#{subject},
 	  		#{fdate1},
 	  		#{area},
-	  		#{link},
 	  		#{fdate2},
 	  		#{fmapx},
-	  		#{fmapy}
+	  		#{fmapy},
+	  		#{zcode}
   		)
   	</insert>
   	

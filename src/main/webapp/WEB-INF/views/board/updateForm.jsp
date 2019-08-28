@@ -6,32 +6,7 @@
 <html>
 <head>
 <script>
-${"#btnInsert"}.click(function () {
-	var subject = $("#subject").val();
-	var content = $("#content").val();
-	var writer = $("#writer").val();
-	var passwd = $("#passwd").val();
-	if (subject == " "){
-		alert("제목을 입력해주세요")
-		document.form.subject.focus();
-		return;
-	}
-	if (content == " "){
-		alert("제목을 입력해주세요")
-		document.form.content.focus();
-		return;
-	}
-	if (writer == " "){
-		alert("제목을 입력해주세요")
-		document.form.writer.focus();
-		return;
-	}
-	if (passwd == " "){
-		alert("제목을 입력해주세요")
-		document.form.passwd.focus();
-		return;
-	}
-})
+
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,10 +34,11 @@ ${"#btnInsert"}.click(function () {
 				<div class="panel panel-default">
 					<div class="panel-heading">게시판 수정</div>
 					<div class="panel-body">
-						<form method="post" name="writeUploadForm" enctype="multipart/form-data"
-							action="writeUploadPro">
+						<form method="post" name="updateForm" enctype="multipart/form-data"
+							action="/board/updatePro">
 
 							<input type="hidden" name="boardid" value="${boardid}">
+							<input type="hidden" name="boardid" value="${boarNum}">
 							
 							<div class="row form-group">
 
@@ -106,7 +82,7 @@ ${"#btnInsert"}.click(function () {
 							
 								<tr>
 									<td colspan=2 align="center">
-									<button class="btn btn-outline btn-primary" id="btnInsert" value="글쓰기">글쓰기</button>
+									<button class="btn btn-outline btn-primary" type="submit" id="btnInsert" value="글쓰기">글쓰기</button>
 									<input class="btn btn-outline btn-primary" type="reset" value="다시작성"> 
 									<input class="btn btn-outline btn-primary" type="button" value="목록보기"
 										OnClick="window.location='boardlist?pageNum=${pageNum}'"></td>
@@ -123,4 +99,5 @@ ${"#btnInsert"}.click(function () {
 
 
 </body>
+
 </html>

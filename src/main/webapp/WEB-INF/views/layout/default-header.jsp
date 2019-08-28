@@ -80,7 +80,7 @@
 
 						<li><a  href="#">Course</a>
 							<ul>
-								<li><a href="index.html">Recommand</a></li>
+								<li><a href="/course/recommend">Recommand</a></li>
 								<li><a href="index-2-airbnb.html">Route</a></li>
 
 							</ul>

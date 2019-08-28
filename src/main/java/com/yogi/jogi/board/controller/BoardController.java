@@ -48,15 +48,18 @@ public class BoardController {
 
 		if (reqboardid != null)
 			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
-		if (session.getAttribute("boardid") != null)
+		if (session.getAttribute("boardid") == null)
+			boardid = "1";
+		else {
 			boardid = (String) session.getAttribute("boardid"); // 오브젝트로 받아오기떄문에 String으로 형변환
-
+		}
 		try {
 			pageNum = Integer.parseInt(request.getParameter("pageNum")); // pageNum을 세팅하는데 넘어오지않으면 1을 집어넣음
 		} catch (Exception e) {
 			// TODO: handle exception
 			pageNum = 1;
 		}
+		
 
 	}
 
@@ -72,7 +75,7 @@ public class BoardController {
 
 		return mv;
 	}
-	@RequestMapping("boardlist/2")
+	@RequestMapping("list")
 	public ModelAndView list2() throws Exception {
 		BoardModel boardModel = new BoardModel();
 		boardid = "2";
@@ -96,7 +99,7 @@ public class BoardController {
 
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel) throws Exception {
-
+		
 		
 		System.out.println("2" + boardModel);
 		boardService.insertBoard(boardModel);
@@ -163,8 +166,8 @@ public class BoardController {
 	  }
 	 
 	 
-	@RequestMapping("updatePro")
-	public ModelAndView updatePro(BoardModel boardModel) throws Exception {
+	@RequestMapping("updatePro/{boardNum}")
+	public ModelAndView updatePro(BoardModel boardModel,@PathVariable("boardNum") int boardNum) throws Exception {
 		mv.clear();
 
 		int check = boardService.selectPasswdOneNum(boardModel);
