@@ -157,6 +157,19 @@ public class MemberController {
 		model.addObject("memberDetailInfo", memberDetailModel);
 		return model;
 	}
+	@RequestMapping(value = "changePasswdDone")
+	public ModelAndView changePasswdDone(@RequestParam String passwd, HttpSession session) throws Exception {
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		memberModel.setPasswd(passwd);
+		System.out.println(memberModel);
+		memberService.updateMember(memberModel);
+		model.setViewName("redirect:/member/updateMember.do");
+		return model;
+	}
+	
 
 	// ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck", method = RequestMethod.POST)
@@ -226,5 +239,7 @@ public class MemberController {
 		}
 		out.close();
 	}
+	
+	
 
 }
