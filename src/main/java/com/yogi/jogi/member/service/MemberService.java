@@ -21,4 +21,6 @@ public interface MemberService {
 	
 	public int updateMember(MemberModel memberModel)throws Exception;
 	
+	public int deleteMember(MemberModel memberModel)throws Exception;
+	
 }

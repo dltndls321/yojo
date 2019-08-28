@@ -20,30 +20,30 @@ import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
-
-
 @Controller
 @RequestMapping(value = "member")
 public class MemberController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	ModelAndView model = new ModelAndView();
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
-	public ModelAndView registemember(MemberDetailModel memberDetailModel,HttpSession session) throws Exception{
+	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
 		System.out.println("registemember : 시작");
 		model.clear();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(memberDetailModel.getId());
 		memberModel.setEmail(memberDetailModel.getEmail());
 		memberModel.setName(memberDetailModel.getName());
-		memberModel.setPhone(memberDetailModel.getPhone1() + "-"+memberDetailModel.getPhone2() + "-" + memberDetailModel.getPhone3());
+		memberModel.setPhone(memberDetailModel.getPhone1() + "-" + memberDetailModel.getPhone2() + "-"
+				+ memberDetailModel.getPhone3());
 		memberModel.setPasswd(memberDetailModel.getPasswd());
-		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/" + memberDetailModel.getDetailAddress());
+		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
+				+ memberDetailModel.getDetailAddress());
 		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
 		memberService.insertMember(memberModel);
 		memberModel = memberService.selectMemberWithEmail(memberModel);
@@ -54,11 +54,12 @@ public class MemberController {
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
 		model.setViewName("redirect:/main/main");
-		model.addObject("InfoMember",memberModel);
+		model.addObject("InfoMember", memberModel);
 		return model;
 	}
+
 	@RequestMapping(value = "loginmember")
-	public ModelAndView loginmember(MemberModel memberModel,HttpSession session) throws Exception{
+	public ModelAndView loginmember(MemberModel memberModel, HttpSession session) throws Exception {
 		System.out.println("loginmember : 시작");
 		model.clear();
 		memberModel = memberService.selectMemberWithId(memberModel);
@@ -68,123 +69,128 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
-		if(memberModel.getId().equals("admin")) {
+		if (memberModel.getId().equals("admin")) {
 			model.setViewName("redirect:/admin/main");
-		}else {
+		} else {
 			model.setViewName("redirect:/main/main");
 		}
-		model.addObject("InfoMember",memberModel);
+		model.addObject("InfoMember", memberModel);
 		return model;
 	}
+
 	@RequestMapping(value = "logout")
-	public String logout(HttpSession session){
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main/main";
 	}
-	
+
 	/* 멤버프로필 */
 	@RequestMapping(value = "profile")
-	public ModelAndView profile(HttpSession session) throws Exception{
+	public ModelAndView profile(HttpSession session) throws Exception {
 		System.out.println("member/profile  : 시작");
 		model.clear();
 		MemberModel memberModel = new MemberModel();
-		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
-		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
-		model.addObject("memberInfo",memberModel);
+		model.addObject("memberInfo", memberModel);
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
+
 	@RequestMapping(value = "updateMember")
-	public ModelAndView updateMember(HttpSession session) throws Exception{
+	public ModelAndView updateMember(HttpSession session) throws Exception {
 		System.out.println("member/updateMember  : 시작");
 		model.clear();
 		MemberModel memberModel = new MemberModel();
 		MemberDetailModel memberDetailModel = new MemberDetailModel();
-		System.out.println("세션번호  : " + (Integer)session.getAttribute("SessionMemberMemnum"));
-		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
-		
+
 		String[] splitAddress = memberModel.getAddress().split("/");
 		String[] splitPhone = memberModel.getPhone().split("-");
-		for(int i=0;i<3;i++) {
-			if(i==0) {
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
 				memberDetailModel.setPostcode(splitAddress[i]);
-			}else if(i==1) {
+			} else if (i == 1) {
 				memberDetailModel.setAddress1(splitAddress[i]);
-			}else {
+			} else {
 				memberDetailModel.setDetailAddress(splitAddress[i]);
 			}
 		}
-		for(int i=0;i<3;i++) {
-			if(i==0) {
-				memberDetailModel.setPhone1(splitPhone[i]);;
-			}else if(i==1) {
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				memberDetailModel.setPhone1(splitPhone[i]);
+			} else if (i == 1) {
 				memberDetailModel.setPhone2(splitPhone[i]);
-			}else {
+			} else {
 				memberDetailModel.setPhone3(splitPhone[i]);
 			}
 		}
-		model.addObject("memberInfo",memberModel);
-		model.addObject("memberDetailInfo",memberDetailModel);
+		model.addObject("memberInfo", memberModel);
+		model.addObject("memberDetailInfo", memberDetailModel);
 		model.setViewName("member/updateMember.do");
 		return model;
 	}
+
 	@RequestMapping(value = "updateMemberDone")
-	public ModelAndView updateMemberDone(MemberDetailModel memberDetailModel,HttpSession session) throws Exception{
+	public ModelAndView updateMemberDone(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
 		model.clear();
 		MemberModel memberModel = new MemberModel();
-		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		memberModel.setName(memberDetailModel.getName());
 		memberModel.setEmail(memberDetailModel.getEmail());
-		memberModel.setPhone(memberDetailModel.getPhone1() + "-"+memberDetailModel.getPhone2() + "-" + memberDetailModel.getPhone3());
-		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/" + memberDetailModel.getDetailAddress());
+		memberModel.setPhone(memberDetailModel.getPhone1() + "-" + memberDetailModel.getPhone2() + "-"
+				+ memberDetailModel.getPhone3());
+		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
+				+ memberDetailModel.getDetailAddress());
 		System.out.println(memberModel);
 		memberService.updateMember(memberModel);
 		model.setViewName("member/updateMember.do");
-		model.addObject("memberInfo",memberModel);
-		model.addObject("memberDetailInfo",memberDetailModel);
+		model.addObject("memberInfo", memberModel);
+		model.addObject("memberDetailInfo", memberDetailModel);
 		return model;
 	}
-	
-	
-	//ajax 컨트롤러들
-	@RequestMapping(value = "IDOverlapCheck",method = RequestMethod.POST)
-	public void IDOverlapCheck(@RequestParam String id,HttpServletResponse response)throws Exception{
-		System.out.println("IDOverlapCheck : 시작" );
+
+	// ajax 컨트롤러들
+	@RequestMapping(value = "IDOverlapCheck", method = RequestMethod.POST)
+	public void IDOverlapCheck(@RequestParam String id, HttpServletResponse response) throws Exception {
+		System.out.println("IDOverlapCheck : 시작");
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(id);
-		System.out.println("IDOverlapCheck : "+memberService.selectMemberWithId(memberModel));
-		if(memberService.selectMemberWithId(memberModel)==null) {
+		System.out.println("IDOverlapCheck : " + memberService.selectMemberWithId(memberModel));
+		if (memberService.selectMemberWithId(memberModel) == null) {
 			System.out.println("IDOverlapCheck :NotOverlap");
 			out.append("0");
 			out.flush();
-		}else {
+		} else {
 			System.out.println("IDOverlapCheck :Overlap");
 			out.append("1");
 			out.flush();
 		}
 		out.close();
 	}
-	@RequestMapping(value = "EmailOverlapCheck",method = RequestMethod.POST)
-	public void EmailOverlapCheck(@RequestParam String email,HttpServletResponse response)throws Exception{
+
+	@RequestMapping(value = "EmailOverlapCheck", method = RequestMethod.POST)
+	public void EmailOverlapCheck(@RequestParam String email, HttpServletResponse response) throws Exception {
 		System.out.println("EmailOverlapCheck : 시작");
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setEmail(email);
-		System.out.println("EmailOverlapCheck : "+memberService.selectMemberWithEmail(memberModel));
-		if(memberService.selectMemberWithEmail(memberModel)==null) {
+		System.out.println("EmailOverlapCheck : " + memberService.selectMemberWithEmail(memberModel));
+		if (memberService.selectMemberWithEmail(memberModel) == null) {
 			System.out.println("EmailOverlapCheck :NotOverlap");
 			out.append("2");
 			System.out.println(2);
 			out.flush();
-		}else {
+		} else {
 			System.out.println("EmailOverlapCheck :Overlap");
 			out.append("3");
 			System.out.println(3);
@@ -192,25 +198,27 @@ public class MemberController {
 		}
 		out.close();
 	}
-	@RequestMapping(value = "loginCheck",method = RequestMethod.POST)
-	public void loginCheck(@RequestParam String id,@RequestParam String passwd,HttpServletResponse response)throws Exception{
+
+	@RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+	public void loginCheck(@RequestParam String id, @RequestParam String passwd, HttpServletResponse response)
+			throws Exception {
 		System.out.println("loginCheck : 시작");
 		PrintWriter out = response.getWriter();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(id);
 		MemberModel dataModel = memberService.selectMemberWithId(memberModel);
-		System.out.println("loginCheck  : "+dataModel);
-		if(memberService.selectMemberWithId(memberModel)==null) {
+		System.out.println("loginCheck  : " + dataModel);
+		if (memberService.selectMemberWithId(memberModel) == null) {
 			System.out.println("loginCheck :id null");
 			out.append("0");
 			System.out.println(0);
 			out.flush();
-		}else if(!dataModel.getPasswd().equals(passwd)){
+		} else if (!dataModel.getPasswd().equals(passwd)) {
 			System.out.println("loginCheck :passwdWrong");
 			out.append("1");
 			System.out.println(1);
 			out.flush();
-		}else {
+		} else {
 			System.out.println("loginCheck :success");
 			out.append("2");
 			System.out.println(2);
@@ -218,5 +226,5 @@ public class MemberController {
 		}
 		out.close();
 	}
-	
+
 }

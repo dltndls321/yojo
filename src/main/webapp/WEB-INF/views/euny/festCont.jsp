@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> 
 <script>
 $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
@@ -117,60 +118,42 @@ $(document).ready(function () {
 				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Location</h3>
 
 				<div id="singleListingMap-container">
-					<div id="singleListingMap" data-latitude="40.70437865245596" data-longitude="-73.98674011230469" data-map-icon="im im-icon-Hamburger"></div>
+					<div id="singleListingMap" data-latitude="40.70437865245596" data-longitude="-73.98674011230469" data-map-icon="im im-icon-Hamburger">
+					<div id="map" style="width:100%;height:350px;"></div> </div>
 					<a href="#" id="streetView">Street View</a>
 				</div>
 			</div>
-				
+		<c:if test="${not empty reviewList}">
 			<!-- Reviews -->
 			<div id="listing-reviews" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>(12)</span></h3>
+				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span></span></h3>
 
 				<!-- Rating Overview -->
 				<div class="rating-overview">
 					<div class="rating-overview-box">
-						<span class="rating-overview-box-total">4.2</span>
+						<span class="rating-overview-box-total">${avg}</span>
 						<span class="rating-overview-box-percent">out of 5.0</span>
 						<div class="star-rating" data-rating="5"></div>
 					</div>
 
 					<div class="rating-bars">
 							<div class="rating-bars-item">
-								<span class="rating-bars-name">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></span>
+								<span class="rating-bars-name">${size}명의 회원이 평가하였습니다 </span>
 								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.2">
+									<span class="rating-bars-rating" data-rating="${avg}">
 										<span class="rating-bars-rating-inner"></span>
 									</span>
-									<strong>4.2</strong>
+									<strong>${avg}</strong>
 								</span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="2.8">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>2.8</strong>
-								</span>
+							<div class="glyph fs1">
+							<div class="clearfix bshadow0 pbs">
+							<span class="im im-icon-${emotion}"></span><span class="mls"></span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="3.7">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>3.7</strong>
-								</span>
 							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.0">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.5</strong>
-								</span>
-							</div>
+							
+							
+							
 					</div>
 				</div>
 				<!-- Rating Overview / End -->
@@ -181,61 +164,20 @@ $(document).ready(function () {
 				<!-- Reviews -->
 				<section class="comments listing-reviews">
 					<ul>
+					<c:forEach var="review" items="${reviewList }" varStatus="status">
 						<li>
 							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
+								<div class="comment-by">${memList[status.index]} <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date"><fmt:formatDate value="${review.regDate}" pattern="yyyy년 MM월 dd일" /></span>
+									<div class="star-rating" data-rating="${review.star}"></div>
 								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>
+								<p>${review.fReview }</p>
 							</div>
 						</li>
-
-						<li>
-							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="4"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>2</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown<span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-02.jpg" class="mfp-gallery"><img src="images/review-image-02.jpg" alt=""></a>
-									<a href="images/review-image-03.jpg" class="mfp-gallery"><img src="images/review-image-03.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>4</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review</a>
-							</div>
-
-						</li>
+					</c:forEach>
 					 </ul>
 				</section>
+		</c:if>
 
 				<!-- Pagination -->
 				<div class="clearfix"></div>
@@ -257,7 +199,6 @@ $(document).ready(function () {
 				<!-- Pagination / End -->
 			</div>
 
-
 			<!-- Add Review Box -->
 			<div id="add-review" class="add-review-box">
 
@@ -270,7 +211,7 @@ $(document).ready(function () {
 
 					<!-- Subrating #1 -->
 					<div class="add-sub-rating">
-						<div class="sub-rating-title">rating <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+						<div class="sub-rating-title">rating <i class="tip" data-tip-content="1-5개까지 설정하실 수 있습니다."></i></div>
 						<div class="sub-rating-stars">
 							<!-- Leave Rating -->
 							<div class="clearfix"></div>
@@ -312,7 +253,7 @@ $(document).ready(function () {
 
 					</fieldset>
 
-					<input type="submit" class="button" id ="writeReview">Submit Review</button>
+					<input type="submit" class="button" id ="writeReview"></button>
 					<div class="clearfix"></div>
 				</form>
 
@@ -324,3 +265,42 @@ $(document).ready(function () {
 
 	</div>
 </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13cd4e6df49574ac7ccc468bb2a978a2&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch("${addr1}", function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${title}"+'</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>

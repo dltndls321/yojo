@@ -83,6 +83,19 @@ public class BoardController {
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
 
+	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
+		mv.clear();
+		BoardModel a = new BoardModel();
+		mv.clear(); // ModelAndView 초기화
+		
+		
+		
+		/*
+		 * mv.addObject("memNum", boardModel.getMemNum()); mv.addObject("fname",
+		 * boardModel.getFname()); mv.addObject("fsize", boardModel.getFsize());
+		 * mv.addObject("readcount", boardModel.getReadcount()); mv.addObject("regdate",
+		 * boardModel.getRegdate()); mv.setViewName("board/writeUploadForm");
+		 */
 		return mv;
 	}
 
@@ -90,6 +103,7 @@ public class BoardController {
 	public String writePro(BoardModel boardModel) throws Exception {
 
 		
+		System.out.println("2" + boardModel);
 		boardService.insertBoard(boardModel);
 		return "redirect:/board/list";
 
@@ -189,5 +203,5 @@ public class BoardController {
 		return mv;
 
 	}
-
+	
 }

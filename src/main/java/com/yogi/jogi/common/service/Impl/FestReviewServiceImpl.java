@@ -35,9 +35,21 @@ public class FestReviewServiceImpl implements FestReviewService{
 	}
 
 	@Override
-	public FestReviewModel selectFestReviewWithMemNum(FestReviewModel festReviewModel) throws Exception {
+	public List<FestReviewModel> selectFestReviewListWithFestNum(FestReviewModel festReviewModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectFestReviewListWithFestNum(festReviewModel);
+	}
+
+	@Override
+	public List<FestReviewModel> selectFestReviewWithMemNum(FestReviewModel festReviewModel) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectFestReviewWithMemNum(festReviewModel);
+	}
+
+	@Override
+	public FestReviewModel selectFestReviewOne(FestReviewModel festReviewModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectFestReviewOne(festReviewModel);
 	}
 	
 	
