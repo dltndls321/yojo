@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.map.model.MapModel;
 import com.yogi.jogi.map.service.MapService;
 
 import net.sf.json.JSON;
@@ -43,16 +44,27 @@ public class MapController {
 	}
 
 	@RequestMapping("test2") //
-	public ModelAndView test2(@RequestParam("startPoint") String startPoint, @RequestParam("endPoint") String endPoint)
+	public ModelAndView test2(@RequestParam("startX") float startX,@RequestParam("startY") float startY
+			, @RequestParam("endX") float endX, @RequestParam("endY") float endY)
 			throws Exception {
 
 		mv.clear();
 		 
+		System.out.println("startX : " + startX +" : startY : " + startY+" : endX : " + endX +" : endY : " + endY);
 
-
-		System.out.println(mapService.getFoodList2());
-
-		mv.addObject("foodList", mapService.getFoodList2());
+		
+		
+		MapModel mapModel = new MapModel();
+		mapModel.setX(startX);
+		mapModel.setY(startY);
+		
+		
+		
+		if(startX > endX && startY > endY) {
+			mv.addObject("foodList", mapService.getFoodList2(mapModel));
+		}
+		
+		mv.addObject("foodList", mapService.getFoodList2(mapModel));
 		mv.setViewName("maptest/maptest.do"); //
 
 		return mv;
