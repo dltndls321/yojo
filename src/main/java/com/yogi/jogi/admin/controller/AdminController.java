@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.board.model.BoardModel;
+import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
@@ -23,16 +25,32 @@ import com.yogi.jogi.member.service.MemberService;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
 	ModelAndView mv = new ModelAndView();
+
 	private int pageNum;
+	private String boardid;
 
 	MemberDetailModel memberDetailModel = new MemberDetailModel();
 
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private BoardService boardService;
+
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		String reqboardid = request.getParameter("boardid"); // boardid가 넘어오는지
+
+		if (reqboardid != null)
+			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
+		if (session.getAttribute("boardid") == null)
+			boardid = "1"; // null 이면 boardid = 1
+		else
+			boardid = (String) session.getAttribute("boardid"); // 오브젝트로 받아오기떄문에 String으로 형변환
 
 		try {
 			pageNum = Integer.parseInt(request.getParameter("pageNum")); // pageNum을 세팅하는데 넘어오지않으면 1을 집어넣음
@@ -47,8 +65,63 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "board")
-	public String moveBoard() {
-		return "admin/board.admin";
+	public ModelAndView moveBoard() throws Exception {
+		
+		mv.clear();
+		
+		BoardModel boardModel = new BoardModel();
+
+		boardid = "1";
+		boardModel.setBoardid(boardid);
+		
+		int pageSize = 6;
+		int currentPage = pageNum;
+		int count = boardService.selectBoardList(boardModel).size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int startRow = (currentPage - 1) * pageSize;
+		int endRow = currentPage * pageSize;
+		if (count < endRow)
+			endRow = count;
+
+		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+
+		int number = count - ((currentPage - 1) * pageSize);
+
+		int bottomLine = 3; // 5 page
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+		int endPage = startPage + bottomLine - 1;
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		mv.addObject("count", count);
+		mv.addObject("pageNum", pageNum);
+
+		mv.addObject("boardlist", boardlist);
+
+		mv.addObject("number", number);
+		mv.addObject("startPage", startPage);
+		mv.addObject("bottomLine", bottomLine);
+		mv.addObject("endPage", endPage);
+
+		mv.setViewName("admin/board.admin");
+
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "boardContent/{boardnum}")
+	public ModelAndView moveBoardContent(BoardModel boardModel, @PathVariable("boardnum") int boardnum)
+			throws Exception {
+
+		mv.clear();
+
+		boardModel.setBoardNum(boardnum);
+		boardModel = boardService.selectBoard(boardnum);
+
+		mv.addObject("boardModel", boardModel);
+		mv.setViewName("admin/boardContent.admin");
+
+		return mv;
 	}
 
 	@RequestMapping(value = "memberList")
@@ -56,7 +129,7 @@ public class AdminController {
 
 		mv.clear();
 
-		int pageSize = 6;
+		int pageSize = 11;
 		int currentPage = pageNum;
 		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = (currentPage - 1) * pageSize;
