@@ -85,6 +85,11 @@
 
 <form method="post" name="mapSearch"
 				action="/map/test2">
+				
+				<input type="hidden" id="startX" name="startX" value=""/>
+				<input type="hidden" id="startY" name="startY" value=""/>
+				<input type="hidden" id="endX" name="endX" value=""/>
+				<input type="hidden" id="endY" name="endY" value=""/>
 <p>출발지 <input id ="startPoint" name="startPoint" type="text" value="마커를 클릭해 설정하세요"> 도착지 <input id ="endPoint" name="endPoint" type="text" value="마커를 클릭해 설정하세요"></p>
 <button type ="submit">검색하기</button>
 </form>
@@ -412,9 +417,10 @@ geocoder.addressSearch(addrX, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
-    	 document.getElementById("startPoint").value = addrX;
-
     	 
+    	 document.getElementById("startPoint").value = addrX;
+    	 document.getElementById("startX").value = result[0].x;
+    	 document.getElementById("startY").value = result[0].y;
     	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
     	 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
@@ -444,6 +450,10 @@ function markerImg2(addrX){
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
 	    	 document.getElementById("endPoint").value = addrX;
+	    	 document.getElementById("endX").value = result[0].x;
+	    	 document.getElementById("endY").value = result[0].y;
+	        
+	    		 
 	    	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	    	 var markerImage = new kakao.maps.MarkerImage(imageSrc2, imageSize, imageOption),
 	    	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다

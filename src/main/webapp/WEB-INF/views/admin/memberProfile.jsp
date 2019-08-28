@@ -131,6 +131,7 @@
 	
 						<button class="button margin-top-15" type="submit">Save</button>
 					</form>
+					<input type="button" class="button margin-top-15" onclick="location.href='/admin/deleteMember/${memberInfo.memnum}'" value="Delete" style="width: 90px; height: 42px;" />
 					</div>
 				</div>
 			</div>

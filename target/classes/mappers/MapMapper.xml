@@ -6,12 +6,12 @@
 <mapper namespace="MapMapperNS">
 
   <select id="getFoodList"  resultType="mapModel">
-    	select * from foodtest3 where rownum between 1 and 5
+    	select * from foodtest3
    </select>
      
-   <select id="getFoodList2"  resultType="mapModel" >
+   <select id="getFoodList2"  parameterType="mapModel"  resultType="mapModel" >
    	 <![CDATA[
-    select * from foodtest3 where x>37.50219 and x<37.525517 and y>127.05289 and y<127.05642
+    select * from foodtest3 where x>#{x} and x<#{x} and y>#{y} and y<#{y}
     ]]>	
    </select>
    
