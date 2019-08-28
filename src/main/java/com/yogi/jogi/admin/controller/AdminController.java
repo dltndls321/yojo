@@ -162,6 +162,22 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "deleteMember/{memnum}")
+	public ModelAndView moveDeleteMember(MemberModel memberModel, @PathVariable("memnum") int memnum)
+			throws Exception {
+
+		mv.clear();
+
+		memberModel.setMemnum(memnum);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		
+		mv.addObject("memberInfo", memberModel);
+		
+		mv.setViewName("admin/memberList.admin");
+
+		return mv;
+	}
 
 	@RequestMapping(value = "customerCenter")
 	public String moveCustomerCenter() {
