@@ -31,6 +31,6 @@ public class FestReviewDao {
 		return sqlSession.selectList(Namespace + ".selectFestReviewWithMemNum", festReviewModel);
 	}
 	public FestReviewModel selectFestReviewOne(FestReviewModel festReviewModel) {
-		return sqlSession.selectOne(Namespace + ".selectFestReviewWithMemNum",festReviewModel);
+		return sqlSession.selectOne(Namespace + ".selectFestReviewOne",festReviewModel);
 	}
 }
