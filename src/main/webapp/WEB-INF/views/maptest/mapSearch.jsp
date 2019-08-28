@@ -47,6 +47,20 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
 </style>
 </head>
 <body>
@@ -57,8 +71,8 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"/> 
-                    <button type="submit">검색하기</button> 
+                    키워드 : <input type="text" value="쌍용교육센터" id="keyword" size="15"/> 
+                    <button type="submit">검색하기</button>
                 </form>
             </div>
         </div>
@@ -344,11 +358,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     });
 });
 
-// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-/* kakao.maps.event.addListener(map, 'idle', function() {
-    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
- */
+
 function searchAddrFromCoords(coords, callback) {
     // 좌표로 행정동 주소 정보를 요청합니다
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
@@ -385,7 +395,11 @@ imageOption = {offset: new kakao.maps.Point(15, 43)}; // 마커이미지의 옵�
 var InfoPos = infowindow.getPosition();
 
 
+var marker1 = new kakao.maps.Marker({
 
+});
+var marker2 = new kakao.maps.Marker({
+});
 
 
 //출발
@@ -397,7 +411,7 @@ geocoder.addressSearch(addrX, function(result, status) {
      if (status === kakao.maps.services.Status.OK) {
     	 document.getElementById("startPoint").value = addrX;
 
-    	 출처: https://jdkblog.tistory.com/39 [JDK's blog]
+    	 
     	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
     	 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
@@ -411,12 +425,8 @@ geocoder.addressSearch(addrX, function(result, status) {
         
 
 
-/* var markerImg = new kakao.maps.Marker({
-    position: markerPosition, 
-    image: markerImage // 마커이미지 설정 
-}); */
 
-markerImg.setMap(map); 
+marker.setMap(map); 
 
 }
 });
@@ -435,28 +445,40 @@ function markerImg2(addrX){
 	    	 var markerImage = new kakao.maps.MarkerImage(imageSrc2, imageSize, imageOption),
 	    	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다
 	    	 // 결과값으로 받은 위치를 마커로 표시합니다
-	         var marker = new kakao.maps.Marker({
+	       var marker = new kakao.maps.Marker({
 	             map: map,
 	             position: coords,
 	             image: markerImage// 마커이미지 설정 
 	         });
 	    	 
 	        
-
-
-	/* var markerImg = new kakao.maps.Marker({
-	    position: markerPosition, 
-	    image: markerImage // 마커이미지 설정 
-	}); */
 	
-	markerImg.setMap(map); 
+	marker.setMap(map); 
 
 	}
 	});
-	}
-	
-	
+}
 
+//마커 rightclick 이벤트
+kakao.maps.event.addListener(marker, 'rightclick', function() {
+marker.setMap(null);
+});
+
+//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }            
+}
+//커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+function closeOverlay() {
+	customOverlay.setMap(null);     
+}
+
+//"마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);    
+}
 </script>
 </body>
 </html>

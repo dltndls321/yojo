@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
-import com.yogi.jogi.board.model.NoticeModel;
+
 import com.yogi.jogi.board.service.BoardService;
 
 
