@@ -1,7 +1,6 @@
 package com.yogi.jogi.member.controller;
 
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -157,6 +155,29 @@ public class MemberController {
 		model.addObject("memberDetailInfo", memberDetailModel);
 		return model;
 	}
+	@RequestMapping(value = "changePasswdDone")
+	public ModelAndView changePasswdDone(@RequestParam String passwd, HttpSession session) throws Exception {
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		memberModel.setPasswd(passwd);
+		System.out.println(memberModel);
+		memberService.updateMember(memberModel);
+		model.setViewName("redirect:/member/updateMember.do");
+		return model;
+	}
+	@RequestMapping(value = "deleteMember")
+	public ModelAndView deleteMember(HttpSession session)throws Exception{
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
+		memberService.deleteMember(memberModel);
+		session.invalidate();
+		model.setViewName("redirect:/main/main");
+		return model;
+	}
+	
 
 	// ajax 컨트롤러들
 	@RequestMapping(value = "IDOverlapCheck", method = RequestMethod.POST)
@@ -226,5 +247,29 @@ public class MemberController {
 		}
 		out.close();
 	}
+	@RequestMapping(value = "deleteCheck", method = RequestMethod.POST)
+	public void deleteCheck(@RequestParam String passwd, HttpServletResponse response, HttpSession session)
+			throws Exception {
+		System.out.println("deleteCheck : 시작");
+		PrintWriter out = response.getWriter();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
+		MemberModel dataModel = memberService.selectMemberWithMemNum(memberModel);
+		System.out.println("deleteCheck  : " + dataModel);
+		if (!dataModel.getPasswd().equals(passwd)) {
+			System.out.println("deleteCheck :passwdWrong");
+			out.append("1");
+			System.out.println(1);
+			out.flush();
+		} else {
+			System.out.println("deleteCheck :success");
+			out.append("2");
+			System.out.println(2);
+			out.flush();
+		}
+		out.close();
+	}
+	
+	
 
 }
