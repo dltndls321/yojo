@@ -97,6 +97,7 @@ public class AdminController {
 
 		String[] splitAddress = memberModel.getAddress().split("/");
 		String[] splitPhone = memberModel.getPhone().split("-");
+		String[] splitJumin = memberModel.getJumin().split("-");
 
 		for (int i = 0; i < 3; i++) {
 			if (i == 0) {
@@ -118,10 +119,47 @@ public class AdminController {
 			}
 		}
 
+		for (int i = 0; i < 2; i++) {
+			if (i == 0) {
+				memberDetailModel.setJumin1(splitJumin[i]);
+			} else if (i == 1) {
+				memberDetailModel.setJumin2(splitJumin[i]);
+			}
+		}
+
 		mv.addObject("memberInfo", memberModel);
 		mv.addObject("memberDetailInfo", memberDetailModel);
 		mv.setViewName("admin/memberProfile.admin");
 
+		return mv;
+	}
+
+	@RequestMapping(value = "updateMember/{memnum}")
+	public ModelAndView moveUpdateMember(MemberDetailModel memberDetailModel, @PathVariable("memnum") int memnum) throws Exception {
+
+		mv.clear();
+		
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum(memnum);
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		
+		memberModel.setId(memberDetailModel.getId());
+		memberModel.setPasswd(memberDetailModel.getPasswd());
+		
+		memberModel.setName(memberDetailModel.getName());
+		memberModel.setEmail(memberDetailModel.getEmail());
+		memberModel.setPhone(memberDetailModel.getPhone1() + "-" + memberDetailModel.getPhone2() + "-"
+				+ memberDetailModel.getPhone3());
+		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
+				+ memberDetailModel.getDetailAddress());
+		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
+		
+		memberService.updateMember(memberModel);
+		
+		mv.addObject("memberInfo", memberModel);
+		mv.addObject("memberDetailInfo", memberDetailModel);
+		mv.setViewName("admin/memberProfile.admin");
+		
 		return mv;
 	}
 
