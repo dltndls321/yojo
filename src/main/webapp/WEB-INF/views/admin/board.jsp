@@ -28,12 +28,12 @@
 					<h4>게시판 이름</h4>
 					<ul>
 						<c:forEach items="${boardlist}" var="boardlist">
-						<li><a href="/admin/boardContent/${boardlist.boardnum }">
+						<li>
 							<div class="list-box-listing">
 								<div class="list-box-listing-img"><img src="images/listing-item-01.jpg" alt=""></div>
 								<div class="list-box-listing-content">
 									<div class="inner">
-										<h3><a href="#">${boardlist.subject }</a></h3>
+										<h3><a href="/admin/boardContent/${boardlist.boardNum }">${boardlist.subject }</a></h3>
 										<span>${boardlist.writer }</span>
 										<span>${boardlist.regdate }</span>
 										<div class="star-rating" data-rating="3.5">
@@ -43,10 +43,8 @@
 								</div>
 							</div>
 							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
+								<a href="/admin/boardDelete/${boardlist.boardNum }" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
 							</div>
-							</a>
 						</li>
 						</c:forEach>
 
