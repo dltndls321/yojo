@@ -1,60 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<!DOCTYPE html>
 <html>
 <head>
-<title>°Ô½ÃÆÇ</title>
+<script>
+
+	
+</script>
 </head>
-
 <body>
-	<br>
-	<br>
-	<b>±Û³»¿ë º¸±â</b>
-	<div class="w3-container w3-display-middle">
-		<table class="w3-table-all">
+	
+		<table class="content">
+			<colgroup>
+				<col width="15%" />
+				<col width="35%" />
+				<col width="25%" />
+				<col width="55%" />
+			</colgroup>
+			<caption>ê²Œì‹œê¸€ ìƒì„¸</caption>
+			<form name="form1" method="post" action="/board/update/${list.boardNum}">
+			
+			<tbody>
+				<tr>
+					<th scope="row">ê¸€ ë²ˆí˜¸</th>
+					<td>${list.boardNum }
+					<input type="hidden" id="boardNum" name="boardNum" value="${list.boardNum }">
+					</td>
+					<th scope="row">ì¡°íšŒìˆ˜</th>
+					<td>${list.readcount }
+					<input type="hidden" id="readcount" name="readcount" value="${list.readcount }">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">ì‘ì„±ì</th>
+					<td>${list.writer }
+					<input type="hidden" id="writer" name="writer" value="${list.writer }">
+					
+					</td>
+					<th scope="row">ì‘ì„±ì‹œê°„</th>
+					<td>${list.regdate }
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">ì œëª©</th>
+					<td colspan="3">${list.subject }
+				<input type="hidden" id="subject" name="subject" value="${list.subject }">	
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+					<div style="height: 300px; margin: 10px; display: inline-block">${list.content }
+					<input type="hidden" id="content" name="content" value="${list.content }">	
+					
+					</div>
+					</td>
+				</tr>
+					<tr>	
+					<td>		
+					<input type="hidden" id="passwd" name="passwd" value="${list.passwd }">	
+					</td>
+					</tr>
+			</tbody>
+			
 			<tr height="30">
-				<td align="center">±Û¹øÈ£</td>
-				<td align="center">${article.num}</td>
-				<td>Á¶È¸¼ö</td>
-				<td align="center">${article.readcount}</td>
+				<td colspan="4" class="w3-center">
+			 <div class="form-group">
+			 
+          <input type="submit" value="ìˆ˜ì •" >
+			</form>
+			
+			
+			<form action="/board/delete/${list.boardNum}"><input type="submit" value="ì‚­ì œ" ></form> 
+              <input type="button" value="ê¸€ëª©ë¡" onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"> 
+      </div>
+<%-- 		<input type="button" value="ê¸€ìˆ˜ì •" onclick="document.location.href='/board/update?boardNum=${list.boardNum}'">
+		<input type="button" value="ê¸€ì‚­ì œ" onclick="document.location.href='/board/delete?boardNum=${list.boardNum}'">
+		<input type="button" value="ë‹µê¸€ì“°ê¸°" onclick="document.location.href='${pageContext.request.contextPath}/board/writeUploadForm?boardNum=${list.boardNum}&pageNum=${pageNum}&ref=${list.ref}&reStep=${list.reStep}&reLevel=${list.reLevel}'">
+		<input type="button" value="ê¸€ëª©ë¡" onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"></td> --%>
 			</tr>
-			<tr height="30">
-				<td>ÀÛ¼ºÀÚ</td>
-				<td align="center">${article.writer}</td>
-				<td align="center">ÀÛ¼ºÀÏ</td>
-				<td align="center" align="center">${article.reg_date}</td>
-			</tr>
-			<tr height="30">
-				<td align="center">±ÛÁ¦¸ñ</td>
-				<td align="center" colspan="3">${article.subject}</td>
-			</tr>
-			<tr height="30">
-				<td align="center">±Û³»¿ë</td>
-				<td align="left" colspan="3"><pre>${article.content}</pre></td>
-			</tr>
-			<tr height="30">
-				<td align="center">ÀÌ¹ÌÁö</td>
-				<td align="left" colspan="3">
-				<img src="<%=request.getContextPath() %>/images/${article.filename}"></td>
-			</tr>
-			<tr height="30">
-				<td colspan="4" class="w3-center"><input type="button"
-					value="±Û¼öÁ¤"
-					onclick="document.location.href='<%=request.getContextPath()%>/board/update?num=${article.num}&pageNum=${pageNum}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="±Û»èÁ¦"
-					onclick="document.location.href='<%=request.getContextPath()%>/board/delete?num=${article.num}&pageNum=${pageNum}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="´ä±Û¾²±â"
-					onclick="document.location.href
-					='${pageContext.request.contextPath}/board/writeForm?num=${article.num}&pageNum=${pageNum}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}'">
-					&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" value="±Û¸ñ·Ï"
-					onclick="document.location.href='<%=request.getContextPath()%>/board/list?pageNum=${pageNum}'"></td>
-			</tr>
+	
 		</table>
-
-
-
-	</div>
+	
 </body>
 </html>
+
+
 

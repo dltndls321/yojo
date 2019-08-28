@@ -40,6 +40,19 @@
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
+								
+								</tr>
+							</thead>
+									
+								<c:forEach items="${AllList}" var="list">
+									<tr>
+									
+										<td align="center" width="100">${list.boardNum}</td>
+										<td align="center" width="150"><a href="<%=request.getContextPath() %>/board/content?boardNum=${list.boardNum}"> ${list.subject}</a></td>
+										<td align="center" width="100">${list.writer}</td>
+										<td align="center" width="100">
+										<fmt:formatDate type="date" value="${list.regdate}" /></td>
+										<td align="center" width="50">${list.readcount}</td>
 									</tr>
 							</thead>
 

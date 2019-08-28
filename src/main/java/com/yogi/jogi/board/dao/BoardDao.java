@@ -26,19 +26,20 @@ public class BoardDao {
 
 	}
 
-	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectBoard", boardModel);
+	public BoardModel selectBoard(int boardNum) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectBoard", boardNum);
 	}
 
-	public void insertBoard(BoardModel boardModel) throws Exception {
-		
+	public int insertBoard(BoardModel boardModel) throws Exception {
+		return sqlSession.insert(Namespace + ".insertBoard", boardModel);
+
 	}
-	public BoardModel updateBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
+	public int updateBoard(BoardModel boardModel) throws Exception {
+		return sqlSession.update(Namespace + ".updateBoard", boardModel);
 
 	}
 	public int deleteBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".deleteBoard", boardModel);
+		return sqlSession.delete(Namespace + ".deleteBoard", boardModel);
 
 	}
 	public int selectPasswdOneNum(BoardModel boardModel) throws Exception {
