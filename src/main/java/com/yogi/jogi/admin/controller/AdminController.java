@@ -203,5 +203,16 @@ public class AdminController {
 	public String moveReviews() {
 		return "admin/reviews.admin";
 	}
+	
+	@RequestMapping(value = "updateBoard")
+	public ModelAndView moveUpdateBoard() throws Exception {
+
+		mv.clear();
+
+		
+		mv.setViewName("admin/updateBoard");
+
+		return mv;
+	}
 
 }
