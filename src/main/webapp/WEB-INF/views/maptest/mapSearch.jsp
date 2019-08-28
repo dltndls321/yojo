@@ -72,7 +72,7 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="쌍용교육센터" id="keyword" size="15"/> 
-                    <button type="submit">검색하기</button> <button onclick="hideMarkers()" >마커지우기</button>
+                    <button type="submit">검색하기</button>
                 </form>
             </div>
         </div>
