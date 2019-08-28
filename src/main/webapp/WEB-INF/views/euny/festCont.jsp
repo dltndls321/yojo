@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -244,7 +245,8 @@ $(document).ready(function () {
 						<input type="hidden" name="link" value='${link}'>
 						<input type="hidden" name="fmapx" value="${mapx}">
 						<input type="hidden" name="fmapy" value="${mapy}">
-						
+						<input type="hidden" name="typeid" value="${typeid}">
+						<input type="hidden" name="contid" value="${contid}">
 						<div>
 							<label>Review:</label>
 							<textarea cols="40" rows="3" id ="review" name = "fReview"></textarea>

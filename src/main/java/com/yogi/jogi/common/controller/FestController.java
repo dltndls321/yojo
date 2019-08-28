@@ -73,7 +73,7 @@ public class FestController {
         parameter = parameter + "&" + "listYN=Y" ;
         parameter = parameter + "&" + "eventStartDate=" + eventStartDate ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
-        //parameter = parameter + "&" + "numOfRows=9999999";
+        parameter = parameter + "&" + "numOfRows=9";
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -210,7 +210,9 @@ public class FestController {
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("tel",tel);
-	    	        model.addObject("telname",telname);
+	    	        model.addObject(""
+	    	        		+ ""
+	    	        		+ "telname",telname);
 	    	        model.addObject("mapx",mapx);
 	    	        model.addObject("mapy",mapy);
 	    	        model.addObject("link",link);
@@ -315,6 +317,8 @@ public class FestController {
     		        model.addObject("fee",fee);
     		        model.addObject("agelimit",agelimit);
     		        model.addObject("playtime",playtime);
+    		        model.addObject("typeid", typeid);
+    		        model.addObject("contid", contid);
 	        	}
 	        }
 	        if(festService.selectFestWithsubject(festivalModel) != null) {
@@ -364,7 +368,7 @@ public class FestController {
 	        return model;
     }
 	@RequestMapping(value = "/review")
-	public void setFestival(FestivalModel festmodel,FestReviewModel festReviewModel, HttpSession session)throws Exception {
+	public String setFestival(FestivalModel festmodel,FestReviewModel festReviewModel, HttpSession session,@RequestParam int typeid,@RequestParam int contid)throws Exception {
 		
 		//먼저 축제정보 insert
 		if(festService.selectFestWithsubject(festmodel)==null) {
@@ -372,19 +376,21 @@ public class FestController {
 		}
 		
 		festmodel = festService.selectFestWithsubject(festmodel);
-		System.out.println(festmodel);
+		System.out.println("모야"+festmodel);
 		int festNum = festmodel.getFestNum();
 		// 축제 고유번호 select
-		festReviewModel.setFestNum(festNum);
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		festReviewModel.setFestNum(festNum);
 		festReviewModel.setMemNum(memNum);
 		
 		if(festReviewService.selectFestReviewOne(festReviewModel) == null) {
 			festReviewService.insertFestReview(festReviewModel);
+			System.out.println("됐을거아니야");
 		} else {
 			festReviewService.updateFestReview(festReviewModel);
 		}
 		
+		return "redirect:/festival/content/" + typeid +"/"+ contid;
 
 	}
 	
