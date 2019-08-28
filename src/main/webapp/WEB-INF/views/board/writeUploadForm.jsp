@@ -6,7 +6,7 @@
 <html>
 <head>
 <script>
-${"#btnInsert"}.click(function () {
+${"#btnInsert"}click(function () {
 	var subject = $("#subject").val();
 	var content = $("#content").val();
 	var writer = $("#writer").val();
@@ -49,15 +49,15 @@ ${"#btnInsert"}.click(function () {
 	<div class="page-wrapper">
 		<div class="container-fluid">
 			<div class="col-lg-8">
-			
+				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">수정</h1>
+					<h1 class="page-header">게시판 관리</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12"></div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-heading">게시판 수정</div>
+					<div class="panel-heading">게시판</div>
 					<div class="panel-body">
 						<form method="post" name="writeUploadForm" enctype="multipart/form-data"
 							action="writeUploadPro">
@@ -68,9 +68,8 @@ ${"#btnInsert"}.click(function () {
 
 								<label class="col-lg-2">제목</label>
 								<div class="col-lg-8">
-										
 									<input type="text" class="form-control" id="subject"
-										name="subject" min="1" max="3" value="${list.subject }">
+										name="subject" min="1" max="3">
 								</div>
 							</div>
 							<div class="row form-group">
@@ -78,15 +77,14 @@ ${"#btnInsert"}.click(function () {
 								<label class="col-lg-2">이름</label>
 								<div class="col-lg-8">
 									<input type="text" class="form-control" id="writer"
-										name="writer" min="1" max="3" value="${list.writer }">
+										name="writer" min="1" max="3">
 								</div>
 							</div>
 
 							<div class="row form-group">
 								<label class="col-lg-2">내용</label>
 								<div class="col-lg-8">
-									<textarea class="form-control" id="content" name="content" 
-									>${list.content }</textarea>
+									<textarea class="form-control" id="content" name="content"></textarea>
 								</div>
 							</div>
 							<div class="row form-group">

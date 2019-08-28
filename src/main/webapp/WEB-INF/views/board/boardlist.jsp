@@ -44,11 +44,11 @@
 								</tr>
 							</thead>
 									
-								<c:forEach items="${list}" var="AllList">
+								<c:forEach items="${AllList}" var="list">
 									<tr>
 									
 										<td align="center" width="100">${list.boardNum}</td>
-										<td align="center" width="150">${list.subject}</td>
+										<td align="center" width="150"><a href="<%=request.getContextPath() %>/board/content?boardNum=${list.boardNum}"> ${list.subject}</a></td>
 										<td align="center" width="100">${list.writer}</td>
 										<td align="center" width="100">
 										<fmt:formatDate type="date" value="${list.regdate}" /></td>

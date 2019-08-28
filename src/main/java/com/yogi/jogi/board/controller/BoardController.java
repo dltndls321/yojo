@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -68,17 +70,16 @@ public class BoardController {
 		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
 		mv.setViewName("board/boardlist");
 		mv.addObject("AllList", AllList);
-		System.out.println(AllList);
+		
 
 		return mv;
 	}
 
 	@RequestMapping("writeUploadForm")
 
-	public ModelAndView writeForm(BoardModel boardModel,@RequestParam String boardid) throws Exception {
-		System.out.println("1" + boardModel);
+	public ModelAndView writeForm(BoardModel boardModel,@RequestParam(value="boardid", required=false) String boardid) throws Exception {
 		mv.clear(); 
-		System.out.println(boardid);
+		
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
 
@@ -88,7 +89,7 @@ public class BoardController {
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel) throws Exception {
 
-		System.out.println("2" + boardModel);
+		
 		boardService.insertBoard(boardModel);
 		return "redirect:/board/list";
 
@@ -97,71 +98,80 @@ public class BoardController {
 	}
 
 	@RequestMapping("writeUploadPro")
-	public String writeUploadPro(MultipartHttpServletRequest multipart, BoardModel boardModel) throws Exception {
+	public String writeUploadPro(MultipartHttpServletRequest multipart,	BoardModel boardModel) throws Exception {
 		
 		MultipartFile multi = multipart.getFile("uploadfile");
 		String fname = multi.getOriginalFilename();
-		System.out.println(fname);
+		
 		if (fname != null && !fname.equals("")) {
 
 			String uploadPath = multipart.getRealPath("/") + "WEB-INF/views/board/fileSave";
-			System.out.println(uploadPath);
+			
 
 			FileCopyUtils.copy(multi.getInputStream(),
 					new FileOutputStream(uploadPath + "/" + multi.getOriginalFilename()));
-			System.out.println("in : "+fname);
+			
 			boardModel.setFname(fname);
 			boardModel.setFsize((int) multi.getSize());
 		} else {
 			boardModel.setFname("");
 			boardModel.setFsize(0);
 		}
-		System.out.println("3" + boardModel);
+		
 		boardService.insertBoard(boardModel);
 		return "redirect:/board/boardlist";
 		// return "redirect:list?pageNum=" + pageNum;
 	}
 
 	@RequestMapping("content")
-	public ModelAndView content(BoardModel boardModel, HttpServletRequest request) throws Exception {
-		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+	public ModelAndView content(int boardNum) throws Exception {
+		
 		mv.clear();
-		boardModel.setBoardNum(boardNum);
-		BoardModel list = boardService.selectBoard(boardModel);
-		mv.addObject("list", list);
-		mv.addObject("pageNum", pageNum);
 		mv.setViewName("board/content"); // 가야할 페이지
+		mv.addObject("list", boardService.selectBoard(boardNum));
 		return mv;
 
 	}
 
-	@RequestMapping("update")
-	public ModelAndView update(BoardModel boardModel) throws Exception {
-		mv.clear();
-		BoardModel list = boardService.updateBoard(boardModel);
-		mv.addObject("list", list);
-		mv.addObject("pageNum", pageNum);
-		mv.setViewName("board/updateForm");
-		return mv;
-	}
-
+	
+	/*
+	 * @RequestMapping("content") public ModelAndView content(BoardModel
+	 * boardModel, @RequestParam(value="boardNum", required=false) int boardNum)
+	 * throws Exception { System.out.println(boardNum); mv.clear();
+	 * mv.setViewName("board/content"); // 가야할 페이지 mv.addObject("list",
+	 * boardService.selectBoard(boardNum)); return mv;
+	 * 
+	 * }
+	 */
+	
+	
+		@RequestMapping("update/{boardNum}") 
+	  public ModelAndView update(BoardModel boardModel,@PathVariable("boardNum") int boardNum) throws Exception {
+		System.out.println(boardModel);
+	  boardService.updateBoard(boardModel);
+	  mv.setViewName("board/updateForm"); 
+	  return mv; 
+	  }
+	 
+	 
 	@RequestMapping("updatePro")
 	public ModelAndView updatePro(BoardModel boardModel) throws Exception {
 		mv.clear();
 
 		int check = boardService.selectPasswdOneNum(boardModel);
 		mv.addObject("check", check);
+		mv.addObject(boardModel.getBoardNum());
 		mv.addObject("pageNum", pageNum);
 
 		mv.setViewName("board/updatePro");
 		return mv;
 	}
 
-	@RequestMapping("delete")
-	public ModelAndView delete(int boarNum) throws Exception {
+	@RequestMapping("delete/{boardNum}")
+	public ModelAndView delete(@PathVariable("boardNum") int boardNum) throws Exception {
 		mv.clear();
 
-		mv.addObject("boarNum", boarNum);
+		mv.addObject("boarNum", boardNum);
 		mv.addObject("pageNum", pageNum);
 
 		mv.setViewName("board/deleteForm");
