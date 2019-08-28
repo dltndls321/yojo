@@ -82,7 +82,8 @@ public class BoardController {
 		
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
-
+		return mv;
+	}
 	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
 		mv.clear();
 		BoardModel a = new BoardModel();
