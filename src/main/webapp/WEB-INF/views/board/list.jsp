@@ -5,17 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
 
 <div id="wrapper">
-
 
 <div class="clearfix"></div>
 
 <div id="dashboard">
-
-	<!-- Navigation
-	================================================== -->
 
 	<!-- Responsive Navigation Trigger -->
 	<a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> Dashboard Navigation</a>
@@ -50,11 +45,7 @@
 
 		</div>
 	</div>
-	<!-- Navigation / End -->
 
-
-	<!-- Content
-	================================================== -->
 	<div class="dashboard-content">
 
 		<!-- Titlebar -->

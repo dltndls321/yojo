@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.member.model.MemberModel;
+import com.yogi.jogi.member.service.MemberService;
 
 @Controller
 @RequestMapping("board")
@@ -36,7 +38,8 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
+	@Autowired
+	private MemberService memberService;
 
 	@ModelAttribute // 이 어노테이션을 사용하면 메소드에서 선언한 객체가 뷰로 넘어감 글구 가장먼저 실행됨
 	public void setAttr(HttpServletRequest request) {
@@ -98,9 +101,10 @@ public class BoardController {
 
 
 	@RequestMapping("writePro")
-	public String writePro(BoardModel boardModel) throws Exception {
-		
-		
+	public String writePro(BoardModel boardModel,HttpSession session) throws Exception {
+
+		boardModel.setMemNum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println(boardModel);
 		System.out.println("2" + boardModel);
 		boardService.insertBoard(boardModel);
 		return "redirect:/board/list";
@@ -110,11 +114,12 @@ public class BoardController {
 	}
 
 	@RequestMapping("writeUploadPro")
-	public String writeUploadPro(MultipartHttpServletRequest multipart,	BoardModel boardModel) throws Exception {
+	public String writeUploadPro(MultipartHttpServletRequest multipart,	BoardModel boardModel,HttpSession session) throws Exception {
 		
 		MultipartFile multi = multipart.getFile("uploadfile");
 		String fname = multi.getOriginalFilename();
-		
+		boardModel.setMemNum((Integer)session.getAttribute("SessionMemberMemnum"));
+		System.out.println(boardModel);
 		if (fname != null && !fname.equals("")) {
 
 			String uploadPath = multipart.getRealPath("/") + "WEB-INF/views/board/fileSave";
