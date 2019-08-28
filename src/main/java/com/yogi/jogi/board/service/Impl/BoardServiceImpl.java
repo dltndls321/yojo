@@ -22,17 +22,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
+	public BoardModel selectBoard(int boardNum) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectBoard(boardModel);
+		return dao.selectBoard(boardNum);
 	}
+	
 	@Override
-	public void insertBoard(BoardModel boardModel) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public BoardModel updateBoard(BoardModel boardModel) throws Exception {
+	public int updateBoard(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.updateBoard(boardModel);
 	}
@@ -49,6 +45,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectPasswdOneNum(boardModel);
 	}
 
-	
+	@Override
+	public int insertBoard(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.insertBoard(boardModel);
+	}
 
 }

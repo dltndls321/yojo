@@ -19,7 +19,7 @@ public class MapDao {
 		return sqlSession.selectList(Namespace+".getFoodList");
 	}
 	
-	public List<MapModel> getFoodList2() throws Exception {
+	public List<MapModel> getFoodList2(float startX, float startY, float endX, float endY) throws Exception {
 		return sqlSession.selectList(Namespace+".getFoodList2");
 	}
 }

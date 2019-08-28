@@ -10,7 +10,7 @@
 		,regdate,ref,reStep,reLevel from board
 	</select>
 	
-	<insert id="insertBoard"  parameterType="boardModel">
+	<insert id="insertBoard"  parameterType="boardModel" >
 		insert
 		into board values
 		(boardSeq.NEXTVAL,#{memNum},'1'
@@ -45,8 +45,7 @@
 
 	</select>
 
-<select id="selectPasswdOneNum" parameterType="boardModel"
-		resultType="int">
+<select id="selectPasswdOneNum" parameterType="boardModel">
 		select 
 			passwd 
 		from 

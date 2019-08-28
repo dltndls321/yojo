@@ -91,16 +91,16 @@
 							<input name="name" value="${memberInfo.name }" type="text"id="nameUpdate"  onblur="emptyCheck('nameUpdate','nameUpdate','이름을 입력하세요.')" onfocus="resetSelect('nameUpdate','nameUpdate','이름을 입력하세요.')" onkeypress="hangul2();">
 
 							<label>번호</label>
-							<input maxlength="3" type="text" class="input-text" name="phone1" id="phoneRegister1" value="${memberDetailInfo.phone1 }" onblur="" onfocus="" style="width: 130px;display: inline;"/> -
+							<input maxlength="3" type="text" class="input-text" name="phone1" id="phoneRegister1" value="${memberDetailInfo.phone1 }" onblur="" onfocus="resetSelectPhone('phoneRegister1','phoneRegisterWarn','')" style="width: 130px;display: inline;"/> -
 									
 									
-									<input maxlength="4" type="text" class="input-text" name="phone2" id="phoneRegister2" value="${memberDetailInfo.phone2 }" onblur="" onfocus="" style="width : 130px;display: inline;"/> -
+									<input maxlength="4" type="text" class="input-text" name="phone2" id="phoneRegister2" value="${memberDetailInfo.phone2 }" onblur="" onfocus="resetSelectPhone('phoneRegister1','phoneRegisterWarn','')" style="width : 130px;display: inline;"/> -
 									
 									
-									<input maxlength="4" type="text" class="input-text" name="phone3" id="phoneRegister3" value="${memberDetailInfo.phone3 }" onblur="" onfocus="" style="width: 130px;display: inline;"/>
+									<input maxlength="4" type="text" class="input-text" name="phone3" id="phoneRegister3" value="${memberDetailInfo.phone3 }" onblur="" onfocus="resetSelectPhone('phoneRegister1','phoneRegisterWarn','')" style="width: 130px;display: inline;"/>
 
 							<label>이메일</label>
-							<input name="email" value="${memberInfo.email }" type="text">
+							<input name="email" id='emailUpdate' value="${memberInfo.email }" type="text" onkeydown="donotkeydown(event);" style="ime-mode:disabled;">
 							
 							<label>주소</label>
 							<input type="text" class="input-text" name="postcode" id="postcode" value="${memberDetailInfo.postcode }" onblur="" onfocus="" placeholder="우편번호" onkeypress="donotkeyin();"/>									
@@ -113,7 +113,7 @@
 							<br/>
 							<br/>
 							<br/>
-						<button id="updateSubmit" class="button border fw margin-top-10" onclick="">회원정보 수정</button>
+						<input type="button" id="updateSubmit" class="button border fw margin-top-10" onclick="onclickUpdate('nameUpdate','phoneRegister1','phoneRegister2','phoneRegister3','emailUpdate','detailAddress','updateMember')" value="회원정보수정">
 
 					</div>
 				</div>
@@ -121,28 +121,51 @@
 			</form>
 
 			<!-- Change Password -->
-			<div class="col-lg-6 col-md-12">
-				<div class="dashboard-list-box margin-top-0">
-					<h4 class="gray">비밀번호 변경</h4>
-					<div class="dashboard-list-box-static">
-
-						<!-- Change Password -->
-						<div class="my-profile">
-							<label class="margin-top-0">현재 비밀번호</label>
-							<input type="password" value="${memberInfo.passwd }">
-
-							<label>새 비밀번호</label>
-							<input type="password">
-
-							<label>비밀번호 확인</label>
-							<input type="password">
-
-							<button class="button margin-top-15">비밀번호 변경</button>
+			<form action="/member/changePasswdDone" id="passwdChangeForm">
+				<div class="col-lg-6 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<h4 class="gray">비밀번호 변경</h4>
+						<div class="dashboard-list-box-static">
+	
+							<!-- Change Password -->
+							<div class="my-profile">
+								<label class="margin-top-0">현재 비밀번호</label>
+								<input type="hidden" name="id" id="passid" value="${ memberInfo.id}">
+								<input type="password" id="nowpasswd" value="${memberInfo.passwd }" disabled="disabled">
+	
+								<label>새 비밀번호</label>
+								<input type="password" name="passwd" id="newpasswd" onblur="passcheckcheck();"onfocus="resetpasswdSelect2()">
+	
+								<label>비밀번호 확인</label>
+								<input type="password" id="newpasswd2" onblur="passcheckcheck2();"onfocus="resetpasswdSelect3()">
+	
+								<input type="button" class="button margin-top-15" id="changepasswdSubmit" onclick="onclickUpdatePasswd();" value="비밀번호 변경">
+							</div>
 						</div>
-
 					</div>
 				</div>
-			</div>
+			</form>
+			<form action="/member/deleteMember" id="deleteMemberForm">
+				<div class="col-lg-6 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<h4 class="gray">회원 탈퇴</h4>
+						<div class="dashboard-list-box-static">
+	
+							<!-- Change Password -->
+							<div class="my-profile">
+	
+								<label>비밀번호</label>
+								<input type="password" name="passwd"  id="deletepasswd" onblur="passcheckcheck3();"onfocus="resetpasswdSelect4()">
+	
+								<label>비밀번호 확인</label>
+								<input type="password" name="passwd2" id="deletepasswd2" onblur="passcheckcheck4();"onfocus="resetpasswdSelect5()">
+	
+								<input type="button" class="button margin-top-15" id="deleteMemberSubmit" onclick="onclickDeleteMember();" value="회원 탈퇴">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 
 	</div>

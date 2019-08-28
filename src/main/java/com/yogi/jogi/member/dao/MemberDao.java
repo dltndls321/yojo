@@ -38,4 +38,8 @@ public class MemberDao {
 	public int updateMember(MemberModel memberModel) throws Exception {
 		return sqlSession.update(Namespace+".updateMember",memberModel);
 	}
+	
+	public int deleteMember(MemberModel memberModel) throws Exception {
+		return sqlSession.delete(Namespace+".deleteMember",memberModel);
+	}
 }
