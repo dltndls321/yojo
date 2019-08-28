@@ -71,6 +71,7 @@
 								<div class="col-lg-8">
 									<input type="text" class="form-control" id="passwd"
 										name="passwd" min="1" max="3">
+						<input type="hidden" id="passwd" name="passwd" value="${list.passwd }">	
 								</div>
 							</div>
 							<table>

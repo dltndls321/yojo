@@ -12,7 +12,7 @@ public interface BoardService {
 	public int insertBoard(BoardModel boardModel) throws Exception;
 	public int updateBoard(BoardModel boardModel)throws Exception;
 	public int deleteBoard(BoardModel boardModel)throws Exception;
-	public int selectPasswdOneNum(BoardModel boardModel)throws Exception;
+	public BoardModel selectPasswdOneNum(BoardModel boardModel)throws Exception;
 
 	
 }
