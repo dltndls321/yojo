@@ -155,12 +155,12 @@
 							<div class="my-profile">
 	
 								<label>비밀번호</label>
-								<input type="password" name="passwd"  id="deletepasswd" onblur="passcheckcheck();"onfocus="resetpasswdSelect2()">
+								<input type="password" name="passwd"  id="deletepasswd" onblur="passcheckcheck3();"onfocus="resetpasswdSelect4()">
 	
 								<label>비밀번호 확인</label>
-								<input type="password" name="passwd2" id="deletepasswd2" onblur="passcheckcheck2();"onfocus="resetpasswdSelect3()">
+								<input type="password" name="passwd2" id="deletepasswd2" onblur="passcheckcheck4();"onfocus="resetpasswdSelect5()">
 	
-								<input type="button" class="button margin-top-15" id="deleteMemberSubmit" onclick="onclickUpdatePasswd();" value="회원 탈퇴">
+								<input type="button" class="button margin-top-15" id="deleteMemberSubmit" onclick="onclickDeleteMember();" value="회원 탈퇴">
 							</div>
 						</div>
 					</div>

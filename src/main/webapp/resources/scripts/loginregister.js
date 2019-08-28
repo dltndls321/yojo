@@ -222,7 +222,7 @@ function passcheckcheck2(){
 }
 function passcheckcheck3(){
 	var1 = document.getElementById("nowpasswd");
-	var2 = document.getElementById("newpasswd");
+	var2 = document.getElementById("deletepasswd");
 	if(var2.value==""){
 		var2.type="text";
 		var2.style.borderColor="red";
@@ -234,6 +234,31 @@ function passcheckcheck3(){
 		var2.style.borderColor="red";
 		var2.style.color="red";
 		var2.value = "6~12자리로 입력해 주세요";
+		return false;
+	}else{
+		var2.style.borderColor="blue";
+	}
+}
+function passcheckcheck4(){
+	var1 = document.getElementById("deletepasswd");
+	var2 = document.getElementById("deletepasswd2");
+	if(var2.value==""){
+		var2.type="text";
+		var2.style.borderColor="red";
+		var2.style.color="red";
+		var2.value = "비밀번호를 입력하세요.";
+		return false;
+	}else if(!passwdRule.test(var2.value)){
+		var2.type="text";
+		var2.style.borderColor="red";
+		var2.style.color="red";
+		var2.value = "6~12자리로 입력해 주세요";
+		return false;
+	}else if(var1.value!=var2.value){
+		var2.type="text";
+		var2.style.borderColor="red";
+		var2.style.color="red";
+		var2.value = "비밀번호가 다릅니다.";
 		return false;
 	}else{
 		var2.style.borderColor="blue";
@@ -256,6 +281,22 @@ function resetpasswdSelect3(){
 		var1.value="";
 	}
 }
+function resetpasswdSelect4(){
+	var1 = document.getElementById("deletepasswd");
+	if(var1.value==""||var1.value=="비밀번호가 다릅니다."||var1.value=="6~12자리로 입력해 주세요"||var1.value=="동일한 비밀번호를 입력해 주세요."||var1.value=="비밀번호를 입력하세요."){
+		var1.type="password";
+		var1.style.color="#808080";
+		var1.value="";
+	}
+}
+function resetpasswdSelect5(){
+	var1 = document.getElementById("deletepasswd2");
+	if(var1.value==""||var1.value=="비밀번호가 다릅니다."||var1.value=="6~12자리로 입력해 주세요"||var1.value=="동일한 비밀번호를 입력해 주세요."||var1.value=="비밀번호를 입력하세요."){
+		var1.type="password";
+		var1.style.color="#808080";
+		var1.value="";
+	}
+}
 function onclickUpdatePasswd(){
 	var1 = document.getElementById("newpasswd");
 	var2 = document.getElementById("newpasswd2");
@@ -267,6 +308,36 @@ function onclickUpdatePasswd(){
 		return false;
 	}else{
 		var3.submit();
+	}
+}
+function onclickDeleteMember(){
+	var1 = document.getElementById("deletepasswd");
+	var2 = document.getElementById("deletepasswd2");
+	var3 = document.getElementById("deleteMemberForm");
+	if(var1.value==""||var1.value=="비밀번호가 다릅니다."||var1.value=="6~12자리로 입력해 주세요"||var1.value=="동일한 비밀번호를 입력해 주세요."||var1.value=="비밀번호를 입력하세요."){
+		return false;
+	}if(var1.value!=var2.value){
+		return false;
+	}else{
+		$.ajax({
+			url : '/member/deleteCheck',
+			type : 'post',
+			data: {'passwd' : var1.value},
+			success:function(data){
+				if(data == '1'){
+					var1.style.color="red";
+					var1.style.borderColor="red";
+					var1.type="text";
+					var1.value = "비밀번호가 다릅니다.";
+				}
+				else if(data == '2'){
+					var3.submit();
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown){
+				alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+			}
+		});
 	}
 }
 
