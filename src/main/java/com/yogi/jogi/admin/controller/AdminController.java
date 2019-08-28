@@ -56,30 +56,34 @@ public class AdminController {
 
 		mv.clear();
 
-		/*
-		 * int pageSize = 6; int currentPage = pageNum; int count =
-		 * memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
-		 * int startRow = (currentPage - 1) * pageSize; int endRow = currentPage *
-		 * pageSize; if (count < endRow) endRow = count;
-		 */
-		List memberList = memberService.selectMemberList();
-		/*
-		 * int number = count - ((currentPage - 1) * pageSize);
-		 * 
-		 * int bottomLine = 3; // 5 page int pageCount = count / pageSize + (count %
-		 * pageSize == 0 ? 0 : 1); int startPage = 1 + (currentPage - 1) / bottomLine *
-		 * bottomLine; int endPage = startPage + bottomLine - 1; if (endPage >
-		 * pageCount) endPage = pageCount;
-		 */
+		int pageSize = 6;
+		int currentPage = pageNum;
+		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int startRow = (currentPage - 1) * pageSize;
+		int endRow = currentPage * pageSize;
+		if (count < endRow)
+			endRow = count;
 
-		/*
-		 * mv.addObject("count", count); mv.addObject("pageNum", pageNum);
-		 */
+		List memberList = memberService.selectMemberList();
+
+		int number = count - ((currentPage - 1) * pageSize);
+
+		int bottomLine = 3; // 5 page
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+		int endPage = startPage + bottomLine - 1;
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		mv.addObject("count", count);
+		mv.addObject("pageNum", pageNum);
+
 		mv.addObject("memberList", memberList);
-		/*
-		 * mv.addObject("number", number); mv.addObject("startPage", startPage);
-		 * mv.addObject("bottomLine", bottomLine); mv.addObject("endPage", endPage);
-		 */
+
+		mv.addObject("number", number);
+		mv.addObject("startPage", startPage);
+		mv.addObject("bottomLine", bottomLine);
+		mv.addObject("endPage", endPage);
 
 		mv.setViewName("admin/memberList.admin");
 
@@ -135,17 +139,18 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "updateMember/{memnum}")
-	public ModelAndView moveUpdateMember(MemberDetailModel memberDetailModel, @PathVariable("memnum") int memnum) throws Exception {
+	public ModelAndView moveUpdateMember(MemberDetailModel memberDetailModel, @PathVariable("memnum") int memnum)
+			throws Exception {
 
 		mv.clear();
-		
+
 		MemberModel memberModel = new MemberModel();
 		memberModel.setMemnum(memnum);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
-		
+
 		memberModel.setId(memberDetailModel.getId());
 		memberModel.setPasswd(memberDetailModel.getPasswd());
-		
+
 		memberModel.setName(memberDetailModel.getName());
 		memberModel.setEmail(memberDetailModel.getEmail());
 		memberModel.setPhone(memberDetailModel.getPhone1() + "-" + memberDetailModel.getPhone2() + "-"
@@ -153,27 +158,27 @@ public class AdminController {
 		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
 				+ memberDetailModel.getDetailAddress());
 		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
-		
+
 		memberService.updateMember(memberModel);
-		
+
 		mv.addObject("memberInfo", memberModel);
 		mv.addObject("memberDetailInfo", memberDetailModel);
 		mv.setViewName("admin/memberProfile.admin");
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "deleteMember/{memnum}")
-	public ModelAndView moveDeleteMember(MemberModel memberModel, @PathVariable("memnum") int memnum)
-			throws Exception {
+	public ModelAndView moveDeleteMember(MemberModel memberModel, @PathVariable("memnum") int memnum) throws Exception {
 
 		mv.clear();
 
 		memberModel.setMemnum(memnum);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
-		
-		mv.addObject("memberInfo", memberModel);
-		
+		memberService.deleteMember(memberModel);
+
+		List memberList = memberService.selectMemberList();
+		mv.addObject("memberList", memberList);
 		mv.setViewName("admin/memberList.admin");
 
 		return mv;
