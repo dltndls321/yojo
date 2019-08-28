@@ -130,7 +130,9 @@ function emailResetCheck(target1,comment){
 function donotkeyin(){
 	event.returnValue = false;
 }
-
+function donotkeydown(event){
+	event.preventDefault();
+}
 /*한글체크*/
 function hangul(target1){
 	var1 = document.getElementById(target1);
@@ -174,6 +176,11 @@ function IDOverlapCheck(target1,comment){
 	});
 	}
 }
+function passcheckcheck(){
+	var1 = document.getElementById("nowpasswd");
+	var2 = document.getElementById("newpasswd");
+}
+
 function onclickRegister(target1,target2,target3,target4,target5,target6,target7,target8,target9,target10,target11,target12,target13,target14,target15){
 	var1 = document.getElementById(target1);
 	var2 = document.getElementById(target2);
@@ -181,7 +188,7 @@ function onclickRegister(target1,target2,target3,target4,target5,target6,target7
 	var4 = document.getElementById(target4);
 	var5 = document.getElementById(target5);
 	var6 = document.getElementById(target6);
-	var7 = document.getElementById(target7);
+	var7 = document.getElementById(target7); 
 	var8 = document.getElementById(target8);
 	var9 = document.getElementById(target9);
 	var10 = document.getElementById(target10);
@@ -270,14 +277,22 @@ function onclickColorChange(target1){
 	var1.value="";
 	var1.type="password";
 }
+function onclickColorChange2(target1){
+	var1 = document.getElementById(target1);
+	var1.style.color="#808080";
+	var1.style.borderColor="#DBDBDB";
+	var1.value="";
+	var1.type="text";
+}
 
-function onclickUpdate(target1,target2,target3,target4,target5,target6){
+function onclickUpdate(target1,target2,target3,target4,target5,target6,target7){
 	var1 = document.getElementById(target1);
 	var2 = document.getElementById(target2);
 	var3 = document.getElementById(target3);
 	var4 = document.getElementById(target4);
 	var5 = document.getElementById(target5);
 	var6 = document.getElementById(target6);
+	var7 = document.getElementById(target7);
 	if(var1.value == ""||var1.value=='이름을 입력하세요.'){
 		var1.style.color="red";
 		var1.value='이름을 입력하세요.';
@@ -297,10 +312,12 @@ function onclickUpdate(target1,target2,target3,target4,target5,target6){
 		var5.style.borderColor="red";
 		var5.value='이메일을 입력하세요.';
 		return false;
-	}if(var6.value == ""||var6.value == "주소를 입력해 주세요."){
-		var5.style.borderColor="red";
-		var5.value='주소를 입력하세요.';
+	}if(var6.value == ""||var6.value == "주소를 입력하세요."){
+		var6.style.borderColor="red";
+		var6.value='주소를 입력하세요.';
 		return false;
+	}else{
+		var7.submit();
 	}
 	
 }

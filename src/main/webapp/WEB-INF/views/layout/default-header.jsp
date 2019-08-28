@@ -146,14 +146,14 @@
 								<p class="form-row form-row-wide">
 									<label for="username">아이디:
 										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="id" id="idLogin" value="" onclick="onclickColorChange('idLogin')"/>
+										<input type="text" class="input-text" name="id" id="idLogin" value="" onfocus="onclickColorChange2('idLogin')"/>
 									</label>
 								</p>
 
 								<p class="form-row form-row-wide">
 									<label for="password">비밀번호:
 										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="passwd" id="passwdLogin" onclick="onclickColorChange('passwdLogin')"/>
+										<input class="input-text" type="password" name="passwd" id="passwdLogin" onfocus="onclickColorChange('passwdLogin')"/>
 									</label>
 									<span class="lost_password">
 										<a href="#" >Lost Your Password?</a>
