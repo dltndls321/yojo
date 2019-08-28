@@ -2,46 +2,54 @@ package com.yogi.jogi.map.model;
 
 public class MapModel {
 
-	private String name;
-	private String food;
-	private String addr;
-	private float x;
-	private float y;
-	public String getName() {
-		return name;
+	private int foodnum;
+	private String foodname;
+	private String foodinfo;
+	private String address;
+	private float foodx;
+	private float foody;
+	public int getFoodnum() {
+		return foodnum;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFoodnum(int foodnum) {
+		this.foodnum = foodnum;
 	}
-	public String getFood() {
-		return food;
+	public String getFoodname() {
+		return foodname;
 	}
-	public void setFood(String food) {
-		this.food = food;
+	public void setFoodname(String foodname) {
+		this.foodname = foodname;
 	}
-	public String getAddr() {
-		return addr;
+	public String getFoodinfo() {
+		return foodinfo;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setFoodinfo(String foodinfo) {
+		this.foodinfo = foodinfo;
 	}
-
-	public float getX() {
-		return x;
+	public String getAddress() {
+		return address;
 	}
-	public void setX(float x) {
-		this.x = x;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public float getY() {
-		return y;
+	public float getFoodx() {
+		return foodx;
 	}
-	public void setY(float y) {
-		this.y = y;
+	public void setFoodx(float foodx) {
+		this.foodx = foodx;
+	}
+	public float getFoody() {
+		return foody;
+	}
+	public void setFoody(float foody) {
+		this.foody = foody;
 	}
 	@Override
 	public String toString() {
-		return "MapModel [name=" + name + ", food=" + food + ", addr=" + addr + ", x=" + x + ", y=" + y + "]";
+		return "MapModel [foodnum=" + foodnum + ", foodname=" + foodname + ", foodinfo=" + foodinfo + ", address="
+				+ address + ", foodx=" + foodx + ", foody=" + foody + "]";
 	}
+	
 	
 
 	
