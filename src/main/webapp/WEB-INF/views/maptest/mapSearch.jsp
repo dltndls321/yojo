@@ -412,9 +412,9 @@ geocoder.addressSearch(addrX, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
+    	 
     	 document.getElementById("startPoint").value = addrX;
 
-    	 
     	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
     	 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     	 markerPosition = new kakao.maps.LatLng(addrX); // 마커가 표시될 위치입니다

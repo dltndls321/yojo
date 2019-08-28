@@ -6,7 +6,7 @@
 <mapper namespace="MapMapperNS">
 
   <select id="getFoodList"  resultType="mapModel">
-    	select * from foodtest3 where rownum between 1 and 5
+    	select * from foodtest3
    </select>
      
    <select id="getFoodList2"  resultType="mapModel" >
