@@ -52,19 +52,16 @@ public class MapController {
 		 
 		System.out.println("startX : " + startX +" : startY : " + startY+" : endX : " + endX +" : endY : " + endY);
 
-		
-		
-		MapModel mapModel = new MapModel();
-		mapModel.setX(startX);
-		mapModel.setY(startY);
-		
-		
-		
 		if(startX > endX && startY > endY) {
-			mv.addObject("foodList", mapService.getFoodList2(mapModel));
+			mv.addObject("foodList", mapService.getFoodList2(endX,endY,startX,startY));
+		}else if(startX < endX && startY > endY) {
+			mv.addObject("foodList", mapService.getFoodList2(startX,endY,endX,startY));
+		}else if(startX < endX && startY < endY) {
+			mv.addObject("foodList", mapService.getFoodList2(startX,startY,endX,endY));
+		}else {
+			mv.addObject("foodList", mapService.getFoodList2(endX,startY,startX,endY));
 		}
-		
-		mv.addObject("foodList", mapService.getFoodList2(mapModel));
+
 		mv.setViewName("maptest/maptest.do"); //
 
 		return mv;
