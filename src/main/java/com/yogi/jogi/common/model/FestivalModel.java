@@ -10,11 +10,12 @@ public class FestivalModel {
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date fdate1;
 	private String area;
-	private String link;
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date fdate2;
 	private float fmapx;
 	private float fmapy;
+	private int zcode;
+	
 	public int getFestNum() {
 		return festNum;
 	}
@@ -39,12 +40,6 @@ public class FestivalModel {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
 	public Date getFdate2() {
 		return fdate2;
 	}
@@ -63,11 +58,20 @@ public class FestivalModel {
 	public void setFmapy(float fmapy) {
 		this.fmapy = fmapy;
 	}
+	public int getZcode() {
+		return zcode;
+	}
+	public void setZcode(int zcode) {
+		this.zcode = zcode;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "FestivalModel [festNum=" + festNum + ", subject=" + subject + ", fdate1=" + fdate1 + ", area=" + area
-				+ ", link=" + link + ", fdate2=" + fdate2 + ", fmapx=" + fmapx + ", fmapy=" + fmapy + "]";
+				+ ", fdate2=" + fdate2 + ", fmapx=" + fmapx + ", fmapy=" + fmapy + ", zcode=" + zcode + "]";
 	}
+	
 	
 	
 	

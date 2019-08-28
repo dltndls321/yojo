@@ -53,11 +53,11 @@ public class FestController {
 	}
 	@RequestMapping(value = "list")
 	public String moveFest() {
-		return "euny/festival.do";
+		return "tripInfo/festival.do";
 	}
 	//축제리스트뽑기
 	@RequestMapping(value = "festival.do")	
-	public void test(HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String eventStartDate) throws Exception {
+	public void test(FestivalModel festivalModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String eventStartDate) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
@@ -73,7 +73,7 @@ public class FestController {
         parameter = parameter + "&" + "listYN=Y" ;
         parameter = parameter + "&" + "eventStartDate=" + eventStartDate ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
-        //parameter = parameter + "&" + "numOfRows=9999999";
+        parameter = parameter + "&" + "numOfRows=9";
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -121,9 +121,8 @@ public class FestController {
         	Object contentId = imsi.get("contentid");
         	int typeid = Integer.parseInt(contenttypeId.toString());
         	int contid = Integer.parseInt(contentId.toString());
-        	//String ddd = (String) a;
-        	//System.out.println("뽑히냐??" + typeid);
-        	//System.out.println(imsi.get("contentid"));
+        	
+        	
         	finaldata =finaldata+ "<div class=\"col-lg-4 col-md-6\" >"+
         			"<input type =\"hidden\" id=\"contentTypeId\" value=\""+ typeid +"\"/>" +
         			"<input type =\"hidden\" id=\"contentId\" value=\""+ contid +"\"/>" +
@@ -138,13 +137,54 @@ public class FestController {
         			"</div>"+
         			"</a>"+
         			"</div>";
+        	
+//        	//데이터넣기위해 jsonparsing하는 애들
+//        	Object mapX = imsi.get("mapx");
+// 	        Object mapY = imsi.get("mapy");
+// 	        float fmapx;
+// 	        float fmapy;
+// 	        if(mapX == null || mapY == null) {
+// 	        	fmapx = 0;
+// 	        	fmapy = 0;
+// 	        }else {
+// 	        	fmapx = Float.parseFloat(mapX.toString());
+// 	 	        fmapy = Float.parseFloat(mapY.toString());
+// 	        }
+// 	         
+// 
+// 	        Object eventstartdate = imsi.get("eventstartdate"); 
+//	        Object eventenddate = imsi.get("eventenddate");
+//	        String date1 = eventstartdate.toString();
+//	        String date2 = eventenddate.toString();
+//	        
+//	        Date fdate1 = new SimpleDateFormat("yyyyMMdd").parse(date1);
+//	        Date fdate2 = new SimpleDateFormat("yyyyMMdd").parse(date2);
+//	        
+//	        Object areacode = imsi.get("areacode"); 
+//	        int zcode = Integer.parseInt(areacode.toString());
+//   
+//        	//데이터넣기	
+//        	festivalModel.setSubject(title);
+//        	festivalModel.setFdate1(fdate1);
+//        	festivalModel.setArea(addr1);
+//        	festivalModel.setFdate2(fdate2);
+//        	festivalModel.setFmapx(fmapx);
+//        	festivalModel.setFmapy(fmapy);
+//        	festivalModel.setZcode(zcode);
+//        	
+//        	
+//        	System.out.println(i+"번째"+festivalModel);
+//        	addData(festivalModel);
+//        	Thread.sleep(100);
         	}	
-
         out.append(finaldata);
         out.flush();
         out.close();
 
     }
+	public void addData(FestivalModel festivalModel) throws Exception {
+		festService.insertFest(festivalModel);
+	}
 	
 	// @RequestParam String areaCode, @RequestParam String eventStartDate
 	@RequestMapping(value = "content/{typeid}/{contid}")
@@ -210,7 +250,9 @@ public class FestController {
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("tel",tel);
-	    	        model.addObject("telname",telname);
+	    	        model.addObject(""
+	    	        		+ ""
+	    	        		+ "telname",telname);
 	    	        model.addObject("mapx",mapx);
 	    	        model.addObject("mapy",mapy);
 	    	        model.addObject("link",link);
@@ -315,6 +357,8 @@ public class FestController {
     		        model.addObject("fee",fee);
     		        model.addObject("agelimit",agelimit);
     		        model.addObject("playtime",playtime);
+    		        model.addObject("typeid", typeid);
+    		        model.addObject("contid", contid);
 	        	}
 	        }
 	        if(festService.selectFestWithsubject(festivalModel) != null) {
@@ -351,40 +395,36 @@ public class FestController {
 			        }else {
 			        	emotion = "Angry ";
 			        }
+			        model.addObject("memList", memList);
 			        model.addObject("avg", avg);
 			        model.addObject("size", size);
 			        model.addObject("emotion", emotion);
 			        model.addObject("reviewList", reviewList);
-		        }
-		        
-		       
-		        
+		        }      
 	        }
-	        model.setViewName("euny/festCont.do");	
+	        model.setViewName("tripInfo/festCont.do");	
 	        return model;
     }
 	@RequestMapping(value = "/review")
-	public void setFestival(FestivalModel festmodel,FestReviewModel festReviewModel, HttpSession session)throws Exception {
-		
-		//먼저 축제정보 insert
-		if(festService.selectFestWithsubject(festmodel)==null) {
-			festService.insertFest(festmodel);
-		}
+	public String setFestival(FestivalModel festmodel,FestReviewModel festReviewModel, HttpSession session,@RequestParam int typeid,@RequestParam int contid)throws Exception {	
 		
 		festmodel = festService.selectFestWithsubject(festmodel);
-		System.out.println(festmodel);
 		int festNum = festmodel.getFestNum();
-		// 축제 고유번호 select
-		festReviewModel.setFestNum(festNum);
+		// 축제 고유번호, memnum select
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		festReviewModel.setFestNum(festNum);
 		festReviewModel.setMemNum(memNum);
-		
+		System.out.println(festNum);
+		System.out.println(memNum);
+		System.out.println(festReviewService.selectFestReviewOne(festReviewModel));
 		if(festReviewService.selectFestReviewOne(festReviewModel) == null) {
 			festReviewService.insertFestReview(festReviewModel);
+			System.out.println("됐을거아니야");
 		} else {
 			festReviewService.updateFestReview(festReviewModel);
 		}
 		
+		return "redirect:/festival/content/" + typeid +"/"+ contid;
 
 	}
 	

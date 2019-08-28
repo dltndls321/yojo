@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="dashboard-content">
 
 		<!-- Titlebar -->
@@ -26,15 +27,15 @@
 				<div class="dashboard-list-box margin-top-0">
 					<h4>게시판 이름</h4>
 					<ul>
-
-						<li>
+						<c:forEach items="${boardlist}" var="boardlist">
+						<li><a href="/admin/boardContent/${boardlist.boardnum }">
 							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-01.jpg" alt=""></a></div>
+								<div class="list-box-listing-img"><img src="images/listing-item-01.jpg" alt=""></div>
 								<div class="list-box-listing-content">
 									<div class="inner">
-										<h3><a href="#">글 제목</a></h3>
-										<span>작성자</span>
-										<span>작성일</span>
+										<h3><a href="#">${boardlist.subject }</a></h3>
+										<span>${boardlist.writer }</span>
+										<span>${boardlist.regdate }</span>
 										<div class="star-rating" data-rating="3.5">
 											<div class="rating-counter">(12 Reply)</div>
 										</div>
@@ -45,9 +46,11 @@
 								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
 								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
 							</div>
+							</a>
 						</li>
+						</c:forEach>
 
-						<li>
+						<!-- <li>
 							<div class="list-box-listing">
 								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-02.jpg" alt=""></a></div>
 								<div class="list-box-listing-content">
@@ -65,12 +68,11 @@
 								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
 								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
 							</div>
-						</li>
+						</li> -->
 						
 					</ul>
 				</div>
 			</div>
-
 
 			<!-- Copyrights -->
 			<div class="col-md-12">
