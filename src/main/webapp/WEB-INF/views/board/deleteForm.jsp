@@ -6,8 +6,8 @@
 		<p class="w3-left" style="padding-left: 30px;">></p>
 		<div class="w3-container ">
 			<b>글삭제</b><br>
-			<form method="POST" name="deleteForm" action="<%=request.getContextPath() %>/board/deletePro">
-			<input type="hidden" name="num" value="${num }">
+			<form method="POST" name="deleteForm" action="/board/deletePro">
+			<input type="hidden" name="boardNum" value="${boardNum }">
 			<input	type="hidden" name="pageNum" value="${pageNum }">
 				<table class="table-bordered" width="360">
 	<tr height="30"><td align=center><b>비밀번호를 입력해 주세요.</b></td></tr>

@@ -73,7 +73,7 @@
 			 
           <input type="submit" value="수정" >
 			</form>
-			
+			회원가입
 			
 			<form action="/board/delete/${list.boardNum}"><input type="submit" value="삭제" ></form> 
               <input type="button" value="글목록" onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"> 

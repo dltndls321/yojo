@@ -48,9 +48,7 @@ public class BoardController {
 
 		if (reqboardid != null)
 			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
-		if (session.getAttribute("boardid") == null)
-			boardid = "1"; // null 이면 boardid = 1
-		else
+		if (session.getAttribute("boardid") != null)
 			boardid = (String) session.getAttribute("boardid"); // 오브젝트로 받아오기떄문에 String으로 형변환
 
 		try {
@@ -74,7 +72,17 @@ public class BoardController {
 
 		return mv;
 	}
-
+	@RequestMapping("boardlist/2")
+	public ModelAndView list2() throws Exception {
+		BoardModel boardModel = new BoardModel();
+		boardid = "2";
+		boardModel.setBoardid(boardid);
+		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
+		mv.setViewName("board/list");
+		mv.addObject("AllList", AllList);
+		
+		return mv;
+	}
 	@RequestMapping("writeUploadForm")
 
 	public ModelAndView writeForm(BoardModel boardModel,@RequestParam(value="boardid", required=false) String boardid) throws Exception {
@@ -84,21 +92,7 @@ public class BoardController {
 		mv.addObject("boardid",boardid);
 		return mv;
 	}
-	public ModelAndView writeForm(BoardModel boardModel) throws Exception {
-		mv.clear();
-		BoardModel a = new BoardModel();
-		mv.clear(); // ModelAndView 초기화
-		
-		
-		
-		/*
-		 * mv.addObject("memNum", boardModel.getMemNum()); mv.addObject("fname",
-		 * boardModel.getFname()); mv.addObject("fsize", boardModel.getFsize());
-		 * mv.addObject("readcount", boardModel.getReadcount()); mv.addObject("regdate",
-		 * boardModel.getRegdate()); mv.setViewName("board/writeUploadForm");
-		 */
-		return mv;
-	}
+
 
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel) throws Exception {
