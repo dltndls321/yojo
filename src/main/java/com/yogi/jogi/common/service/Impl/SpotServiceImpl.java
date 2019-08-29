@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yogi.jogi.common.dao.FestDao;
 import com.yogi.jogi.common.dao.SpotDao;
-import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.SpotModel;
-import com.yogi.jogi.common.service.FestService;
 import com.yogi.jogi.common.service.SpotService;
 
 @Service
@@ -18,27 +15,27 @@ public class SpotServiceImpl implements SpotService{
 	private SpotDao dao;
 
 	@Override
-	public int insertFest(SpotModel spotModel) throws Exception {
+	public int insertSpot(SpotModel spotModel) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.insertFest(spotModel);
+		return dao.insertSpot(spotModel);
 	}
 
 	@Override
-	public List<SpotModel> selectFestList() throws Exception {
+	public List<SpotModel> selectSpotList() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectFestList();
+		return dao.selectSpotList();
 	}
 
 	@Override
-	public SpotModel selectFestWithFestNum(SpotModel spotModel) throws Exception {
+	public SpotModel selectSpotWithSpotNum(SpotModel spotModel) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectFestWithFestNum(spotModel);
+		return dao.selectSpotWithSpotNum(spotModel);
 	}
 
 	@Override
-	public SpotModel selectFestWithsubject(SpotModel spotModel) throws Exception {
+	public SpotModel selectSpotWithname(SpotModel spotModel) throws Exception {
 		// TODO Auto-generated method stub
-		return  dao.selectFestWithsubject(spotModel);
+		return  dao.selectSpotWithname(spotModel);
 	}
 	
 	

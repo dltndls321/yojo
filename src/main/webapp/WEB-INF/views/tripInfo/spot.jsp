@@ -81,7 +81,9 @@ $(document).ready(function(){
 				<div class="main-search-input-item">
 					<select data-placeholder="All Categories" class="chosen-select" id="spotcode" >
 						<option value = "">관광지 분류</option>	
-						<option value ="A01010100">공원</option>
+						<option value ="A01010100">국립공원</option>
+						<option value ="A01010200">도립공원</option>
+						<option value ="A01010300">군립공원</option>
 						<option value ="A01010400">산</option>
 						<option value ="A01010500">자연생태관광지</option>
 						<option value ="A01010600">자연휴양림</option>
@@ -89,15 +91,15 @@ $(document).ready(function(){
 						<option value ="A01010800">폭포</option>
 						<option value ="A01010900">계곡</option>
 						<option value ="A01011000">약수터</option>
-						<option value ="A01012000">해안절경</option>
-						<option value ="A01013000">해수욕장</option>
-						<option value ="A01014000">섬</option>
-						<option value ="A01015000">항구/포구</option>
-						<option value ="A01016000">어촌</option>
-						<option value ="A01017000">등대</option>
-						<option value ="A01018000">호수</option>
-						<option value ="A01019000">강</option>
-						<option value ="A01020000">동굴</option>
+						<option value ="A01011100">해안절경</option>
+						<option value ="A01011200">해수욕장</option>
+						<option value ="A01011300">섬</option>
+						<option value ="A01011400">항구/포구</option>
+						<option value ="A01011500">어촌</option>
+						<option value ="A01011600">등대</option>
+						<option value ="A01011700">호수</option>
+						<option value ="A01011800">강</option>
+						<option value ="A01011900">동굴</option>
 					</select>
 				</div>
 		

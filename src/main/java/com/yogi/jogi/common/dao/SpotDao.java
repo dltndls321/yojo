@@ -6,27 +6,26 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.SpotModel;
 
 @Repository
 public class SpotDao {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String Namespace = "FestMapperNS";
-	public int insertFest(SpotModel spotModel) throws Exception {
-		return sqlSession.insert(Namespace + ".insertFest" , spotModel);
+	private final String Namespace = "SpotMapperNS";
+	public int insertSpot(SpotModel spotModel) throws Exception {
+		return sqlSession.insert(Namespace + ".insertSpot" , spotModel);
 	}
 	
-	public List<SpotModel> selectFestList() throws Exception {
-		return sqlSession.selectList(Namespace + ".selectFestList");
+	public List<SpotModel> selectSpotList() throws Exception {
+		return sqlSession.selectList(Namespace + ".selectSpotList");
 	}
 	
-	public SpotModel selectFestWithFestNum(SpotModel spotModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectFestWithFestNum",spotModel);
+	public SpotModel selectSpotWithSpotNum(SpotModel spotModel) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectSpotWithSpotNum",spotModel);
 	}
 
-	public SpotModel selectFestWithsubject(SpotModel spotModel) {
-		return sqlSession.selectOne(Namespace + ".selectFestWithsubject",spotModel);
+	public SpotModel selectSpotWithname(SpotModel spotModel) {
+		return sqlSession.selectOne(Namespace + ".selectSpotWithname",spotModel);
 	}
 }
