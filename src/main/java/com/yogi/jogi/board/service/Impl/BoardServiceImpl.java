@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int selectPasswdOneNum(BoardModel boardModel) throws Exception {
+	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectPasswdOneNum(boardModel);
 	}

@@ -15,16 +15,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
-import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
 @Controller
@@ -51,17 +48,18 @@ public class BoardController {
 
 		if (reqboardid != null)
 			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
-		if (session.getAttribute("boardid") == null)
-			boardid = "1"; // null 이면 boardid = 1
-		else
+		if (session.getAttribute("boardid") != null) {
+			
 			boardid = (String) session.getAttribute("boardid"); // 오브젝트로 받아오기떄문에 String으로 형변환
-
+		}
+	
 		try {
 			pageNum = Integer.parseInt(request.getParameter("pageNum")); // pageNum을 세팅하는데 넘어오지않으면 1을 집어넣음
 		} catch (Exception e) {
 			// TODO: handle exception
 			pageNum = 1;
 		}
+		
 
 	}
 
@@ -77,7 +75,17 @@ public class BoardController {
 
 		return mv;
 	}
-
+	@RequestMapping("list")
+	public ModelAndView list2() throws Exception {
+		BoardModel boardModel = new BoardModel();
+		boardid = "2";
+		boardModel.setBoardid(boardid);
+		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
+		mv.setViewName("board/list");
+		mv.addObject("AllList", AllList);
+		
+		return mv;
+	}
 	@RequestMapping("writeUploadForm")
 
 	public ModelAndView writeForm(BoardModel boardModel,@RequestParam(value="boardid", required=false) String boardid) throws Exception {
@@ -85,9 +93,9 @@ public class BoardController {
 		
 		mv.setViewName("board/writeUploadForm");
 		mv.addObject("boardid",boardid);
-
 		return mv;
 	}
+
 
 	@RequestMapping("writePro")
 	public String writePro(BoardModel boardModel,HttpSession session) throws Exception {
@@ -164,13 +172,13 @@ public class BoardController {
 	public ModelAndView updatePro(BoardModel boardModel) throws Exception {
 		mv.clear();
 
-		int check = boardService.selectPasswdOneNum(boardModel);
-		mv.addObject("check", check);
-		mv.addObject(boardModel.getBoardNum());
-		mv.addObject("pageNum", pageNum);
 
-		mv.setViewName("board/updatePro");
-		return mv;
+		 int check = boardService.updateBoard(boardModel);
+	      mv.addObject("check", check);
+	      mv.addObject("pageNum", pageNum);
+	      
+	      mv.setViewName("board/updatePro");
+	      return mv;
 	}
 
 	@RequestMapping("delete/{boardNum}")

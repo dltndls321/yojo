@@ -32,10 +32,11 @@
 		boardNum=#{boardNum}
 	</update>
 
-	<select parameterType="boardModel" id="delete"> 
-	delete from board where num
-		=#{num} 
+	<select parameterType="boardModel" id="deleteBoard"> 
+	delete from board where boardNum
+		=#{boardNum} 
 		</select>
+		
 	<select id="selectBoard" parameterType="boardModel"
 		resultType="boardModel">
 		select
@@ -45,7 +46,7 @@
 
 	</select>
 
-<select id="selectPasswdOneNum" parameterType="boardModel">
+<select id="selectPasswdOneNum" resultType="boardModel" parameterType="boardModel">
 		select 
 			passwd 
 		from 
