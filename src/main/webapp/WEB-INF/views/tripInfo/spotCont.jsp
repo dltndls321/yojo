@@ -35,15 +35,15 @@ $(document).ready(function () {
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar">
 				<div class="listing-titlebar-title">
-					<h2>${title}<span class="listing-tag">festival</span></h2>
+					<h2>${title}<span class="listing-tag">spot</span></h2>
 					<span>
 						<a href="#listing-location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
 							${addr1}
 						</a>
 					</span>
-					<div class="star-rating" data-rating="${avg}">
-						<div class="rating-counter"><a href="#listing-reviews">(${size} reviews)</a></div>
+					<div class="star-rating" data-rating="5">
+						<div class="rating-counter"><a href="#listing-reviews">(5 reviews)</a></div>
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,7 @@ $(document).ready(function () {
 				<div class="listing-links-container">
 
 					<ul class="listing-links contact-links">
-						<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> ${tel}</a></li>
+						<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> ${infocenter}</a></li>
 						<li><i class="fa fa-link"></i> ${link }</li>
 					</ul>
 					<div class="clearfix"></div>
@@ -94,17 +94,21 @@ $(document).ready(function () {
 						<h4>Detail Info</h4>
 						<ul>
 							<li>
-								<h5>연령제한</h5>
-								<p>${agelimit}</p>
+								<h5>유모차 대여</h5>
+								<p>${baby}</p>
 								
 							</li>
 							<li>
-								<h5>요금</h5>
-								<span>${fee}</span>
+								<h5>신용카드 가능 여부</h5>
+								<p>${chkcard}</p>
 							</li>
 							<li>
-								<h5>행사기간</h5>
-								<p>${fdate1} ~ ${fdate2}</p>					
+								<h5>이용시간</h5>
+								<p>${usetime}</p>					
+							</li>
+							<li>
+								<h5>쉬는날</h5>
+								<p>${restdate}</p>					
 							</li>
 						</ul>
 
@@ -172,7 +176,7 @@ $(document).ready(function () {
 								<div class="comment-by">${memList[status.index]} <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date"><fmt:formatDate value="${review.regDate}" pattern="yyyy년 MM월 dd일" /></span>
 									<div class="star-rating" data-rating="${review.star}"></div>
 								</div>
-								<p>${review.fReview }</p>
+								<p>${review.sReview }</p>
 							</div>
 						</li>
 					</c:forEach>
@@ -238,12 +242,10 @@ $(document).ready(function () {
 				<!-- Subratings Container / End -->
 
 				<!-- Review Comment -->
-				<form id="add-comment" class="add-comment" action ="/festival/review">
+				<form id="add-comment" class="add-comment" action ="/spot/review">
 					<fieldset>
-						<input type="hidden" name="subject" value="${title}">
+						<input type="hidden" name="name" value="${title}">
 						<input type="hidden" name="area" value="${addr1}">
-						<input type="hidden" name="fdate1" value="${fdate1}" >
-						<input type="hidden" name="fdate2" value="${fdate2}">
 						<input type="hidden" name="link" value='${link}'>
 						<input type="hidden" name="fmapx" value="${mapx}">
 						<input type="hidden" name="fmapy" value="${mapy}">
@@ -251,7 +253,7 @@ $(document).ready(function () {
 						<input type="hidden" name="contid" value="${contid}">
 						<div>
 							<label>Review:</label>
-							<textarea cols="40" rows="3" id ="review" name = "fReview"></textarea>
+							<textarea cols="40" rows="3" id ="review" name = "sReview"></textarea>
 						</div>
 
 					</fieldset>
@@ -298,7 +300,7 @@ geocoder.addressSearch("${addr1}", function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${title}"+'</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${name}"+'</div>'
         });
         infowindow.open(map, marker);
 

@@ -98,6 +98,7 @@
 /* Forms Reset & Styles
 ------------------------------------- */
 input,
+input[type="reset"],
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -143,6 +144,7 @@ input {
 }
 
 input:focus,
+input[type="reset"]:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -8150,6 +8152,7 @@ span.blog-item-tag {
 button.button,
 input[type="button"],
 input[type="submit"],
+input[type="reset"],
 a.button.border,
 a.button {
 	background-color: #66676b;
@@ -8170,6 +8173,7 @@ a.button {
 
 
 input[type="button"],
+input[type="reset"],
 input[type="submit"] {
 	line-height: 32px;
 }
