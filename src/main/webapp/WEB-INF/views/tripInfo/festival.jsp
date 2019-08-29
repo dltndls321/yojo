@@ -30,15 +30,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Listings</h2><span>Grid Layout With Sidebar</span>
-
-				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Listings</li>
-					</ul>
-				</nav>
+				<h2>Festival</h2><span></span>
 
 			</div>
 		</div>

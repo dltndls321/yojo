@@ -13,7 +13,7 @@ $(document).ready(function(){
 	        type: 'get',
 	        data : {"areaCode" : areaCode, "spotCode" :spotCode},
 	        success: function(data){
-	            	$('#festival').html(data);
+	            	$('#spot').html(data);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
 	                alert("Status: " + textStatus); alert("Error: " + errorThrown);
@@ -30,15 +30,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Listings</h2><span>Grid Layout With Sidebar</span>
-
-				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Listings</li>
-					</ul>
-				</nav>
+				<h2>TOURIST SPOT</h2>
 
 			</div>
 		</div>
@@ -115,7 +107,7 @@ $(document).ready(function(){
 		
 
 
-			<div class="row" id ="festival">
+			<div class="row" id ="spot">
 
 				<!-- Listing Item -->
 				
