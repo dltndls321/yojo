@@ -90,6 +90,7 @@
 
 						<li><a href="#">TripInfo</a>
 							<ul>
+								<li><a href="/food/list">Finding</a></li>
 								<li><a href="/food/list">Eat</a></li>
 								<li><a href="/festival/list">Festival</a></li>
 								<li><a href="/spot/list">Tourist Spot</a></li>
