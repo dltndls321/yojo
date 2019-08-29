@@ -81,7 +81,7 @@
 						<li><a  href="#">Course</a>
 							<ul>
 								<li><a href="/course/recommend">Recommand</a></li>
-								<li><a href="index-2-airbnb.html">Route</a></li>
+								<li><a href="/map/search">Route</a></li>
 
 							</ul>
 						</li>
@@ -90,7 +90,6 @@
 
 						<li><a href="#">TripInfo</a>
 							<ul>
-								<li><a href="/map/search">Finding</a></li>
 								<li><a href="/food/list">Eat</a></li>
 								<li><a href="/festival/list">Festival</a></li>
 								<li><a href="/spot/list">Tourist Spot</a></li>
