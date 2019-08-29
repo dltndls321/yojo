@@ -108,24 +108,24 @@
 							<input maxlength="4" type="text" class="input-text" name="phone3" id="phone3" value="${memberDetailInfo.phone3 }" onblur="" onfocus="" style="width: 130px;display: inline;"/>
 							
 							<label>Jumin</label>
-							<input value="${memberDetailInfo.jumin1 }" type="text" id="jumin1" name="jumin1" style="width: 200px; display: inline;"> - 
-							<input value="${memberDetailInfo.jumin2 }" type="text" id="jumin2" name="jumin2" style="width: 200px; display: inline;">
+							<a>${memberDetailInfo.jumin1 } - ${memberDetailInfo.jumin2 } ● ● ● ● ● ● </a>
+							<input value="${memberDetailInfo.jumin1 }" type="hidden" id="jumin1" name="jumin1" style="width: 200px; display: inline;">
+							<input value="${memberDetailInfo.jumin2 }" type="hidden" id="jumin2" name="jumin2" style="width: 200px; display: inline;">
 							
 							<label>Address</label>
 							<input type="text" class="input-text" name="postcode" id="postcode" value="${memberDetailInfo.postcode }" onblur="" onfocus="" placeholder="우편번호" onkeypress="donotkeyin();"/>									
 							<input type="text" class="input-text" name="address1" id="address1" value="${memberDetailInfo.address1 }" onblur="" onfocus="" placeholder="주소" onkeypress="donotkeyin();"/>									
 							<input type="text" class="input-text" name="detailAddress" id="detailAddress" value="${memberDetailInfo.detailAddress }" onblur="emptyCheck('detailAddress','detailAddress','주소를 입력하세요.')" onfocus="resetSelect('detailAddress','detailAddress','주소를 입력하세요.')" placeholder="상세주소"/>							
 							
-							<button class="button border fw margin-top-10"  type="button" onclick="execDaumPostcode()" style="margin-bottom: 20px">주소찾기</button>
+							<button class="button border fw margin-top-10"  type="button" onclick="execDaumPostcode();" style="margin-bottom: 20px">주소찾기</button>
 
 							<label>Email</label>
 							<input value="${memberInfo.email }" type="text" id="email" name="email">
 							
 							<label>RegDate</label>
-							<input value="${memberInfo.regdate }" type="text">
+							<a>${memberInfo.regdate }</a>
+							<input value="${memberInfo.regdate }" type="hidden">
 
-							<label>Notes</label>
-							<textarea name="notes" id="notes" cols="30" rows="10">추가정보</textarea>
 
 						</div>
 	
@@ -137,45 +137,37 @@
 			</div>
 			
 			
-			<div class="col-lg-6 col-md-12">
-				<div class="dashboard-list-box margin-top-0">
-					<h4 class="gray">Member Tastes</h4>
-					<div class="dashboard-list-box-static">
-
-						<div class="my-profile">
-							<div class="col-lg-6">
-								<label class="margin-top-0">Companion</label>
-								<input type="text" value="이" name="" id="">
-
-								<label>Prefer Style</label>
-								<input type="text" value="지" name="" id="">
-	
-								<label>Prefer Place</label>
-								<input type="text" value="까" name="" id="">
-							</div>
-							
-							<div class="col-lg-6">
-								<label class="margin-top-0">Prefer Festival</label>
-								<input type="text" value="거" name="" id="">
-
-								<label>Prefer Food</label>
-								<input type="text" value="울" name="" id="">
-	
-								<label>Prefer Spot</label>
-								<input type="text" value="?" name="" id="">
-							</div>
-
-							<button class="button margin-top-15">Save</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
 
 			<!-- Change Password -->
 			<div class="col-lg-6 col-md-12" style="margin-top: 80px;">
 				<div class="dashboard-list-box margin-top-0">
 					<h4>${memberInfo.id }'s Post</h4>
+					<ul>
+						<li>
+							<div class="list-box-listing">
+								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-01.jpg" alt=""></a></div>
+								<div class="list-box-listing-content">
+									<div class="inner">
+										<h3><a href="#">글 제목</a></h3>
+										<span>작성일</span>
+										<div class="star-rating" data-rating="3.5">
+											<div class="rating-counter">(12 Reply)</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="buttons-to-right">
+								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
+								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-12" style="margin-top: 80px;">
+				<div class="dashboard-list-box margin-top-0">
+					<h4>${memberInfo.id }'s Reviews</h4>
 					<ul>
 						<li>
 							<div class="list-box-listing">

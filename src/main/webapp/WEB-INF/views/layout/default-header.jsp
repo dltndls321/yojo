@@ -268,8 +268,12 @@
 					<div class="user-menu">
 						<div class="user-name"><span><img src="/resources/images/user-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
 						<ul>
-							
+							<c:if test="${SessionMemberId eq 'admin'}">
+							<li><a href="/admin/main"><i class="im im-icon-Male"></i> ChangeAdmin</a></li>
+							</c:if>
+							<c:if test="${SessionMemberId ne 'admin'}">
 							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
+							</c:if>
 							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
 						</ul>
 					</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="dashboard-content">
 
 		<!-- Titlebar -->
@@ -43,7 +44,7 @@
 									<div class="message-by">
 										<div class="message-by-headline">
 											<h5>${member.id} <i>new</i></h5>
-											<span>${member.regdate}</span>
+											<span><fmt:formatDate value="${member.regdate }" pattern="yyyy년 MM월 dd일" /></span>
 										</div>
 										<p>신상정보? </p>
 									</div>
@@ -75,9 +76,17 @@
 				<div class="pagination-container margin-top-30 margin-bottom-0">
 					<nav class="pagination">
 						<ul>
-							<li><a href="#" class="current-page">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+							<c:if test="${ startPage>bottomLine}">
+								<li><a href="/admin/memberList?pageNum=${startPage - bottomLine}"><i class="sl sl-icon-arrow-left"></i></a></li>
+							</c:if>
+							<c:forEach   var="i"  begin="${startPage }"   end="${endPage }">
+								<li><a href="/admin/memberList?pageNum=${i}" class="current-page">${i }</a></li>
+							 	
+							</c:forEach>
+							<c:if test="${ endPage<pageCount}">
+								<li><a href="/admin/memberList?pageNum=${startPage + bottomLine}"><i class="sl sl-icon-arrow-right"></i></a></li>
+							</c:if>
+							
 						</ul>
 					</nav>
 				</div>

@@ -21,6 +21,7 @@ import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.NowUserModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
@@ -31,13 +32,15 @@ public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	ModelAndView model = new ModelAndView();
-	private static NowUserModel nowUser;
+	static NowUserModel nowUser;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private FestReviewService festReviewService;
 	@Autowired
 	private FestService festService;
+	@Autowired
+	private SpotService spotService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -111,14 +114,17 @@ public class MemberController {
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
 		int reviewListsize = reviewList.size();
 		int star = 0;
-		for(int i = 0 ; i<reviewListsize;i++) {
-			star = star + reviewList.get(i).getStar();
-			int festnum = reviewList.get(i).getFestNum();
-			festivalModel.setFestNum(festnum);
-			festivalModel = festService.selectFestWithFestNum(festivalModel);
-			festList.add(festivalModel);
+		double avg=0;
+		if(reviewListsize!=0) {
+			for(int i = 0 ; i<reviewListsize;i++) {
+				star = star + reviewList.get(i).getStar();
+				int festnum = reviewList.get(i).getFestNum();
+				festivalModel.setFestNum(festnum);
+				festivalModel = festService.selectFestWithFestNum(festivalModel);
+				festList.add(festivalModel);
+			}
+			avg =((double)((star*10)/reviewListsize))/10;
 		}
-		double avg =((double)(star*10)/reviewListsize)/10;
 		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
