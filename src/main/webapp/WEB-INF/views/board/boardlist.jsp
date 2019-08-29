@@ -28,7 +28,7 @@
 							<ul>
 								<li><a href="#">Home</a></li>
 								<li><a href="#">게시판</a></li>
-								<li>공지사항</li>
+								<li>자유게시판</li>
 							</ul>
 						</nav>
 					</div>
