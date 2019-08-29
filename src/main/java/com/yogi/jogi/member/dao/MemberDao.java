@@ -1,6 +1,7 @@
 package com.yogi.jogi.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class MemberDao {
 	
 	public int deleteMember(MemberModel memberModel) throws Exception {
 		return sqlSession.delete(Namespace+".deleteMember",memberModel);
+	}
+	
+	public List<MemberModel> selectMemberListPaging(Map map) throws Exception {
+		return sqlSession.selectList(Namespace+".selectMemberListPaging",map);
 	}
 }

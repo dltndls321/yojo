@@ -22,7 +22,6 @@ public class BoardDao {
 
 	public List<BoardModel> selectBoardList() throws Exception {
 		return sqlSession.selectList(Namespace + ".selectBoardList");
-
 	}
 
 	public BoardModel selectBoard(int boardNum) throws Exception {

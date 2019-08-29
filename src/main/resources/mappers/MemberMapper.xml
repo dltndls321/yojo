@@ -32,6 +32,18 @@
     	from
     		member
     </select>
+    <select id="selectMemberListPaging" parameterType="hashmap" resultType="memberModel">
+    	select *  from
+    		(select rownum rnum,a.* from
+    			(select 
+    				* 
+    			from 
+    				member
+    			order by memnum desc) a
+    		)
+    		where rnum between #{start} and #{end}
+    	
+    </select>
      <select id="selectMemberWithId" parameterType="memberModel" resultType="memberModel">
     	select
     		*

@@ -81,7 +81,7 @@
 						<li><a  href="#">Course</a>
 							<ul>
 								<li><a href="/course/recommend">Recommand</a></li>
-								<li><a href="index-2-airbnb.html">Route</a></li>
+								<li><a href="/map/search">Route</a></li>
 
 							</ul>
 						</li>
@@ -90,7 +90,6 @@
 
 						<li><a href="#">TripInfo</a>
 							<ul>
-								<li><a href="/map/search">Finding</a></li>
 								<li><a href="/food/list">Eat</a></li>
 								<li><a href="/festival/list">Festival</a></li>
 								<li><a href="/spot/list">Tourist Spot</a></li>
@@ -268,8 +267,12 @@
 					<div class="user-menu">
 						<div class="user-name"><span><img src="/resources/images/user-avatar.jpg" alt=""></span> ${SessionMemberName}님, 안녕하세요. </div>
 						<ul>
-							
+							<c:if test="${SessionMemberId eq 'admin'}">
+							<li><a href="/admin/main"><i class="im im-icon-Male"></i> ChangeAdmin</a></li>
+							</c:if>
+							<c:if test="${SessionMemberId ne 'admin'}">
 							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
+							</c:if>
 							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
 						</ul>
 					</div>

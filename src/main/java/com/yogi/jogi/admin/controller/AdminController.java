@@ -29,7 +29,9 @@ import com.yogi.jogi.member.service.MemberService;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	private static NowUserModel nowUser;
+	
+	static NowUserModel nowUser;
+	
 	ModelAndView mv = new ModelAndView();
 	
 	private int pageNum;
@@ -72,10 +74,20 @@ public class AdminController {
 	public ModelAndView moveMain(HttpSession session) throws Exception{
 		mv.clear();
 		mv.setViewName("admin/main.admin");
-		int nowuser = nowUser.getNowUser();
-		int totalmember = memberService.selectMemberList().size();
+		MemberModel memberModel = new MemberModel(); 
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
+		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
+		int totalboard = boardService.selectBoardList().size();
+		int totalreview = festReviewService.selectFestReviewList().size() + spotService.selectSpotList().size();
+		
+		mv.addObject("adminInfo", memberModel);
 		mv.addObject("totalmember",totalmember);
 		mv.addObject("nowuser",nowuser);
+		mv.addObject("totalboard",totalboard);
+		mv.addObject("totalreview",totalreview);
+		
 		return mv;
 	}
 
@@ -161,26 +173,24 @@ public class AdminController {
 	public ModelAndView moveMemberList() throws Exception {
 
 		mv.clear();
-
-		int pageSize = 11;
+		int pageSize = 5;
 		int currentPage = pageNum;
 		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
-		int startRow = (currentPage - 1) * pageSize;
+		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
-		if (count < endRow)
+		if (count < endRow) {
 			endRow = count;
-
-		List memberList = memberService.selectMemberList();
-
+		}
+		List<MemberModel> memberList = memberService.selectMemberListPaging(startRow +1, endRow);
 		int number = count - ((currentPage - 1) * pageSize);
-
 		int bottomLine = 3; // 5 page
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
 		int endPage = startPage + bottomLine - 1;
-		if (endPage > pageCount)
+		if (endPage > pageCount) {
 			endPage = pageCount;
-
+		}	
+		mv.addObject("pageCount",pageCount);
 		mv.addObject("count", count);
 		mv.addObject("pageNum", pageNum);
 

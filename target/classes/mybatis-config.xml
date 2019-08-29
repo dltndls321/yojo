@@ -11,6 +11,7 @@
     	 	<typeAlias type="com.yogi.jogi.map.model.MapModel" alias="mapModel"/>
 			<typeAlias type="com.yogi.jogi.common.model.FestivalModel" alias="festModel"/>
 			<typeAlias type="com.yogi.jogi.common.model.FestReviewModel" alias="festReviewModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.SpotModel" alias="spotModel"/>
         </typeAliases>
         <!-- <mappers>
         	<mapper resource="/mappers/Login_Register_Mapper.xml"/>
