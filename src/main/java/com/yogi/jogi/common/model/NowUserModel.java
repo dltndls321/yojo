@@ -8,6 +8,8 @@ public class NowUserModel {
 	}
 
 	public static void setNowUser(int nowUser) {
+		if(NowUserModel.nowUser<=0)
+			NowUserModel.nowUser=0;
 		NowUserModel.nowUser = nowUser+1;
 	}
 	

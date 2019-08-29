@@ -65,15 +65,34 @@ public class MapController {
 		if(startX > endX && startY > endY) {
 			mv.addObject("foodList", mapService.getFoodList2(endY,endX,startY,startX));
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
+			mv.addObject("swX",endY);
+			mv.addObject("swY",endX);
+			mv.addObject("neX",startY);
+			mv.addObject("neY",startX);
 		}else if(startX < endX && startY > endY) {
+			
 			mv.addObject("foodList", mapService.getFoodList2(endY,startX,startY,endX));
 			mv.addObject("festList", festService.selectFestListXY(startX,endY,endX,startY));
+			mv.addObject("swX",endY);
+			mv.addObject("swY",startX);
+			mv.addObject("neX",startY);
+			mv.addObject("neY",endX);
 		}else if(startX < endX && startY < endY) {
+			
 			mv.addObject("foodList", mapService.getFoodList2(startY,startX,endY,endX));
 			mv.addObject("festList", festService.selectFestListXY(startX,startY,endX,endY));
+			mv.addObject("swX",startY);
+			mv.addObject("swY",startX);
+			mv.addObject("neX",endY);
+			mv.addObject("neY",endX);
 		}else { 
+			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(startY,endX,endY,startX));
 			mv.addObject("festList", festService.selectFestListXY(startY,endX,endY,startX));
+			mv.addObject("swX",startY);
+			mv.addObject("swY",endX);
+			mv.addObject("neX",endY);
+			mv.addObject("neY",startX);
 		}
 
 		mv.setViewName("maptest/maptest.do"); //

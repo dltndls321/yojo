@@ -52,7 +52,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-1">
-					<div class="dashboard-stat-content"><h4>25</h4> <span>Total Course</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalboard}</h4> <span>총 게시글 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-1">
-					<div class="dashboard-stat-content"><h4>50</h4> <span>Total TripInfo</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalreview}</h4> <span>총 리뷰 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 				</div>
 			</div>

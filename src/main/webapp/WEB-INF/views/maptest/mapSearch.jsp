@@ -347,7 +347,9 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         if (status === kakao.maps.services.Status.OK) {
             var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
             detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-            detailAddr += '<div><center><a href="#" onclick="markerImg(\''+result[0].address.address_name+'\')">출발지로 설정</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="markerImg2(\''+result[0].address.address_name+'\')">도착지로 설정</a></center></div>';
+            detailAddr += '<div><center><a href="#" onclick="markerImg(\''+result[0].address.address_name+
+            		'\')">출발지로 설정</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="markerImg2(\''+
+            				result[0].address.address_name+'\')">도착지로 설정</a></center></div>';
             
             var content = '<div class="bAddr">' +
                             '<span class="title">주소정보</span>' + 
@@ -355,7 +357,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                         '</div>';
 
             // 마커를 클릭한 위치에 표시합니다 
-           //addMarker2(mouseEvent.latLng);
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
 

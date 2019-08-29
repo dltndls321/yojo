@@ -23,4 +23,7 @@ public interface MemberService {
 	
 	public int deleteMember(MemberModel memberModel)throws Exception;
 	
+	public List<MemberModel> selectMemberListPaging(int start,int end) throws Exception;
+	
+	
 }

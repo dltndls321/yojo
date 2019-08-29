@@ -20,10 +20,8 @@ public class BoardDao {
 
 	private static final String Namespace = "boardMapperNS";
 
-
-public List<BoardModel> selectBoardList() throws Exception {
-	return sqlSession.selectList(Namespace + ".selectBoardList");
-
+	public List<BoardModel> selectBoardList() throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardList");
 	}
 
 	public BoardModel selectBoard(int boardNum) throws Exception {
@@ -36,6 +34,7 @@ public List<BoardModel> selectBoardList() throws Exception {
 	}
 
 	public int updateBoard(BoardModel boardModel) throws Exception {
+		System.out.println(boardModel);
 		return sqlSession.update(Namespace + ".updateBoard", boardModel);
 
 	}

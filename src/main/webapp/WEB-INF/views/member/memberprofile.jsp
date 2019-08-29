@@ -14,7 +14,7 @@
 					<div class="user-profile-name">
 						<h2> ${memberInfo.name}</h2>
 						<div class="star-rating" data-rating="${avg}">
-							<div class="rating-counter"><a href="#listing-reviews">( ${reviewListsize} 개 리뷰했어요!)</a></div>
+							<div class="rating-counter"> ${reviewListsize}개 리뷰했어요! (${avg})</div>
 						</div>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 					<li><i class="fa fa-home"></i> 주소 : ${memberInfo.address}</a></li>
 					<li><i class="sl sl-icon-phone"></i> 번호 : ${memberInfo.phone}</li>
 					<li><i class="fa fa-envelope-o"></i> 이메일 : ${memberInfo.email}</a></li>
-					<li><i class="fa fa-envelope-o"></i> <a href="#">빨간색 : ${memberInfo.email}</a></li>
+					<%-- <li><i class="fa fa-envelope-o"></i> <a href="#">빨간색 : ${memberInfo.email}</a></li> --%>
 				</ul>
 				<br/>
 				<br/>
