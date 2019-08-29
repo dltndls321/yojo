@@ -158,6 +158,31 @@ geocoder.addressSearch("${festLists.area}", function(result, status) {
 });    
 </c:forEach>
 
+
+
+var sw = new kakao.maps.LatLng("${swX}", "${swY}"), // 사각형 영역의 남서쪽 좌표
+ne = new kakao.maps.LatLng("${neX}",  "${neY}"); // 사각형 영역의 북동쪽 좌표
+
+//사각형을 구성하는 영역정보를 생성합니다
+//사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
+var rectangleBounds = new kakao.maps.LatLngBounds(sw, ne);
+
+//지도에 표시할 사각형을 생성합니다
+var rectangle = new kakao.maps.Rectangle({
+bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
+strokeWeight: 4, // 선의 두께입니다
+strokeColor: '#FF3DE5', // 선의 색깔입니다
+strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+strokeStyle: 'shortdashdot', // 선의 스타일입니다
+fillColor: '#FF8AEF', // 채우기 색깔입니다
+fillOpacity: 0.5 // 채우기 불투명도 입니다
+});
+
+//지도에 사각형을 표시합니다
+rectangle.setMap(map);
+
+
+
 //커스텀 오버레이에 표시할 내용입니다     
 //HTML 문자열 또는 Dom Element 입니다 
 var content = document.createElement('div');
@@ -282,6 +307,8 @@ function removeEventHandle(target, type, callback) {
  }
 }
 
+
+//목록에 리스트추가 함수
 function foodSet1(name){
 	document.getElementById("span1").innerHTML=name;
 }
@@ -297,6 +324,9 @@ function festSet1(name){
 function festSet2(name){
 	document.getElementById("span5").innerHTML=name;
 }
+
+
+
 </script>
 </body>
 </html>
