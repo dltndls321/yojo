@@ -72,8 +72,9 @@ public class AdminController {
 	public ModelAndView moveMain(HttpSession session) throws Exception{
 		mv.clear();
 		mv.setViewName("admin/main.admin");
-		int nowuser = nowUser.getNowUser();
-		int totalmember = memberService.selectMemberList().size();
+		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
+		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
+//		int totalboard = boardService.selectBoardList(boardModel);
 		mv.addObject("totalmember",totalmember);
 		mv.addObject("nowuser",nowuser);
 		return mv;
@@ -91,13 +92,13 @@ public class AdminController {
 
 		int pageSize = 6;
 		int currentPage = pageNum;
-		int count = boardService.selectBoardList(boardModel).size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int count = boardService.selectBoardList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = (currentPage - 1) * pageSize;
 		int endRow = currentPage * pageSize;
 		if (count < endRow)
 			endRow = count;
 
-		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+		List<BoardModel> boardlist = boardService.selectBoardList();
 
 		int number = count - ((currentPage - 1) * pageSize);
 
@@ -149,7 +150,7 @@ public class AdminController {
 		boardModel = boardService.selectBoard(boardNum);
 		boardService.deleteBoard(boardModel);
 
-		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+		List<BoardModel> boardlist = boardService.selectBoardList();
 
 		mv.addObject("boardlist", boardlist);
 		mv.setViewName("admin/board.admin");

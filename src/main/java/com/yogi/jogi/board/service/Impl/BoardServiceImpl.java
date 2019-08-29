@@ -16,9 +16,9 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao dao;
 
 	@Override
-	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
+	public List<BoardModel> selectBoardList() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectBoardList(boardModel);
+		return dao.selectBoardList();
 	}
 
 	@Override
