@@ -72,8 +72,9 @@ public class AdminController {
 	public ModelAndView moveMain(HttpSession session) throws Exception{
 		mv.clear();
 		mv.setViewName("admin/main.admin");
-		int nowuser = nowUser.getNowUser();
-		int totalmember = memberService.selectMemberList().size();
+		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
+		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
+//		int totalboard = boardService.selectBoardList(boardModel);
 		mv.addObject("totalmember",totalmember);
 		mv.addObject("nowuser",nowuser);
 		return mv;

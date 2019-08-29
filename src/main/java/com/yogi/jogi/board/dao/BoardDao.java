@@ -21,7 +21,6 @@ public class BoardDao {
 	private static final String Namespace = "boardMapperNS";
 
 	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
-		String boardid = boardModel.getBoardid();
 		return sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
 
 	}
