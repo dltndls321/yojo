@@ -16,6 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.common.model.NowUserModel;
+import com.yogi.jogi.common.service.FestReviewService;
+import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
@@ -25,9 +29,9 @@ import com.yogi.jogi.member.service.MemberService;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
+	private static NowUserModel nowUser;
 	ModelAndView mv = new ModelAndView();
-
+	
 	private int pageNum;
 	private String boardid;
 
@@ -35,9 +39,14 @@ public class AdminController {
 
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private FestService festService;
+	@Autowired
+	private FestReviewService festReviewService;
+	@Autowired
+	private SpotService spotService;
 
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
@@ -60,8 +69,14 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "main")
-	public String moveMain() {
-		return "admin/main.admin";
+	public ModelAndView moveMain(HttpSession session) throws Exception{
+		mv.clear();
+		mv.setViewName("admin/main.admin");
+		int nowuser = nowUser.getNowUser();
+		int totalmember = memberService.selectMemberList().size();
+		mv.addObject("totalmember",totalmember);
+		mv.addObject("nowuser",nowuser);
+		return mv;
 	}
 
 	@RequestMapping(value = "board")

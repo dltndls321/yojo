@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="dashboard-content">
 
 		<!-- Titlebar -->
@@ -34,7 +36,7 @@
 		<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-2">
-					<div class="dashboard-stat-content"><h4>1000</h4> <span>Total Visitor</span></div>
+					<div class="dashboard-stat-content"><h4> ${nowuser}</h4> <span>접속중인 회원수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
 				</div>
 			</div>
@@ -42,7 +44,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-3">
-					<div class="dashboard-stat-content"><h4>5</h4> <span>Total Member</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalmember}</h4> <span>총 회원 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
 				</div>
 			</div>

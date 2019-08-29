@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
+import com.yogi.jogi.common.model.NowUserModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
 import com.yogi.jogi.member.model.MemberDetailModel;
@@ -30,7 +31,7 @@ public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	ModelAndView model = new ModelAndView();
-
+	private static NowUserModel nowUser;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -42,6 +43,7 @@ public class MemberController {
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
 		System.out.println("registemember : 시작");
 		model.clear();
+		int nowuser = nowUser.getNowUser();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(memberDetailModel.getId());
 		memberModel.setEmail(memberDetailModel.getEmail());
@@ -60,6 +62,7 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
+		nowUser.setNowUser(nowuser);
 		model.setViewName("redirect:/main/main");
 		model.addObject("InfoMember", memberModel);
 		return model;
@@ -69,6 +72,7 @@ public class MemberController {
 	public ModelAndView loginmember(MemberModel memberModel, HttpSession session) throws Exception {
 		System.out.println("loginmember : 시작");
 		model.clear();
+		int nowuser = nowUser.getNowUser();
 		memberModel = memberService.selectMemberWithId(memberModel);
 		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
 		System.out.println("아이디 >>" + memberModel.getId());
@@ -82,12 +86,15 @@ public class MemberController {
 			model.setViewName("redirect:/main/main");
 		}
 		model.addObject("InfoMember", memberModel);
+		nowUser.setNowUser(nowuser);
 		return model;
 	}
 
 	@RequestMapping(value = "logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
+		int nowuser = nowUser.getNowUser();
+		nowUser.setNowUser(nowuser-2);
 		return "redirect:/main/main";
 	}
 
