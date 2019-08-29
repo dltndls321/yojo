@@ -74,9 +74,14 @@ public class AdminController {
 		mv.setViewName("admin/main.admin");
 		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
 		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
-//		int totalboard = boardService.selectBoardList(boardModel);
+		int totalboard = boardService.selectBoardList().size();
+		int totalreview = festReviewService.selectFestReviewList().size();
+		
 		mv.addObject("totalmember",totalmember);
 		mv.addObject("nowuser",nowuser);
+		mv.addObject("totalboard",totalboard);
+		mv.addObject("totalreview",totalreview);
+		
 		return mv;
 	}
 
