@@ -56,6 +56,12 @@ public class MapController {
 		 
 		System.out.println("startX : " + startX +" : startY : " + startY+" : endX : " + endX +" : endY : " + endY);
 		
+		float centerX = (startX + endX)/2;
+		float centerY = (startY + endY)/2;
+		
+		mv.addObject("centerX",centerX);
+		mv.addObject("centerY",centerY);
+		
 		if(startX > endX && startY > endY) {
 			mv.addObject("foodList", mapService.getFoodList2(endY,endX,startY,startX));
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
