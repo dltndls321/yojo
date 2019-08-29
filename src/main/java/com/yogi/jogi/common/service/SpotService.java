@@ -5,10 +5,10 @@ import java.util.List;
 import com.yogi.jogi.common.model.SpotModel;
 
 public interface SpotService {
-	public int insertFest(SpotModel spotModel) throws Exception;
+	public int insertSpot(SpotModel spotModel) throws Exception;
 	
-	public List<SpotModel> selectFestList() throws Exception;
-	public SpotModel selectFestWithFestNum(SpotModel spotModel) throws Exception;
-	public SpotModel selectFestWithsubject(SpotModel spotModel) throws Exception;
+	public List<SpotModel> selectSpotList() throws Exception;
+	public SpotModel selectSpotWithSpotNum(SpotModel spotModel) throws Exception;
+	public SpotModel selectSpotWithname(SpotModel spotModel) throws Exception;
 	
 }
