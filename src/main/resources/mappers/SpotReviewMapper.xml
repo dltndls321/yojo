@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="SpotReviewMapperNS">
+  	<insert id="insertSpotReview" parameterType="spotReviewModel">
+  		Insert into spotReview(srNum,spotNum,memNum,star,sReview,regDate)	
+  		values(
+	  		spotReviewSeq.NEXTVAL,
+	  		#{spotNum},
+	  		#{memNum},
+	  		#{star},
+	  		#{sReview},
+	  		sysdate
+  		)
+  	</insert>
+  	
+  	<select id="selectSpotReviewList" resultType="spotReviewModel">
+    	select
+    		*
+    	from
+    		spotReview
+    </select>
+    
+    <select id="selectSpotReviewListWithSpotNum"  parameterType="spotReviewModel" resultType="spotReviewModel">
+    	select
+    		*
+    	from
+    		spotReview
+    	where
+    		spotNum = #{spotNum}
+    </select>
+    
+    <select id="selectSpotReviewWithMemNum"  parameterType="spotReviewModel" resultType="spotReviewModel">
+    	select
+    		*
+    	from
+    		spotReview
+    	where
+    		memNum = #{memNum}
+    </select>
+    
+    <select id="selectSpotReviewOne" parameterType="spotReviewModel" resultType="spotReviewModel">
+    	select
+    		*
+    	from
+    		spotReview
+    	where
+    		memNum = #{memNum}
+    	and
+    		spotNum = #{spotNum}
+    </select>
+  	
+  	<update id="updateSpotReview" parameterType="spotReviewModel">
+    	update spotReview set
+    		star = #{star},
+    		sReview = #{sReview}
+    	where
+    		memNum = #{memNum}
+    	and
+    		spotNum = #{spotNum}
+    </update>
+</mapper>
