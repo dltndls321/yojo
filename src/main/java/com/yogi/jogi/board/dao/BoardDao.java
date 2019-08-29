@@ -20,8 +20,9 @@ public class BoardDao {
 
 	private static final String Namespace = "boardMapperNS";
 
-	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
+
+public List<BoardModel> selectBoardList() throws Exception {
+	return sqlSession.selectList(Namespace + ".selectBoardList");
 
 	}
 
