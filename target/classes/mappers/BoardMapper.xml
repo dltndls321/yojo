@@ -28,8 +28,7 @@
 		subject=#{subject},
 		passwd=#{passwd},
 		content=#{content}
-		where
-		boardNum=#{boardNum}
+		where  		boardNum=#{boardNum}
 	</update>
 
 	<select parameterType="boardModel" id="deleteBoard"> 
