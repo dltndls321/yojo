@@ -1,6 +1,8 @@
 package com.yogi.jogi.member.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.common.model.FestReviewModel;
+import com.yogi.jogi.common.model.FestivalModel;
+import com.yogi.jogi.common.service.FestReviewService;
+import com.yogi.jogi.common.service.FestService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
@@ -27,7 +33,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private FestReviewService festReviewService;
+	@Autowired
+	private FestService festService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -88,12 +97,31 @@ public class MemberController {
 		System.out.println("member/profile  : 시작");
 		model.clear();
 		MemberModel memberModel = new MemberModel();
+		FestReviewModel festReviewModel = new FestReviewModel();
+		FestivalModel festivalModel = new FestivalModel();
+		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
+		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
+		List<FestivalModel> festList = new ArrayList<FestivalModel>();
+		int reviewListsize = reviewList.size();
+		int star = 0;
+		for(int i = 0 ; i<reviewListsize;i++) {
+			star = star + reviewList.get(i).getStar();
+			int festnum = reviewList.get(i).getFestNum();
+			festivalModel.setFestNum(festnum);
+			festivalModel = festService.selectFestWithFestNum(festivalModel);
+			festList.add(festivalModel);
+		}
+		double avg =((double)(star*10)/reviewListsize)/10;
 		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
 		model.addObject("memberInfo", memberModel);
+		model.addObject("reviewListsize",reviewListsize);
+		model.addObject("avg",avg);
+		model.addObject("reviewList",reviewList);
+		model.addObject("festList",festList);
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
