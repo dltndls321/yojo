@@ -99,6 +99,23 @@
 						<a href="#" class="button gray"><i class="sl sl-icon-close"></i>
 							Delete</a>
 					</div>
+					<div class="pagination-container margin-top-30 margin-bottom-0">
+					<nav class="pagination">
+						<ul>
+							<c:if test="${ startPage>bottomLine}">
+								<li><a href="/board/boardlist?pageNum=${startPage - bottomLine}"><i class="sl sl-icon-arrow-left"></i></a></li>
+							</c:if>
+							<c:forEach   var="i"  begin="${startPage }"   end="${endPage }">
+								<li><a href="/board/boardlist?pageNum=${i}" class="current-page">${i }</a></li>
+							 	
+							</c:forEach>
+							<c:if test="${ endPage<pageCount}">
+								<li><a href="/board/boardlist?pageNum=${startPage + bottomLine}"><i class="sl sl-icon-arrow-right"></i></a></li>
+							</c:if>
+							
+						</ul>
+					</nav>
+				</div>
 					</li>
 
 
