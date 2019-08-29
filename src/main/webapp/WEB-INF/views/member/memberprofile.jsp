@@ -12,8 +12,8 @@
 					<div class="user-profile-avatar"><img src="images/user-profile-avatar.jpg" alt=""></div>
 					<div class="user-profile-name">
 						<h2> ${memberInfo.name}</h2>
-						<div class="star-rating" data-rating="5">
-							<div class="rating-counter"><a href="#listing-reviews">(60 reviews)</a></div>
+						<div class="star-rating" data-rating="${avg}">
+							<div class="rating-counter"><a href="#listing-reviews">( ${reviewListsize} 개 리뷰했어요!)</a></div>
 						</div>
 					</div>
 				</div>
