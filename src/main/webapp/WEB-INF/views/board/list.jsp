@@ -24,6 +24,7 @@
 						<h2>게시판</h2>
 						<!-- Breadcrumbs -->
 						<nav id="breadcrumbs">
+
 							<ul>
 								<li><a href="#">Home</a></li>
 								<li><a href="#">게시판</a></li>
@@ -42,7 +43,8 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th></th>
+									<th><a class="fa fa-edit fa-fw"
+										href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
 									<th></th>
 									<th></th>
 									<th>No.</th>
@@ -50,41 +52,48 @@
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
+
 								</tr>
 							</thead>
 						</table>
 						<ul>
 
-							<li>
-								<div class="list-box-listing">
-									<c:forEach items="${AllList}" var="list">
+							<li><c:forEach items="${AllList}" var="list">
+									<div class="list-box-listing">
 										<div class="list-box-listing-img">
-											<a href="#"><img src="images/listing-item-02.jpg" alt=""></a>
+											<a href="#"> <img
+												src="<%=request.getContextPath() %>/fileSave/${list.fname}">
+											</a>
 										</div>
 										<div class="list-box-listing-content">
 											<div class="inner">
 												<table>
 													<tr>
-														<td width="250"><div>
+														<td width="110"><div>
+																<h3></h3>
+															</div></td>
+														<td width="180"><div>
 																<h3>${list.boardNum}</h3>
 															</div></td>
-														<td width="200"	><div>
-																<a href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
+														<td width="220"><div>
+																<a
+																	href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
 																	${list.subject}</a>
-																	</div></td>
+															</div></td>
 
-														<td width="200"><div>${list.writer}</div></td>
-														<td width="230"><div>
-															<fmt:formatDate type="date" value="${list.regdate}" />
-														</div></td>
-														<td style="letter-spacing: 40pt;"><div>${list.readcount}</div></td>
+														<td width="250"><div>${list.writer}</div></td>
+														<td width="325"><div>
+																<fmt:formatDate type="date" value="${list.regdate}" />
+															</div></td>
+														<td><div>${list.readcount}</div></td>
 
 													</tr>
 												</table>
 											</div>
 
 										</div>
-								</div> </c:forEach>
+									</div>
+								</c:forEach>
 					</div>
 					<div class="buttons-to-right">
 						<a href="#" class="button gray"><i class="sl sl-icon-close"></i>

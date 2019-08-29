@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<div class="page-wrapper">
+		<div class="container-fluid">
+			<div class="col-lg-8" align="center">
 
-<html><head><title>게시판</title></head><body>
-	<div class="w3-center">
-		<p class="w3-left" style="padding-left: 30px;">></p>
-		<div class="w3-container ">
-			<b>글삭제</b><br>
-			<form method="POST" name="deleteForm" action="/board/deletePro">
+				<div class="col-lg-12">
+					<h1 class="page-header"></h1>
+					<h1 class="page-header"></h1>
+					
+				</div>
+				<div class="row">
+					<div class="col-lg-12"></div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form method="POST" name="deleteForm" action="/board/deletePro">
 			<input type="hidden" name="boardNum" value="${boardNum }">
 			<input	type="hidden" name="pageNum" value="${pageNum }">
 				<table class="table-bordered" width="360">
@@ -18,5 +26,13 @@
 						<td align=center><input type="submit" value="글삭제">
 							<input type="button" value="글목록"
 							onclick="document.location.href='<%=request.getContextPath() %>/board/boardlist?pageNum=${pageNum }'">
-						</td>
-		</tr></table></form>	</div>	</div></body></html>
+							</td>
+							</tr>
+							</table>
+							</form>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

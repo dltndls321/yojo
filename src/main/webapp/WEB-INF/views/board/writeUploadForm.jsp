@@ -6,33 +6,36 @@
 <html>
 <head>
 <script>
-${"#btnInsert"}click(function () {
-	var subject = $("#subject").val();
-	var content = $("#content").val();
-	var writer = $("#writer").val();
-	var passwd = $("#passwd").val();
-	if (subject == " "){
-		alert("제목을 입력해주세요")
-		document.form.subject.focus();
-		return;
+	$
+	{
+		"#btnInsert"
 	}
-	if (content == " "){
-		alert("제목을 입력해주세요")
-		document.form.content.focus();
-		return;
-	}
-	if (writer == " "){
-		alert("제목을 입력해주세요")
-		document.form.writer.focus();
-		return;
-	}
-	if (passwd == " "){
-		alert("제목을 입력해주세요")
-		document.form.passwd.focus();
-		return;
-	}
-})
-
+	click(function() {
+		var subject = $("#subject").val();
+		var content = $("#content").val();
+		var writer = $("#writer").val();
+		var passwd = $("#passwd").val();
+		if (subject == " ") {
+			alert("제목을 입력해주세요")
+			document.form.subject.focus();
+			return;
+		}
+		if (content == " ") {
+			alert("제목을 입력해주세요")
+			document.form.content.focus();
+			return;
+		}
+		if (writer == " ") {
+			alert("제목을 입력해주세요")
+			document.form.writer.focus();
+			return;
+		}
+		if (passwd == " ") {
+			alert("제목을 입력해주세요")
+			document.form.passwd.focus();
+			return;
+		}
+	})
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
@@ -59,11 +62,11 @@ ${"#btnInsert"}click(function () {
 				<div class="panel panel-default">
 					<div class="panel-heading">게시판</div>
 					<div class="panel-body">
-						<form method="post" name="writeUploadForm" enctype="multipart/form-data"
-							action="/board/writeUploadPro">
+						<form method="post" name="writeUploadForm"
+							enctype="multipart/form-data" action="/board/writeUploadPro">
 
 							<input type="hidden" name="boardid" value="${boardid}">
-							
+
 							<div class="row form-group">
 
 								<label class="col-lg-2">제목</label>
@@ -96,26 +99,28 @@ ${"#btnInsert"}click(function () {
 								</div>
 							</div>
 							<table>
-							<tr>
-							
-								<td width="600" align="left">
-								<input type="file" size="40" maxlength="30" name="uploadfile"></td>
-							</tr>
-							
+						
+								<tr>
+									<td width="70" align="center">file</td>
+									<td width="260"><input type="file" 
+									size="40"
+										maxlength="30" name="uploadfile"></td>
+								</tr>
 								<tr>
 									<td colspan=2 align="center">
-									<button class="btn btn-outline btn-primary" id="btnInsert" value="글쓰기">글쓰기</button>
-									<input class="btn btn-outline btn-primary" type="reset" value="다시작성"> 
-									<input class="btn btn-outline btn-primary" type="button" value="목록보기"
-										OnClick="window.location='boardlist?pageNum=${pageNum}'"></td>
+									<input type=submit id="btnInsert" value="글쓰기"
+										style="max-width: 100px; min-width: 99px;"> 
+										<input type="reset" value="다시작성" style="max-width: 100px;"> 
+										<input type="button" value="목록보기"
+										OnClick="window.location='boardlist?pageNum=${pageNum}'"
+										style="max-width: 100px;"></td>
+
 
 								</tr>
-								</table>
+							</table>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-

@@ -101,7 +101,7 @@ public class AdminController {
 		boardid = "1";
 		boardModel.setBoardid(boardid);
 
-		int pageSize = 6;
+		int pageSize = 2;
 		int currentPage = pageNum;
 		int count = boardService.selectBoardList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = (currentPage - 1) * pageSize;
