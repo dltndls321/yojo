@@ -35,6 +35,7 @@ public class BoardDao {
 	}
 
 	public int updateBoard(BoardModel boardModel) throws Exception {
+		System.out.println(boardModel);
 		return sqlSession.update(Namespace + ".updateBoard", boardModel);
 
 	}

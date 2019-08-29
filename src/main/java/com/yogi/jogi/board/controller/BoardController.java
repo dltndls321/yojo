@@ -69,7 +69,7 @@ public class BoardController {
 		boardid = "1";
 		boardModel.setBoardid(boardid);
 		List<BoardModel> AllList = boardService.selectBoardList();
-		mv.setViewName("board/boardlist");
+		mv.setViewName("board/boardlist.do");
 		mv.addObject("AllList", AllList);
 		
 
@@ -91,7 +91,7 @@ public class BoardController {
 	public ModelAndView writeForm(BoardModel boardModel,@RequestParam(value="boardid", required=false) String boardid) throws Exception {
 		mv.clear(); 
 		
-		mv.setViewName("board/writeUploadForm");
+		mv.setViewName("board/writeUploadForm.do");
 		mv.addObject("boardid",boardid);
 		return mv;
 	}
@@ -141,7 +141,7 @@ public class BoardController {
 	public ModelAndView content(int boardNum) throws Exception {
 		
 		mv.clear();
-		mv.setViewName("board/content"); // 가야할 페이지
+		mv.setViewName("board/content.do"); // 가야할 페이지
 		mv.addObject("list", boardService.selectBoard(boardNum));
 		return mv;
 
@@ -163,7 +163,7 @@ public class BoardController {
 	  public ModelAndView update(BoardModel boardModel,@PathVariable("boardNum") int boardNum) throws Exception {
 		System.out.println(boardModel);
 	  boardService.updateBoard(boardModel);
-	  mv.setViewName("board/updateForm"); 
+	  mv.setViewName("board/updateForm.do"); 
 	  return mv; 
 	  }
 	 
@@ -174,10 +174,11 @@ public class BoardController {
 
 
 		 int check = boardService.updateBoard(boardModel);
+		 System.out.println(check);
 	      mv.addObject("check", check);
 	      mv.addObject("pageNum", pageNum);
 	      
-	      mv.setViewName("board/updatePro");
+	      mv.setViewName("board/updatePro.do");
 	      return mv;
 	}
 
@@ -188,7 +189,7 @@ public class BoardController {
 		mv.addObject("boarNum", boardNum);
 		mv.addObject("pageNum", pageNum);
 
-		mv.setViewName("board/deleteForm");
+		mv.setViewName("board/deleteForm.do");
 		return mv;
 	}
 
