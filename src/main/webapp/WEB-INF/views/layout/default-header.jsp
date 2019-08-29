@@ -90,16 +90,16 @@
 
 						<li><a href="#">TripInfo</a>
 							<ul>
-								<li><a href="dashboard.html">Eat</a></li>
+								<li><a href="/food/list">Eat</a></li>
 								<li><a href="/festival/list">Festival</a></li>
-								<li><a href="dashboard-bookings.html">Tourist Spot</a></li>
+								<li><a href="/spot/list">Tourist Spot</a></li>
 							</ul>
 						</li>
 
 						<li><a href="#">Community</a>
 							<ul>
-								<li><a href="dashboard.html">Notice</a></li>
-								<li><a href="dashboard-messages.html">Free Board</a></li>
+								<li><a href="/board/list">Notice</a></li>
+								<li><a href="/board/boardlist">Free Board</a></li>
 								<li><a href="dashboard-bookings.html">Q&A</a></li>
 							</ul>
 						</li>

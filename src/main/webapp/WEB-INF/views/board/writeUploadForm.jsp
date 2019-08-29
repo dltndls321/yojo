@@ -60,7 +60,7 @@ ${"#btnInsert"}click(function () {
 					<div class="panel-heading">게시판</div>
 					<div class="panel-body">
 						<form method="post" name="writeUploadForm" enctype="multipart/form-data"
-							action="writeUploadPro">
+							action="/board/writeUploadPro">
 
 							<input type="hidden" name="boardid" value="${boardid}">
 							

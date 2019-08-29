@@ -6,12 +6,12 @@
 <mapper namespace="MapMapperNS">
 
   <select id="getFoodList"  resultType="mapModel">
-    	select * from foodtest3
+    	select * from food
    </select>
      
-   <select id="getFoodList2"  parameterType="float"  resultType="mapModel" >
+   <select id="getFoodList2"  parameterType="hashmap"  resultType="mapModel" >
    	 <![CDATA[
-    select * from foodtest3 where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
+    select * from food where foodx>#{startX} and foodx<#{endX} and foody>#{startY} and foody<#{endY}
     ]]>	
    </select>
    
