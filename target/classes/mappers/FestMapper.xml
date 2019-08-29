@@ -24,6 +24,15 @@
     	from
     		festival
     </select>
+    
+    
+    <!-- 승해가 추가한부분 -->
+    <select id="selectFestListXY" parameterType="hashmap" resultType="festModel" >
+     <![CDATA[
+    select * from festival where fmapx>#{startX} and fmapx<#{endX} and fmapy>#{startY} and fmapy<#{endY}
+    ]]>	
+    </select>
+    
     <select id="selectFestWithFestNum" parameterType="festModel" resultType="festModel">
     	select
     		*

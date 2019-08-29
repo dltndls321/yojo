@@ -73,9 +73,10 @@
 			 
           <input type="submit" value="수정" >
 			</form>
-			
-			
-			<form action="/board/delete/${list.boardNum}"><input type="submit" value="삭제" ></form> 
+
+			<form action="/board/delete/${list.boardNum}">
+			<input type="submit" value="삭제" >
+			</form> 
               <input type="button" value="글목록" onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"> 
       </div>
 <%-- 		<input type="button" value="글수정" onclick="document.location.href='/board/update?boardNum=${list.boardNum}'">

@@ -20,9 +20,9 @@ public class BoardDao {
 
 	private static final String Namespace = "boardMapperNS";
 
-	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
-		String boardid = boardModel.getBoardid();
-		return sqlSession.selectList(Namespace + ".selectBoardList", boardModel);
+
+public List<BoardModel> selectBoardList() throws Exception {
+	return sqlSession.selectList(Namespace + ".selectBoardList");
 
 	}
 
@@ -34,22 +34,21 @@ public class BoardDao {
 		return sqlSession.insert(Namespace + ".insertBoard", boardModel);
 
 	}
+
 	public int updateBoard(BoardModel boardModel) throws Exception {
 		return sqlSession.update(Namespace + ".updateBoard", boardModel);
 
 	}
+
 	public int deleteBoard(BoardModel boardModel) throws Exception {
 		return sqlSession.delete(Namespace + ".deleteBoard", boardModel);
 
 	}
-	public int selectPasswdOneNum(BoardModel boardModel) throws Exception {
-		try {
-			return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
-		} finally {
-			sqlSession.close();
-		}
-		
-	}
 
+	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
+
+		return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
+
+	}
 
 }

@@ -5,49 +5,114 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>Insert title here</title>
-</head>
-<body>
-	<div class="w3-container">
-		<span class="w3-center  w3-large"> </span>
-		<p class="w3-right w3-padding-right-large">
-			<a href="<%=request.getContextPath()%>/board/writeForm?">글쓰기</a>
-		</p>
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<div class="clearfix"></div>
+	<!-- Header Container / End -->
 
 
+	<!-- Dashboard -->
+	<div id="dashboard">
+
+		<div class="dashboard-content">
+
+			<!-- Titlebar -->
+			<div id="titlebar">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>게시판</h2>
+						<!-- Breadcrumbs -->
+						<nav id="breadcrumbs">
+							<ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#">게시판</a></li>
+								<li>공지사항</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<!-- Listings -->
+				<div class="col-lg-12 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>No.</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+						</table>
+						<ul>
+
+							<li>
+								<div class="list-box-listing">
+									<c:forEach items="${AllList}" var="list">
+										<div class="list-box-listing-img">
+											<a href="#"><img src="images/listing-item-02.jpg" alt=""></a>
+										</div>
+										<div class="list-box-listing-content">
+											<div class="inner">
+												<table>
+													<tr>
+														<td width="250"><div>
+																<h3>${list.boardNum}</h3>
+															</div></td>
+														<td width="200"	><div>
+																<a href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
+																	${list.subject}</a>
+																	</div></td>
+
+														<td width="200"><div>${list.writer}</div></td>
+														<td width="230"><div>
+															<fmt:formatDate type="date" value="${list.regdate}" />
+														</div></td>
+														<td style="letter-spacing: 40pt;"><div>${list.readcount}</div></td>
+
+													</tr>
+												</table>
+											</div>
+
+										</div>
+								</div> </c:forEach>
+					</div>
+					<div class="buttons-to-right">
+						<a href="#" class="button gray"><i class="sl sl-icon-close"></i>
+							Delete</a>
+					</div>
+					</li>
 
 
-		<table class="table table-striped table-bordered table-hover"
-			width="700">
-			<tr class="table table-striped" style="text-align: center;">
-				<th>번호</th>
-				<th>제 목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조 회</th>
+					</ul>
+				</div>
+			</div>
 
-			</tr>
-			<c:forEach var="list" items="${AllList }">
 
-				<tr height="30">
-					<td align="center" width="50">${list.boardNum }</td>
-
-					<td width="250">${list.subject }</td>
-					<td align="center" width="100">${list.writer}</td>
-
-					<td align="center" width="150"><fmt:formatDate type="date"
-							value="${list.regdate}" /></td>
-					<td align="center" width="50">${list.readcount}</td>
-
-				</tr>
-			</c:forEach>
-
-		</table>
+			<!-- Copyrights -->
+			<div class="col-md-12">
+				<div class="copyrights">© 2019 Listeo. All Rights Reserved.</div>
+			</div>
+		</div>
 
 	</div>
+	<!-- Content / End -->
 
-</body>
-</html>
+
+</div>
+<!-- Dashboard / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+
+

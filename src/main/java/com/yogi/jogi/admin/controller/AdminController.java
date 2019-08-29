@@ -16,6 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.common.model.NowUserModel;
+import com.yogi.jogi.common.service.FestReviewService;
+import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
@@ -25,9 +29,9 @@ import com.yogi.jogi.member.service.MemberService;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
+	private static NowUserModel nowUser;
 	ModelAndView mv = new ModelAndView();
-
+	
 	private int pageNum;
 	private String boardid;
 
@@ -35,9 +39,14 @@ public class AdminController {
 
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private FestService festService;
+	@Autowired
+	private FestReviewService festReviewService;
+	@Autowired
+	private SpotService spotService;
 
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
@@ -60,8 +69,15 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "main")
-	public String moveMain() {
-		return "admin/main.admin";
+	public ModelAndView moveMain(HttpSession session) throws Exception{
+		mv.clear();
+		mv.setViewName("admin/main.admin");
+		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
+		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
+//		int totalboard = boardService.selectBoardList(boardModel);
+		mv.addObject("totalmember",totalmember);
+		mv.addObject("nowuser",nowuser);
+		return mv;
 	}
 
 	@RequestMapping(value = "board")
@@ -76,13 +92,13 @@ public class AdminController {
 
 		int pageSize = 6;
 		int currentPage = pageNum;
-		int count = boardService.selectBoardList(boardModel).size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int count = boardService.selectBoardList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = (currentPage - 1) * pageSize;
 		int endRow = currentPage * pageSize;
 		if (count < endRow)
 			endRow = count;
 
-		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+		List<BoardModel> boardlist = boardService.selectBoardList();
 
 		int number = count - ((currentPage - 1) * pageSize);
 
@@ -134,7 +150,7 @@ public class AdminController {
 		boardModel = boardService.selectBoard(boardNum);
 		boardService.deleteBoard(boardModel);
 
-		List<BoardModel> boardlist = boardService.selectBoardList(boardModel);
+		List<BoardModel> boardlist = boardService.selectBoardList();
 
 		mv.addObject("boardlist", boardlist);
 		mv.setViewName("admin/board.admin");
