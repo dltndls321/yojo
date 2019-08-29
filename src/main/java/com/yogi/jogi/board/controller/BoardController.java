@@ -68,7 +68,7 @@ public class BoardController {
 		BoardModel boardModel = new BoardModel();
 		boardid = "1";
 		boardModel.setBoardid(boardid);
-		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
+		List<BoardModel> AllList = boardService.selectBoardList();
 		mv.setViewName("board/boardlist");
 		mv.addObject("AllList", AllList);
 		
@@ -80,8 +80,8 @@ public class BoardController {
 		BoardModel boardModel = new BoardModel();
 		boardid = "2";
 		boardModel.setBoardid(boardid);
-		List<BoardModel> AllList = boardService.selectBoardList(boardModel);
-		mv.setViewName("board/list");
+		List<BoardModel> AllList = boardService.selectBoardList();
+		mv.setViewName("board/list.do");
 		mv.addObject("AllList", AllList);
 		
 		return mv;
