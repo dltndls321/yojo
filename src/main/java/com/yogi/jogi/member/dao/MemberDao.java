@@ -47,4 +47,7 @@ public class MemberDao {
 	public List<MemberModel> selectMemberListPaging(Map map) throws Exception {
 		return sqlSession.selectList(Namespace+".selectMemberListPaging",map);
 	}
+	public List<MemberModel> selectMemberbetweenDate(Map map) throws Exception {
+		return sqlSession.selectList(Namespace+".selectMemberbetweenDate",map);
+	}
 }

@@ -73,7 +73,7 @@
 						</span>
 					</button>
 				</div>
-
+				<c:if test="${not empty SessionMemberMemnum }">
 				<!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
@@ -108,6 +108,8 @@
 				</nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
+				</c:if>
+				
 				
 			</div>
 			<!-- Left Side Content / End -->

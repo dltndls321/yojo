@@ -1,5 +1,9 @@
 package com.yogi.jogi.admin.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +23,7 @@ import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.common.model.NowUserModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
@@ -49,6 +54,8 @@ public class AdminController {
 	private FestReviewService festReviewService;
 	@Autowired
 	private SpotService spotService;
+	@Autowired
+	private SpotReviewService spotReviewService;
 
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
@@ -77,17 +84,21 @@ public class AdminController {
 		MemberModel memberModel = new MemberModel(); 
 		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		Date start = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.of("Asia/Seoul").systemDefault()).toInstant());
+		Date end = Date.from(LocalDateTime.now().atZone(ZoneId.of("Asia/Seoul").systemDefault()).toInstant());
+		System.out.println(start+ " and " +end);
+		List<MemberModel> dateMembermodel = memberService.selectMemberbetweenDate(start, end);
 		int nowuser = nowUser.getNowUser();//현재 접속중인 인원
 		int totalmember = memberService.selectMemberList().size();//가입한 총 회원수
 		int totalboard = boardService.selectBoardList().size();
-		int totalreview = festReviewService.selectFestReviewList().size() + spotService.selectSpotList().size();
+		int totalreview = festReviewService.selectFestReviewList().size() + spotReviewService.selectSpotReviewList().size();
 		
 		mv.addObject("adminInfo", memberModel);
 		mv.addObject("totalmember",totalmember);
 		mv.addObject("nowuser",nowuser);
 		mv.addObject("totalboard",totalboard);
 		mv.addObject("totalreview",totalreview);
-		
+		mv.addObject("dateMembermodel",dateMembermodel);
 		return mv;
 	}
 
@@ -173,6 +184,9 @@ public class AdminController {
 	public ModelAndView moveMemberList() throws Exception {
 
 		mv.clear();
+		
+		
+		
 		int pageSize = 5;//한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
 		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
@@ -190,6 +204,12 @@ public class AdminController {
 			endPage = pageCount;
 		}	
 		List<MemberModel> memberList = memberService.selectMemberListPaging(startRow +1, endRow);
+		LocalDateTime now = LocalDateTime.now();//로컬데이트타임 현재
+		List<LocalDateTime> regdate =  new ArrayList<LocalDateTime>();//새 리스트
+		for(int i=0;i<memberList.size();i++) {
+			regdate.add(memberList.get(i).getRegdate().toInstant().atZone(ZoneId.of("Asia/Seoul").systemDefault()).toLocalDateTime());
+		}//db에 있는 regdate를 로컬데이트로 타입 변환 후 삽입
+		LocalDateTime startdate = now.minusDays(1);//현재 시간보다 하루 적은 날짜
 		
 		mv.addObject("memberList", memberList);
 		
@@ -201,7 +221,9 @@ public class AdminController {
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);
 		mv.addObject("endPage", endPage);
-
+		mv.addObject("now",now);
+		mv.addObject("regdate",regdate);
+		mv.addObject("startdate",startdate);
 		mv.setViewName("admin/memberList.admin");
 
 		return mv;

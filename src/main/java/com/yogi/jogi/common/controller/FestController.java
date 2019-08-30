@@ -102,10 +102,6 @@ public class FestController {
         JSONObject parse_body = (JSONObject) parse_response.get("body");
         JSONObject parse_items = (JSONObject) parse_body.get("items"); 
         JSONArray parse_item = (JSONArray) parse_items.get("item");
-        System.out.println("1"+parse_response.toString());
-        System.out.println("2"+parse_body.toString());
-        System.out.println("3"+parse_items.toString());
-        System.out.println("5"+parse_item.size());
 		/*
 		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
 		 * System.out.println(totalCount.toString());
@@ -243,10 +239,19 @@ public class FestController {
 	    	        float mapx = Float.parseFloat(mapX.toString());
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
+	    	        String addr2 = addr1;
+	    	        int lastIdx = addr1.lastIndexOf(",");
+	    	        if(lastIdx!=0 && lastIdx != -1) {
+	    	        	addr2 = addr1.substring(0,lastIdx-2);
+	    	        	model.addObject("addr2",addr2);
+	    	        }
+	    	        
+	    	        
 	    	        
 	    	        festivalModel.setSubject(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
+	    	        model.addObject("addr2",addr2);
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("tel",tel);
@@ -414,9 +419,6 @@ public class FestController {
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		festReviewModel.setFestNum(festNum);
 		festReviewModel.setMemNum(memNum);
-		System.out.println(festNum);
-		System.out.println(memNum);
-		System.out.println(festReviewService.selectFestReviewOne(festReviewModel));
 		if(festReviewService.selectFestReviewOne(festReviewModel) == null) {
 			festReviewService.insertFestReview(festReviewModel);
 			System.out.println("됐을거아니야");

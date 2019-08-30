@@ -7,7 +7,6 @@
 $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
       var star = $(this).val();
-      alert(star)
       $('#add-comment').prepend("<input type='hidden' name = 'star' value =" + star +">")
       
     });
@@ -283,7 +282,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch("${addr1}", function(result, status) {
+geocoder.addressSearch("${addr2}", function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {

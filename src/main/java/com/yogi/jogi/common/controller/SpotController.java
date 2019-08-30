@@ -106,11 +106,6 @@ public class SpotController {
         JSONObject parse_items = (JSONObject) parse_body.get("items"); 
         JSONArray parse_item = (JSONArray) parse_items.get("item");
        
-        
-        System.out.println("1"+parse_response.toString());
-        System.out.println("2"+parse_body.toString());
-        System.out.println("3"+parse_items.toString());
-        System.out.println("5"+parse_item.size());
 		/*
 		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
 		 * System.out.println(totalCount.toString());

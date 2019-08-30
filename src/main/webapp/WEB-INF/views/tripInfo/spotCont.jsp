@@ -7,7 +7,6 @@
 $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
       var star = $(this).val();
-      alert(star)
       $('#add-comment').prepend("<input type='hidden' name = 'star' value =" + star +">")
       
     });
@@ -42,8 +41,8 @@ $(document).ready(function () {
 							${addr1}
 						</a>
 					</span>
-					<div class="star-rating" data-rating="5">
-						<div class="rating-counter"><a href="#listing-reviews">(5 reviews)</a></div>
+					<div class="star-rating" data-rating="${avg}">
+						<div class="rating-counter"><a href="#listing-reviews">(${size} reviews)</a></div>
 					</div>
 				</div>
 			</div>
@@ -300,7 +299,7 @@ geocoder.addressSearch("${addr1}", function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${name}"+'</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${title}"+'</div>'
         });
         infowindow.open(map, marker);
 
