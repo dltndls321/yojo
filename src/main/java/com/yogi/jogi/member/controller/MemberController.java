@@ -19,8 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.NowUserModel;
+import com.yogi.jogi.common.model.SpotModel;
+import com.yogi.jogi.common.model.SpotReviewModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
@@ -41,6 +44,8 @@ public class MemberController {
 	private FestService festService;
 	@Autowired
 	private SpotService spotService;
+	@Autowired
+	private SpotReviewService spotReviewService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -119,6 +124,9 @@ public class MemberController {
 		MemberModel memberModel = new MemberModel();
 		FestReviewModel festReviewModel = new FestReviewModel();
 		FestivalModel festivalModel = new FestivalModel();
+		SpotReviewModel spotReviewModel = new SpotReviewModel();
+		SpotModel spotModel = new SpotModel();
+		spotReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
@@ -135,6 +143,26 @@ public class MemberController {
 			}
 			avg =((double)((star*10)/reviewListsize))/10;
 		}
+		List<SpotReviewModel> spotReviewList = spotReviewService.selectSpotReviewWithMemNum(spotReviewModel);
+		List<SpotModel> spotList = new ArrayList<SpotModel>();
+		int spotreviewListsize = spotReviewList.size();
+		int spotstar = 0;
+		double spotavg=0;
+		if(spotreviewListsize!=0) {
+			for(int i = 0 ; i<spotreviewListsize;i++) {
+				spotstar = spotstar + spotReviewList.get(i).getStar();
+				int spotNum = spotReviewList.get(i).getSpotNum();
+				spotModel.setSpotNum(spotNum);
+				spotModel = spotService.selectSpotWithSpotNum(spotModel);
+				spotList.add(spotModel);
+			}
+			spotavg =((double)((spotstar*10)/reviewListsize))/10;
+		}
+		if(avg != 0 && spotavg != 0) {
+			avg = (double)(((int)((avg+spotavg)*10))/2)/10;
+		}
+		System.out.println(avg);
+		System.out.println(spotavg);
 		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println("memberModel셋 memNum  : " + memberModel);
@@ -145,6 +173,9 @@ public class MemberController {
 		model.addObject("avg",avg);
 		model.addObject("reviewList",reviewList);
 		model.addObject("festList",festList);
+		model.addObject("spotReviewList",spotReviewList);
+		model.addObject("spotList",spotList);
+		model.addObject("spotreviewListsize",spotreviewListsize);
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
