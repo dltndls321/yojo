@@ -7,7 +7,6 @@
 $(document).ready(function () {
     $("input:radio[name=rating]").click(function () {
       var star = $(this).val();
-      alert(star)
       $('#add-comment').prepend("<input type='hidden' name = 'star' value =" + star +">")
       
     });
