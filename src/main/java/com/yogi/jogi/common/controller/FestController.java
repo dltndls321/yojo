@@ -71,7 +71,7 @@ public class FestController {
         parameter = parameter + "&" + "MobileApp=AppTest";
         parameter = parameter + "&" + "arrange=O";       
         parameter = parameter + "&" + "listYN=Y" ;
-        parameter = parameter + "&" + "eventStartDate=" + eventStartDate ;
+        parameter = parameter + "&" + "eventEndDate=" + eventStartDate ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&" + "numOfRows=9";
         parameter = parameter + "&" + "_type=json";

@@ -137,7 +137,7 @@ public class SpotController {
         			"</div>"+
         			"</a>"+
         			"</div>";
-        	
+        	/*
         	//데이터넣기위해 jsonparsing하는 애들
         	String cat = (String) imsi.get("cat3"); 
         	if(cat.equals("A01010100")|| cat.equals("A01010200")|| cat.equals("A01010300")) {
@@ -168,8 +168,9 @@ public class SpotController {
  	        spotModel.setZcode(zcode);
          	 	
          	System.out.println(i+"번째"+spotModel);
-         	//addData(spotModel);
+         	addData(spotModel);
          	Thread.sleep(100);
+         	*/
         	}	
         out.append(finaldata);
         out.flush();

@@ -65,15 +65,12 @@
 		<div class="col-lg-8 col-md-8 padding-left-30">
 
 			<h3 class="margin-top-0 margin-bottom-40">Tom's Listings</h3>
-
 			<!-- Listings Container -->
 			<div class="row">
-
 				<!-- Listing Item -->
 				<div class="col-lg-12 col-md-12">
 					<div class="listing-item-container list-layout">
 						<a href="listings-single-page.html" class="listing-item">
-							
 							<!-- Image -->
 							<div class="listing-item-image">
 								<img src="images/listing-item-01.jpg" alt="">

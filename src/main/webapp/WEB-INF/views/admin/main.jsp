@@ -114,7 +114,7 @@
 								<li>Date: <fmt:formatDate value="${dateMembermodels.regdate }" pattern="yyyy년 MM월 dd일" /></li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="/admin/memberProfile" class="button gray">View Info</a>
+								<a href="/admin/memberProfile/${dateMembermodels.memnum}" class="button gray">View Info</a>
 							</div>
 						</li>
 						</c:forEach>
