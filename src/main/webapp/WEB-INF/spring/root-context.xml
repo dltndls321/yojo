@@ -16,11 +16,7 @@
 	<bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-<<<<<<< HEAD
-       <!-- <property name="url"
-=======
       <!--  <property name="url"
->>>>>>> 9ebf934e982c5faa9f9ed85ecdc4255a3422cd61
             value="jdbc:oracle:thin:@127.0.0.1:1521:orcl">
         </property> -->
         <property name="url"
