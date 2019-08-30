@@ -179,7 +179,6 @@ public class AdminController {
 
 		return mv;
 	}
-
 	@RequestMapping(value = "memberList")
 	public ModelAndView moveMemberList() throws Exception {
 
