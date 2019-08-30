@@ -15,5 +15,4 @@ public interface BoardService {
 	public int deleteBoard(BoardModel boardModel)throws Exception;
 	public BoardModel selectPasswdOneNum(BoardModel boardModel)throws Exception;
 	public List<BoardModel> selectBoardListPaging(int start,int end) throws Exception;
-	
 }

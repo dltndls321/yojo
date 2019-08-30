@@ -60,4 +60,8 @@ public class BoardServiceImpl implements BoardService {
 		map.put("end", end);
 		return dao.selectBoardListPaging(map);
 	}
+
+
+
+	
 }

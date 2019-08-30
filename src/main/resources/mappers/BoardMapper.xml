@@ -6,8 +6,14 @@
 
 	<select id="selectBoardList" resultType="boardModel">
 		
-		select boardNum,memNum,boardid,subject,writer,passwd,content,fname,fsize,readcount
-		,regdate,ref,reStep,reLevel from board
+		select *  from
+    		(select rownum rnum,a.* from
+    			(select 
+    				* 
+    			from 
+    				board
+    			order by boardnum desc) a
+    		)
 	</select>
 	
 	<insert id="insertBoard"  parameterType="boardModel" >
@@ -65,14 +71,23 @@
     		where rnum between #{start} and #{end}
     	
     </select>
-	<!-- <select id="selectBoardCount" parameterType="boardModel"
+	
+		<update id="updateReadcount" parameterType="boardModel">
+		update
+		board
+		set
+		readcount=readcount+1
+		where
+		boardNum = #{boardNum}
+	</update>
+
+<!--
+	 <select id="selectBoardCount" parameterType="boardModel"
 		resultType="boardModel">
 		select
 		nvl(count(*),0) from board where boardid =
 		#{boardid}
 	</select>
-
-
 	<select id="selectMaxBoardNum" resultType="int">
 		select
 		nvl(max(boardNum),0) from
@@ -99,14 +114,7 @@
 		boardNum = #{boardNum}
 	</select>
 
-	<update id="updateReadcount" parameterType="boardModel">
-		update
-		board
-		set
-		readcount=readcount+1
-		where
-		num = #{num}
-	</update> -->
+ -->
 
 
 	
