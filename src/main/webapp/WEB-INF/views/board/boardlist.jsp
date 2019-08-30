@@ -45,10 +45,10 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-								<c:if test="id=${id }">
+								
 									<th><a class="fa fa-edit fa-fw"
 										href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
-										</c:if>
+										
 									<th></th>
 									<th></th>
 									<th>No.</th>
