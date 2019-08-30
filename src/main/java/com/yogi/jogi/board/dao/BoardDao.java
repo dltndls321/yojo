@@ -55,5 +55,11 @@ public class BoardDao {
 		public List<BoardModel> selectBoardListPaging(Map map) throws Exception {
 		return sqlSession.selectList(Namespace+".selectBoardListPaging",map);
 	}
+		public int updateReadcount(BoardModel boardModel) throws Exception {
+			return sqlSession.update(Namespace + ".updateReadcount", boardModel);
 
+		}
+		public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
+			return sqlSession.selectList(Namespace + ".selectBoardListWidhBoardid", boardid);
+		}
 }

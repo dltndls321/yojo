@@ -54,10 +54,21 @@ public class BoardServiceImpl implements BoardService {
 		return dao.insertBoard(boardModel);
 	}
 	@Override
-	public List<BoardModel> selectBoardListPaging(int start, int end) throws Exception {
+	public List<BoardModel> selectBoardListPaging(int start, int end,String boardid) throws Exception {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("boardid",boardid);
 		return dao.selectBoardListPaging(map);
 	}
+
+	@Override
+	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectBoardListWidhBoardid(boardid);
+	}
+
+	
+
+	
 }
