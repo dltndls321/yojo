@@ -37,7 +37,6 @@
 							</select>
 						</div>
 					</div>
-
 					<h4>Trip Reviews</h4> 
 
 					<!-- Reply to review popup -->
