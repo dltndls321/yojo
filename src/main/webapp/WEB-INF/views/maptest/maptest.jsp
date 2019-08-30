@@ -9,7 +9,7 @@
 <title>Insert title here</title>
     <style>
     
-.overlaybox {position:absolute;width:360px;height:200px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;padding:15px 10px;}
+.overlaybox {position:absolute;width:360px;height:230px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;padding:15px 10px;}
 .overlaybox div, ul {overflow:hidden;margin:0;padding:0;}
 .overlaybox li {list-style: none;}
 .overlaybox .boxtitle {color:#fff;font-size:16px;font-weight:bold;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png') no-repeat right 120px center;margin-bottom:8px;}
@@ -159,6 +159,51 @@ geocoder.addressSearch("${festLists.area}", function(result, status) {
 </c:forEach>
 
 
+//spot
+<c:forEach items="${spotList}" var="spotLists" >	
+geocoder.addressSearch("${spotLists.area}", function(result, status) {
+	imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커이미지의 주소입니다    
+	imageSize = new kakao.maps.Size(24, 35), // 마커이미지의 크기입니다
+	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	// 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords,
+            image: markerImage // 마커이미지 설정 
+        });
+		
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+      
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${spotLists.name}"+
+            '<center><a href="#" onclick="spotSet1(\''+"${spotLists.name}"+'\')">관광지1로 설정</a></center></div>'
+            ,removable : iwRemoveable
+        });
+        
+       
+        /* infowindow.open(map, marker); */
+        marker.setMap(map,marker);
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+
+      //마커에 마우스오버 이벤트를 등록합니다
+      kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+          infowindow.open(map, marker);
+      });
+
+      
+    } 
+   
+});    
+</c:forEach>
+
 
 var sw = new kakao.maps.LatLng("${swX}", "${swY}"), // 사각형 영역의 남서쪽 좌표
 ne = new kakao.maps.LatLng("${neX}",  "${neY}"); // 사각형 영역의 북동쪽 좌표
@@ -209,6 +254,10 @@ content.innerHTML = '<div class="overlaybox">' +
  '        <li>' +
  '            <span class="number">5</span>' +
  '            <span class="title" id="span5">축제2</span>' +
+ '        </li>'+
+ '        <li>' +
+ '            <span class="number">6</span>' +
+ '            <span class="title" id="span6">관광지1</span>' +
  '        </li><a href="#"onClick="history.back()" style=" color: white;">&nbsp;범위설정다시하기</a><a href="#" style="float: right; color: white;">설정완료</a>' +
  '    </ul>' +
  '</div>';
@@ -324,7 +373,9 @@ function festSet1(name){
 function festSet2(name){
 	document.getElementById("span5").innerHTML=name;
 }
-
+function spotSet1(name){
+	document.getElementById("span6").innerHTML=name;
+}
 
 
 </script>
