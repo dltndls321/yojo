@@ -48,7 +48,7 @@ public class BoardController {
 
 		HttpSession session = request.getSession();
 		String reqboardid = request.getParameter("boardid"); // boardid가 넘어오는지
-
+	
 		if (reqboardid != null)
 			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
 		if (session.getAttribute("boardid") != null) {
@@ -66,11 +66,12 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardlist")
-	public ModelAndView list() throws Exception {
+	public ModelAndView list(HttpSession httpSession,MemberModel memberModel) throws Exception {
 		mv.clear();
+		
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
-		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
 		if (count < endRow) {
@@ -84,7 +85,47 @@ public class BoardController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow);
+		String id = memberModel.getId();
+		
+		
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow,"2");
+		mv.addObject("id",id);
+		mv.addObject("boardlist", boardlist);
+		mv.addObject("pageCount", pageCount);
+		mv.addObject("count", count);
+		mv.addObject("pageNum", pageNum);
+		mv.addObject("number", number);
+		mv.addObject("startPage", startPage);
+		mv.addObject("bottomLine", bottomLine);
+		mv.addObject("endPage", endPage);
+		
+		List<BoardModel> AllList = boardService.selectBoardList();
+		mv.setViewName("board/boardlist.do");
+		mv.addObject("AllList", AllList);
+
+		return mv;
+	}
+
+	@RequestMapping("list")
+	public ModelAndView list2() throws Exception {
+		mv.clear();
+		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
+		int currentPage = pageNum;
+		int count = boardService.selectBoardListWidhBoardid("1").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int startRow = ((currentPage - 1) * pageSize);
+		int endRow = currentPage * pageSize;
+		if (count < endRow) {
+			endRow = count;
+		}
+		int number = count - ((currentPage - 1) * pageSize);
+		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+		int endPage = startPage + bottomLine - 1;
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow,"1");
 
 		mv.addObject("boardlist", boardlist);
 
@@ -95,22 +136,7 @@ public class BoardController {
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);
 		mv.addObject("endPage", endPage);
-		BoardModel boardModel = new BoardModel();
-		boardid = "1";
-		
-		boardModel.setBoardid(boardid);
-		List<BoardModel> AllList = boardService.selectBoardList();
-		mv.setViewName("board/boardlist.do");
-		mv.addObject("AllList", AllList);
-
-		return mv;
-	}
-
-	@RequestMapping("list")
-	public ModelAndView list2() throws Exception {
-		BoardModel boardModel = new BoardModel();
-		boardid = "2";
-		boardModel.setBoardid(boardid);
+	
 		List<BoardModel> AllList = boardService.selectBoardList();
 		mv.setViewName("board/list.do");
 		mv.addObject("AllList", AllList);

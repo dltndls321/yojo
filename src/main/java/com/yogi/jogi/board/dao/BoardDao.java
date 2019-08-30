@@ -59,4 +59,7 @@ public class BoardDao {
 			return sqlSession.update(Namespace + ".updateReadcount", boardModel);
 
 		}
+		public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
+			return sqlSession.selectList(Namespace + ".selectBoardListWidhBoardid", boardid);
+		}
 }
