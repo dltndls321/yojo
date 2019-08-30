@@ -105,43 +105,19 @@
 				<div class="dashboard-list-box invoices with-icons margin-top-20">
 					<h4>New Member</h4>
 					<ul>
-						
+						<c:forEach items="${dateMembermodel }" var="dateMembermodels">
 						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>hyeyeon8752</strong>
+							<strong>${dateMembermodels.id }</strong>
 							<ul>
-								<li class="paid">이혜연</li>
-								<li>MemNum: 01</li>
-								<li>Date: 2019/08/22</li>
+								<li class="paid">${dateMembermodels.name }</li>
+								<li>MemNum: ${dateMembermodels.memnum }</li>
+								<li>Date: <fmt:formatDate value="${dateMembermodels.regdate }" pattern="yyyy년 MM월 dd일" /></li>
 							</ul>
 							<div class="buttons-to-right">
 								<a href="/admin/memberProfile" class="button gray">View Info</a>
 							</div>
 						</li>
-						
-						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>euny</strong>
-							<ul>
-								<li class="paid">송은희</li>
-								<li>MemNum: 02</li>
-								<li>Date: 2019/08/22</li>
-							</ul>
-							<div class="buttons-to-right">
-								<a href="/admin/memberProfile" class="button gray">View Info</a>
-							</div>
-						</li>
-
-						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>winsun</strong>
-							<ul>
-								<li class="paid">이승해</li>
-								<li>MemNum: 03</li>
-								<li>Date: 2019/08/22</li>
-							</ul>
-							<div class="buttons-to-right">
-								<a href="/admin/memberProfile" class="button gray">View Info</a>
-							</div>
-						</li>
-
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

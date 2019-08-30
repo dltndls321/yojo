@@ -68,6 +68,14 @@
     	where
     		memnum=#{memnum}
     </select>
+    <select id="selectMemberbetweenDate" parameterType="hashmap" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
+    	where
+    		regdate between #{start} and #{end}
+    </select>
 	<update id="updateMember" parameterType="memberModel">
 		update member set
     		id = #{id},

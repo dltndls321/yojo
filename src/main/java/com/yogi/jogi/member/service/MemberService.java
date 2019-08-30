@@ -1,5 +1,6 @@
 package com.yogi.jogi.member.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public interface MemberService {
 	public int deleteMember(MemberModel memberModel)throws Exception;
 	
 	public List<MemberModel> selectMemberListPaging(int start,int end) throws Exception;
+	
+	public List<MemberModel> selectMemberbetweenDate(Date start,Date end) throws Exception;
+	
 	
 	
 }

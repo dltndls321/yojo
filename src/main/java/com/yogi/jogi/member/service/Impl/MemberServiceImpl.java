@@ -1,5 +1,6 @@
 package com.yogi.jogi.member.service.Impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,14 @@ public class MemberServiceImpl implements MemberService{
 		map.put("start", start);
 		map.put("end", end);
 		return dao.selectMemberListPaging(map);
+	}
+
+	@Override
+	public List<MemberModel> selectMemberbetweenDate(Date start, Date end) throws Exception {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.selectMemberbetweenDate(map);
 	}
 	
 	

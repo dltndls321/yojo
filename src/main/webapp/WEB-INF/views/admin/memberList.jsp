@@ -35,7 +35,7 @@
 
 						<ul>
 						
-						<c:forEach var="member" items="${memberList }">
+						<c:forEach var="member" items="${memberList }" varStatus="status">
 						
 							<li class="unread">
 								<a href="/admin/memberProfile/${member.memnum }">
@@ -44,8 +44,9 @@
 									<div class="message-by">
 										<div class="message-by-headline">
 											<h5>${member.id}
-												
+												<c:if test="${startdate le regdate[status.index] && regdate[status.index] le now }">
 												 <i>new</i>
+												 </c:if>
 											</h5>
 											<span><fmt:formatDate value="${member.regdate }" pattern="yyyy년 MM월 dd일" /></span>
 										</div>

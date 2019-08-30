@@ -46,7 +46,12 @@ public class MemberController {
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
 		System.out.println("registemember : 시작");
 		model.clear();
-		int nowuser = nowUser.getNowUser();
+		int nowuser = 0;
+		if(nowUser.getNowUser() <=0) {
+			nowuser = 0;
+		}else {
+			nowuser = nowUser.getNowUser();
+		} 
 		MemberModel memberModel = new MemberModel();
 		memberModel.setId(memberDetailModel.getId());
 		memberModel.setEmail(memberDetailModel.getEmail());
@@ -75,7 +80,12 @@ public class MemberController {
 	public ModelAndView loginmember(MemberModel memberModel, HttpSession session) throws Exception {
 		System.out.println("loginmember : 시작");
 		model.clear();
-		int nowuser = nowUser.getNowUser();
+		int nowuser = 0;
+		if(nowUser.getNowUser() <=0) {
+			nowuser = 0;
+		}else {
+			nowuser = nowUser.getNowUser();
+		}
 		memberModel = memberService.selectMemberWithId(memberModel);
 		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
 		System.out.println("아이디 >>" + memberModel.getId());
@@ -215,6 +225,8 @@ public class MemberController {
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
 		memberService.deleteMember(memberModel);
 		session.invalidate();
+		int nowuser = nowUser.getNowUser();
+		nowUser.setNowUser(nowuser-2);
 		model.setViewName("redirect:/main/main");
 		return model;
 	}
