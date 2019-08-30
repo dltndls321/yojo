@@ -14,5 +14,6 @@ public interface BoardService {
 	public int updateBoard(BoardModel boardModel)throws Exception;
 	public int deleteBoard(BoardModel boardModel)throws Exception;
 	public BoardModel selectPasswdOneNum(BoardModel boardModel)throws Exception;
-	public List<BoardModel> selectBoardListPaging(int start,int end) throws Exception;
+	public List<BoardModel> selectBoardListPaging(int start,int end,String boardid) throws Exception;
+	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception;
 }

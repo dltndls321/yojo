@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -21,7 +22,7 @@
 			<div id="titlebar">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>게시판</h2>
+						<h2>자유게시판</h2>
 						<!-- Breadcrumbs -->
 						<nav id="breadcrumbs">
 
@@ -44,8 +45,10 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
+								
 									<th><a class="fa fa-edit fa-fw"
 										href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
+										
 									<th></th>
 									<th></th>
 									<th>No.</th>
@@ -59,7 +62,7 @@
 						
 						</table>
 
-						<c:forEach items="${AllList}" var="list">
+						<c:forEach items="${boardlist}" var="list">
 							<div class="list-box-listing">
 								<div class="list-box-listing-img">
 									<a
