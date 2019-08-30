@@ -1,5 +1,7 @@
 package com.yogi.jogi.admin.controller;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -173,6 +175,9 @@ public class AdminController {
 	public ModelAndView moveMemberList() throws Exception {
 
 		mv.clear();
+		
+		
+		
 		int pageSize = 5;//한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
 		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
@@ -201,7 +206,7 @@ public class AdminController {
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);
 		mv.addObject("endPage", endPage);
-
+		
 		mv.setViewName("admin/memberList.admin");
 
 		return mv;
