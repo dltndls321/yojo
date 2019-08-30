@@ -1,6 +1,8 @@
 package com.yogi.jogi.board.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.member.model.MemberModel;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -50,5 +53,11 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.insertBoard(boardModel);
 	}
-
+	@Override
+	public List<BoardModel> selectBoardListPaging(int start, int end) throws Exception {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.selectBoardListPaging(map);
+	}
 }

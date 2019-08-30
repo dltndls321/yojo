@@ -38,12 +38,7 @@
 	})
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title>boardList</title>
 </head>
 
@@ -99,19 +94,19 @@
 								</div>
 							</div>
 							<table>
-						
+
 								<tr>
-									<td width="70" align="center">file</td>
-									<td width="260"><input type="file" 
-									size="40"
-										maxlength="30" name="uploadfile"></td>
+									<td width="70" align="center"></td>
+									<td width="260"><input type="file" size="40"
+										maxlength="30" name="uploadfile"
+										style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
 								</tr>
 								<tr>
-									<td colspan=2 align="center">
-									<input type=submit id="btnInsert" value="글쓰기"
-										style="max-width: 100px; min-width: 99px;"> 
-										<input type="reset" value="다시작성" style="max-width: 100px;"> 
-										<input type="button" value="목록보기"
+									<td colspan=2 align="center"><input type=submit
+										id="btnInsert" value="글쓰기"
+										style="max-width: 100px; min-width: 33px;"> <input
+										type="reset" value="다시작성" style="max-width: 100px;"> <input
+										type="button" value="목록보기"
 										OnClick="window.location='boardlist?pageNum=${pageNum}'"
 										style="max-width: 100px;"></td>
 

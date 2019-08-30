@@ -24,7 +24,8 @@
 					</tr>
 					<tr height="30">
 						<td align=center><input type="submit" value="글삭제">
-							<input type="button" value="글목록"
+						
+							<input type="button" value="글목록" style="max-width: 70px;"
 							onclick="document.location.href='<%=request.getContextPath() %>/board/boardlist?pageNum=${pageNum }'">
 							</td>
 							</tr>

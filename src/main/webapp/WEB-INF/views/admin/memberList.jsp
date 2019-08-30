@@ -43,10 +43,13 @@
 
 									<div class="message-by">
 										<div class="message-by-headline">
-											<h5>${member.id} <i>new</i></h5>
+											<h5>${member.id}
+												
+												 <i>new</i>
+											</h5>
 											<span><fmt:formatDate value="${member.regdate }" pattern="yyyy년 MM월 dd일" /></span>
 										</div>
-										<p>신상정보? </p>
+										<p> ${member.name }, ${member.phone}, ${member.address } </p>
 									</div>
 								</a>
 							</li>

@@ -243,10 +243,19 @@ public class FestController {
 	    	        float mapx = Float.parseFloat(mapX.toString());
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
+	    	        String addr2 = addr1;
+	    	        int lastIdx = addr1.lastIndexOf(",");
+	    	        if(lastIdx!=0 && lastIdx != -1) {
+	    	        	addr2 = addr1.substring(0,lastIdx-2);
+	    	        	model.addObject("addr2",addr2);
+	    	        }
+	    	        
+	    	        
 	    	        
 	    	        festivalModel.setSubject(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
+	    	        model.addObject("addr2",addr2);
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("tel",tel);
