@@ -98,8 +98,8 @@
 
 						<li><a href="#">Community</a>
 							<ul>
-								<li><a href="/board/list">Notice</a></li>
-								<li><a href="/board/boardlist">Free Board</a></li>
+								<li><a href="/board/list?boarid=2">Notice</a></li>
+								<li><a href="/board/boardlist?boarid=1">Free Board</a></li>
 								<li><a href="dashboard-bookings.html">Q&A</a></li>
 							</ul>
 						</li>

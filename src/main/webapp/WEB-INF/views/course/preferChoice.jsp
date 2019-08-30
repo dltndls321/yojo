@@ -146,32 +146,32 @@
 						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A01010100" type="checkbox" name="check">
-							<label for="A01010100">한식</label>
+							<input id="A05020100" type="checkbox" name="check">
+							<label for="A05020100">한식</label>
 
-							<input id="A01010400" type="checkbox" name="check">
-							<label for="A01010400">산</label>
+							<input id="A05020200" type="checkbox" name="check">
+							<label for="A05020200">양식</label>
 
-							<input id="A01010500" type="checkbox" name="check">
-							<label for="A01010500">자연생태관광지</label>
+							<input id="A05020300" type="checkbox" name="check">
+							<label for="A05020300">일식</label>
 
-							<input id="A01010600" type="checkbox" name="check">
-							<label for="A01010600">자연휴양림</label>
+							<input id="A05020400" type="checkbox" name="check">
+							<label for="A05020400">중식</label>
 
-							<input id="A01010700" type="checkbox" name="check" >
-							<label for="A01010700">수목원</label>
+							<input id="A05020500" type="checkbox" name="check" >
+							<label for="A05020500">아시아식</label>
 
-							<input id="A01010800" type="checkbox" name="check" >
-							<label for="A01010800">폭포</label>
+							<input id="A05020600" type="checkbox" name="check" >
+							<label for="A05020600">패밀리레스토랑</label>
 
-							<input id="A01010900" type="checkbox" name="check">
-							<label for="A01010900">계곡</label>	
+							<input id="A05020700" type="checkbox" name="check">
+							<label for="A05020700">이색음식점</label>	
 
-							<input id="A01011000" type="checkbox" name="check">
-							<label for="A01011000">약수터</label>
+							<input id="A05020800" type="checkbox" name="check">
+							<label for="A05020800">채식전문점</label>
 							
-							<input id="A01011100" type="checkbox" name="check">
-							<label for="A01011100">해안절경</label>
+							<input id="A05020900" type="checkbox" name="check">
+							<label for="A05020900">바/카페</label>
 						</div>
 
 						</div>

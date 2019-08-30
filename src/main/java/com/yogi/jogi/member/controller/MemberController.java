@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.board.model.BoardModel;
+import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.NowUserModel;
@@ -46,6 +48,8 @@ public class MemberController {
 	private SpotService spotService;
 	@Autowired
 	private SpotReviewService spotReviewService;
+	@Autowired
+	private BoardService boardSerivce;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -125,6 +129,7 @@ public class MemberController {
 		FestReviewModel festReviewModel = new FestReviewModel();
 		FestivalModel festivalModel = new FestivalModel();
 		SpotReviewModel spotReviewModel = new SpotReviewModel();
+		
 		SpotModel spotModel = new SpotModel();
 		spotReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
@@ -156,10 +161,12 @@ public class MemberController {
 				spotModel = spotService.selectSpotWithSpotNum(spotModel);
 				spotList.add(spotModel);
 			}
-			spotavg =((double)((spotstar*10)/reviewListsize))/10;
+			spotavg =((double)((spotstar*10)/spotreviewListsize))/10;
 		}
 		if(avg != 0 && spotavg != 0) {
 			avg = (double)(((int)((avg+spotavg)*10))/2)/10;
+		}else if(avg==0 && spotavg != 0 ) {
+			avg=spotavg;
 		}
 		System.out.println(avg);
 		System.out.println(spotavg);
