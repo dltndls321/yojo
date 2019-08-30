@@ -177,7 +177,8 @@ public class AdminController {
 		mv.clear();
 		
 		
-		int pageSize = 5;
+		
+		int pageSize = 5;//한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
 		int count = memberService.selectMemberList().size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = ((currentPage - 1) * pageSize);
@@ -185,21 +186,22 @@ public class AdminController {
 		if (count < endRow) {
 			endRow = count;
 		}
-		List<MemberModel> memberList = memberService.selectMemberListPaging(startRow +1, endRow);
 		int number = count - ((currentPage - 1) * pageSize);
-		int bottomLine = 3; // 5 page
+		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
 		int endPage = startPage + bottomLine - 1;
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}	
+		List<MemberModel> memberList = memberService.selectMemberListPaging(startRow +1, endRow);
+		
+		mv.addObject("memberList", memberList);
+		
+		
 		mv.addObject("pageCount",pageCount);
 		mv.addObject("count", count);
 		mv.addObject("pageNum", pageNum);
-
-		mv.addObject("memberList", memberList);
-
 		mv.addObject("number", number);
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);

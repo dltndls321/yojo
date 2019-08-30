@@ -16,83 +16,87 @@
 
 
 
-	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="col-lg-8">
+<div class="page-wrapper">
+	<div class="container-fluid">
+		<div class="col-lg-8">
 
-				<div class="col-lg-12">
-					<h1 class="page-header">수정</h1>
-				</div>
-				<div class="row">
-					<div class="col-lg-12"></div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">게시판 수정</div>
-					<div class="panel-body">
-						<form method="post" name="updateForm"
-							enctype="multipart/form-data" action="/board/updatePro">
+			<div class="col-lg-12">
+				<h1 class="page-header">수정</h1>
+			</div>
+			<div class="row">
+				<div class="col-lg-12"></div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">게시판 수정</div>
+				<div class="panel-body">
+					<form method="post" name="updateForm" enctype="multipart/form-data"
+						action="/board/updatePro">
 
-							<input type="hidden" name="boardid" value="${boardid}"> 
-							<input type="hidden" name="boardNum" value="${boardNum}">
+						<input type="hidden" name="boardid" value="${boardid}"> <input
+							type="hidden" name="boardNum" value="${boardNum}">
 
-							<div class="row form-group">
+						<div class="row form-group">
 
-								<label class="col-lg-2">제목</label>
-								<div class="col-lg-8">
+							<label class="col-lg-2">제목</label>
+							<div class="col-lg-8">
 
-									<input type="text" class="form-control" id="subject"
-										name="subject" min="1" max="3" value="${list.subject }">
-								</div>
+								<input type="text" class="form-control" id="subject"
+									name="subject" min="1" max="3" value="${list.subject }">
 							</div>
-							<div class="row form-group">
+						</div>
+						<div class="row form-group">
 
-								<label class="col-lg-2">이름</label>
-								<div class="col-lg-8">
-									<input type="text" class="form-control" id="writer"
-										name="writer" min="1" max="3" value="${list.writer }">
-								</div>
+							<label class="col-lg-2">이름</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" id="writer"
+									name="writer" min="1" max="3" value="${list.writer }">
 							</div>
+						</div>
 
-							<div class="row form-group">
-								<label class="col-lg-2">내용</label>
-								<div class="col-lg-8">
-									<textarea class="form-control" id="content" name="content">${list.content }</textarea>
-								</div>
+						<div class="row form-group">
+							<label class="col-lg-2">내용</label>
+							<div class="col-lg-8">
+								<textarea class="form-control" id="content" name="content">${list.content }</textarea>
 							</div>
-							<div class="row form-group">
+						</div>
+						<div class="row form-group">
 
-								<label class="col-lg-2">비밀번호</label>
-								<div class="col-lg-8">
-									<input type="text" class="form-control" id="passwd"
-										name="passwd" min="1" max="3"> 
-										<input type="hidden" id="passwd" name="passwd" value="${list.passwd }">
-								</div>
+							<label class="col-lg-2">비밀번호</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" id="passwd"
+									name="passwd" min="1" max="3"> <input type="hidden"
+									id="passwd" name="passwd" value="${list.passwd }">
 							</div>
-							<div class="row form-group">
+						</div>
+						<div class="row form-group">
 
-
-								<div class="col-lg-8">
-									<input type="file" name="uploadfile">
-
-								</div>
-							</div>
 							<table>
-
-
 								<tr>
-									<td colspan=5 align="center">
-										<input type="submit" value="수정" style="max-width: 100px; min-width: 103px;"> 
-									<input type="reset" value="다시입력" style="max-width: 100px;"> 
-				<input type="button" value=" 글목록" onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"style="max-width: 100px;">
-								</td>
+									<td width="70" align="center"></td>
+									<td width="260"><input type="file" size="40"
+										maxlength="30" name="uploadfile"
+										style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
 								</tr>
 							</table>
-						</form>
-					</div>
+						</div>
+						<table>
+
+
+							<tr>
+								<td colspan=5 align="center"><input type="submit"
+									value="수정" style="max-width: 100px; min-width: 99px;">
+									<input type="reset" value="다시입력" style="max-width: 100px;">
+									<input type="button" value=" 글목록"
+									onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"
+									style="max-width: 100px;"></td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 
 
