@@ -16,7 +16,7 @@ $(document).ready(function(){
 	            	$('#festival').html(data);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-	                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+	            	alert("검색 결과가 없습니다.");
 	        }
 	        });	
 	});
