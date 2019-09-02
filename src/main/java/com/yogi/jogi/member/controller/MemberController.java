@@ -186,7 +186,7 @@ public class MemberController {
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
-
+	
 	@RequestMapping(value = "updateMember")
 	public ModelAndView updateMember(HttpSession session) throws Exception {
 		System.out.println("member/updateMember  : 시작");

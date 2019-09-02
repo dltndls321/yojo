@@ -167,7 +167,6 @@ public class AdminController {
 			throws Exception {
 
 		mv.clear();
-
 		boardModel.setBoardNum(boardNum);
 		boardModel = boardService.selectBoard(boardNum);
 		boardService.deleteBoard(boardModel);
