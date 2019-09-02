@@ -23,6 +23,14 @@
     	from
     		spot
     </select>
+    
+    <!-- 승해가 추가한부분 -->
+    <select id="selectSpotListXY" parameterType="hashmap" resultType="spotModel" >
+     <![CDATA[
+    select * from spot where smapx>#{startX} and smapx<#{endX} and smapy>#{startY} and smapy<#{endY}
+    ]]>	
+    </select>
+    
     <select id="selectSpotWithSpotNum" parameterType="spotModel" resultType="spotModel">
     	select
     		*

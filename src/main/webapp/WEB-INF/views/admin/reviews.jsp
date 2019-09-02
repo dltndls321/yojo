@@ -6,7 +6,7 @@
 		<div id="titlebar">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Reviews</h2>
+					<h2>리뷰</h2>
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
@@ -37,7 +37,6 @@
 							</select>
 						</div>
 					</div>
-
 					<h4>Trip Reviews</h4> 
 
 					<!-- Reply to review popup -->

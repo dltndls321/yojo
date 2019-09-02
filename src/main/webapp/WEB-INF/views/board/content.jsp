@@ -70,9 +70,10 @@
 
 
 								<!-- Share Buttons -->
-
+								
 								<input type="submit" value="수정"
-									style="max-width: 100px; min-width: 99px;"> <input
+									style="max-width: 100px; min-width: 99px;">
+									 <input
 									type="button" value="글삭제"
 									onclick="document.location.href='<%=request.getContextPath()%>/board/delete/${list.boardNum}'"
 									style="max-width: 100px;"> <input type="button"

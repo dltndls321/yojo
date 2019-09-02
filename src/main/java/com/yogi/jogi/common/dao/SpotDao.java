@@ -1,6 +1,7 @@
 package com.yogi.jogi.common.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class SpotDao {
 
 	public SpotModel selectSpotWithname(SpotModel spotModel) {
 		return sqlSession.selectOne(Namespace + ".selectSpotWithname",spotModel);
+	}
+	
+	public List<SpotModel> selectSpotListXY(Map map) throws Exception {
+
+		return sqlSession.selectList(Namespace + ".selectSpotListXY", map);
 	}
 }

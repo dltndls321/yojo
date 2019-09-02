@@ -66,7 +66,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardlist")
-	public ModelAndView list(HttpSession httpSession,MemberModel memberModel) throws Exception {
+	public ModelAndView list() throws Exception {
 		mv.clear();
 		
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
@@ -85,11 +85,9 @@ public class BoardController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		String id = memberModel.getId();
 		
 		
 		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow,"2");
-		mv.addObject("id",id);
 		mv.addObject("boardlist", boardlist);
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("count", count);
@@ -115,7 +113,8 @@ public class BoardController {
 		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
 		if (count < endRow) {
-			endRow = count;
+			endRow = count; 
+			
 		}
 		int number = count - ((currentPage - 1) * pageSize);
 		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
@@ -144,17 +143,17 @@ public class BoardController {
 		return mv;
 	}
 
-	@RequestMapping("writeUploadForm")
+	@RequestMapping("writeForm")
 
 	public ModelAndView writeForm(BoardModel boardModel,
 			@RequestParam(value = "boardid", required = false) String boardid) throws Exception {
 		mv.clear();
 		boardid="1";
-		mv.setViewName("board/writeUploadForm.do");
+		mv.setViewName("board/writeForm.do");
 		mv.addObject("boardid", boardid);
 		return mv;
 	}
-	@RequestMapping("writeUploadForm2")
+	@RequestMapping("writeUploadForm")
 	public ModelAndView writeForm2(BoardModel boardModel,
 			@RequestParam(value = "boardid", required = false) String boardid) throws Exception {
 		mv.clear();
@@ -205,8 +204,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("content")
-	public ModelAndView content(int boardNum,HttpServletRequest request) throws Exception {
-		String id = request.getParameter("id");
+	public ModelAndView content(int boardNum,HttpServletRequest request,HttpSession httpSession,MemberModel memberModel) throws Exception {
+		
+		String id = memberModel.getId();
+		
 		try {
 			BoardModel boardModel = new BoardModel();
 			if(!boardModel.getWriter().equals(id)) {
@@ -219,6 +220,7 @@ public class BoardController {
 		mv.clear();
 		mv.setViewName("board/content.do"); // 가야할 페이지
 		
+		mv.addObject("id",id);
 		mv.addObject("list", boardService.selectBoard(boardNum));
 		return mv;
 

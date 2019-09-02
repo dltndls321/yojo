@@ -236,9 +236,18 @@ public class SpotController {
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
 	    	        
+	    	        String addr2 = addr1;
+	    	        int lastIdx = addr1.lastIndexOf(",");
+	    	        if(lastIdx!=0 && lastIdx != -1) {
+	    	        	addr2 = addr1.substring(0,lastIdx-2);
+	    	        	model.addObject("addr2",addr2);
+	    	        }
+	    	        
+	    	        System.out.println(title + " : " + addr2);
 	    	        spotModel.setName(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
+	    	        model.addObject("addr2",addr2);
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("mapx",mapx);
