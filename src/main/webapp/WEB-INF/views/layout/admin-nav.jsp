@@ -21,6 +21,7 @@
 					</ul>	
 				</li>
 				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Reviews</a></li>
+				<li><a href="/admin/course"><i class="sl sl-icon-plus"></i>Add Course</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">

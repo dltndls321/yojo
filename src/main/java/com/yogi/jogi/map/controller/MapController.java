@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.map.model.MapModel;
 import com.yogi.jogi.map.service.MapService;
 
@@ -34,6 +35,9 @@ public class MapController {
 	
 	@Autowired
 	private FestService festService;
+	
+	@Autowired
+	private SpotService spotService;
 
 	@RequestMapping("test") //
 	public ModelAndView test() throws Exception {
@@ -62,9 +66,13 @@ public class MapController {
 		mv.addObject("centerX",centerX);
 		mv.addObject("centerY",centerY);
 		
+		
+		
 		if(startX > endX && startY > endY) {
 			mv.addObject("foodList", mapService.getFoodList2(endY,endX,startY,startX));
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
+			mv.addObject("spotList", spotService.selectSpotListXY(endX,endY,startX,startY));
+			System.out.println(spotService.selectSpotListXY(endX,endY,startX,startY));
 			mv.addObject("swX",endY);
 			mv.addObject("swY",endX);
 			mv.addObject("neX",startY);
@@ -73,6 +81,8 @@ public class MapController {
 			
 			mv.addObject("foodList", mapService.getFoodList2(endY,startX,startY,endX));
 			mv.addObject("festList", festService.selectFestListXY(startX,endY,endX,startY));
+			mv.addObject("spotList", spotService.selectSpotListXY(startX,endY,endX,startY));
+			System.out.println(spotService.selectSpotListXY(startX,endY,endX,startY));
 			mv.addObject("swX",endY);
 			mv.addObject("swY",startX);
 			mv.addObject("neX",startY);
@@ -81,6 +91,8 @@ public class MapController {
 			
 			mv.addObject("foodList", mapService.getFoodList2(startY,startX,endY,endX));
 			mv.addObject("festList", festService.selectFestListXY(startX,startY,endX,endY));
+			mv.addObject("spotList", spotService.selectSpotListXY(startX,startY,endX,endY));
+			System.out.println(spotService.selectSpotListXY(startX,startY,endX,endY));
 			mv.addObject("swX",startY);
 			mv.addObject("swY",startX);
 			mv.addObject("neX",endY);
@@ -89,10 +101,12 @@ public class MapController {
 			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(startY,endX,endY,startX));
 			mv.addObject("festList", festService.selectFestListXY(startY,endX,endY,startX));
+			mv.addObject("spotList", spotService.selectSpotListXY(startY,endX,endY,startX));
+			System.out.println(spotService.selectSpotListXY(startY,endX,endY,startX));
 			mv.addObject("swX",startY);
 			mv.addObject("swY",endX);
 			mv.addObject("neX",endY);
-			mv.addObject("neY",startX);
+			mv.addObject("neY",startX); 
 		}
 
 		mv.setViewName("maptest/maptest.do"); //

@@ -27,23 +27,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yogi.jogi.common.model.SpotModel;
-import com.yogi.jogi.common.model.SpotReviewModel;
-import com.yogi.jogi.common.service.SpotReviewService;
-import com.yogi.jogi.common.service.SpotService;
+import com.yogi.jogi.common.model.FoodModel;
+import com.yogi.jogi.common.model.FoodReviewModel;
+import com.yogi.jogi.common.service.FoodReviewService;
+import com.yogi.jogi.common.service.FoodService;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
 
 
 @Controller
-@RequestMapping(value = "spot")
-public class SpotController {
+@RequestMapping(value = "food")
+public class FoodController {
 	@Autowired
-	private SpotService spotService;
+	private FoodService foodService;
 	
 	@Autowired 
-	private SpotReviewService spotReviewService;
+	private FoodReviewService foodReviewService;
 	
 	@Autowired
 	private MemberService memberService;
@@ -56,11 +56,11 @@ public class SpotController {
 	}
 	@RequestMapping(value = "list")
 	public String moveFest() {
-		return "tripInfo/spot.do";
+		return "tripInfo/food.do";
 	}
 	//관광지리스트뽑기
-	@RequestMapping(value = "spot.do")	
-	public void test(SpotModel spotModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String spotCode) throws Exception {
+	@RequestMapping(value = "food.do")	
+	public void test(FoodModel foodModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String foodCode) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
@@ -75,8 +75,8 @@ public class SpotController {
         parameter = parameter + "&" + "arrange=O";       
         parameter = parameter + "&" + "listYN=Y" ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
-        parameter = parameter + "&cat1=A01&cat2=A0101&cat3=" + spotCode;
-        parameter = parameter + "&" + "numOfRows=9";
+        parameter = parameter + "&cat1=A05&cat2=A0502&cat3=" + foodCode;
+        parameter = parameter + "&" + "numOfRows=9999";
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -137,52 +137,37 @@ public class SpotController {
         			"</div>"+
         			"</a>"+
         			"</div>";
-        	/*
-        	//데이터넣기위해 jsonparsing하는 애들
-        	String cat = (String) imsi.get("cat3"); 
-        	if(cat.equals("A01010100")|| cat.equals("A01010200")|| cat.equals("A01010300")) {
-        		cat = "A01010100";
-        	}
-
-         	Object mapX = imsi.get("mapx");
-  	        Object mapY = imsi.get("mapy");
-  	        float smapx;
-  	        float smapy;
-  	        if(mapX == null || mapY == null) {
-  	        	smapx = 0;
-  	        	smapy = 0;
-  	        }else {
-  	        	smapx = Float.parseFloat(mapX.toString());
-  	        	smapy = Float.parseFloat(mapY.toString());
-  	        }
-  	                
- 	        Object areacode = imsi.get("areacode"); 
- 	        int zcode = Integer.parseInt(areacode.toString());
-    
-         	//데이터넣기	
- 	        spotModel.setCategory(cat);
- 	        spotModel.setArea(addr1);
- 	        spotModel.setName(title);
- 	        spotModel.setSmapx(smapx);
- 	        spotModel.setSmapy(smapy);
- 	        spotModel.setZcode(zcode);
-         	 	
-         	System.out.println(i+"번째"+spotModel);
-         	addData(spotModel);
-         	Thread.sleep(100);
-         	*/
+        	
+			
+			/*
+			 * //데이터넣기위해 jsonparsing하는 애들 String cat = (String) imsi.get("cat3"); Object
+			 * mapX = imsi.get("mapx"); Object mapY = imsi.get("mapy"); float foodx; float
+			 * foody; if(mapX == null || mapY == null) { foodx = 0; foody = 0; }else {
+			 * foodx= Float.parseFloat(mapX.toString()); foody =
+			 * Float.parseFloat(mapY.toString()); }
+			 * 
+			 * Object areacode = imsi.get("areacode"); int zcode =
+			 * Integer.parseInt(areacode.toString());
+			 * 
+			 * //데이터넣기 foodModel.setCategory(cat); foodModel.setArea(addr1);
+			 * foodModel.setName(title); foodModel.setFoodx(foodx);
+			 * foodModel.setFoody(foody); foodModel.setZcode(zcode);
+			 * 
+			 * System.out.println(i+"번째"+foodModel); addData(foodModel); Thread.sleep(100);
+			 */
+         	
         	}	
         out.append(finaldata);
         out.flush();
         out.close();
 
     }
-	public void addData(SpotModel spotModel) throws Exception {
-		spotService.insertSpot(spotModel);
+	public void addData(FoodModel foodModel) throws Exception {
+		foodService.insertFood(foodModel);
 	}
 	
 	@RequestMapping(value = "content/{typeid}/{contid}")
-	public ModelAndView spotContent(SpotModel spotModel, SpotReviewModel spotReviewModel, MemberModel memberModel, HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
+	public ModelAndView foodContent(FoodModel foodModel, FoodReviewModel foodReviewModel, MemberModel memberModel, HttpServletRequest request, HttpServletResponse response,@PathVariable("typeid") int typeid,@PathVariable("contid") int contid) throws Exception {
 		 request.setCharacterEncoding("utf-8");
 	     response.setContentType("text/html; charset=utf-8");
 	        model.clear();
@@ -236,18 +221,10 @@ public class SpotController {
 	    	        float mapy = Float.parseFloat(mapY.toString());
 	    	        String link = (String) parse_item.get("homepage");	
 	    	        
-	    	        String addr2 = addr1;
-	    	        int lastIdx = addr1.lastIndexOf(",");
-	    	        if(lastIdx!=0 && lastIdx != -1) {
-	    	        	addr2 = addr1.substring(0,lastIdx-2);
-	    	        	model.addObject("addr2",addr2);
-	    	        }
-	    	        
-	    	        System.out.println(title + " : " + addr2);
-	    	        spotModel.setName(title);
+	    	        foodModel.setName(title);
+	    	        foodModel.setArea(addr1);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
-	    	        model.addObject("addr2",addr2);
 	    	        model.addObject("firstimage",firstimage);
 	    	        model.addObject("overview",overview);
 	    	        model.addObject("mapx",mapx);
@@ -342,32 +319,39 @@ public class SpotController {
 	    	        
 
 	    	
-    	        	String baby = (String) parse_item.get("chkbabycarriage"); 
-    	        	String chkcard = (String) parse_item.get("chkcreditcard"); 
-    	        	String usetime = (String) parse_item.get("usetime");
-    	        	String infocenter = (String) parse_item.get("infocenter");
-    	        	String parking = (String) parse_item.get("parking");
-    	        	String restdate = (String) parse_item.get("restdate");
+    	        	
+    	        	String chkcard = (String) parse_item.get("chkcreditcardfood"); 
+    	        	String opentime = (String) parse_item.get("opentimefood");
+    	        	String infocenter = (String) parse_item.get("infocenterfood");
+    	        	String parking = (String) parse_item.get("parkingfood");
+    	        	String restdate = (String) parse_item.get("restdatefood");
+    	        	String smoking = (String) parse_item.get("smoking");
+    	        	String packing = (String) parse_item.get("packing");
+    	        	String firstmenu = (String) parse_item.get("firstmenu");
+    	        	String treatmenu = (String) parse_item.get("treatmenu");
     	        	
 
     		        model.addObject("chkcard",chkcard);
-    		        model.addObject("baby",baby);
-    		        model.addObject("usetime",usetime);
+    		        model.addObject("smoking",smoking);
+    		        model.addObject("opentime",opentime);
     		        model.addObject("infocenter",infocenter);
     		        model.addObject("parking",parking);
     		        model.addObject("restdate",restdate);
+    		        model.addObject("packing",packing);
+    		        model.addObject("firstmenu",firstmenu);
+    		        model.addObject("treatmenu",treatmenu);
     		        model.addObject("typeid", typeid);
     		        model.addObject("contid", contid);
 	        	}
 	        }
-	        System.out.println(spotModel);
-	        if(spotService.selectSpotWithname(spotModel) != null) {
+	        System.out.println(foodModel);
+	        if(foodService.selectFoodWithname(foodModel) != null) {
 	     
-	        	spotModel = spotService.selectSpotWithname(spotModel);
-	        	System.out.println(spotModel);
-		        int spotNum = spotModel.getSpotNum();
-		        spotReviewModel.setSpotNum(spotNum);  
-		        List<SpotReviewModel> reviewList = spotReviewService.selectSpotReviewListWithSpotNum(spotReviewModel);
+	        	foodModel = foodService.selectFoodWithname(foodModel);
+	        	System.out.println(foodModel);
+		        int foodNum = foodModel.getFoodNum();
+		        foodReviewModel.setFoodNum(foodNum);  
+		        List<FoodReviewModel> reviewList = foodReviewService.selectFoodReviewListWithFoodNum(foodReviewModel);
 		        System.out.println(reviewList);
 		        int star = 0;
 		        int size = reviewList.size();
@@ -406,26 +390,26 @@ public class SpotController {
 			        model.addObject("reviewList", reviewList);
 		        }      
 	        }
-	        model.setViewName("tripInfo/spotCont.do");	
+	        model.setViewName("tripInfo/foodCont.do");	
 	        return model;
 	}
 	@RequestMapping(value = "/review")
-	public String setSpot(SpotModel spotmodel, SpotReviewModel spotReviewModel, HttpSession session,@RequestParam int typeid,@RequestParam int contid)throws Exception {	
+	public String setFood(FoodModel foodmodel, FoodReviewModel foodReviewModel, HttpSession session,@RequestParam int typeid,@RequestParam int contid)throws Exception {	
 		
-		spotmodel = spotService.selectSpotWithname(spotmodel);
-		int spotNum = spotmodel.getSpotNum();
+		foodmodel = foodService.selectFoodWithname(foodmodel);
+		int foodNum = foodmodel.getFoodNum();
 		// 축제 고유번호, memnum select
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
-		spotReviewModel.setSpotNum(spotNum);
-		spotReviewModel.setMemNum(memNum);
+		foodReviewModel.setFoodNum(foodNum);
+		foodReviewModel.setMemNum(memNum);
 		
-		if(spotReviewService.selectSpotReviewOne(spotReviewModel) == null) {
-			spotReviewService.insertSpotReview(spotReviewModel);
+		if(foodReviewService.selectFoodReviewOne(foodReviewModel) == null) {
+			foodReviewService.insertFoodReview(foodReviewModel);
 		} else {
-			spotReviewService.updateSpotReview(spotReviewModel);
+			foodReviewService.updateFoodReview(foodReviewModel);
 		}
 		
-		return "redirect:/spot/content/" + typeid + "/" + contid;
+		return "redirect:/food/content/" + typeid + "/" + contid;
 
 	}
 	
