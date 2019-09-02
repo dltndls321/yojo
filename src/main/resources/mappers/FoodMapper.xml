@@ -41,5 +41,16 @@
     	and
     		area=#{area}
     </select>
+    <select id="selectFoodAdmin"  parameterType="foodModel" resultType="foodModel">
+    	select
+    		*
+    	from
+    		food
+    	where
+    		category=#{category}
+    	and
+    		zcode=#{zcode}
+    </select>
+    
 
 </mapper>

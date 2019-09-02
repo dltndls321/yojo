@@ -28,4 +28,8 @@ public class FoodDao {
 	public FoodModel selectFoodWithname(FoodModel foodModel) {
 		return sqlSession.selectOne(Namespace + ".selectFoodWithname",foodModel);
 	}
+	
+	public List<FoodModel> selectFoodAdmin(FoodModel foodModel) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectFoodAdmin", foodModel);
+	}
 }

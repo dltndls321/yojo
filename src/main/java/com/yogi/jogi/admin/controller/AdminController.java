@@ -1,5 +1,9 @@
 package com.yogi.jogi.admin.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -7,27 +11,40 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.common.model.FestivalModel;
+import com.yogi.jogi.common.model.FoodModel;
 import com.yogi.jogi.common.model.NowUserModel;
+import com.yogi.jogi.common.model.SpotModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.FoodService;
 import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping(value = "admin")
@@ -56,6 +73,14 @@ public class AdminController {
 	private SpotService spotService;
 	@Autowired
 	private SpotReviewService spotReviewService;
+	@Autowired
+	private FoodService foodService;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 
 	@ModelAttribute
 	public void setAttr(HttpServletRequest request) {
@@ -340,6 +365,92 @@ public class AdminController {
 	@RequestMapping(value = "reviews")
 	public String moveReviews() {
 		return "admin/reviews.admin";
+	}
+	@RequestMapping(value = "course")
+	public String addCourse() {
+		return "admin/addCourse.admin";
+	}
+	@RequestMapping(value = "adminfood")
+	public void selectFood(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String foodCode) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		FoodModel foodModel = new FoodModel();
+		foodModel.setCategory(foodCode);
+		foodModel.setZcode(areaCode);
+		System.out.println(foodModel);
+		
+		JSONArray jsonArray = new JSONArray();
+		try {
+			List<FoodModel> foodList = foodService.selectFoodAdmin(foodModel);
+			if(foodList != null && foodList.size() >0) {
+				for (int i = 0; i < foodList.size(); i++) {
+					jsonArray.add(foodList.get(i));
+				}
+			}
+			response.setContentType("text/xml;charset=utf-8");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.print(jsonArray.toString());
+			printWriter.flush();
+			printWriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		System.out.println(jsonArray);
+	}
+	
+	@RequestMapping(value = "adminfest")
+	
+	public void selectFest(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam Date date) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		System.out.println(date);
+		FestivalModel festivalModel = new FestivalModel();
+		festivalModel.setFdate2(date);
+		festivalModel.setZcode(areaCode);
+		System.out.println(festivalModel);
+		
+		JSONArray jsonArray = new JSONArray();
+		try {
+			List<FestivalModel> festList = festService.selectFestAdmin(festivalModel);
+			if(festList != null && festList.size() >0) {
+				for (int i = 0; i < festList.size(); i++) {
+					jsonArray.add(festList.get(i));
+				}
+			}
+			response.setContentType("text/xml;charset=utf-8");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.print(jsonArray.toString());
+			printWriter.flush();
+			printWriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		System.out.println(jsonArray);
+		
+	}
+	@RequestMapping(value = "adminspot")
+	public void selectSpot(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String spotCode) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		SpotModel spotModel = new SpotModel();
+		spotModel.setCategory(spotCode);
+		spotModel.setZcode(areaCode);
+		System.out.println(spotModel);
+		
+		JSONArray jsonArray = new JSONArray();
+		try {
+			List<SpotModel> spotList = spotService.selectSpotAdmin(spotModel);
+			if(spotList != null && spotList.size() >0) {
+				for (int i = 0; i < spotList.size(); i++) {
+					jsonArray.add(spotList.get(i));
+				}
+			}
+			response.setContentType("text/xml;charset=utf-8");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.print(jsonArray.toString());
+			printWriter.flush();
+			printWriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		System.out.println(jsonArray);
 	}
 
 }
