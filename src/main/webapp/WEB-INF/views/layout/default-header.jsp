@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
@@ -52,6 +53,8 @@
         
     }
 </script>
+
+
 <header id="header-container">
 	<!-- Header -->
 	<div id="header">
@@ -130,13 +133,20 @@
 				<div class="small-dialog-header">
 					<h3>로그인/회원가입</h3>
 				</div>
-
+				
+					
+				
 				<!--Tabs -->
 				<div class="sign-in-form style-1">
-
+					<ul>
+					<li><a id="kakao-login-btn"></a><a href="http://developers.kakao.com/logout"></a></li>
+					</ul>
+					<br/>
+					
 					<ul class="tabs-nav">
 						<li class=""><a href="#tab1">로그인</a></li>
 						<li><a href="#tab2">회원가입</a></li>
+						
 					</ul>
 
 					<div class="tabs-container alt">
@@ -275,7 +285,7 @@
 							<c:if test="${SessionMemberId ne 'admin'}">
 							<li><a href="/member/profile"><i class="im im-icon-Male"></i> Profile</a></li>
 							</c:if>
-							<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
+							<li><a onclick="logoutkakao();" href="/member/logout" ><i class="sl sl-icon-power"></i> Logout</a></li>
 						</ul>
 					</div>
 				</div>
