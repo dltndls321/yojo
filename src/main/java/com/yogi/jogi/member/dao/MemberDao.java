@@ -50,4 +50,8 @@ public class MemberDao {
 	public List<MemberModel> selectMemberbetweenDate(Map map) throws Exception {
 		return sqlSession.selectList(Namespace+".selectMemberbetweenDate",map);
 	}
+	
+	public int updateMemberTokken(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMemberTokken",memberModel);
+	}
 }

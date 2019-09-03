@@ -5,7 +5,7 @@
  
 <mapper namespace="memberMapperNS">
   <insert id="insertMember" parameterType="memberModel">
-    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate)
+    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate,status,tokken)
     	values(
     		memberSeq.NEXTVAL,
     		#{id},
@@ -15,7 +15,9 @@
     		#{address},
     		#{phone},
     		#{email},
-    		sysdate
+    		sysdate,
+    		#{status},
+    		#{tokken}
     	)
     </insert>
   <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
@@ -89,7 +91,13 @@
     		memnum = #{memnum}   
 		   
 	</update>
-	
+	<update id="updateMemberTokken" parameterType="memberModel">
+		update member set
+    		tokken = #{tokken}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
     
      <delete id="deleteMember" parameterType="memberModel">
     	delete

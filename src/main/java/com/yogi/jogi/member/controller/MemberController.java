@@ -3,17 +3,25 @@ package com.yogi.jogi.member.controller;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.model.BoardModel;
@@ -25,6 +33,7 @@ import com.yogi.jogi.common.model.SpotModel;
 import com.yogi.jogi.common.model.SpotReviewModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.OauthService;
 import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
 import com.yogi.jogi.member.model.MemberDetailModel;
@@ -50,9 +59,54 @@ public class MemberController {
 	private SpotReviewService spotReviewService;
 	@Autowired
 	private BoardService boardSerivce;
+	@Autowired
+	private RestTemplate restTemplate;
+	@Autowired
+	private OauthService oauthService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
+		System.out.println("registemember : 시작");
+		model.clear();
+		String[] tokkenItems = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+		String tokken = "";
+		for(int i = 0 ; i<5 ; i++) {
+			int index = (int)(Math.random()*tokkenItems.length);
+			tokken = tokken + tokkenItems[index];
+		}
+		int nowuser = 0;
+		if(nowUser.getNowUser() <=0) {
+			nowuser = 0;
+		}else {
+			nowuser = nowUser.getNowUser();
+		} 
+		MemberModel memberModel = new MemberModel();
+		memberModel.setId(memberDetailModel.getId());
+		memberModel.setEmail(memberDetailModel.getEmail());
+		memberModel.setName(memberDetailModel.getName());
+		memberModel.setPhone(memberDetailModel.getPhone1() + "-" + memberDetailModel.getPhone2() + "-"
+				+ memberDetailModel.getPhone3());
+		memberModel.setPasswd(memberDetailModel.getPasswd());
+		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
+				+ memberDetailModel.getDetailAddress());
+		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
+		memberModel.setStatus("1");
+		memberModel.setTokken(tokken);
+		memberService.insertMember(memberModel);
+		memberModel = memberService.selectMemberWithEmail(memberModel);
+		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
+		System.out.println("아이디 >>" + memberModel.getId());
+		System.out.println("비밀번호 >>" + memberModel.getPasswd());
+		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
+		session.setAttribute("SessionMemberId", memberModel.getId());
+		session.setAttribute("SessionMemberName", memberModel.getName());
+		nowUser.setNowUser(nowuser);
+		model.setViewName("redirect:/main/main");
+		model.addObject("InfoMember", memberModel);
+		return model;
+	}
+	@RequestMapping(value = "kakaoregisterDone")
+	public ModelAndView kakaoregisterDone(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
 		System.out.println("registemember : 시작");
 		model.clear();
 		int nowuser = 0;
@@ -71,6 +125,8 @@ public class MemberController {
 		memberModel.setAddress(memberDetailModel.getPostcode() + "/" + memberDetailModel.getAddress1() + "/"
 				+ memberDetailModel.getDetailAddress());
 		memberModel.setJumin(memberDetailModel.getJumin1() + "-" + memberDetailModel.getJumin2());
+		memberModel.setStatus(memberDetailModel.getStatus());
+		memberModel.setTokken(memberDetailModel.getTokken());
 		memberService.insertMember(memberModel);
 		memberModel = memberService.selectMemberWithEmail(memberModel);
 		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
@@ -84,6 +140,8 @@ public class MemberController {
 		model.addObject("InfoMember", memberModel);
 		return model;
 	}
+	
+	
 
 	@RequestMapping(value = "loginmember")
 	public ModelAndView loginmember(MemberModel memberModel, HttpSession session) throws Exception {
@@ -113,7 +171,14 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session) throws Exception{
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel= memberService.selectMemberWithMemNum(memberModel);
+		if(memberModel.getStatus().equals("3")) {
+			System.out.println(memberModel.getTokken());
+			oauthService.logoutKakaoInfo(memberModel.getTokken());
+		}
 		session.invalidate();
 		int nowuser = nowUser.getNowUser();
 		nowUser.setNowUser(nowuser-2);
@@ -261,6 +326,11 @@ public class MemberController {
 		model.clear();
 		MemberModel memberModel = new MemberModel();
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		if(memberModel.getStatus().equals("3")) {
+			Map<String, Object> resultMap = oauthService.selectKakaoInfo(memberModel.getTokken());
+			oauthService.deleteKakaoInfo(resultMap);
+		}
 		memberService.deleteMember(memberModel);
 		session.invalidate();
 		int nowuser = nowUser.getNowUser();
@@ -268,6 +338,22 @@ public class MemberController {
 		model.setViewName("redirect:/main/main");
 		return model;
 	}
+	@RequestMapping(value = "kakaoRegister")
+	public ModelAndView kakaoRegister(HttpSession session) throws Exception {
+		model.clear();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setName((String) session.getAttribute("kakaoName"));
+		memberModel.setEmail((String) session.getAttribute("kakaoEmail"));
+		memberModel.setPasswd((String)session.getAttribute("kakaoPasswd"));
+		memberModel.setTokken((String)session.getAttribute("kakaoTokken"));
+		memberModel.setStatus((String)session.getAttribute("kakaoStatus"));
+		memberModel.setId((String)session.getAttribute("kakaoId"));
+		System.out.println(memberModel);
+		model.setViewName("member/kakaoRegister.do");
+		model.addObject("memberInfo", memberModel);
+		return model;
+	}
+	
 	
 
 	// ajax 컨트롤러들
@@ -360,7 +446,60 @@ public class MemberController {
 		}
 		out.close();
 	}
-	
+	@RequestMapping(value = "Kakaologin")
+	public void Kakaologin(@RequestBody String params, HttpServletResponse response, HttpSession session)
+			throws Exception {
+		PrintWriter out = response.getWriter();
+		MemberModel memberModel = new MemberModel();
+		JSONParser paser = new JSONParser();
+		JSONObject obj = (JSONObject)paser.parse(params);
+		String token = (String) obj.get("access_token");
+		System.out.println(token);
+		//엑세스 토큰을 이용한 카카오 정보 조회 서비스
+		Map<String, Object> resultMap = oauthService.selectKakaoInfo(token);
+		System.out.println(resultMap);
+		//계정 정보
+		Map<String, Object> kakaoAccount = (Map<String, Object>) resultMap.get("kakao_account");
+		Map<String, Object> kakaoNickName = (Map<String, Object>) resultMap.get("properties");
+		String id = (Integer)resultMap.get("id")+"";
+		System.out.println(id);
+		System.out.println(kakaoAccount);
+		System.out.println(kakaoNickName.get("nickname"));
+		if(kakaoAccount.containsKey("email")&&kakaoNickName.containsKey("nickname")) {
+			memberModel.setEmail((String) kakaoAccount.get("email"));
+			if(memberService.selectMemberWithEmail(memberModel)!=null) {
+				memberModel= memberService.selectMemberWithEmail(memberModel);
+				memberModel.setTokken(token);
+				memberService.updateMemberTokken(memberModel);
+				session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
+				session.setAttribute("SessionMemberId", memberModel.getId());
+				session.setAttribute("SessionMemberName", memberModel.getName());
+				session.setAttribute("kakaoTokken", token);
+				out.append("1");
+				out.flush();
+			}else {
+				session.setAttribute("kakaoId", id);
+				session.setAttribute("kakaoName", (String) kakaoNickName.get("nickname"));
+				session.setAttribute("kakaoPasswd", (String) kakaoAccount.get("email"));
+				session.setAttribute("kakaoTokken", token);
+				session.setAttribute("kakaoStatus", "3");
+				session.setAttribute("kakaoEmail", (String) kakaoAccount.get("email"));
+				memberModel.setId(id);
+				memberModel.setName((String) kakaoNickName.get("nickname"));
+				memberModel.setPasswd((String) kakaoAccount.get("email"));
+				memberModel.setTokken(token);
+				memberModel.setStatus("3");
+				out.append("2");
+				out.flush();
+			}
+		}else {
+			oauthService.logoutKakaoInfo(token);
+			oauthService.deleteKakaoInfo(resultMap);
+			out.append("3");
+			out.flush();
+		}
+		out.close();
+	}
 	
 
 }

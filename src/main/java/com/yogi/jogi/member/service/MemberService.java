@@ -28,6 +28,7 @@ public interface MemberService {
 	
 	public List<MemberModel> selectMemberbetweenDate(Date start,Date end) throws Exception;
 	
+	public int updateMemberTokken(MemberModel memberModel)throws Exception;
 	
 	
 }
