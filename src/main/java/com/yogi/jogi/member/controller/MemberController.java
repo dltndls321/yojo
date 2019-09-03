@@ -172,12 +172,14 @@ public class MemberController {
 
 	@RequestMapping(value = "logout")
 	public String logout(HttpSession session) throws Exception{
-		MemberModel memberModel = new MemberModel();
-		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
-		memberModel= memberService.selectMemberWithMemNum(memberModel);
-		if(memberModel.getStatus().equals("3")) {
-			System.out.println(memberModel.getTokken());
-			oauthService.logoutKakaoInfo(memberModel.getTokken());
+		if((Integer)session.getAttribute("SessionMemberMemnum")!=null){
+			MemberModel memberModel = new MemberModel();
+			memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+			memberModel= memberService.selectMemberWithMemNum(memberModel);
+			if(memberModel.getStatus().equals("3")) {
+				System.out.println(memberModel.getTokken());
+				oauthService.logoutKakaoInfo(memberModel.getTokken());
+			}
 		}
 		session.invalidate();
 		int nowuser = nowUser.getNowUser();
