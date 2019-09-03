@@ -152,7 +152,7 @@ public class MapController {
 		course[3] = course4;
 		course[4] = course5;
 		course[5] = course6;
-		
+
 		mv.clear();
 		System.out.println("course1 : " + course1 + "course2 : " + course2 + "course3 : " + course3 
 				+ "course4 : " + course4+ "course5 : " + course5+ "course6 : " + course6   );
@@ -169,14 +169,19 @@ public class MapController {
 		courseModel.setSubject((String)session.getAttribute("SessionMemberId"));
 		mapService.insertCourse(courseModel);
 		mv.addObject("CourseInfo",mapService.getCourseListOne((String)session.getAttribute("SessionMemberId")));
-
-		for(int i = 0 ; i<6;i++) {
+		
+		
+		
+		for(int i = 0 ; i<index.length;i++) {
+			
 		if(course[i].substring(index[i]+2).equals("맛집")) {
-			mv.addObject("foodArea",mapService.getFoodArea(course[i]));
+				 mv.addObject("Area"+i,mapService.getFoodArea(course[i].substring(0,index[i]))); 
 			System.out.println("맛집");
 		}else if(course[i].substring(index[i]+2).equals("축제")) {
+				 mv.addObject("Area"+i,festService.getFestArea(course[i].substring(0,index[i]))); 
 			System.out.println("축제");
 		}else {
+				 mv.addObject("Area"+i,spotService.getSpotArea(course[i].substring(0,index[i]))); 
 			System.out.println("관광지");
 		}
 		}

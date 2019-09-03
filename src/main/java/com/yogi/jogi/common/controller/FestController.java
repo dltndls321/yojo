@@ -248,7 +248,7 @@ public class FestController {
 	    	        
 	    	        
 	    	        
-	    	        festivalModel.setSubject(title);
+	    	        festivalModel.setName(title);
 	    	        model.addObject("title",title);
 	    	        model.addObject("addr1",addr1);
 	    	        model.addObject("addr2",addr2);

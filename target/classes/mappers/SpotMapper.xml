@@ -5,14 +5,14 @@
  
 <mapper namespace="SpotMapperNS">
   	<insert id="insertSpot" parameterType="spotModel">
-  		Insert into spot(spotNum,category,area,name,smapx,smapy,zcode)	
+  		Insert into spot(spotNum,category,area,name,x,y,zcode)	
   		values(
 	  		spotSeq.NEXTVAL,
 	  		#{category},
 	  		#{area},
 	  		#{name},
-	  		#{smapx},
-	  		#{smapy},
+	  		#{x},
+	  		#{y},
 	  		#{zcode}
   		)
   	</insert>
@@ -27,10 +27,14 @@
     <!-- 승해가 추가한부분 -->
     <select id="selectSpotListXY" parameterType="hashmap" resultType="spotModel" >
      <![CDATA[
-    select * from spot where smapx>#{startX} and smapx<#{endX} and smapy>#{startY} and smapy<#{endY}
+    select * from spot where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
     ]]>	
     </select>
-    
+    <select id="getSpotArea"  parameterType="String" resultType="spotModel">
+    	select * from spot where name = #{name}
+   </select>
+   <!-- 끝 -->
+   
     <select id="selectSpotWithSpotNum" parameterType="spotModel" resultType="spotModel">
     	select
     		*

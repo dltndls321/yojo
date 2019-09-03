@@ -6,14 +6,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class FestivalModel {
 	private int festNum;
-	private String subject;
+	private String name;
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date fdate1;
 	private String area;
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date fdate2;
-	private float fmapx;
-	private float fmapy;
+	private float x;
+	private float y;
 	private int zcode;
 	
 	public int getFestNum() {
@@ -22,12 +22,7 @@ public class FestivalModel {
 	public void setFestNum(int festNum) {
 		this.festNum = festNum;
 	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+	
 	public Date getFdate1() {
 		return fdate1;
 	}
@@ -46,31 +41,39 @@ public class FestivalModel {
 	public void setFdate2(Date fdate2) {
 		this.fdate2 = fdate2;
 	}
-	public float getFmapx() {
-		return fmapx;
-	}
-	public void setFmapx(float fmapx) {
-		this.fmapx = fmapx;
-	}
-	public float getFmapy() {
-		return fmapy;
-	}
-	public void setFmapy(float fmapy) {
-		this.fmapy = fmapy;
-	}
+	
 	public int getZcode() {
 		return zcode;
 	}
 	public void setZcode(int zcode) {
 		this.zcode = zcode;
 	}
-	
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
 	@Override
 	public String toString() {
-		return "FestivalModel [festNum=" + festNum + ", subject=" + subject + ", fdate1=" + fdate1 + ", area=" + area
-				+ ", fdate2=" + fdate2 + ", fmapx=" + fmapx + ", fmapy=" + fmapy + ", zcode=" + zcode + "]";
+		return "FestivalModel [festNum=" + festNum + ", name=" + name + ", fdate1=" + fdate1 + ", area=" + area
+				+ ", fdate2=" + fdate2 + ", x=" + x + ", y=" + y + ", zcode=" + zcode + "]";
 	}
+	
+	
+	
 	
 	
 	

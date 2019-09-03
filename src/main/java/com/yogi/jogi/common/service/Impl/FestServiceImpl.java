@@ -56,6 +56,12 @@ public class FestServiceImpl implements FestService{
 		// TODO Auto-generated method stub
 		return dao.selectFestAdmin(festivalModel);
 	}
+
+	@Override
+	public FestivalModel getFestArea(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getFestArea(name);
+	}
 	
 	
 	

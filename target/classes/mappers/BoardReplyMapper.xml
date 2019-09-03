@@ -14,7 +14,7 @@
         select
             *
         from reply
-        order by replyNum desc
+        order by replyNum 
     </select>
     
     
@@ -26,9 +26,9 @@
     
     <update id="replyUpdate" parameterType="replyModel">
         update reply
-            SET
-            content = #{content}
-        where replyNum = #{replyNum}
+            set
+            content =#{content}
+        where replyNum =#{replyNum}
     </update>
     
     <delete id="replyDelete" parameterType="int">

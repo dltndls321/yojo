@@ -479,5 +479,61 @@ function onclickUpdate(target1,target2,target3,target4,target5,target6,target7){
 	}else{
 		var7.submit();
 	}
-	
 }
+function onclickKakao(target1,target2,target3,target4,target5,target6,target7,target8,target9,target10,target11){
+	var1 = document.getElementById(target1);
+	var2 = document.getElementById(target2);
+	var3 = document.getElementById(target3);
+	var4 = document.getElementById(target4);
+	var5 = document.getElementById(target5);
+	var6 = document.getElementById(target6);
+	var7 = document.getElementById(target7);
+	var8 = document.getElementById(target8);
+	var9 = document.getElementById(target9);
+	var10 = document.getElementById(target10);
+	var11 = document.getElementById(target11);
+	
+	if(var1.value == ""){
+		var1.style.borderColor="red";
+		return false;
+	}
+	if(var2.value == ""){
+		var2.style.borderColor="red";
+		return false;
+	}if(var3.value == ""||var3.value == "주민번호를 입력하세요."){
+		var3.style.borderColor="red";
+		var3.value="주민번호를 입력하세요.";
+		return false;
+	}if(var4.value == ""||var3.value == "주민번호를 입력하세요."){
+		var4.style.borderColor="red";
+		var3.value="주민번호를 입력하세요.";
+		return false;
+	}if(var5.value == ""){
+		var5.style.borderColor="red";
+		return false;
+	}if(var6.value == ""||var8.value == "주소를 입력하세요."){
+		var8.style.borderColor="red";
+		var8.value='주소를 입력하세요.';
+		return false;
+	}if(var7.value == ""||var8.value == "주소를 입력하세요."){
+		var8.style.borderColor="red";
+		var8.value='주소를 입력하세요.';
+		return false;
+	}if(var8.value == ""||var8.value == "주소를 입력하세요."){
+		var8.style.borderColor="red";
+		var8.value='주소를 입력하세요.';
+		return false;
+	}if(var10.value == ""||var10.value=='비밀번호를 입력하세요.'||var10.value=="6~12자리로 입력해 주세요"||var10.value=="동일한 비밀번호를 입력해 주세요."){
+		var10.style.borderColor="red";
+		return false;
+	}if(var11.value == ""||var11.value=='비밀번호를 입력하세요.'||var11.value=="6~12자리로 입력해 주세요"||var11.value=="동일한 비밀번호를 입력해 주세요."){
+		var11.style.borderColor="red";
+		return false;
+	}else{
+		var9.submit();
+	}
+}
+function logoutkakao(){
+	 Kakao.Auth.logout();
+}
+

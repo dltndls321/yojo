@@ -74,6 +74,12 @@ public class MemberServiceImpl implements MemberService{
 		map.put("end", end);
 		return dao.selectMemberbetweenDate(map);
 	}
+
+	@Override
+	public int updateMemberTokken(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.updateMemberTokken(memberModel);
+	}
 	
 	
 }

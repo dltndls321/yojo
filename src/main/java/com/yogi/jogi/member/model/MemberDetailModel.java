@@ -17,6 +17,8 @@ public class MemberDetailModel {
 	private String phone3;
 	private String email;
 	private Date regdate;
+	private String status;
+	private String tokken;
 	public int getMemnum() {
 		return memnum;
 	}
@@ -101,12 +103,25 @@ public class MemberDetailModel {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getTokken() {
+		return tokken;
+	}
+	public void setTokken(String tokken) {
+		this.tokken = tokken;
+	}
 	@Override
 	public String toString() {
 		return "MemberDetailModel [memnum=" + memnum + ", id=" + id + ", passwd=" + passwd + ", name=" + name
 				+ ", jumin1=" + jumin1 + ", jumin2=" + jumin2 + ", postcode=" + postcode + ", address1=" + address1
 				+ ", detailAddress=" + detailAddress + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3="
-				+ phone3 + ", email=" + email + ", regdate=" + regdate + "]";
+				+ phone3 + ", email=" + email + ", regdate=" + regdate + ", status=" + status + ", tokken=" + tokken
+				+ "]";
 	}
 	
 }

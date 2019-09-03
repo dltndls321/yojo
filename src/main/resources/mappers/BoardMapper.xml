@@ -91,7 +91,7 @@
 	
 	
 
-<!--
+
 	 <select id="selectBoardCount" parameterType="boardModel"
 		resultType="boardModel">
 		select
@@ -123,9 +123,6 @@
 		where
 		boardNum = #{boardNum}
 	</select>
-
- -->
-
 
 	
 
