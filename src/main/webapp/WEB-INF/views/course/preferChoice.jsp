@@ -3,30 +3,38 @@
 <!DOCTYPE html>
 <script>
 $(document).ready(function(){
+	var arrayfood = new Array();
+	var arrayspot = new Array();
 	$('input:checkbox[name="foodchk"]').change(function(){
 		var id = $(this).attr('id'); 
-		
 		$('#'+id).attr("checked",true);
-		alert(id);
-	})
-	
-})
-
-	
-$(function(){
-	$("#preview").click(function() {
-		$("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
-		$("#finaldata").append("<input type='hidden' name='arrayfood' id='arrayfood' value='"+arrayfood+"'>"); 
-		//날짜넣기
-		var startdate = $("#startdate").val();
-		var enddate = $("#enddate").val();
-
-		$("#finaldata").append("<input type='hidden' name='startdate' id='startdate' value='"+startdate+"'>");
-		$("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
-		 
-	})
+		arrayfood.push($(this).val());
 		
+	});
+	
+	$('input:checkbox[name="spotchk"]').change(function(){
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+		arrayspot.push($(this).val());
+
+	});
+	
+	$("#submit").click(function() {
+		var theme = $("#theme option:selected").val();
+		var areaCode = $("#areaCode option:selected").val();
+		var date = $("#date-picker").val();
+
+		$("#finddata").append("<input type='hidden' name='theme' value='"+theme+"'>");
+		$("#finddata").append("<input type='hidden' name='areaCode' value='"+areaCode+"'>"); 
+		$("#finddata").append("<input type='hidden' name='date' value='"+date+"'>");
+		$("#finddata").append("<input type='hidden' name='foodcode' value='"+arrayfood+"'>");
+		$("#finddata").append("<input type='hidden' name='spotcode' value='"+arrayspot+"'>");	 
+	
+});
 })
+
+	
+
 
 </script>
 <!-- Titlebar
@@ -81,7 +89,7 @@ $(function(){
 							<!-- City -->
 								<div class="col-md-4">
 									<h5>여행 지역</h5>
-									<select class="chosen-select-no-single" id="areacode">
+									<select class="chosen-select-no-single" id="areaCode">
 											<option value = "">지역 선택</option>	
 											<option value ="1">서울</option>
 											<option value ="2">인천</option>
@@ -216,9 +224,6 @@ $(function(){
 						</div>
 					</div>
 					<!-- Section / End -->
-
-
-					
 
 					<form action = "findCourse" id = "finddata">
 					
