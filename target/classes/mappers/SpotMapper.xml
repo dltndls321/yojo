@@ -47,5 +47,18 @@
     	where
     		name=#{name}
     </select>
+    
+    <select id="selectSpotAdmin"  parameterType="spotModel" resultType="spotModel">
+    	select
+    		*
+    	from
+    		spot
+    	where
+    		category=#{category}
+    	and
+    		zcode=#{zcode}
+    </select>
+    
+    
 
 </mapper>

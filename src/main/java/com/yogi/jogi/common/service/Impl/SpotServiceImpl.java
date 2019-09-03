@@ -52,6 +52,12 @@ public class SpotServiceImpl implements SpotService{
 		map.put("endY", endY);
 		return dao.selectSpotListXY(map); 
 	}
+
+	@Override
+	public List<SpotModel> selectSpotAdmin(SpotModel spotModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSpotAdmin(spotModel);
+	}
 	
 	
 	

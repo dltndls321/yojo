@@ -50,5 +50,17 @@
     		subject=#{subject}
     </select>
     
+     <select id="selectFestAdmin"  parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		#{fdate2}
+    	between fdate1 and fdate2
+    	and
+    		zcode=#{zcode}
+    </select>
+    
     
 </mapper>

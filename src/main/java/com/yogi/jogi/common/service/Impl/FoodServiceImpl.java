@@ -38,6 +38,12 @@ public class FoodServiceImpl implements FoodService{
 		// TODO Auto-generated method stub
 		return  dao.selectFoodWithname(foodModel);
 	}
+
+	@Override
+	public List<FoodModel> selectFoodAdmin(FoodModel foodModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectFoodAdmin(foodModel);
+	}
 	
 	
 	

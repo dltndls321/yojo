@@ -138,11 +138,12 @@ public class FoodController {
         			"</a>"+
         			"</div>";
         	
+			
 			/*
 			 * //데이터넣기위해 jsonparsing하는 애들 String cat = (String) imsi.get("cat3"); Object
 			 * mapX = imsi.get("mapx"); Object mapY = imsi.get("mapy"); float foodx; float
-			 * foody; if(mapX == null || mapY == null) { foodx = 0; foody = 0; }else { foodx
-			 * = Float.parseFloat(mapX.toString()); foody =
+			 * foody; if(mapX == null || mapY == null) { foodx = 0; foody = 0; }else {
+			 * foodx= Float.parseFloat(mapX.toString()); foody =
 			 * Float.parseFloat(mapY.toString()); }
 			 * 
 			 * Object areacode = imsi.get("areacode"); int zcode =
@@ -152,8 +153,7 @@ public class FoodController {
 			 * foodModel.setName(title); foodModel.setFoodx(foodx);
 			 * foodModel.setFoody(foody); foodModel.setZcode(zcode);
 			 * 
-			 * System.out.println(i+"번째"+foodModel); //addData(foodModel);
-			 * Thread.sleep(100);
+			 * System.out.println(i+"번째"+foodModel); addData(foodModel); Thread.sleep(100);
 			 */
          	
         	}	

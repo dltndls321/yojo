@@ -11,5 +11,7 @@ public interface FoodService {
 	public List<FoodModel> selectFoodList() throws Exception;
 	public FoodModel selectFoodWithFoodNum(FoodModel foodModel) throws Exception;
 	public FoodModel selectFoodWithname(FoodModel foodModel) throws Exception;
+	public List<FoodModel> selectFoodAdmin(FoodModel foodModel) throws Exception;
+
 	
 }

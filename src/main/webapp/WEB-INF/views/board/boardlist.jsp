@@ -45,10 +45,10 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-								
-									<th><a class="fa fa-edit fa-fw"
-										href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
-										
+									<c:if test="${sessionscope.memNum == list.memNum }">
+										<th><a class="fa fa-edit fa-fw"
+											href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
+									</c:if>
 									<th></th>
 									<th></th>
 									<th>No.</th>
@@ -59,7 +59,7 @@
 
 								</tr>
 							</thead>
-						
+
 						</table>
 
 						<c:forEach items="${boardlist}" var="list">
@@ -67,30 +67,29 @@
 								<div class="list-box-listing-img">
 									<a
 										href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
-										<img
-										src="<%=request.getContextPath() %>/fileSave/${list.fname}">
+										<img src="<%=request.getContextPath() %>/images/${list.fname}">
 									</a>
 								</div>
 								<div class="list-box-listing-content">
 									<div class="inner">
 										<table>
 											<tr>
-												<td width="110"><div>
+												<td width="10%"><div>
 														<h3></h3>
 													</div></td>
-												<td width="180"><div>
+												<td width="25%"><div>
 														<a
 															href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">${list.boardNum}</a>
 													</div></td>
-												<td width="220"><div>
+												<td width="25%"><div>
 														<a
 															href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
 															${list.subject}</a>
 													</div></td>
 
-												<td width="250"><a
+												<td width="20%"><a
 													href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">${list.writer}</a></td>
-												<td width="325"><div>
+												<td width="20%"><div>
 														<fmt:formatDate type="date" value="${list.regdate}" />
 													</div></td>
 												<td><div>${list.readcount}</div></td>
@@ -104,36 +103,33 @@
 							</div>
 						</c:forEach>
 					</div>
-					
-						<div class="buttons-to-right">
-							<a href="#" class="button gray"><i class="sl sl-icon-close"></i>
-								Delete</a>
-						</div>
-						<div class="pagination-container margin-top-30 margin-bottom-0">
-							<nav class="pagination">
-								<ul>
-									<c:if test="${ startPage>bottomLine}">
-										<li><a
-											href="/board/boardlist?pageNum=${startPage - bottomLine}"><i
-												class="sl sl-icon-arrow-left"></i></a></li>
-									</c:if>
-									<c:forEach var="i" begin="${startPage }" end="${endPage }">
-										<li><a href="/board/boardlist?pageNum=${i}"
-											class="current-page">${i }</a></li>
 
-									</c:forEach>
-									<c:if test="${ endPage<pageCount}">
-										<li><a
-											href="/board/boardlist?pageNum=${startPage + bottomLine}"><i
-												class="sl sl-icon-arrow-right"></i></a></li>
-									</c:if>
+					<div class="buttons-to-right"></div>
+					<div class="pagination-container margin-top-30 margin-bottom-0">
+						<nav class="pagination">
+							<ul>
+								<c:if test="${ startPage>bottomLine}">
+									<li><a
+										href="/board/boardlist?pageNum=${startPage - bottomLine}"><i
+											class="sl sl-icon-arrow-left"></i></a></li>
+								</c:if>
+								<c:forEach var="i" begin="${startPage }" end="${endPage }">
+									<li><a href="/board/boardlist?pageNum=${i}"
+										class="current-page">${i }</a></li>
 
-								</ul>
-							</nav>
-						</div>
-						
+								</c:forEach>
+								<c:if test="${ endPage<pageCount}">
+									<li><a
+										href="/board/boardlist?pageNum=${startPage + bottomLine}"><i
+											class="sl sl-icon-arrow-right"></i></a></li>
+								</c:if>
+
+							</ul>
+						</nav>
 					</div>
-				
+
+				</div>
+
 
 
 				<!-- Copyrights -->

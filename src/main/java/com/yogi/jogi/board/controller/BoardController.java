@@ -1,6 +1,5 @@
 package com.yogi.jogi.board.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
-import com.yogi.jogi.member.dao.MemberDao;
 import com.yogi.jogi.member.model.MemberModel;
 import com.yogi.jogi.member.service.MemberService;
 
@@ -38,6 +37,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
 	@Autowired
 	private MemberService memberService;
 
@@ -48,7 +48,7 @@ public class BoardController {
 
 		HttpSession session = request.getSession();
 		String reqboardid = request.getParameter("boardid"); // boardid가 넘어오는지
-	
+
 		if (reqboardid != null)
 			session.setAttribute("boardid", reqboardid); // boardid가 있으면 session에 boardid 체크
 		if (session.getAttribute("boardid") != null) {
@@ -66,9 +66,9 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardlist")
-	public ModelAndView list() throws Exception {
+	public ModelAndView list(HttpServletRequest request, HttpSession session) throws Exception {
 		mv.clear();
-		
+
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
 		int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
@@ -85,9 +85,15 @@ public class BoardController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		
-		
-		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow,"2");
+
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "2");
+
+		session = request.getSession(true);
+
+		String memNum = request.getParameter("memNum");
+		request.getSession().setAttribute("memNum", memNum);
+		System.out.println(memNum);
+		mv.addObject("memNum", memNum);
 		mv.addObject("boardlist", boardlist);
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("count", count);
@@ -96,7 +102,7 @@ public class BoardController {
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);
 		mv.addObject("endPage", endPage);
-		
+
 		List<BoardModel> AllList = boardService.selectBoardList();
 		mv.setViewName("board/boardlist.do");
 		mv.addObject("AllList", AllList);
@@ -113,8 +119,8 @@ public class BoardController {
 		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
 		if (count < endRow) {
-			endRow = count; 
-			
+			endRow = count;
+
 		}
 		int number = count - ((currentPage - 1) * pageSize);
 		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
@@ -124,7 +130,7 @@ public class BoardController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow,"1");
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "1");
 
 		mv.addObject("boardlist", boardlist);
 
@@ -135,7 +141,7 @@ public class BoardController {
 		mv.addObject("startPage", startPage);
 		mv.addObject("bottomLine", bottomLine);
 		mv.addObject("endPage", endPage);
-	
+
 		List<BoardModel> AllList = boardService.selectBoardList();
 		mv.setViewName("board/list.do");
 		mv.addObject("AllList", AllList);
@@ -148,16 +154,17 @@ public class BoardController {
 	public ModelAndView writeForm(BoardModel boardModel,
 			@RequestParam(value = "boardid", required = false) String boardid) throws Exception {
 		mv.clear();
-		boardid="1";
+		boardid = "1";
 		mv.setViewName("board/writeForm.do");
 		mv.addObject("boardid", boardid);
 		return mv;
 	}
+
 	@RequestMapping("writeUploadForm")
 	public ModelAndView writeForm2(BoardModel boardModel,
 			@RequestParam(value = "boardid", required = false) String boardid) throws Exception {
 		mv.clear();
-		boardid="2";
+		boardid = "2";
 		mv.setViewName("board/writeUploadForm.do");
 		mv.addObject("boardid", boardid);
 		return mv;
@@ -203,25 +210,15 @@ public class BoardController {
 		// return "redirect:list?pageNum=" + pageNum;
 	}
 
-	@RequestMapping("content")
-	public ModelAndView content(int boardNum,HttpServletRequest request,HttpSession httpSession,MemberModel memberModel) throws Exception {
-		
-		String id = memberModel.getId();
-		
-		try {
-			BoardModel boardModel = new BoardModel();
-			if(!boardModel.getWriter().equals(id)) {
-				boardService.updateBoard(boardModel);
-			}
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+	@RequestMapping(value="content", method = RequestMethod.GET)
+	public ModelAndView content(@RequestParam ("boardNum")int boardNum, MemberModel memberModel) throws Exception {
+
 		mv.clear();
-		mv.setViewName("board/content.do"); // 가야할 페이지
 		
-		mv.addObject("id",id);
 		mv.addObject("list", boardService.selectBoard(boardNum));
+		mv.addObject("memberModel",new MemberModel());
+		mv.setViewName("board/content.do"); // 가야할 페이지
+
 		return mv;
 
 	}
@@ -281,5 +278,6 @@ public class BoardController {
 	}
 
 
+	
 
 }
