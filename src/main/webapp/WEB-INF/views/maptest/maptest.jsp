@@ -75,7 +75,7 @@ var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈
 
 	
 <c:forEach items="${foodList}" var="foodLists" >	
-geocoder.addressSearch("${foodLists.address}", function(result, status) {
+geocoder.addressSearch("${foodLists.area}", function(result, status) {
 	
 	
     // 정상적으로 검색이 완료됐으면 
@@ -92,9 +92,9 @@ geocoder.addressSearch("${foodLists.address}", function(result, status) {
         // 인포윈도우로 장소에 대한 설명을 표시합니다
       
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${foodLists.foodname}"+
-            '<center><a href="#" onclick="foodSet1(\''+"${foodLists.foodname}"+'\')">맛집1로 설정</a><br><a href="#" onclick="foodSet2(\''+"${foodLists.foodname}"+'\')">맛집2로 설정</a>'+
-            '<br><a href="#" onclick="foodSet3(\''+"${foodLists.foodname}"+'\')">맛집3으로 설정</a></center></div>',
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${foodLists.name}"+
+            '<center><a href="#" onclick="foodSet1(\''+"${foodLists.name}"+'\')">맛집1로 설정</a><br><a href="#" onclick="foodSet2(\''+"${foodLists.name}"+'\')">맛집2로 설정</a>'+
+            '<br><a href="#" onclick="foodSet3(\''+"${foodLists.name}"+'\')">맛집3으로 설정</a></center></div>',
             removable : iwRemoveable
         });
         
