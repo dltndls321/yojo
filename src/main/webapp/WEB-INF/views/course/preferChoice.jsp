@@ -3,22 +3,35 @@
 <!DOCTYPE html>
 <script>
 $(document).ready(function(){
-	var arrayfood = new Array();
-	var arrayspot = new Array();
-	$('input:checkbox[name="foodchk"]').change(function(){
+	var food;
+	var spot;
+	$('input:checkbox[name="foodchk"]').click(function(){
 		var id = $(this).attr('id'); 
 		$('#'+id).attr("checked",true);
-		arrayfood.push($(this).val());
 		
+		 if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="foodchk"]').prop('checked', false);
+            $(this).prop('checked', true);
+		 } 
+		 $("input[name=foodchk]:checked").each(function() {
+				food = $(this).val();
+			});	
 	});
 	
 	$('input:checkbox[name="spotchk"]').change(function(){
 		var id = $(this).attr('id'); 
 		$('#'+id).attr("checked",true);
-		arrayspot.push($(this).val());
 
+		 if ($(this).prop('checked')) {
+	            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+	            $('input[type="checkbox"][name="spotchk"]').prop('checked', false);
+	            $(this).prop('checked', true);
+			 }
+		 $("input[name=spotchk]:checked").each(function() {
+			 spot = $(this).val();
+			});
 	});
-	
 	$("#submit").click(function() {
 		var theme = $("#theme option:selected").val();
 		var areaCode = $("#areaCode option:selected").val();
@@ -27,8 +40,8 @@ $(document).ready(function(){
 		$("#finddata").append("<input type='hidden' name='theme' value='"+theme+"'>");
 		$("#finddata").append("<input type='hidden' name='areaCode' value='"+areaCode+"'>"); 
 		$("#finddata").append("<input type='hidden' name='date' value='"+date+"'>");
-		$("#finddata").append("<input type='hidden' name='foodcode' value='"+arrayfood+"'>");
-		$("#finddata").append("<input type='hidden' name='spotcode' value='"+arrayspot+"'>");	 
+		$("#finddata").append("<input type='hidden' name='foodCode' value='"+food+"'>");
+		$("#finddata").append("<input type='hidden' name='spotCode' value='"+spot+"'>");	 
 	
 });
 })
@@ -137,7 +150,7 @@ $(document).ready(function(){
 						<h5 class="margin-top-30 margin-bottom-10">선호 관광지<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A01010100" type="checkbox" name="spotchk" value="A01010100">
+							<input id="A01010100" type="checkbox" name="spotchk" value="A01010100" >
 							<label for="A01010100">공원</label>
 
 							<input id="A01010400" type="checkbox" name="spotchk" value="A01010400">
@@ -211,7 +224,7 @@ $(document).ready(function(){
 							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
 							<label for="A05020600">패밀리레스토랑</label>
 
-							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
+							<input id="A05020700" type="checkbox" name="foodchk" value="A05020700">
 							<label for="A05020700">이색음식점</label>	
 
 							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
