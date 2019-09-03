@@ -5,8 +5,7 @@
  
 <mapper namespace="AdminCourseMapperNS">
   	<insert id="insertCourse" parameterType="adminCourseModel">
-  		Insert into adminCourse(courseNum,subject,theme,startDate,endDate,areaCode,foodCode,spotCode,
-  		course1,course2,course3,course4,course5,course6)	
+  		Insert into adminCourse(courseNum,subject,theme,startDate,endDate,areaCode,foodCode,spotCode,course1,course2,course3,course4,course5,course6)	
   		values(
 	  		AdminCourseSeq.NEXTVAL,
 	  		#{subject},
@@ -16,7 +15,6 @@
 	  		#{areaCode},
 	  		#{foodCode},
 	  		#{spotCode},
-	  		#{foodCode},
 	  		#{course1},
 	  		#{course2},
 	  		#{course3},

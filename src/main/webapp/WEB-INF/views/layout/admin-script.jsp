@@ -55,5 +55,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
+
+
 </script>
 
