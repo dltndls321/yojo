@@ -9,7 +9,7 @@
 <title>Insert title here</title>
     <style>
     
-.overlaybox {position:absolute;width:360px;height:230px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;padding:15px 10px;}
+.overlaybox {position:absolute;width:360px;height:240px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;padding:15px 10px;}
 .overlaybox div, ul {overflow:hidden;margin:0;padding:0;}
 .overlaybox li {list-style: none;}
 .overlaybox .boxtitle {color:#fff;font-size:16px;font-weight:bold;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png') no-repeat right 120px center;margin-bottom:8px;}
@@ -75,7 +75,7 @@ var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈
 
 	
 <c:forEach items="${foodList}" var="foodLists" >	
-geocoder.addressSearch("${foodLists.address}", function(result, status) {
+geocoder.addressSearch("${foodLists.area}", function(result, status) {
 	
 	
     // 정상적으로 검색이 완료됐으면 
@@ -92,9 +92,10 @@ geocoder.addressSearch("${foodLists.address}", function(result, status) {
         // 인포윈도우로 장소에 대한 설명을 표시합니다
       
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${foodLists.foodname}"+
-            '<center><a href="#" onclick="foodSet1(\''+"${foodLists.foodname}"+'\')">맛집1로 설정</a><br><a href="#" onclick="foodSet2(\''+"${foodLists.foodname}"+'\')">맛집2로 설정</a>'+
-            '<br><a href="#" onclick="foodSet3(\''+"${foodLists.foodname}"+'\')">맛집3으로 설정</a></center></div>',
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${foodLists.name}"+
+            '<center>코스설정<br><a href="#" onclick="courseSet1(\''+"${foodLists.name}- 맛집"+'\')">1</a> | <a href="#" onclick="courseSet2(\''+"${foodLists.name}- 맛집"+'\')">2</a>'+
+            ' | <a href="#" onclick="courseSet3(\''+"${foodLists.name}- 맛집"+'\')">3</a> | <a href="#" onclick="courseSet4(\''+"${foodLists.name}- 맛집"+'\')">4</a>' +
+            ' | <a href="#" onclick="courseSet5(\''+"${foodLists.name}- 맛집"+'\')">5</a> | <a href="#" onclick="courseSet6(\''+"${foodLists.name}- 맛집"+'\')">6</a></center></div>',
             removable : iwRemoveable
         });
         
@@ -137,7 +138,9 @@ geocoder.addressSearch("${festLists.area}", function(result, status) {
       
         var infowindow = new kakao.maps.InfoWindow({
             content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${festLists.subject}"+
-            '<center><a href="#" onclick="festSet1(\''+"${festLists.subject}"+'\')">축제1로 설정</a><br><a href="#" onclick="festSet2(\''+"${festLists.subject}"+'\')">축제2로 설정</a></center></div>'
+            '<center>코스설정<br><a href="#" onclick="courseSet1(\''+"${festLists.subject}- 축제"+'\')">1</a> | <a href="#" onclick="courseSet2(\''+"${festLists.subject}- 축제"+'\')">2</a>'+
+            ' | <a href="#" onclick="courseSet3(\''+"${festLists.subject}- 축제"+'\')">3</a> | <a href="#" onclick="courseSet4(\''+"${festLists.subject}- 축제"+'\')">4</a>' +
+            ' | <a href="#" onclick="courseSet5(\''+"${festLists.subject}- 축제"+'\')">5</a> | <a href="#" onclick="courseSet6(\''+"${festLists.subject}- 축제"+'\')">6</a></center></div>'
             ,removable : iwRemoveable
         });
         
@@ -183,7 +186,9 @@ geocoder.addressSearch("${spotLists.area}", function(result, status) {
       
         var infowindow = new kakao.maps.InfoWindow({
             content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${spotLists.name}"+
-            '<center><a href="#" onclick="spotSet1(\''+"${spotLists.name}"+'\')">관광지1로 설정</a></center></div>'
+            '<center>코스설정<br><a href="#" onclick="courseSet1(\''+"${spotLists.name}- 관광지"+'\')">1</a> | <a href="#" onclick="courseSet2(\''+"${spotLists.name}- 관광지"+'\')">2</a>'+
+            ' | <a href="#" onclick="courseSet3(\''+"${spotLists.name}- 관광지"+'\')">3</a> | <a href="#" onclick="courseSet4(\''+"${spotLists.name}- 관광지"+'\')">4</a>' +
+            ' | <a href="#" onclick="courseSet5(\''+"${spotLists.name}- 관광지"+'\')">5</a> | <a href="#" onclick="courseSet6(\''+"${spotLists.name}- 관광지"+'\')">6</a></center></div>'
             ,removable : iwRemoveable
         });
         
@@ -232,35 +237,37 @@ rectangle.setMap(map);
 //HTML 문자열 또는 Dom Element 입니다 
 var content = document.createElement('div');
 content.className = 'overlaybox';
-content.innerHTML = '<div class="overlaybox">' +
+content.innerHTML = '<form method="post" name="mapResult"' +
+ '	action="/map/route"><div class="overlaybox">' +
  '    <div class="boxtitle">코스 설정목록</div>' +
  '    <ul>' +
  '        <li class="up">' +
  '            <span class="number">1</span>' +
- '            <span class="title" id="span1">맛집1</span>' +
+ '            <span class="title" id="span1">코스1</span><input type="hidden" id="course1" name="course1" value="1"/>' +
  '        </li>' +
  '        <li>' +
  '            <span class="number">2</span>' +
- '            <span class="title" id="span2">맛집2</span>' +
+ '            <span class="title" id="span2">코스2</span><input type="hidden" id="course2" name="course2" value="2"/>' +
  '        </li>' +
  '        <li>' +
  '            <span class="number">3</span>' +
- '            <span class="title" id="span3">맛집3</span>' +
+ '            <span class="title" id="span3">코스3</span><input type="hidden" id="course3" name="course3" value="3"/>' +
  '        </li>' +
  '        <li>' +
  '            <span class="number">4</span>' +
- '            <span class="title" id="span4">축제1</span>' +
+ '            <span class="title" id="span4">코스4</span><input type="hidden" id="course4" name="course4" value="4"/>' +
  '        </li>' +
  '        <li>' +
  '            <span class="number">5</span>' +
- '            <span class="title" id="span5">축제2</span>' +
+ '            <span class="title" id="span5">코스5</span><input type="hidden" id="course5" name="course5" value="5"/>' +
  '        </li>'+
  '        <li>' +
  '            <span class="number">6</span>' +
- '            <span class="title" id="span6">관광지1</span>' +
- '        </li><a href="#"onClick="history.back()" style=" color: white;">&nbsp;범위설정다시하기</a><a href="#" style="float: right; color: white;">설정완료</a>' +
+ '            <span class="title" id="span6">코스6</span><input type="hidden" id="course6" name="course6" value="6"/>' +
+ ' <input type="hidden" id="startPoint" name="startPoint" value="${startPoint}"/><input type="hidden" id="endPoint" name="endPoint" value="${endPoint}"/>'+
+ '        </li><button type="button" href="#"onClick="history.back()" style=" border-radius: 10px;">&nbsp;범위설정다시하기</button><button type="submit" style="float: right; border-radius: 10px;">설정완료</button>' +
  '    </ul>' +
- '</div>';
+ '</div></form>';
 
 
  
@@ -358,23 +365,29 @@ function removeEventHandle(target, type, callback) {
 
 
 //목록에 리스트추가 함수
-function foodSet1(name){
+function courseSet1(name){
 	document.getElementById("span1").innerHTML=name;
+	document.getElementById("course1").value=name;
 }
-function foodSet2(name){
+function courseSet2(name){
 	document.getElementById("span2").innerHTML=name;
+	document.getElementById("course2").value=name;
 }
-function foodSet3(name){
+function courseSet3(name){
 	document.getElementById("span3").innerHTML=name;
+	document.getElementById("course3").value=name;
 }
-function festSet1(name){
+function courseSet4(name){
 	document.getElementById("span4").innerHTML=name;
+	document.getElementById("course4").value=name;
 }
-function festSet2(name){
+function courseSet5(name){
 	document.getElementById("span5").innerHTML=name;
+	document.getElementById("course5").value=name;
 }
-function spotSet1(name){
+function courseSet6(name){
 	document.getElementById("span6").innerHTML=name;
+	document.getElementById("course6").value=name;
 }
 
 
