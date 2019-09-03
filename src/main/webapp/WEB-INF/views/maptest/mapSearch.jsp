@@ -84,7 +84,7 @@
 </div>
 
 <form method="post" name="mapSearch"
-				action="/map/test2">
+				action="/map/result">
 				
 				<input type="hidden" id="startX" name="startX" value=""/>
 				<input type="hidden" id="startY" name="startY" value=""/>
