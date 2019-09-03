@@ -16,6 +16,7 @@
 			<typeAlias type="com.yogi.jogi.common.model.SpotReviewModel" alias="spotReviewModel"/>
 			<typeAlias type="com.yogi.jogi.common.model.FoodModel" alias="foodModel"/>
 			<typeAlias type="com.yogi.jogi.common.model.FoodReviewModel" alias="foodReviewModel"/>
+			<typeAlias type="com.yogi.jogi.admin.model.AdminCourseModel" alias="adminCourseModel"/>
         </typeAliases>
         <!-- <mappers>
         	<mapper resource="/mappers/Login_Register_Mapper.xml"/>
