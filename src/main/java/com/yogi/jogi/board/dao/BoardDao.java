@@ -25,9 +25,16 @@ public class BoardDao {
 	public List<BoardModel> selectBoardList() throws Exception {
 		return sqlSession.selectList(Namespace + ".selectBoardList");
 	}
-
+	BoardModel boardModel = new BoardModel();
 	public BoardModel selectBoard(int boardNum) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectBoard", boardNum);
+		try {
+			int result = sqlSession.update(Namespace + ".updateReadcount", boardNum);
+			boardModel = (BoardModel)sqlSession.selectOne(Namespace + ".selectBoard", boardNum);
+		
+		} finally {
+			return boardModel;
+		}
+		
 	}
 
 	public int insertBoard(BoardModel boardModel) throws Exception {

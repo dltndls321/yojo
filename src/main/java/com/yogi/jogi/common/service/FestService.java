@@ -3,7 +3,6 @@ package com.yogi.jogi.common.service;
 import java.util.List;
 
 import com.yogi.jogi.common.model.FestivalModel;
-import com.yogi.jogi.common.model.FoodModel;
 import com.yogi.jogi.member.model.MemberModel;
 
 public interface FestService {

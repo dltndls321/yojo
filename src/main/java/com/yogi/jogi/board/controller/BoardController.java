@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,7 +67,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardlist")
-	public ModelAndView list(HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView list(HttpServletRequest request, HttpSession session,MemberModel memberModel) throws Exception {
 		mv.clear();
 
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
@@ -88,12 +89,14 @@ public class BoardController {
 
 		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "2");
 
-		session = request.getSession(true);
-
-		String memNum = request.getParameter("memNum");
-		request.getSession().setAttribute("memNum", memNum);
-		System.out.println(memNum);
-		mv.addObject("memNum", memNum);
+		/*
+		 * session = request.getSession(true);
+		 * 
+		 * String memNum = request.getParameter("memNum");
+		 * request.getSession().setAttribute("memNum", memNum);
+		 */
+		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		session.setAttribute("memNum", memNum);
 		mv.addObject("boardlist", boardlist);
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("count", count);
@@ -111,7 +114,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("list")
-	public ModelAndView list2() throws Exception {
+	public ModelAndView list2(HttpSession session,MemberModel memberModel) throws Exception {
 		mv.clear();
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
@@ -130,8 +133,10 @@ public class BoardController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
+		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		session.setAttribute("memNum", memNum);
 		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "1");
-
+		
 		mv.addObject("boardlist", boardlist);
 
 		mv.addObject("pageCount", pageCount);
@@ -188,12 +193,12 @@ public class BoardController {
 			throws Exception {
 
 		MultipartFile multi = multipart.getFile("uploadfile");
-		String fname = multi.getOriginalFilename();
+		String fname ="http://211.63.89.83:8888/resources/fileSave/" + multi.getOriginalFilename();
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println(boardModel);
-		if (fname != null && !fname.equals("")) {
+		if (fname != null && !fname.equals("http://211.63.89.83:8888/resources/fileSave/")) {
 
-			String uploadPath = multipart.getRealPath("/") + "WEB-INF/views/board/fileSave";
+			String uploadPath = "D:/workspace/yojo/src/main/webapp/resources/fileSave/";
 
 			FileCopyUtils.copy(multi.getInputStream(),
 					new FileOutputStream(uploadPath + "/" + multi.getOriginalFilename()));
@@ -211,10 +216,12 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="content", method = RequestMethod.GET)
-	public ModelAndView content(@RequestParam ("boardNum")int boardNum, MemberModel memberModel) throws Exception {
+	public ModelAndView content(@RequestParam ("boardNum")int boardNum, MemberModel memberModel,HttpSession session) throws Exception {
 
 		mv.clear();
-		
+		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		session.setAttribute("memNum", memNum);
+		mv.addObject("memNum",memNum);
 		mv.addObject("list", boardService.selectBoard(boardNum));
 		mv.addObject("memberModel",new MemberModel());
 		mv.setViewName("board/content.do"); // 가야할 페이지

@@ -9,9 +9,10 @@
 
 <script>
 	var boardNum = '${list.boardNum}'; //게시글 번호
-
+	var memNum = '${list.memNum}'; //유저 번호
+	
 	$('[name=replyInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
-		var insertData = $('[name=replyInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
 		replyInsert(insertData); //Insert 함수호출(아래)
 	});
 
@@ -40,10 +41,11 @@
 
 	//댓글 등록
 	function replyInsert(insertData) {
+		content=$('#dcontent').val();
 		$.ajax({
 			url : '/reply/insert',
-			type : 'post',
-			data : insertData,
+			type : 'get',
+			data : {'boardNum' : boardNum, 'content' : content, 'memNum' : memNum},
 			success : function(data) {
 				if (data == 1) {
 					replyList(); //댓글 작성 후 댓글 목록 reload
@@ -56,17 +58,18 @@
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	function replyUpdate(replyNum, content) {
 		var a = '';
-		
+		alert("ok1");
 		a += '<div class="input-group">';
 		a += '<input type="text" class="form-control" name="content_'+replyNum+'" value="'+content+'"/>';
-		a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="replyUpdate('+ replyNum + ');">수정</button> </span>';
+		a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="replyUpdate2('+ replyNum + ');">수정</button> </span>';
 		a += '</div>';
 		$('.replyContent' + replyNum).html(a);
 
 	}
 
 	//댓글 수정
-	function replyUpdate(replyNum) {
+	function replyUpdate2(replyNum) {
+		alert("content_"+replyNum);
 		var updateContent = $('[name=content_' + replyNum + ']').val();
 
 		$.ajax({
@@ -80,8 +83,8 @@
 				if (data == 1)
 					replyList(boardNum); //댓글 수정후 목록 출력 
 			}
-		});
-	}
+			});
+		}
 
 	//댓글 삭제 
 	function replyDelete(replyNum) {
@@ -125,7 +128,7 @@
 
 					<!-- Blog Post -->
 					<div class="blog-post single-post">
-						<form name="form1" method="post"
+						<form name="form1" method="post" 
 							action="/board/update/${list.boardNum}">
 							<input type="hidden" id="subject" name="subject"
 								value="${list.subject }"> <input type="hidden"
@@ -139,7 +142,7 @@
 							<!-- Img -->
 							<table>
 								<tr height="30">
-									<td align="center"><img src="<%=request.getContextPath() %>/images/${list.fname}"></td>
+									<td align="center" ><img src='<c:out value="${list.fname}"/>'></td>
 								</tr>
 							</table>
 					</div>
@@ -240,20 +243,36 @@
 			<!-- Reviews -->
 			<form name="replyInsertForm">
 				<div class="input-group">
-					<input type="hidden" name="boardNum" value="${list.boardNum}" /> <input
-						type="text" class="form-control" id="content" name="content"
-						placeholder="내용을 입력하세요."> <span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							name="replyInsertBtn">등록</button>
+					<input type="hidden" name="boardNum" value="${list.boardNum}" /> 
+					<input type="hidden" name="memNum" value="${list.memNum }"/>
+					
+					<input type="text" class="form-control" id="dcontent" name="content"	placeholder="내용을 입력하세요."> 
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="button" name="replyInsertBtn"  onclick="replyInsert()">등록</button>
 					</span>
 				</div>
 			</form>
 
 		</div>
-
 		<div class="container">
+		
+			<section class="comments">
+			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
+					
+				
+								
+								
+			</section>
+			<div class="container">
+			
+
 			<div class="replyList"></div>
+			
+        
+    </div>
+			
 		</div>
+		
 	</div>
 	<!-- Reply Form {s} -->
 
@@ -269,7 +288,7 @@
 	<div class="my-3 p-3 bg-white rounded shadow-sm"
 		style="padding-top: 10px">
 
-		<h6 class="border-bottom pb-2 mb-0">Reply list</h6>
+		<h6 class="border-bottom pb-2 mb-0"></h6>
 
 		<div id="replyList"></div>
 
