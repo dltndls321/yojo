@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yogi.jogi.board.model.ReplyModel;
 import com.yogi.jogi.board.service.ReplyService;
-import com.yogi.jogi.member.model.MemberModel;
  
 
 @Controller
@@ -32,7 +30,6 @@ public class BoardReplyController {
     @ResponseBody
     private List<ReplyModel> replyList(ReplyModel replyModel) throws Exception{
         
-    	
         return replyService.replyList();
     }
     
@@ -52,15 +49,16 @@ public class BoardReplyController {
     @RequestMapping("/update") //댓글 수정  
     @ResponseBody
     private int replyUpdate(@RequestParam int replyNum, @RequestParam String content) throws Exception{
-        
+        System.out.println(replyNum);
+        System.out.println(content);
     	ReplyModel replyModel = new ReplyModel();
-        replyModel.setBoardNum(replyNum);
+        replyModel.setReplyNum(replyNum);
         replyModel.setContent(content);
         
         return replyService.replyUpdate(replyModel);
     }
     
-    @RequestMapping("/delete/{boardNum}") //댓글 삭제  
+    @RequestMapping("/delete/{replyNum}") //댓글 삭제  
     @ResponseBody
     private int replyDelete(@PathVariable int replyNum) throws Exception{
         

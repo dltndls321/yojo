@@ -10,6 +10,7 @@
 <script>
 	var boardNum = '${list.boardNum}'; //게시글 번호
 	var memNum = '${list.memNum}'; //유저 번호
+	
 	$('[name=replyInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
 		var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
 		replyInsert(insertData); //Insert 함수호출(아래)
@@ -41,13 +42,11 @@
 	//댓글 등록
 	function replyInsert(insertData) {
 		content=$('#dcontent').val();
-		alert("ok");
 		$.ajax({
 			url : '/reply/insert',
 			type : 'get',
 			data : {'boardNum' : boardNum, 'content' : content, 'memNum' : memNum},
 			success : function(data) {
-				alert(data+"ok=====");
 				if (data == 1) {
 					replyList(); //댓글 작성 후 댓글 목록 reload
 					$('[name=content]').val('');
@@ -59,17 +58,18 @@
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	function replyUpdate(replyNum, content) {
 		var a = '';
-		
+		alert("ok1");
 		a += '<div class="input-group">';
 		a += '<input type="text" class="form-control" name="content_'+replyNum+'" value="'+content+'"/>';
-		a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="replyUpdate('+ replyNum + ');">수정</button> </span>';
+		a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="replyUpdate2('+ replyNum + ');">수정</button> </span>';
 		a += '</div>';
 		$('.replyContent' + replyNum).html(a);
 
 	}
 
 	//댓글 수정
-	function replyUpdate(replyNum) {
+	function replyUpdate2(replyNum) {
+		alert("content_"+replyNum);
 		var updateContent = $('[name=content_' + replyNum + ']').val();
 
 		$.ajax({
@@ -83,8 +83,8 @@
 				if (data == 1)
 					replyList(boardNum); //댓글 수정후 목록 출력 
 			}
-		});
-	}
+			});
+		}
 
 	//댓글 삭제 
 	function replyDelete(replyNum) {
@@ -259,20 +259,17 @@
 			<section class="comments">
 			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
 					
-				<ul>
-					<li>
-						<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-						<div class="comment-content"><div class="arrow-comment"></div>
-							<div class="comment-by">멤버Num<span class="date">날짜</span><!--유저이름,	 날짜 -->
-								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-							</div>
-							<p>내용</p><!-- 댓글내용 -->
-						</div>
-							</li>
-							</ul>
+				
 								
 								
 			</section>
+			<div class="container">
+			
+
+			<div class="replyList"></div>
+			
+        
+    </div>
 			
 		</div>
 		

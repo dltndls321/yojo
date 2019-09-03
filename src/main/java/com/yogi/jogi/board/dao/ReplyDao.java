@@ -24,10 +24,10 @@ public class ReplyDao {
 		return sqlSession.selectList(Namespace + ".replyList");
 	}
 	public int replyInsert(ReplyModel replyModel) throws Exception {
-		System.out.println(replyModel);
 		return sqlSession.insert(Namespace + ".replyInsert",replyModel);
 	}
 	public int replyUpdate(ReplyModel replyModel) throws Exception {
+		System.out.println(replyModel);
 		return sqlSession.update(Namespace + ".replyUpdate",replyModel);
 	}
 	public int replyDelete(int replynum) throws Exception{
