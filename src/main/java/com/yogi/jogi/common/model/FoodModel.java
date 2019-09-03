@@ -6,8 +6,8 @@ public class FoodModel {
 	private String category;
 	private String area;
 	private String name;
-	private float foodx;
-	private float foody;
+	private float x;
+	private float y;
 	private int zcode;
 	public int getFoodNum() {
 		return foodNum;
@@ -33,29 +33,31 @@ public class FoodModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getFoodx() {
-		return foodx;
-	}
-	public void setFoodx(float foodx) {
-		this.foodx = foodx;
-	}
-	public float getFoody() {
-		return foody;
-	}
-	public void setFoody(float foody) {
-		this.foody = foody;
-	}
+	
 	public int getZcode() {
 		return zcode;
 	}
 	public void setZcode(int zcode) {
 		this.zcode = zcode;
 	}
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
 	@Override
 	public String toString() {
-		return "FoodModel [foodNum=" + foodNum + ", category=" + category + ", area=" + area + ", name=" + name
-				+ ", foodx=" + foodx + ", foody=" + foody + ", zcode=" + zcode + "]";
+		return "FoodModel [foodNum=" + foodNum + ", category=" + category + ", area=" + area + ", name=" + name + ", x="
+				+ x + ", y=" + y + ", zcode=" + zcode + "]";
 	}
+	
 	
 	
 	

@@ -13,5 +13,6 @@ public interface FestService {
 	public FestivalModel selectFestWithsubject(FestivalModel festivalModel) throws Exception;
 	public List<FestivalModel> selectFestListXY(float startX, float startY, float endX, float endY) throws Exception;
 	public List<FestivalModel> selectFestAdmin(FestivalModel festivalModel) throws Exception;
+	public FestivalModel getFestArea(String name) throws Exception;
 	
 }

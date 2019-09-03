@@ -12,6 +12,6 @@ public interface SpotService {
 	public SpotModel selectSpotWithname(SpotModel spotModel) throws Exception;
 	public List<SpotModel> selectSpotListXY(float startX, float startY, float endX, float endY) throws Exception;
 	public List<SpotModel> selectSpotAdmin(SpotModel spotModel) throws Exception;
-	
+	public SpotModel getSpotArea(String name) throws Exception;
 
 }

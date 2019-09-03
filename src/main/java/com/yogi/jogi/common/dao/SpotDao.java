@@ -39,4 +39,9 @@ public class SpotDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace + ".selectSpotAdmin", spotModel);
 	}
+
+	public SpotModel getSpotArea(String name) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(Namespace + ".getSpotArea", name);
+	}
 }

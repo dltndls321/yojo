@@ -38,4 +38,9 @@ public class FestDao {
 	public List<FestivalModel> selectFestAdmin(FestivalModel festivalModel) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectFestAdmin", festivalModel);
 	}
+
+	public FestivalModel getFestArea(String name) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(Namespace+".getFestArea",name);
+	}
 }
