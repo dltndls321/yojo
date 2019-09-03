@@ -3,6 +3,7 @@ package com.yogi.jogi.admin.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yogi.jogi.admin.model.AdminCourseModel;
+import com.yogi.jogi.admin.service.AdminCourseService;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.common.model.FestivalModel;
@@ -75,6 +79,8 @@ public class AdminController {
 	private SpotReviewService spotReviewService;
 	@Autowired
 	private FoodService foodService;
+	@Autowired
+	private AdminCourseService adminCourseService;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -192,7 +198,6 @@ public class AdminController {
 			throws Exception {
 
 		mv.clear();
-
 		boardModel.setBoardNum(boardNum);
 		boardModel = boardService.selectBoard(boardNum);
 		boardService.deleteBoard(boardModel);
@@ -452,5 +457,49 @@ public class AdminController {
 		}		
 		System.out.println(jsonArray);
 	}
+	@RequestMapping(value = "chkCourse")
+	public ModelAndView chkCourse(HttpServletRequest request, HttpServletResponse response,AdminCourseModel adminCourseModel,
+			@RequestParam String title, @RequestParam String theme, @RequestParam String arrayspot,@RequestParam String arrayfood,
+			@RequestParam String food, @RequestParam int area, @RequestParam String spot,@RequestParam String fest,
+			@RequestParam Date startdate, @RequestParam Date enddate ) throws Exception  {
+		
+	
+		String[] foodList = food.split(",");
+		String[] spotList = spot.split(",");
+
+		adminCourseModel.setSubject(title);
+		adminCourseModel.setTheme(theme);
+		adminCourseModel.setStartDate(startdate);
+		adminCourseModel.setEndDate(enddate);
+		adminCourseModel.setAreaCode(area);
+		adminCourseModel.setFoodCode(arrayfood);
+		adminCourseModel.setSpotCode(arrayspot);
+		adminCourseModel.setCourse1(foodList[0]);
+		adminCourseModel.setCourse2(spotList[0]);
+		adminCourseModel.setCourse3(foodList[1]);
+		adminCourseModel.setCourse4(spotList[1]);
+		adminCourseModel.setCourse5(foodList[2]);
+		adminCourseModel.setCourse6(fest);
+		
+		System.out.println(adminCourseModel);
+		
+		adminCourseService.insertCourse(adminCourseModel);
+
+		mv.clear();
+		mv.addObject("title", title);
+		mv.addObject("theme", theme);
+		mv.addObject("arrayspot", arrayspot);
+		mv.addObject("arrayfood", arrayfood);
+		mv.addObject("food", foodList);
+		mv.addObject("area", area);
+		mv.addObject("spot", spotList);
+		mv.addObject("fest", fest);
+		mv.addObject("startdate", startdate);
+		mv.addObject("enddate", enddate);
+		
+		mv.setViewName("admin/chkCourse.admin");
+		return mv;
+	}
+	
 
 }

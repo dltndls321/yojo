@@ -2,14 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
-
 $(document).ready(function(){
+	$('#theme').change(function(){
+		var title = $("#title").val();
+		var theme = $("#theme option:selected").val();
+
+		$("#finaldata").append("<input type='hidden' name='title' value='"+title+"'>");
+		$("#finaldata").append("<input type='hidden' name='theme' value='"+theme+"'>");
+	})
 	//음식
 	$('#foodcode').change(function(){
 		var areaCode = $("#areafood option:selected").val();
 		var foodCode = $("#foodcode option:selected").val();
 		var foodCate = $("#foodcode option:checked").text();
-		alert(areaCode);alert(foodCode);
 		var resultStr = "";
 		
 		$.ajax({        
@@ -25,8 +30,8 @@ $(document).ready(function(){
 	            	}else {
 	            		$('#foodlist').append("<h5>"+foodCate+"</h5>");
 	        			$.each(data, function(i){ 
-	        				$("#foodlist").append("<input type ='checkbox' name = 'foodchk' id='"+data[i].foodNum+"'>"
-	        						+"<label for = '"+data[i].foodNum+"'>"+data[i].name+"</label>");
+	        				$("#foodlist").append("<input type ='checkbox' name = 'foodchk' id='food"+data[i].foodNum+"'value = '"+data[i].name+"'>"
+	        						+"<label for = 'food"+data[i].foodNum+"'>"+data[i].name+"</label>");
 	        				}); 
 	        			} 
 	            	
@@ -40,7 +45,6 @@ $(document).ready(function(){
 	$('#areafest').change(function(){
 		var areaCode = $("#areafest option:selected").val();
 		var date = $("#date-picker").val();
-		alert(areaCode);alert(date);
 		var resultStr = "";
 		
 		$.ajax({        
@@ -56,8 +60,9 @@ $(document).ready(function(){
 	            	}else {
 	            		$('#festlist').empty();
 	        			$.each(data, function(i){ 
-	        				$("#festlist").append("<input type ='checkbox' name = 'festchk' id='"+data[i].festNum+"'>"
-	        						+"<label for = '"+data[i].festNum+"'>"+data[i].subject+"</label>");
+	        				$("#festlist").append("<input type ='checkbox' name = 'festchk' id='fest"+data[i].festNum+"'value = '"+data[i].subject+"'>"
+	     						+"<label for = 'fest"+data[i].festNum+"'>"+data[i].subject+
+	     						"("+(data[i].fdate1.month+1)+"/"+data[i].fdate1.date+"~"+(data[i].fdate2.month+1)+"/"+data[i].fdate2.date+")</label>");
 	        				}); 
 	        			} 
 	            	
@@ -66,13 +71,13 @@ $(document).ready(function(){
 	                alert("검색 결과가 없습니다.");
 	        }
 	        });	
+		$("#finaldata").append("<input type='hidden' name='area' value='"+areaCode+"'>");
 	});
 		//관광지
 		$('#spotcode').change(function(){
 			var areaCode = $("#areaspot option:selected").val();
 			var spotCode = $("#spotcode option:selected").val();
 			var spotCote = $("#spotcode option:selected").text();
-			alert(areaCode);alert(spotCode);
 			var resultStr = "";
 			
 			$.ajax({        
@@ -88,8 +93,8 @@ $(document).ready(function(){
 		            	}else {
 		            		$('#spotlist').append("<h5>"+spotCote+"</h5>");
 		        			$.each(data, function(i){ 	
-		        				$("#spotlist").append("<input type ='checkbox' name = 'spotchk' id='"+data[i].spotNum+"'>"
-		        						+"<label for = '"+data[i].spotNum+"'>"+data[i].name+"</label>");
+		        				$("#spotlist").append("<input type ='checkbox' name = 'spotchk' id='spot"+data[i].spotNum+"'value = '"+data[i].name+"'>"
+		        						+"<label for = 'spot"+data[i].spotNum+"'>"+data[i].name+"</label>");
 		        				}); 
 		        			} 
 		            	
@@ -109,9 +114,113 @@ $(document).ready(function(){
 		$('#spotlist').empty();
 	});	
 });
-$(document).on("change",'input:checkbox[name="foodchk"]',function(){  
-	 
-});
+
+	//음식점이 코스에 추가되는거
+	$(document).on("change",'input:checkbox[name="foodchk"]',function(){
+	
+		var id = $(this).attr('id'); 
+		alert(id)
+		$('#'+id).attr("checked",true);
+		var food = $('#'+id).val();
+		var newfood = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+			newfood += "<td>";
+			newfood += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
+			newfood += "<div class='fm-input pricing-name'><input type='text' value='음식점'/></div>";
+			newfood +=  "<div class='fm-input pricing-ingredients'><input type='text' value ='"+food+"'/></div>";
+			newfood += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
+			newfood += "</td>";
+			newfood += "</tr>";
+	
+			$("#finalcourse").append(newfood);
+			$("#finaldata").append("<input type='hidden' name='food' value='"+food+"'>");	 
+		 
+	});
+	
+	//축제가 코스에 추가되는거
+	$(document).on("change",'input:checkbox[name="festchk"]',function(){
+	
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+		var fest = $('#'+id).val();
+							
+		var newfest = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+			newfest += "<td>";
+			newfest += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
+			newfest += "<div class='fm-input pricing-name'><input type='text' value='축제'/></div>";
+			newfest +=  "<div class='fm-input pricing-ingredients'><input type='text' value ='"+fest+"'/></div>";
+			newfest += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
+			newfest += "</td>";
+			newfest += "</tr>";
+	
+			$("#finalcourse").append(newfest);
+			$("#finaldata").append("<input type='hidden' name='fest' value='"+fest+"'>");	 
+		 
+	});
+	//관광지가 코스에 추가되는거
+	$(document).on("change",'input:checkbox[name="spotchk"]',function(){
+	
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+		var spot = $('#'+id).val();
+		
+		alert(spot)
+	
+		var newspot = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+			newspot += "<td>";
+			newspot += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
+			newspot += "<div class='fm-input pricing-name'><input type='text' value='관광지'/></div>";
+			newspot +=  "<div class='fm-input pricing-ingredients'><input type='text' value ='"+spot+"'/></div>";
+			newspot += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
+			newspot += "</td>";
+			newspot += "</tr>";
+			$("#finalcourse").append(newspot);
+			$("#finaldata").append("<input type='hidden' name='spot' value='"+spot+"'>");	 
+		 
+	});
+	//마지막 체크부분
+	var arrayfood = new Array();
+	var arrayspot = new Array();
+	$(document).on("change",'input:checkbox[name="finalfood"]',function(){
+		
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+		var chk = $('#'+id).val();
+		
+		arrayfood.push($(this).val());
+		
+		
+	});
+	$(document).on("change",'input:checkbox[name="finalspot"]',function(){
+		
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+		var chk = $('#'+id).val();
+		
+		arrayspot.push($(this).val());
+		
+		
+		
+	
+	});
+
+	$(function(){
+		$("#preview").click(function() {
+			$("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
+			$("#finaldata").append("<input type='hidden' name='arrayfood' id='arrayfood' value='"+arrayfood+"'>"); 
+			//날짜넣기
+			var startdate = $("#startdate").val();
+			var enddate = $("#enddate").val();
+
+			$("#finaldata").append("<input type='hidden' name='startdate' id='startdate' value='"+startdate+"'>");
+			$("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
+			 
+		})
+		
+		
+		
+		
+	
+	})
 
 </script>
 <div class="dashboard-content">
@@ -142,7 +251,7 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 						<div class="row with-forms">
 							<div class="col-md-12">
 								<h5>Course Title <i class="tip" data-tip-content="추천코스의 이름으로 등록됩니다"></i></h5>
-								<input class="search-field" type="text" value=""/>
+								<input class="search-field" id = "title" type="text" value=""/>
 							</div>
 						</div>
 
@@ -152,12 +261,12 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 							<!-- Status -->
 							<div class="col-md-6">
 								<h5>Category</h5>
-								<select class="chosen-select-no-single" >
+								<select class="chosen-select-no-single" id ="theme" >
 									<option label="blank">--선택--</option>	
-									<option>아이와 함께</option>
-									<option>부모님과 함께</option>
-									<option>연인과 함께</option>
-									<option>친구와 함께</option>
+									<option value ="child">아이와 함께</option>
+									<option value ="parent">부모님과 함께</option>
+									<option value ="couple">연인과 함께</option>
+									<option value ="firend">친구와 함께</option>
 								</select>
 							</div>
 
@@ -372,7 +481,7 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 								<!-- City -->
 								<div class="col-md-4">
 									<h5>여행 지역</h5>
-									<select class="chosen-select-no-single" >
+									<select class="chosen-select-no-single" id="finalarea" >
 											<option value = "">지역 선택</option>	
 											<option value ="1">서울</option>
 											<option value ="2">인천</option>
@@ -397,66 +506,66 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 								<!-- Address -->
 								<div class="col-md-4">
 									<h5>여행 날짜</h5>
-									<input type="text" id="date-picker1" placeholder="Date" readonly="readonly">
+									<input type="text" id="startdate" placeholder="2019-01-01">
 								</div>
 								<div class="col-md-4">
 									<h5>여행 날짜</h5>
-									<input type="text" id="date-picker2" placeholder="Date" readonly="readonly">
+									<input type="text" id="enddate" placeholder="2019-12-31" >
 								</div>
 						<div class="col-md-12">
 								<!-- Checkboxes -->
 						<h5 class="margin-top-30 margin-bottom-10"><br/>선호 관광지<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A01010100" type="checkbox" name="check">
+							<input id="A01010100" type="checkbox" name="finalspot" value="A01010100">
 							<label for="A01010100">공원</label>
 
-							<input id="A01010400" type="checkbox" name="check">
+							<input id="A01010400" type="checkbox" name="finalspot" value="A01010400">
 							<label for="A01010400">산</label>
 
-							<input id="A01010500" type="checkbox" name="check">
+							<input id="A01010500" type="checkbox" name="finalspot" value="A01010500">
 							<label for="A01010500">자연생태관광지</label>
 
-							<input id="A01010600" type="checkbox" name="check">
+							<input id="A01010600" type="checkbox" name="finalspot" value="A01010600">
 							<label for="A01010600">자연휴양림</label>
 
-							<input id="A01010700" type="checkbox" name="check" >
+							<input id="A01010700" type="checkbox" name="finalspot" value="A01010700" >
 							<label for="A01010700">수목원</label>
 
-							<input id="A01010800" type="checkbox" name="check" >
+							<input id="A01010800" type="checkbox" name="finalspot" value="A01010800">
 							<label for="A01010800">폭포</label>
 
-							<input id="A01010900" type="checkbox" name="check">
+							<input id="A01010900" type="checkbox" name="finalspot" value="A01010900">
 							<label for="A01010900">계곡</label>	
 
-							<input id="A01011000" type="checkbox" name="check">
+							<input id="A01011000" type="checkbox" name="finalspot" value="A01011000">
 							<label for="A01011000">약수터</label>
 							
-							<input id="A01011100" type="checkbox" name="check">
+							<input id="A01011100" type="checkbox" name="finalspot" value="A01011100">
 							<label for="A01011100">해안절경</label>
 							
-							<input id="A01011200" type="checkbox" name="check">
+							<input id="A01011200" type="checkbox" name="finalspot" value="A01011200">
 							<label for="A01011200">해수욕장</label>
 							
-							<input id="A01011300" type="checkbox" name="check">
+							<input id="A01011300" type="checkbox" name="finalspot" value="A01011300">
 							<label for="A01011300">섬</label>
 							
-							<input id="A01011400" type="checkbox" name="check">
+							<input id="A01011400" type="checkbox" name="finalspot" value="A01011400">
 							<label for="A01011400">항구/포구</label>
 							
-							<input id="A01011500" type="checkbox" name="check">
+							<input id="A01011500" type="checkbox" name="finalspot" value="A01011500">
 							<label for="A01011500">어촌</label>
 							
-							<input id="A01011600" type="checkbox" name="check">
+							<input id="A01011600" type="checkbox" name="finalspot" value="A01011600">
 							<label for="A01011600">등대</label>
 							
-							<input id="A01011700" type="checkbox" name="check">
+							<input id="A01011700" type="checkbox" name="finalspot" value="A01011700">
 							<label for="A01011700">호수</label>
 							
-							<input id="A01011800" type="checkbox" name="check">
+							<input id="A01011800" type="checkbox" name="finalspot" value="A01011800">
 							<label for="A01011800">강</label>
 							
-							<input id="A01011900" type="checkbox" name="check">
+							<input id="A01011900" type="checkbox" name="finalspot" value="A01011900">
 							<label for="A01011900">동굴</label>
 						</div>
 						</div>
@@ -466,31 +575,31 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A05020100" type="checkbox" name="check">
+							<input id="A05020100" type="checkbox" name="finalfood" value="A05020100">
 							<label for="A05020100">한식</label>
 
-							<input id="A05020200" type="checkbox" name="check">
+							<input id="A05020200" type="checkbox" name="finalfood" value="A05020200">
 							<label for="A05020200">양식</label>
 
-							<input id="A05020300" type="checkbox" name="check">
+							<input id="A05020300" type="checkbox" name="finalfood" value="A05020300">
 							<label for="A05020300">일식</label>
 
-							<input id="A05020400" type="checkbox" name="check">
+							<input id="A05020400" type="checkbox" name="finalfood" value="A05020400">
 							<label for="A05020400">중식</label>
 
-							<input id="A05020500" type="checkbox" name="check" >
+							<input id="A05020500" type="checkbox" name="finalfood" value="A05020500">
 							<label for="A05020500">아시아식</label>
 
-							<input id="A05020600" type="checkbox" name="check" >
+							<input id="A05020600" type="checkbox" name="finalfood" value="A05020600">
 							<label for="A05020600">패밀리레스토랑</label>
 
-							<input id="A05020700" type="checkbox" name="check">
+							<input id="A05020700" type="checkbox" name="finalfood" value="A05020700">
 							<label for="A05020700">이색음식점</label>	
 
-							<input id="A05020800" type="checkbox" name="check">
+							<input id="A05020800" type="checkbox" name="finalfood" value="A05020800">
 							<label for="A05020800">채식전문점</label>
 							
-							<input id="A05020900" type="checkbox" name="check">
+							<input id="A05020900" type="checkbox" name="finalfood" value="A05020900">
 							<label for="A05020900">바/카페</label>
 						</div>
 						</div>
@@ -503,8 +612,6 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 					<!-- Section / End -->
 
 
-					
-				
 
 					<!-- Section -->
 					<div class="add-listing-section margin-top-45">
@@ -520,18 +627,10 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 
 							<div class="row">
 								<div class="col-md-12">
-									<table id="pricing-list-container">
-										<tr class="pricing-list-item pattern">
-											<td>
-												<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
-												<div class="fm-input pricing-name"><input type="text"/></div>
-												<div class="fm-input pricing-ingredients"><input type="text" placeholder="Description" /></div>
-												<div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>
-											</td>
-										</tr>
+									<table id="pricing-list-container" >
+										<tbody class="ui-sortable" id ="finalcourse">
+										</tbody>
 									</table>
-									<a href="#" class="button add-pricing-list-item">Add Item</a>
-									<a href="#" class="button add-pricing-submenu">Add Category</a>
 								</div>
 							</div>
 
@@ -541,8 +640,10 @@ $(document).on("change",'input:checkbox[name="foodchk"]',function(){
 					</div>
 					<!-- Section / End -->
 
-
-					<a href="#" class="button preview">Preview <i class="fa fa-arrow-circle-right"></i></a>
+					<form action = "chkCourse" id = "finaldata">
+					
+					<input type="submit"  class="button preview" value="Preview" id="preview"/> 
+					</form>
 
 				</div>
 			</div>
