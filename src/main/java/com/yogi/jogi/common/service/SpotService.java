@@ -2,7 +2,6 @@ package com.yogi.jogi.common.service;
 
 import java.util.List;
 
-import com.yogi.jogi.common.model.FoodModel;
 import com.yogi.jogi.common.model.SpotModel;
 
 public interface SpotService {

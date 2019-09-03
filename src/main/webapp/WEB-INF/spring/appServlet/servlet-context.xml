@@ -66,7 +66,7 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 
-	<mvc:resources mapping="/images/**"
-		location="/yojo/src/main/webapp/WEB-INF/views/board/fileSave, /WEB-INF/resources/" cache-period="60" />
-
+	<!-- <mvc:resources mapping="/images/**"
+		location="/WEB-INF/views/board/fileSave/" cache-period="60" />
+ -->
 </beans:beans>

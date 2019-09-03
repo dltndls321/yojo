@@ -86,9 +86,7 @@
 								<td colspan=5 align="center"><input type="submit"
 									value="수정" style="max-width: 100px; min-width: 99px;">
 									<input type="reset" value="다시입력" style="max-width: 100px;">
-									<input type="button" value=" 글목록"
-									onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"
-									style="max-width: 100px;"></td>
+									</td>
 							</tr>
 						</table>
 					</form>

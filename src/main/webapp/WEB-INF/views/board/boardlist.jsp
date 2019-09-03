@@ -67,32 +67,34 @@
 								<div class="list-box-listing-img">
 									<a
 										href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
-										<img src="<%=request.getContextPath() %>/images/${list.fname}">
+										
+										<img src='<c:out value="${list.fname}"/>'>
 									</a>
 								</div>
 								<div class="list-box-listing-content">
 									<div class="inner">
 										<table>
 											<tr>
-												<td width="10%"><div>
+												<td width="140px"><div>
 														<h3></h3>
 													</div></td>
-												<td width="25%"><div>
+												<td width="180px"><div>
 														<a
 															href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">${list.boardNum}</a>
 													</div></td>
-												<td width="25%"><div>
+												<td width="220px"><div>
 														<a
 															href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
 															${list.subject}</a>
 													</div></td>
 
-												<td width="20%"><a
+												<td width="270px"><a
 													href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">${list.writer}</a></td>
-												<td width="20%"><div>
+												<td width="300px"><div>
 														<fmt:formatDate type="date" value="${list.regdate}" />
 													</div></td>
-												<td><div>${list.readcount}</div></td>
+												<td width="15%"><div>${list.readcount}</div></td>
+												
 
 											</tr>
 

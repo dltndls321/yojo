@@ -9,9 +9,9 @@
 
 <script>
 	var boardNum = '${list.boardNum}'; //게시글 번호
-
+	var memNum = '${list.memNum}'; //유저 번호
 	$('[name=replyInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
-		var insertData = $('[name=replyInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
 		replyInsert(insertData); //Insert 함수호출(아래)
 	});
 
@@ -40,11 +40,14 @@
 
 	//댓글 등록
 	function replyInsert(insertData) {
+		content=$('#dcontent').val();
+		alert("ok");
 		$.ajax({
 			url : '/reply/insert',
-			type : 'post',
-			data : insertData,
+			type : 'get',
+			data : {'boardNum' : boardNum, 'content' : content, 'memNum' : memNum},
 			success : function(data) {
+				alert(data+"ok=====");
 				if (data == 1) {
 					replyList(); //댓글 작성 후 댓글 목록 reload
 					$('[name=content]').val('');
@@ -125,7 +128,7 @@
 
 					<!-- Blog Post -->
 					<div class="blog-post single-post">
-						<form name="form1" method="post"
+						<form name="form1" method="post" 
 							action="/board/update/${list.boardNum}">
 							<input type="hidden" id="subject" name="subject"
 								value="${list.subject }"> <input type="hidden"
@@ -139,7 +142,7 @@
 							<!-- Img -->
 							<table>
 								<tr height="30">
-									<td align="center"><img src="<%=request.getContextPath() %>/images/${list.fname}"></td>
+									<td align="center" ><img src='<c:out value="${list.fname}"/>'></td>
 								</tr>
 							</table>
 					</div>
@@ -240,20 +243,39 @@
 			<!-- Reviews -->
 			<form name="replyInsertForm">
 				<div class="input-group">
-					<input type="hidden" name="boardNum" value="${list.boardNum}" /> <input
-						type="text" class="form-control" id="content" name="content"
-						placeholder="내용을 입력하세요."> <span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							name="replyInsertBtn">등록</button>
+					<input type="hidden" name="boardNum" value="${list.boardNum}" /> 
+					<input type="hidden" name="memNum" value="${list.memNum }"/>
+					
+					<input type="text" class="form-control" id="dcontent" name="content"	placeholder="내용을 입력하세요."> 
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="button" name="replyInsertBtn"  onclick="replyInsert()">등록</button>
 					</span>
 				</div>
 			</form>
 
 		</div>
-
 		<div class="container">
-			<div class="replyList"></div>
+		
+			<section class="comments">
+			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
+					
+				<ul>
+					<li>
+						<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+						<div class="comment-content"><div class="arrow-comment"></div>
+							<div class="comment-by">멤버Num<span class="date">날짜</span><!--유저이름,	 날짜 -->
+								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
+							</div>
+							<p>내용</p><!-- 댓글내용 -->
+						</div>
+							</li>
+							</ul>
+								
+								
+			</section>
+			
 		</div>
+		
 	</div>
 	<!-- Reply Form {s} -->
 
@@ -269,7 +291,7 @@
 	<div class="my-3 p-3 bg-white rounded shadow-sm"
 		style="padding-top: 10px">
 
-		<h6 class="border-bottom pb-2 mb-0">Reply list</h6>
+		<h6 class="border-bottom pb-2 mb-0"></h6>
 
 		<div id="replyList"></div>
 

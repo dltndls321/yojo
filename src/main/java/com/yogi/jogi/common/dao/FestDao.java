@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yogi.jogi.common.model.FestivalModel;
-import com.yogi.jogi.common.model.FoodModel;
 
 @Repository
 public class FestDao {

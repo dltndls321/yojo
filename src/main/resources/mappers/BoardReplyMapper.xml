@@ -14,7 +14,7 @@
         select
             *
         from reply
-        order by replyNum desc
+        order by replyNum 
     </select>
     
     

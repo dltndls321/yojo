@@ -64,8 +64,7 @@
 								<div class="list-box-listing-img">
 									<a
 										href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
-										<img
-										src="<%=request.getContextPath() %>/fileSave/${list.fname}">
+										<img src='<c:out value="${list.fname}"/>'>
 									</a>
 								</div>
 								<div class="list-box-listing-content">
