@@ -107,14 +107,12 @@ $(document).ready(function(){
 	});
 	$("#spotclear").click(function(){
 		$('#spotlist').empty();
-	});
-	
-
-	 $('input:checkbox[name="foodchk"]').change(function(){
-	       alert("왜안나오징");
-	    });
-	
+	});	
 });
+$(document).on("change",'input:checkbox[name="foodchk"]',function(){  
+	 
+});
+
 </script>
 <div class="dashboard-content">
 
@@ -526,7 +524,7 @@ $(document).ready(function(){
 										<tr class="pricing-list-item pattern">
 											<td>
 												<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
-												<div class="fm-input pricing-name"><input type="text" placeholder="Title" /></div>
+												<div class="fm-input pricing-name"><input type="text"/></div>
 												<div class="fm-input pricing-ingredients"><input type="text" placeholder="Description" /></div>
 												<div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>
 											</td>
