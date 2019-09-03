@@ -2,6 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
+$(document).ready(function(){
+	$('input:checkbox[name="foodchk"]').change(function(){
+		var id = $(this).attr('id'); 
+		
+		$('#'+id).attr("checked",true);
+		alert(id);
+	})
+	
+})
+
+	
 $(function(){
 	$("#preview").click(function() {
 		$("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
