@@ -119,7 +119,7 @@ $(document).ready(function(){
 	$(document).on("change",'input:checkbox[name="foodchk"]',function(){
 	
 		var id = $(this).attr('id'); 
-		alert(id)
+		
 		$('#'+id).attr("checked",true);
 		var food = $('#'+id).val();
 		var newfood = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
@@ -163,8 +163,6 @@ $(document).ready(function(){
 		$('#'+id).attr("checked",true);
 		var spot = $('#'+id).val();
 		
-		alert(spot)
-	
 		var newspot = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
 			newspot += "<td>";
 			newspot += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
@@ -215,11 +213,7 @@ $(document).ready(function(){
 			$("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
 			 
 		})
-		
-		
-		
-		
-	
+			
 	})
 
 </script>
@@ -244,20 +238,16 @@ $(document).ready(function(){
 
 						<!-- Headline -->
 						<div class="add-listing-headline">
-							<h3><i class="sl sl-icon-doc"></i> Basic Informations</h3>
+							<h3><i class="sl sl-icon-doc"></i>Trip Info</h3>
 						</div>
 
 						<!-- Title -->
 						<div class="row with-forms">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<h5>Course Title <i class="tip" data-tip-content="추천코스의 이름으로 등록됩니다"></i></h5>
 								<input class="search-field" id = "title" type="text" value=""/>
 							</div>
-						</div>
-
-						<!-- Row -->
-						<div class="row with-forms">
-
+							
 							<!-- Status -->
 							<div class="col-md-6">
 								<h5>Category</h5>
@@ -269,14 +259,9 @@ $(document).ready(function(){
 									<option value ="firend">친구와 함께</option>
 								</select>
 							</div>
-
-							<!-- Type -->
-							<div class="col-md-6">
-								<h5>Keywords <i class="tip" data-tip-content="Maximum of 15 keywords related with your business"></i></h5>
-								<input type="text" placeholder="Keywords should be separated by commas">
-							</div>
-
 						</div>
+
+						
 						<!-- Row / End -->
 
 					</div>
@@ -431,9 +416,7 @@ $(document).ready(function(){
 									<h5>관광지 분류</h5>
 									<select class="chosen-select" id="spotcode">
 										<option value = "">--선택--</option>	
-										<option value ="A01010100">국립공원</option>
-										<option value ="A01010200">도립공원</option>
-										<option value ="A01010300">군립공원</option>
+										<option value ="A01010100">공원</option>
 										<option value ="A01010400">산</option>
 										<option value ="A01010500">자연생태관광지</option>
 										<option value ="A01010600">자연휴양림</option>
@@ -506,11 +489,11 @@ $(document).ready(function(){
 								<!-- Address -->
 								<div class="col-md-4">
 									<h5>여행 날짜</h5>
-									<input type="text" id="startdate" placeholder="2019-01-01">
+									<input type="text" id="startdate" placeholder="20190101" >
 								</div>
 								<div class="col-md-4">
 									<h5>여행 날짜</h5>
-									<input type="text" id="enddate" placeholder="2019-12-31" >
+									<input type="text" id="enddate"  placeholder="20191231" >
 								</div>
 						<div class="col-md-12">
 								<!-- Checkboxes -->
@@ -642,7 +625,7 @@ $(document).ready(function(){
 
 					<form action = "chkCourse" id = "finaldata">
 					
-					<input type="submit"  class="button preview" value="Preview" id="preview"/> 
+					<input type="submit"  class="button preview" value="submit" id="preview"/> 
 					</form>
 
 				</div>

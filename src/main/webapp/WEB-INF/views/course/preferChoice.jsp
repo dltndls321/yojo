@@ -1,7 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script>
+$(function(){
+	$("#preview").click(function() {
+		$("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
+		$("#finaldata").append("<input type='hidden' name='arrayfood' id='arrayfood' value='"+arrayfood+"'>"); 
+		//날짜넣기
+		var startdate = $("#startdate").val();
+		var enddate = $("#enddate").val();
 
+		$("#finaldata").append("<input type='hidden' name='startdate' id='startdate' value='"+startdate+"'>");
+		$("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
+		 
+	})
+		
+})
+
+</script>
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar" class="gradient">
@@ -40,10 +56,21 @@
 
 						<!-- Row -->
 						<div class="row with-forms">
+						
+								<div class="col-md-4">
+									<h5>여행테마</h5>
+									<select class="chosen-select-no-single" id ="theme" >
+										<option label="blank">--선택--</option>	
+										<option value ="child">아이와 함께</option>
+										<option value ="parent">부모님과 함께</option>
+										<option value ="couple">연인과 함께</option>
+										<option value ="firend">친구와 함께</option>
+									</select>
+								</div>
 							<!-- City -->
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<h5>여행 지역</h5>
-									<select class="chosen-select-no-single" >
+									<select class="chosen-select-no-single" id="areacode">
 											<option value = "">지역 선택</option>	
 											<option value ="1">서울</option>
 											<option value ="2">인천</option>
@@ -66,7 +93,7 @@
 								</div>
 
 							<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<h5>여행 날짜</h5>
 						<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
 					</div>
@@ -91,55 +118,55 @@
 						<h5 class="margin-top-30 margin-bottom-10">선호 관광지<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A01010100" type="checkbox" name="check">
+							<input id="A01010100" type="checkbox" name="spotchk" value="A01010100">
 							<label for="A01010100">공원</label>
 
-							<input id="A01010400" type="checkbox" name="check">
+							<input id="A01010400" type="checkbox" name="spotchk" value="A01010400">
 							<label for="A01010400">산</label>
 
-							<input id="A01010500" type="checkbox" name="check">
+							<input id="A01010500" type="checkbox" name="spotchk" value="A01010500">
 							<label for="A01010500">자연생태관광지</label>
 
-							<input id="A01010600" type="checkbox" name="check">
+							<input id="A01010600" type="checkbox" name="spotchk" value="A01010600">
 							<label for="A01010600">자연휴양림</label>
 
-							<input id="A01010700" type="checkbox" name="check" >
+							<input id="A01010700" type="checkbox" name="spotchk" value="A01010700">
 							<label for="A01010700">수목원</label>
 
-							<input id="A01010800" type="checkbox" name="check" >
+							<input id="A01010800" type="checkbox" name="spotchk" value="A01010800">
 							<label for="A01010800">폭포</label>
 
-							<input id="A01010900" type="checkbox" name="check">
+							<input id="A01010900" type="checkbox" name="spotchk" value="A01010900">
 							<label for="A01010900">계곡</label>	
 
-							<input id="A01011000" type="checkbox" name="check">
+							<input id="A01011000" type="checkbox" name="spotchk" value="A01011000">
 							<label for="A01011000">약수터</label>
 							
-							<input id="A01011100" type="checkbox" name="check">
+							<input id="A01011100" type="checkbox" name="spotchk" value="A01011100">
 							<label for="A01011100">해안절경</label>
 							
-							<input id="A01011200" type="checkbox" name="check">
+							<input id="A01011200" type="checkbox" name="spotchk" value="A01011200">
 							<label for="A01011200">해수욕장</label>
 							
-							<input id="A01011300" type="checkbox" name="check">
+							<input id="A01011300" type="checkbox" name="spotchk" value="A01011300">
 							<label for="A01011300">섬</label>
 							
-							<input id="A01011400" type="checkbox" name="check">
+							<input id="A01011400" type="checkbox" name="spotchk" value="A01011400">
 							<label for="A01011400">항구/포구</label>
 							
-							<input id="A01011500" type="checkbox" name="check">
+							<input id="A01011500" type="checkbox" name="spotchk" value="A01011500">
 							<label for="A01011500">어촌</label>
 							
-							<input id="A01011600" type="checkbox" name="check">
+							<input id="A01011600" type="checkbox" name="spotchk" value="A01011600">
 							<label for="A01011600">등대</label>
 							
-							<input id="A01011700" type="checkbox" name="check">
+							<input id="A01011700" type="checkbox" name="spotchk" value="A01011700">
 							<label for="A01011700">호수</label>
 							
-							<input id="A01011800" type="checkbox" name="check">
+							<input id="A01011800" type="checkbox" name="spotchk" value="A01011800">
 							<label for="A01011800">강</label>
 							
-							<input id="A01011900" type="checkbox" name="check">
+							<input id="A01011900" type="checkbox" name="spotchk" value="A01011900">
 							<label for="A01011900">동굴</label>
 						</div>
 						<!-- Checkboxes / End -->
@@ -147,31 +174,31 @@
 						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A05020100" type="checkbox" name="check">
+							<input id="A05020100" type="checkbox" name="foodchk" value="A05020100">
 							<label for="A05020100">한식</label>
 
-							<input id="A05020200" type="checkbox" name="check">
+							<input id="A05020200" type="checkbox" name="foodchk" value="A05020200">
 							<label for="A05020200">양식</label>
 
-							<input id="A05020300" type="checkbox" name="check">
+							<input id="A05020300" type="checkbox" name="foodchk" value="A05020300">
 							<label for="A05020300">일식</label>
 
-							<input id="A05020400" type="checkbox" name="check">
+							<input id="A05020400" type="checkbox" name="foodchk" value="A05020400">
 							<label for="A05020400">중식</label>
 
-							<input id="A05020500" type="checkbox" name="check" >
+							<input id="A05020500" type="checkbox" name="foodchk" value="A01010100">
 							<label for="A05020500">아시아식</label>
 
-							<input id="A05020600" type="checkbox" name="check" >
+							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
 							<label for="A05020600">패밀리레스토랑</label>
 
-							<input id="A05020700" type="checkbox" name="check">
+							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
 							<label for="A05020700">이색음식점</label>	
 
-							<input id="A05020800" type="checkbox" name="check">
+							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
 							<label for="A05020800">채식전문점</label>
 							
-							<input id="A05020900" type="checkbox" name="check">
+							<input id="A05020900" type="checkbox" name="foodchk" value="A05020900">
 							<label for="A05020900">바/카페</label>
 						</div>
 
@@ -182,7 +209,10 @@
 
 					
 
-					<a href="#" class="button preview">Preview <i class="fa fa-arrow-circle-right"></i></a>
+					<form action = "findCourse" id = "finddata">
+					
+					<input type="submit"  class="button preview" value="Submit" id="submit"/> 
+					</form>
 
 				</div>
 			</div>
