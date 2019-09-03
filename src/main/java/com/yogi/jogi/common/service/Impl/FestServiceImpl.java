@@ -50,6 +50,12 @@ public class FestServiceImpl implements FestService{
 		map.put("endY", endY);
 		return dao.selectFestListXY(map); 
 	}
+
+	@Override
+	public List<FestivalModel> selectFestAdmin(FestivalModel festivalModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectFestAdmin(festivalModel);
+	}
 	
 	
 	

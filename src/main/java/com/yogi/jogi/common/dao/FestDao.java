@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yogi.jogi.common.model.FestivalModel;
+import com.yogi.jogi.common.model.FoodModel;
 
 @Repository
 public class FestDao {
@@ -33,5 +34,9 @@ public class FestDao {
 	public List<FestivalModel> selectFestListXY(Map map) throws Exception {
 		
 		return sqlSession.selectList(Namespace + ".selectFestListXY",map);
+	}
+	
+	public List<FestivalModel> selectFestAdmin(FestivalModel festivalModel) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectFestAdmin", festivalModel);
 	}
 }

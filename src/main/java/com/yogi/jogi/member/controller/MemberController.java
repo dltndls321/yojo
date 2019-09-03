@@ -188,10 +188,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "updateMember")
-	public ModelAndView updateMember(HttpSession session) throws Exception {
+	public ModelAndView updateMember(MemberModel memberModel,HttpSession session) throws Exception {
 		System.out.println("member/updateMember  : 시작");
 		model.clear();
-		MemberModel memberModel = new MemberModel();
 		MemberDetailModel memberDetailModel = new MemberDetailModel();
 		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
 		memberModel.setMemnum((Integer) session.getAttribute("SessionMemberMemnum"));

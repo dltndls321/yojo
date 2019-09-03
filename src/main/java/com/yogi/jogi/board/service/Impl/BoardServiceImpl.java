@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
+import com.yogi.jogi.board.model.ReplyModel;
 import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.member.model.MemberModel;
 
@@ -67,6 +68,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectBoardListWidhBoardid(boardid);
 	}
+
+	
 
 	
 

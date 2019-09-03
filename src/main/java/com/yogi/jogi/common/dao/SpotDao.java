@@ -34,4 +34,9 @@ public class SpotDao {
 
 		return sqlSession.selectList(Namespace + ".selectSpotListXY", map);
 	}
+
+	public List<SpotModel> selectSpotAdmin(SpotModel spotModel) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace + ".selectSpotAdmin", spotModel);
+	}
 }

@@ -103,8 +103,7 @@
 					</div>
 					
 						<div class="buttons-to-right">
-							<a href="#" class="button gray"><i class="sl sl-icon-close"></i>
-								Delete</a>
+							
 						</div>
 						<div class="pagination-container margin-top-30 margin-bottom-0">
 							<nav class="pagination">
