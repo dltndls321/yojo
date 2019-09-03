@@ -5,15 +5,15 @@
  
 <mapper namespace="FestMapperNS">
   	<insert id="insertFest" parameterType="festModel">
-  		Insert into festival(festNum,subject,fdate1,area,fdate2,fmapx,fmapy,zcode)	
+  		Insert into festival(festNum,name,fdate1,area,fdate2,x,y,zcode)	
   		values(
 	  		festSeq.NEXTVAL,
-	  		#{subject},
+	  		#{name},
 	  		#{fdate1},
 	  		#{area},
 	  		#{fdate2},
-	  		#{fmapx},
-	  		#{fmapy},
+	  		#{x},
+	  		#{y},
 	  		#{zcode}
   		)
   	</insert>
@@ -29,9 +29,14 @@
     <!-- 승해가 추가한부분 -->
     <select id="selectFestListXY" parameterType="hashmap" resultType="festModel" >
      <![CDATA[
-    select * from festival where fmapx>#{startX} and fmapx<#{endX} and fmapy>#{startY} and fmapy<#{endY}
+    select * from festival where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
     ]]>	
     </select>
+    <select id="getFestArea"  parameterType="String" resultType="festModel">
+    	select * from festival where name = #{name}
+   </select>
+   <!-- 끝 -->
+    
     
     <select id="selectFestWithFestNum" parameterType="festModel" resultType="festModel">
     	select

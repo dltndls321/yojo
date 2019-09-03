@@ -11,7 +11,7 @@
      
    <select id="getFoodList2"  parameterType="hashmap"  resultType="mapModel" >
    	 <![CDATA[
-    select * from food where foodx>#{startX} and foodx<#{endX} and foody>#{startY} and foody<#{endY}
+    select * from food where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
     ]]>	
    </select>
    <select id="getFoodArea"  parameterType="String" resultType="mapModel">

@@ -137,10 +137,10 @@ geocoder.addressSearch("${festLists.area}", function(result, status) {
         // 인포윈도우로 장소에 대한 설명을 표시합니다
       
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${festLists.subject}"+
-            '<center>코스설정<br><a href="#" onclick="courseSet1(\''+"${festLists.subject}- 축제"+'\')">1</a> | <a href="#" onclick="courseSet2(\''+"${festLists.subject}- 축제"+'\')">2</a>'+
-            ' | <a href="#" onclick="courseSet3(\''+"${festLists.subject}- 축제"+'\')">3</a> | <a href="#" onclick="courseSet4(\''+"${festLists.subject}- 축제"+'\')">4</a>' +
-            ' | <a href="#" onclick="courseSet5(\''+"${festLists.subject}- 축제"+'\')">5</a> | <a href="#" onclick="courseSet6(\''+"${festLists.subject}- 축제"+'\')">6</a></center></div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+"${festLists.name}"+
+            '<center>코스설정<br><a href="#" onclick="courseSet1(\''+"${festLists.name}- 축제"+'\')">1</a> | <a href="#" onclick="courseSet2(\''+"${festLists.name}- 축제"+'\')">2</a>'+
+            ' | <a href="#" onclick="courseSet3(\''+"${festLists.name}- 축제"+'\')">3</a> | <a href="#" onclick="courseSet4(\''+"${festLists.name}- 축제"+'\')">4</a>' +
+            ' | <a href="#" onclick="courseSet5(\''+"${festLists.name}- 축제"+'\')">5</a> | <a href="#" onclick="courseSet6(\''+"${festLists.name}- 축제"+'\')">6</a></center></div>'
             ,removable : iwRemoveable
         });
         

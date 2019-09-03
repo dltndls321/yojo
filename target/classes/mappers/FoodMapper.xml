@@ -5,14 +5,14 @@
  
 <mapper namespace="FoodMapperNS">
   	<insert id="insertFood" parameterType="foodModel">
-  		Insert into food(foodNum,category,area,name,foodx,foody,zcode)	
+  		Insert into food(foodNum,category,area,name,x,y,zcode)	
   		values(
 	  		foodSeq.NEXTVAL,
 	  		#{category},
 	  		#{area},
 	  		#{name},
-	  		#{foodx},
-	  		#{foody},
+	  		#{x},
+	  		#{y},
 	  		#{zcode}
   		)
   	</insert>

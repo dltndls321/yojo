@@ -58,6 +58,12 @@ public class SpotServiceImpl implements SpotService{
 		// TODO Auto-generated method stub
 		return dao.selectSpotAdmin(spotModel);
 	}
+
+	@Override
+	public SpotModel getSpotArea(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getSpotArea(name);
+	}
 	
 	
 	

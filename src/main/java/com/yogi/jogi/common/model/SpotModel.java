@@ -6,8 +6,8 @@ public class SpotModel {
 	private String category;
 	private String area;
 	private String name;
-	private float smapx;
-	private float smapy;
+	private float x;
+	private float y;
 	private int zcode;
 	public int getSpotNum() {
 		return spotNum;
@@ -33,30 +33,31 @@ public class SpotModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getSmapx() {
-		return smapx;
-	}
-	public void setSmapx(float smapx) {
-		this.smapx = smapx;
-	}
-	public float getSmapy() {
-		return smapy;
-	}
-	public void setSmapy(float smapy) {
-		this.smapy = smapy;
-	}
+	
 	public int getZcode() {
 		return zcode;
 	}
 	public void setZcode(int zcode) {
 		this.zcode = zcode;
 	}
-	
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
 	@Override
 	public String toString() {
-		return "SpotModel [spotNum=" + spotNum + ", category=" + category + ", area=" + area + ", name=" + name + ", smapx="
-				+ smapx + ", smapy=" + smapy + ", zcode=" + zcode + "]";
+		return "SpotModel [spotNum=" + spotNum + ", category=" + category + ", area=" + area + ", name=" + name + ", x="
+				+ x + ", y=" + y + ", zcode=" + zcode + "]";
 	}
+	
 	
 	
 	
