@@ -69,30 +69,30 @@ public class MapController {
 		
 		
 		if(startX > endX && startY > endY) {
-			mv.addObject("foodList", mapService.getFoodList2(endY,endX,startY,startX));
+			mv.addObject("foodList", mapService.getFoodList2(endX,endY,startX,startY));
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(endX,endY,startX,startY));
-			System.out.println(spotService.selectSpotListXY(endX,endY,startX,startY));
+			System.out.println(mapService.getFoodList2(endX,endY,startX,startY));
 			mv.addObject("swX",endY);
 			mv.addObject("swY",endX);
 			mv.addObject("neX",startY);
 			mv.addObject("neY",startX);
 		}else if(startX < endX && startY > endY) {
 			
-			mv.addObject("foodList", mapService.getFoodList2(endY,startX,startY,endX));
+			mv.addObject("foodList", mapService.getFoodList2(startX,endY,endX,startY));
 			mv.addObject("festList", festService.selectFestListXY(startX,endY,endX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,endY,endX,startY));
-			System.out.println(spotService.selectSpotListXY(startX,endY,endX,startY));
+			System.out.println(mapService.getFoodList2(startX,endY,endX,startY));
 			mv.addObject("swX",endY);
 			mv.addObject("swY",startX);
 			mv.addObject("neX",startY);
 			mv.addObject("neY",endX);
 		}else if(startX < endX && startY < endY) {
 			
-			mv.addObject("foodList", mapService.getFoodList2(startY,startX,endY,endX));
+			mv.addObject("foodList", mapService.getFoodList2(startX,startY,endX,endY));
 			mv.addObject("festList", festService.selectFestListXY(startX,startY,endX,endY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,startY,endX,endY));
-			System.out.println(spotService.selectSpotListXY(startX,startY,endX,endY));
+			System.out.println(mapService.getFoodList2(startX,startY,endX,endY));
 			mv.addObject("swX",startY);
 			mv.addObject("swY",startX);
 			mv.addObject("neX",endY);
@@ -102,7 +102,7 @@ public class MapController {
 			mv.addObject("foodList", mapService.getFoodList2(startY,endX,endY,startX));
 			mv.addObject("festList", festService.selectFestListXY(startY,endX,endY,startX));
 			mv.addObject("spotList", spotService.selectSpotListXY(startY,endX,endY,startX));
-			System.out.println(spotService.selectSpotListXY(startY,endX,endY,startX));
+			System.out.println(mapService.getFoodList2(startY,endX,endY,startX));
 			mv.addObject("swX",startY);
 			mv.addObject("swY",endX);
 			mv.addObject("neX",endY);

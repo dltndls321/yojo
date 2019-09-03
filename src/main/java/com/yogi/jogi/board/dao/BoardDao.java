@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yogi.jogi.board.model.BoardModel;
-import com.yogi.jogi.member.model.MemberModel;
+
 
 @Repository
 public class BoardDao {
@@ -62,4 +62,5 @@ public class BoardDao {
 		public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
 			return sqlSession.selectList(Namespace + ".selectBoardListWidhBoardid", boardid);
 		}
+
 }
