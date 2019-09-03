@@ -69,5 +69,4 @@
 	<!-- <mvc:resources mapping="/images/**"
 		location="/WEB-INF/views/board/fileSave/" cache-period="60" />
  -->
-	 
 </beans:beans>
