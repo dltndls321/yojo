@@ -76,7 +76,7 @@ public class FoodController {
         parameter = parameter + "&" + "listYN=Y" ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&cat1=A05&cat2=A0502&cat3=" + foodCode;
-        parameter = parameter + "&" + "numOfRows=9999";
+        parameter = parameter + "&" + "numOfRows=9";
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
