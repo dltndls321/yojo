@@ -216,7 +216,7 @@ public class MemberController {
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
-		List<BoardModel> boardList = 
+		List<BoardModel> boardList = boardSerivce.selectBoardListWidhMemnum(boardModel);
 		int reviewListsize = reviewList.size();
 		int star = 0;
 		double avg=0;
@@ -266,6 +266,7 @@ public class MemberController {
 		model.addObject("spotReviewList",spotReviewList);
 		model.addObject("spotList",spotList);
 		model.addObject("spotreviewListsize",spotreviewListsize);
+		model.addObject("boardList",boardList);
 		System.out.println("memberprofile 최종");
 		model.setViewName("member/memberprofile.do");
 		return model;
