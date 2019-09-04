@@ -2,6 +2,7 @@ package com.yogi.jogi.board.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.model.ReplyModel;
@@ -17,5 +18,7 @@ public interface BoardService {
 	public BoardModel selectPasswdOneNum(BoardModel boardModel)throws Exception;
 	public List<BoardModel> selectBoardListPaging(int start,int end,String boardid) throws Exception;
 	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception;
+	public List<BoardModel> selectSearchBoardList(String searchOption,String keyword) throws Exception;
+	public int selectListGetCount(String searchOption,String keyword) throws Exception; 
 	
 }

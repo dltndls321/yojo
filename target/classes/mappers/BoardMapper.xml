@@ -5,20 +5,17 @@
 <mapper namespace="boardMapperNS">
 
 	<select id="selectBoardList" resultType="boardModel">
+
+		select
+		boardNum,memNum,boardid,subject,writer,passwd,content,fname,fsize,readcount
+		,regdate,ref,reStep,reLevel from board
 		
-		select *  from
-    		(select rownum rnum,a.* from
-    			(select 
-    				* 
-    			from 
-    				board
-    			order by boardnum desc) a
-    		)
 	</select>
-	
-	<insert id="insertBoard"  parameterType="boardModel" >
+
+	<insert id="insertBoard" parameterType="boardModel">
 		insert
-		into board values
+		into
+		board values
 		(boardSeq.NEXTVAL,#{memNum},#{boardid}
 		,#{subject},#{writer},#{passwd},#{content},
 		#{fname},#{fsize},
@@ -37,11 +34,12 @@
 		where boardNum=#{boardNum}
 	</update>
 
-	<select parameterType="boardModel" id="deleteBoard"> 
-	delete from board where boardNum
-		=#{boardNum} 
-		</select>
-		
+	<select parameterType="boardModel" id="deleteBoard">
+		delete from board where
+		boardNum
+		=#{boardNum}
+	</select>
+
 	<select id="selectBoard" parameterType="boardModel"
 		resultType="boardModel">
 		select
@@ -51,36 +49,41 @@
 
 	</select>
 
-<select id="selectPasswdOneNum" resultType="boardModel" parameterType="boardModel">
-		select 
-			passwd 
-		from 
-			board 
-		where 
-			boardNum = #{boardNum}
+	<select id="selectPasswdOneNum" resultType="boardModel"
+		parameterType="boardModel">
+		select
+		passwd
+		from
+		board
+		where
+		boardNum = #{boardNum}
 	</select>
-	<select id="selectBoardListPaging" parameterType="hashmap" resultType="boardModel">
-    	select *  from
-    		(select rownum rnum,a.* from
-    			(select 
-    				* 
-    			from 
-    				board
-    			where boardid = #{boardid}
-    			order by boardnum desc) a
-    		)
-    		where rnum between #{start} and #{end}
-    	
-    </select>
-    <select id="selectBoardListWidhBoardid" parameterType="boardModel" resultType="boardModel">
-    	select * from
-    		board
-    	where
-    		boardid=#{boardid}
-    
-    </select>
-	
-		<update id="updateReadcount" parameterType="boardModel">
+	<select id="selectBoardListPaging" parameterType="hashmap"
+		resultType="boardModel">
+		select * from
+		(select rownum rnum,a.* from
+		(select
+		*
+		from
+		board
+
+		where boardid = #{boardid}
+		order by boardnum desc) a
+		)
+		where rnum between
+		#{start} and #{end}
+
+	</select>
+	<select id="selectBoardListWidhBoardid"
+		parameterType="boardModel" resultType="boardModel">
+		select * from
+		board
+		where
+		boardid=#{boardid}
+
+	</select>
+
+	<update id="updateReadcount" parameterType="boardModel">
 		update
 		board
 		set
@@ -88,11 +91,11 @@
 		where
 		boardNum = #{boardNum}
 	</update>
-	
-	
 
 
-	 <select id="selectBoardCount" parameterType="boardModel"
+
+
+	<select id="selectBoardCount" parameterType="boardModel"
 		resultType="boardModel">
 		select
 		nvl(count(*),0) from board where boardid =
@@ -123,8 +126,33 @@
 		where
 		boardNum = #{boardNum}
 	</select>
+	<select id="selectSearchBoardList" resultType="boardModel">
 
-	
+		select
+		boardNum,memNum,boardid,subject,writer,passwd,content,fname,fsize,readcount
+		,regdate,ref,reStep,reLevel from board
+		<include refid="search"></include>
+		order by boardNum, regdate desc
+	</select>
+	<select id="selectListGetCount" resultType="int">
+		select
+		count(*)
+		from
+		board
+		<include refid="search"></include>
 
+	</select>
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'all'"> <!-- 검색이 전체검색일떄 -->
+				where writer like '%${keyword}%'
+				OR content like '%${keyword}%'
+				OR subject like '%${keyword}%'
+			</when>
+			<otherwise> <!-- 검색이 전체검색아닐떄 -->
+				where ${searchOption} like '%${keyword}%'
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>
 

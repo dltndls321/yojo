@@ -35,13 +35,28 @@
 					</div>
 				</div>
 			</div>
-
+			
+				<form name="form2" method="post" action="${path }/board/boardlist">
+					<select name="searchOption" style="width: 80px; height: 30px;">
+					<option value="all"<c:out value="${searchOption == 'all'?'selected':''}"/>>제목,이름,내용</option>			
+					<option value="subject"<c:out value="${searchOption == 'subject'?'selected':''}"/>>제목</option>			
+					<option value="writer"<c:out value="${searchOption == 'writer'?'selected':''}"/>>이름</option>			
+					<option value="content"<c:out value="${searchOption == 'content'?'selected':''}"/>>내용</option>			
+					</select>
+					<input name="keyword" style="width: 150px; height: 30px;" value="${keyword }">	
+					<input type="submit" value="조회">
+					
+						
+					</form>
+					<!-- 게시물 수 -->
+					${count}개의 게시물이 있습니다.
+					
 			<div class="row">
 
 				<!-- Listings -->
 				<div class="col-lg-12 col-md-12">
 					<div class="dashboard-list-box margin-top-0">
-
+					
 						<table class="table table-hover">
 							<thead>
 								<tr>
