@@ -3,30 +3,51 @@
 <!DOCTYPE html>
 <script>
 $(document).ready(function(){
-	$('input:checkbox[name="foodchk"]').change(function(){
+	var food;
+	var spot;
+	$('input:checkbox[name="foodchk"]').click(function(){
 		var id = $(this).attr('id'); 
-		
 		$('#'+id).attr("checked",true);
-		alert(id);
-	})
-	
-})
-
-	
-$(function(){
-	$("#preview").click(function() {
-		$("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
-		$("#finaldata").append("<input type='hidden' name='arrayfood' id='arrayfood' value='"+arrayfood+"'>"); 
-		//날짜넣기
-		var startdate = $("#startdate").val();
-		var enddate = $("#enddate").val();
-
-		$("#finaldata").append("<input type='hidden' name='startdate' id='startdate' value='"+startdate+"'>");
-		$("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
-		 
-	})
 		
+		 if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="foodchk"]').prop('checked', false);
+            $(this).prop('checked', true);
+		 } 
+		 $("input[name=foodchk]:checked").each(function() {
+				food = $(this).val();
+			});	
+	});
+	
+	$('input:checkbox[name="spotchk"]').change(function(){
+		var id = $(this).attr('id'); 
+		$('#'+id).attr("checked",true);
+
+		 if ($(this).prop('checked')) {
+	            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+	            $('input[type="checkbox"][name="spotchk"]').prop('checked', false);
+	            $(this).prop('checked', true);
+			 }
+		 $("input[name=spotchk]:checked").each(function() {
+			 spot = $(this).val();
+			});
+	});
+	$("#submit").click(function() {
+		var theme = $("#theme option:selected").val();
+		var areaCode = $("#areaCode option:selected").val();
+		var date = $("#date-picker").val();
+
+		$("#finddata").append("<input type='hidden' name='theme' value='"+theme+"'>");
+		$("#finddata").append("<input type='hidden' name='areaCode' value='"+areaCode+"'>"); 
+		$("#finddata").append("<input type='hidden' name='date' value='"+date+"'>");
+		$("#finddata").append("<input type='hidden' name='foodCode' value='"+food+"'>");
+		$("#finddata").append("<input type='hidden' name='spotCode' value='"+spot+"'>");	 
+	
+});
 })
+
+	
+
 
 </script>
 <!-- Titlebar
@@ -81,7 +102,7 @@ $(function(){
 							<!-- City -->
 								<div class="col-md-4">
 									<h5>여행 지역</h5>
-									<select class="chosen-select-no-single" id="areacode">
+									<select class="chosen-select-no-single" id="areaCode">
 											<option value = "">지역 선택</option>	
 											<option value ="1">서울</option>
 											<option value ="2">인천</option>
@@ -124,12 +145,43 @@ $(function(){
 						</div>
 
 						<div class="submit-section">
+						<!-- Checkboxes -->
+						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
+						<div class="checkboxes in-row margin-bottom-20">
+					
+							<input id="A05020100" type="checkbox" name="foodchk" value="A05020100">
+							<label for="A05020100">한식</label>
+
+							<input id="A05020200" type="checkbox" name="foodchk" value="A05020200">
+							<label for="A05020200">양식</label>
+
+							<input id="A05020300" type="checkbox" name="foodchk" value="A05020300">
+							<label for="A05020300">일식</label>
+
+							<input id="A05020400" type="checkbox" name="foodchk" value="A05020400">
+							<label for="A05020400">중식</label>
+
+							<input id="A05020500" type="checkbox" name="foodchk" value="A01010100">
+							<label for="A05020500">아시아식</label>
+
+							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
+							<label for="A05020600">패밀리레스토랑</label>
+
+							<input id="A05020700" type="checkbox" name="foodchk" value="A05020700">
+							<label for="A05020700">이색음식점</label>	
+
+							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
+							<label for="A05020800">채식전문점</label>
+							
+							<input id="A05020900" type="checkbox" name="foodchk" value="A05020900">
+							<label for="A05020900">바/카페</label>
+						</div>
 							
 							<!-- Checkboxes -->
 						<h5 class="margin-top-30 margin-bottom-10">선호 관광지<span>(optional)</span></h5>
 						<div class="checkboxes in-row margin-bottom-20">
 					
-							<input id="A01010100" type="checkbox" name="spotchk" value="A01010100">
+							<input id="A01010100" type="checkbox" name="spotchk" value="A01010100" >
 							<label for="A01010100">공원</label>
 
 							<input id="A01010400" type="checkbox" name="spotchk" value="A01010400">
@@ -181,44 +233,11 @@ $(function(){
 							<label for="A01011900">동굴</label>
 						</div>
 						<!-- Checkboxes / End -->
-						<!-- Checkboxes -->
-						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
-						<div class="checkboxes in-row margin-bottom-20">
-					
-							<input id="A05020100" type="checkbox" name="foodchk" value="A05020100">
-							<label for="A05020100">한식</label>
-
-							<input id="A05020200" type="checkbox" name="foodchk" value="A05020200">
-							<label for="A05020200">양식</label>
-
-							<input id="A05020300" type="checkbox" name="foodchk" value="A05020300">
-							<label for="A05020300">일식</label>
-
-							<input id="A05020400" type="checkbox" name="foodchk" value="A05020400">
-							<label for="A05020400">중식</label>
-
-							<input id="A05020500" type="checkbox" name="foodchk" value="A01010100">
-							<label for="A05020500">아시아식</label>
-
-							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
-							<label for="A05020600">패밀리레스토랑</label>
-
-							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
-							<label for="A05020700">이색음식점</label>	
-
-							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
-							<label for="A05020800">채식전문점</label>
-							
-							<input id="A05020900" type="checkbox" name="foodchk" value="A05020900">
-							<label for="A05020900">바/카페</label>
-						</div>
+						
 
 						</div>
 					</div>
 					<!-- Section / End -->
-
-
-					
 
 					<form action = "findCourse" id = "finddata">
 					

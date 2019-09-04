@@ -24,6 +24,26 @@
   		)
   	</insert>
   	
- 
-    
+  	<select id="selectCourse"  parameterType="adminCourseModel" resultType="adminCourseModel">
+    	select
+    		*
+    	from
+    		adminCourse
+    	where
+    		theme =#{theme}
+      	and
+        	#{startDate}
+    	between startDate and endDate
+    	and
+    		areaCode = #{areaCode}
+    	and
+        	foodCode 
+        LIKE '%'|| #{foodCode} || '%'
+      	and
+        	spotCode
+       	like '%' ||  #{spotCode} || '%'
+    </select>
+
+
+
 </mapper>

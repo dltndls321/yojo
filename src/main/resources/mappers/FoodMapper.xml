@@ -38,8 +38,6 @@
     		food
     	where
     		name=#{name}
-    	and
-    		area=#{area}
     </select>
     <select id="selectFoodAdmin"  parameterType="foodModel" resultType="foodModel">
     	select

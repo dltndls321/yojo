@@ -30,5 +30,7 @@ public interface MemberService {
 	
 	public int updateMemberTokken(MemberModel memberModel)throws Exception;
 	
+	public int updateMemberStatus(MemberModel memberModel)throws Exception;
+	
 	
 }

@@ -30,7 +30,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectBoard(boardNum);
 	}
-	
+
 	@Override
 	public int updateBoard(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
@@ -54,12 +54,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.insertBoard(boardModel);
 	}
+
 	@Override
-	public List<BoardModel> selectBoardListPaging(int start, int end,String boardid) throws Exception {
+	public List<BoardModel> selectBoardListPaging(int start, int end, String boardid) throws Exception {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("boardid",boardid);
+		map.put("boardid", boardid);
 		return dao.selectBoardListPaging(map);
 	}
 
@@ -69,9 +70,22 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardListWidhBoardid(boardid);
 	}
 
-	
+	@Override
+	public List<BoardModel> selectSearchBoardList(String searchOption, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSearchBoardList(searchOption, keyword);
+	}
 
-	
+	@Override
+	public int selectListGetCount(String searchOption, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListGetCount(searchOption, keyword);
+	}
 
-	
+	@Override
+	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectBoardListWidhMemnum(boardModel);
+	}
+
 }

@@ -33,6 +33,7 @@ import com.yogi.jogi.common.model.SpotModel;
 import com.yogi.jogi.common.model.SpotReviewModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.MailService;
 import com.yogi.jogi.common.service.OauthService;
 import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
@@ -63,6 +64,8 @@ public class MemberController {
 	private RestTemplate restTemplate;
 	@Autowired
 	private OauthService oauthService;
+	@Autowired
+	private MailService mailService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -93,6 +96,7 @@ public class MemberController {
 		memberModel.setStatus("1");
 		memberModel.setTokken(tokken);
 		memberService.insertMember(memberModel);
+		mailService.send("요기조기 인증 메일 입니다.", "귀하의 인증 번호는 " + tokken + "입니다.","d178961@gmail.com",memberModel.getEmail(), null);
 		memberModel = memberService.selectMemberWithEmail(memberModel);
 		System.out.println("맴버 번호 >>" + memberModel.getMemnum());
 		System.out.println("아이디 >>" + memberModel.getId());
@@ -100,8 +104,15 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
+		session.setAttribute("SessionMemberStatus", memberModel.getStatus());
 		nowUser.setNowUser(nowuser);
-		model.setViewName("redirect:/main/main");
+		if(memberModel.getId().equals("admin")) {
+			memberModel.setStatus("2");
+			memberService.updateMemberStatus(memberModel);
+			model.setViewName("redirect:/admin/main");
+		}else {
+			model.setViewName("redirect:/main/main");
+		}
 		model.addObject("InfoMember", memberModel);
 		return model;
 	}
@@ -135,6 +146,7 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
+		session.setAttribute("SessionMemberStatus", memberModel.getStatus());
 		nowUser.setNowUser(nowuser);
 		model.setViewName("redirect:/main/main");
 		model.addObject("InfoMember", memberModel);
@@ -160,6 +172,7 @@ public class MemberController {
 		session.setAttribute("SessionMemberMemnum", memberModel.getMemnum());
 		session.setAttribute("SessionMemberId", memberModel.getId());
 		session.setAttribute("SessionMemberName", memberModel.getName());
+		session.setAttribute("SessionMemberStatus", memberModel.getStatus());
 		if (memberModel.getId().equals("admin")) {
 			model.setViewName("redirect:/admin/main");
 		} else {
@@ -196,12 +209,14 @@ public class MemberController {
 		FestReviewModel festReviewModel = new FestReviewModel();
 		FestivalModel festivalModel = new FestivalModel();
 		SpotReviewModel spotReviewModel = new SpotReviewModel();
-		
+		BoardModel boardModel = new BoardModel();
 		SpotModel spotModel = new SpotModel();
 		spotReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
+		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
+		List<BoardModel> boardList = boardSerivce.selectBoardListWidhMemnum(boardModel);
 		int reviewListsize = reviewList.size();
 		int star = 0;
 		double avg=0;
@@ -242,6 +257,7 @@ public class MemberController {
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
+		
 		model.addObject("memberInfo", memberModel);
 		model.addObject("reviewListsize",reviewListsize);
 		model.addObject("avg",avg);
@@ -250,6 +266,8 @@ public class MemberController {
 		model.addObject("spotReviewList",spotReviewList);
 		model.addObject("spotList",spotList);
 		model.addObject("spotreviewListsize",spotreviewListsize);
+		model.addObject("boardList",boardList);
+		System.out.println("memberprofile 최종");
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
@@ -499,6 +517,30 @@ public class MemberController {
 			out.append("3");
 			out.flush();
 		}
+		out.close();
+	}
+	@RequestMapping(value = "emailok", method = RequestMethod.POST)
+	public void emailok(@RequestParam String emailok,HttpServletResponse response, HttpSession session)
+			throws Exception {
+		System.out.println("emailok : 시작");
+		PrintWriter out = response.getWriter();
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
+		memberModel = memberService.selectMemberWithMemNum(memberModel);
+		if (!memberModel.getTokken().equals(emailok)) {
+			System.out.println("emailok :tokken not eq");
+			out.append("0");
+			System.out.println(0);
+			out.flush();
+		} else if (memberModel.getTokken().equals(emailok)) {
+			System.out.println("emailok :tokken eq");
+			memberModel.setStatus("2");
+			memberService.updateMemberStatus(memberModel);
+			session.setAttribute("SessionMemberStatus", memberModel.getStatus());
+			out.append("1");
+			System.out.println(1);
+			out.flush();
+		} 
 		out.close();
 	}
 	

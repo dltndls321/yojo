@@ -536,4 +536,24 @@ function onclickKakao(target1,target2,target3,target4,target5,target6,target7,ta
 function logoutkakao(){
 	 Kakao.Auth.logout();
 }
+function emailok(){
+	var1 = document.getElementById("emailok");
+	$.ajax({
+		url : '/member/emailok',
+		type : 'post',
+		data: {'emailok' : var1.value},
+		success:function(data){
+			if(data == '0'){
+				alert("인증번호가 틀렸습니다.");
+			}
+			else if(data == '1'){
+				alert("인증이 완료되었습니다.");
+				location.href = "/main/main";
+			}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown){
+        	alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+        }
+});
+}
 

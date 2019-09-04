@@ -59,16 +59,17 @@ public class FoodController {
 		return "tripInfo/food.do";
 	}
 	//관광지리스트뽑기
-	@RequestMapping(value = "food.do")	
-	public void test(FoodModel foodModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String foodCode) throws Exception {
-        request.setCharacterEncoding("utf-8");
+	@RequestMapping(value = "food.do" )	
+	public void test(FoodModel foodModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String foodCode, @RequestParam int pageNum) throws Exception {
+		model.clear();
+		request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
         String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
         String serviceKey = "Tua5fEDly3iKvvzpx%2F7OOnK7t6QMYcBuGsaiBl%2BQalNS5gZamN1jCFjTpyrafwkC4dhvs4vd59C4cMGKikSx1g%3D%3D";
         String parameter = "";
         PrintWriter out = response.getWriter();    
-        
+    
  
         parameter = parameter + "&" + "MobileOS=ETC";
         parameter = parameter + "&" + "MobileApp=AppTest";
@@ -77,6 +78,7 @@ public class FoodController {
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&cat1=A05&cat2=A0502&cat3=" + foodCode;
         parameter = parameter + "&" + "numOfRows=9";
+        parameter = parameter + "&" + "pageNo=" + pageNum;
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -106,14 +108,33 @@ public class FoodController {
         JSONObject parse_items = (JSONObject) parse_body.get("items"); 
         JSONArray parse_item = (JSONArray) parse_items.get("item");
        
-		/*
-		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
-		 * System.out.println(totalCount.toString());
-		 */
-		 
-        String finaldata="";
+        JSONArray foodjson = new JSONArray();
+        JSONObject fooddata = new JSONObject();
+        JSONObject pagedata = new JSONObject();
+        JSONObject pagingdata = new JSONObject();
+        
+        //페이징을 위한
+        int pageSize = 9;
+        int bottomLine = 3;
+        int currentPage = pageNum;
+        Object total = parse_body.get("totalCount");
+        int count = Integer.parseInt(total.toString());
+        
+        int pageCount = count / pageSize + (count % pageSize ==0? 0 :1);
+        int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+        int endPage = startPage + bottomLine -1;//
+        if (endPage > pageCount)
+        	endPage = pageCount;
+    	JSONObject pdata = new JSONObject();
+    	pdata.put("count", total);
+
+    	
+    	String finaldata="";
+		System.out.println("갯수"+total);
         for (int i = 0; i < parse_item.size(); i++) { 
-        	JSONObject imsi = (JSONObject) parse_item.get(i);
+        	JSONObject imsi = (JSONObject) parse_item.get(i);   
+        	pagedata.put("pagedata", pdata);	
+        	
         	String addr1 = (String) imsi.get("addr1"); 
         	String firstimage = (String) imsi.get("firstimage"); 
         	String title = (String) imsi.get("title"); 
@@ -121,7 +142,6 @@ public class FoodController {
         	Object contentId = imsi.get("contentid");
         	int typeid = Integer.parseInt(contenttypeId.toString());
         	int contid = Integer.parseInt(contentId.toString());
-        	
         	
         	finaldata =finaldata+ "<div class=\"col-lg-4 col-md-6\" >"+
         			"<input type =\"hidden\" id=\"contentTypeId\" value=\""+ typeid +"\"/>" +
@@ -137,8 +157,6 @@ public class FoodController {
         			"</div>"+
         			"</a>"+
         			"</div>";
-        	
-			
 			/*
 			 * //데이터넣기위해 jsonparsing하는 애들 String cat = (String) imsi.get("cat3"); Object
 			 * mapX = imsi.get("mapx"); Object mapY = imsi.get("mapy"); float foodx; float
@@ -155,11 +173,40 @@ public class FoodController {
 			 * 
 			 * System.out.println(i+"번째"+foodModel); addData(foodModel); Thread.sleep(100);
 			 */
-         	
-        	}	
-        out.append(finaldata);
+        	}
+        
+        String paging = "";
+        if(startPage>bottomLine) {
+        	int prev = startPage - bottomLine;
+        	paging += "<li><a onclick =\"goChange("+prev+")\"}\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-left\"></i></a></li>" ;
+        }
+        
+        for (int j = startPage; j < endPage+1; j++) {
+        	if(j==pageNum) {
+        		paging += "<li><a class=\"current-page\" onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}else if(j!=pageNum) {
+        		paging += "<li><a  onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}
+		}
+        if(endPage<pageCount) {
+        	int next = startPage + bottomLine;
+        	paging += "<li><a onclick =\"goChange("+next+")\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-right\"></i></a></li>";
+        }
+        
+        Object foodCont = finaldata;
+        Object pagingdatas = paging;
+        fooddata.put("foodCont", foodCont);
+        pagingdata.put("pagingdata",pagingdatas);
+        foodjson.add(fooddata);
+        foodjson.add(pagingdata);
+        foodjson.add(pagedata);
+        
+        
+        System.out.println(foodjson.toString());
+        out.print(foodjson.toString());
         out.flush();
         out.close();
+
 
     }
 	public void addData(FoodModel foodModel) throws Exception {
@@ -317,9 +364,6 @@ public class FoodController {
 	    	        JSONObject parse_items = (JSONObject) parse_body.get("items"); 
 	    	        JSONObject parse_item = (JSONObject) parse_items.get("item");
 	    	        
-
-	    	
-    	        	
     	        	String chkcard = (String) parse_item.get("chkcreditcardfood"); 
     	        	String opentime = (String) parse_item.get("opentimefood");
     	        	String infocenter = (String) parse_item.get("infocenterfood");
@@ -330,7 +374,6 @@ public class FoodController {
     	        	String firstmenu = (String) parse_item.get("firstmenu");
     	        	String treatmenu = (String) parse_item.get("treatmenu");
     	        	
-
     		        model.addObject("chkcard",chkcard);
     		        model.addObject("smoking",smoking);
     		        model.addObject("opentime",opentime);
@@ -342,6 +385,7 @@ public class FoodController {
     		        model.addObject("treatmenu",treatmenu);
     		        model.addObject("typeid", typeid);
     		        model.addObject("contid", contid);
+    		        
 	        	}
 	        }
 	        System.out.println(foodModel);
@@ -412,6 +456,7 @@ public class FoodController {
 		return "redirect:/food/content/" + typeid + "/" + contid;
 
 	}
+	
 	
 	
 }

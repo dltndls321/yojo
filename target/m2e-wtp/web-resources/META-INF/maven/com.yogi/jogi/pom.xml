@@ -63,7 +63,17 @@
             <artifactId>tiles-template</artifactId>
             <version>${org.apache.tiles-version}</version>
         </dependency> 
-
+		<!-- Mail -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 
 		<!-- 컨넥션 풀을 위한 라이브러리 -->
 		<dependency>
