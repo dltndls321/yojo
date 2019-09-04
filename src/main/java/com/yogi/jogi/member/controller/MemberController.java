@@ -172,7 +172,7 @@ public class MemberController {
 
 	@RequestMapping(value = "logout")
 	public String logout(HttpSession session) throws Exception{
-		if((Integer)session.getAttribute("SessionMemberMemnum")!=null){
+		if(session.getAttribute("SessionMemberMemnum")!=null){
 			MemberModel memberModel = new MemberModel();
 			memberModel.setMemnum((Integer)session.getAttribute("SessionMemberMemnum"));
 			memberModel= memberService.selectMemberWithMemNum(memberModel);
