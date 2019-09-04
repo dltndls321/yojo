@@ -1,8 +1,9 @@
 package com.yogi.jogi.board.controller;
 
-
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -67,9 +68,90 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardlist")
-	public ModelAndView list(HttpServletRequest request, HttpSession session,MemberModel memberModel) throws Exception {
-		mv.clear();
+	public ModelAndView list(HttpServletRequest request, HttpSession session, MemberModel memberModel,
+			@RequestParam(defaultValue = "subject") String searchOption,
+			@RequestParam(defaultValue = "") String keyword) throws Exception {
+		
+			List<BoardModel> list = boardService.selectSearchBoardList(searchOption,keyword);
+			System.out.println("++++"+list);
+			int scount = boardService.selectListGetCount(searchOption, keyword);
+			
+		/*
+		 * Map<String,Object> map = new HashMap<String, Object>(); map.put("list",
+		 * list); map.put("scount", scount); map.put("searchOption", searchOption);
+		 * map.put("keyword", keyword);
+		 */
+			
+		
+		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
+		int currentPage = pageNum;
+		//int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int count = list.size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		
+		int startRow = ((currentPage - 1) * pageSize);
+		int endRow = currentPage * pageSize;
+		if (count < endRow) {
+			endRow = count;
+		}
+		int number = count - ((currentPage - 1) * pageSize);
+		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+		int endPage = startPage + bottomLine - 1;
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
 
+		int start = startRow;
+		int end = endRow;
+		
+		
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "2");
+
+		
+		/*
+		 * session = request.getSession(true);
+		 * 
+		 * String memNum = request.getParameter("memNum");
+		 * request.getSession().setAttribute("memNum", memNum);
+		 */
+		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		session.setAttribute("memNum", memNum);
+		session.setAttribute("boardid",boardid);
+		mv.addObject("boardlist", list);
+		mv.addObject("pageCount", pageCount);
+		mv.addObject("count", count);
+		mv.addObject("pageNum", pageNum);
+		mv.addObject("number", number);
+		mv.addObject("startPage", startPage);
+		mv.addObject("bottomLine", bottomLine);
+		mv.addObject("endPage", endPage);
+
+		List<BoardModel> AllList = boardService.selectBoardList();
+		mv.setViewName("board/boardlist.do");
+		mv.addObject("AllList", AllList);
+		
+		
+
+		return mv;
+	}
+
+	@RequestMapping("list")
+	public ModelAndView list2(HttpServletRequest request, HttpSession session, MemberModel memberModel,
+			@RequestParam(defaultValue = "subject") String searchOption,
+			@RequestParam( defaultValue = "") String keyword) throws Exception {
+		
+			List<BoardModel> list = boardService.selectSearchBoardList(searchOption,keyword);
+			
+			int scount = boardService.selectListGetCount(searchOption, keyword);
+			
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("list", list);
+			map.put("scount", scount);
+			map.put("searchOption", searchOption);
+			map.put("keyword", keyword);
+			map.put("map", map);
+		
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
 		int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
@@ -87,8 +169,13 @@ public class BoardController {
 			endPage = pageCount;
 		}
 
+		int start = startRow;
+		int end = endRow;
+		
+		
 		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "2");
 
+		
 		/*
 		 * session = request.getSession(true);
 		 * 
@@ -97,48 +184,8 @@ public class BoardController {
 		 */
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		session.setAttribute("memNum", memNum);
+		session.setAttribute("boardid",boardid);
 		mv.addObject("boardlist", boardlist);
-		mv.addObject("pageCount", pageCount);
-		mv.addObject("count", count);
-		mv.addObject("pageNum", pageNum);
-		mv.addObject("number", number);
-		mv.addObject("startPage", startPage);
-		mv.addObject("bottomLine", bottomLine);
-		mv.addObject("endPage", endPage);
-
-		List<BoardModel> AllList = boardService.selectBoardList();
-		mv.setViewName("board/boardlist.do");
-		mv.addObject("AllList", AllList);
-
-		return mv;
-	}
-
-	@RequestMapping("list")
-	public ModelAndView list2(HttpSession session,MemberModel memberModel) throws Exception {
-		mv.clear();
-		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
-		int currentPage = pageNum;
-		int count = boardService.selectBoardListWidhBoardid("1").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
-		int startRow = ((currentPage - 1) * pageSize);
-		int endRow = currentPage * pageSize;
-		if (count < endRow) {
-			endRow = count;
-
-		}
-		int number = count - ((currentPage - 1) * pageSize);
-		int bottomLine = 3; // 페이징 처리시 페이징 최대 갯수
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
-		int endPage = startPage + bottomLine - 1;
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
-		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
-		session.setAttribute("memNum", memNum);
-		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "1");
-		
-		mv.addObject("boardlist", boardlist);
-
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("count", count);
 		mv.addObject("pageNum", pageNum);
@@ -150,6 +197,8 @@ public class BoardController {
 		List<BoardModel> AllList = boardService.selectBoardList();
 		mv.setViewName("board/list.do");
 		mv.addObject("AllList", AllList);
+		System.out.println(boardid);
+		
 
 		return mv;
 	}
@@ -193,7 +242,7 @@ public class BoardController {
 			throws Exception {
 
 		MultipartFile multi = multipart.getFile("uploadfile");
-		String fname ="http://211.63.89.83:8888/resources/fileSave/" + multi.getOriginalFilename();
+		String fname = "http://211.63.89.83:8888/resources/fileSave/" + multi.getOriginalFilename();
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println(boardModel);
 		if (fname != null && !fname.equals("http://211.63.89.83:8888/resources/fileSave/")) {
@@ -215,15 +264,16 @@ public class BoardController {
 		// return "redirect:list?pageNum=" + pageNum;
 	}
 
-	@RequestMapping(value="content", method = RequestMethod.GET)
-	public ModelAndView content(@RequestParam ("boardNum")int boardNum, MemberModel memberModel,HttpSession session) throws Exception {
+	@RequestMapping(value = "content", method = RequestMethod.GET)
+	public ModelAndView content(@RequestParam("boardNum") int boardNum, MemberModel memberModel, HttpSession session)
+			throws Exception {
 
 		mv.clear();
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		session.setAttribute("memNum", memNum);
-		mv.addObject("memNum",memNum);
+		mv.addObject("memNum", memNum);
 		mv.addObject("list", boardService.selectBoard(boardNum));
-		mv.addObject("memberModel",new MemberModel());
+		mv.addObject("memberModel", new MemberModel());
 		mv.setViewName("board/content.do"); // 가야할 페이지
 
 		return mv;
@@ -283,8 +333,5 @@ public class BoardController {
 		return mv;
 
 	}
-
-
-	
 
 }
