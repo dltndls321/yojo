@@ -83,28 +83,46 @@
 			<h3 class="margin-top-0 margin-bottom-40">게시판</h3>
 			<!-- Listings Container -->
 			<div class="row">
+			<c:if test="${!empty boardList }">
+			<c:forEach items="${boardList }" var="boardLists">
 				<!-- Listing Item -->
 				<div class="col-lg-12 col-md-12">
 					<div class="listing-item-container list-layout">
 						<a href="listings-single-page.html" class="listing-item">
 							<!-- Image -->
 							<div class="listing-item-image">
-								<img src="images/listing-item-01.jpg" alt="">
+								<img src="${boardLists.fname }" alt="" style="width: 194px;height: 220px;">
 							</div>
 							
 							<!-- Content -->
+							
 							<div class="listing-item-content">
 							<div class="listing-item-inner">
-									<h3>Tom's Restaurant</h3>
-									<span>964 School Street, New York</span>
-									<div class="star-rating" data-rating="3.5">
-										<div class="rating-counter">(12 reviews)</div>
-									</div>
+									<h3>${boardLists.subject }</h3>
+									<span>${boardLists.regdate }</span>
 								</div>
 							</div>
+							
 						</a>
 					</div>
 				</div>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty boardList }">
+				<div class="col-lg-12 col-md-12">
+					<div class="listing-item-container list-layout">
+						<a class="listing-item">
+							<div class="listing-item-content">
+							<div class="listing-item-inner">
+									<h3>작성한 글이 없습니다.</h3>
+								</div>
+							</div>
+							
+						</a>
+					</div>
+				</div>
+			</c:if>
+			
 				<!-- Listing Item / End -->
 				<div class="col-md-12 browse-all-user-listings">
 					<a href="#">Browse All Listings <i class="fa fa-angle-right"></i> </a>
@@ -122,8 +140,10 @@
 
 				<!-- Reviews -->
 				<section class="comments listing-reviews">
-					<h4 class="margin-top-60 margin-bottom-20">축제 리뷰</h3>
+					<h4 class="margin-top-60 margin-bottom-20">축제 리뷰</h4>
+					<c:if test="${!empty festList }">
 					<ul>
+					
 					<c:forEach var="festlists" items="${festList}" varStatus="status">
 						<li>
 							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
@@ -140,8 +160,23 @@
 						</li>
 					</c:forEach>
 					 </ul>
+					 </c:if>
+					 <c:if test="${empty festList }">
+						<div class="col-lg-12 col-md-12">
+							<div class="listing-item-container list-layout">
+								<a class="listing-item">
+									<div class="listing-item-content">
+									<div class="listing-item-inner">
+											<h3>작성한 글이 없습니다.</h3>
+										</div>
+									</div>
+									
+								</a>
+							</div>
+						</div>
+					 </c:if>
 				</section>
-
+				<c:if test="${!empty festList }">
 				<!-- Pagination -->
 				<div class="clearfix"></div>
 				<div class="row">
@@ -158,14 +193,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="clearfix"></div>
 				<!-- Pagination / End -->
+				</c:if>
+				<div class="clearfix"></div>
 				
 				<!-- Reviews -->
 				<section class="comments listing-reviews">
 					<h4 class="margin-top-60 margin-bottom-20">관광지 리뷰</h4>
+					<c:if test="">
 					<ul>
-					<c:if test="${! empty spotList}">
 					<c:forEach var="spotLists" items="${spotList}" varStatus= "status">
 						<li>
 							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
@@ -181,12 +217,27 @@
 							</div>
 						</li>
 					</c:forEach>
-					</c:if>
 					 </ul>
+					 </c:if>
+					 <c:if test="${empty spotList}">
+					 	<div class="col-lg-12 col-md-12">
+							<div class="listing-item-container list-layout">
+								<a class="listing-item">
+									<div class="listing-item-content">
+									<div class="listing-item-inner">
+											<h3>작성한 글이 없습니다.</h3>
+										</div>
+									</div>
+									
+								</a>
+							</div>
+						</div>
+					 </c:if>
 				</section>
 
 				<!-- Pagination -->
 				<div class="clearfix"></div>
+				<c:if test="${!empty spotList}">
 				<div class="row">
 					<div class="col-md-12">
 						<!-- Pagination -->
@@ -201,6 +252,7 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
 				<div class="clearfix"></div>
 				<!-- Pagination / End -->
 			</div>
