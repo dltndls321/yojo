@@ -160,7 +160,7 @@
 
 
 			<!-- Right Side Content / End -->
-			<c:if test="${empty SessionMemberMemnum }">
+			<c:if test="${empty SessionMemberMemnum}">
 			<div class="right-side">
 				<div class="header-widget">
 					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><i class="sl sl-icon-login"></i> Sign In</a>

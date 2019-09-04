@@ -239,7 +239,7 @@ $(document).ready(function () {
 				<!-- Review Comment -->
 				<form id="add-comment" class="add-comment" action ="/festival/review">
 					<fieldset>
-						<input type="hidden" name="subject" value="${title}">
+						<input type="hidden" name="name" value="${title}">
 						<input type="hidden" name="area" value="${addr1}">
 						<input type="hidden" name="fdate1" value="${fdate1}" >
 						<input type="hidden" name="fdate2" value="${fdate2}">

@@ -127,6 +127,10 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
          alert(JSON.stringify(err));
       }
     });
+    Kakao.PlusFriend.createChatButton({
+        container: '#plusfriend-chat-button',
+        plusFriendId: '_xaxbIxiT' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+      });
   //]]>
 </script>
 

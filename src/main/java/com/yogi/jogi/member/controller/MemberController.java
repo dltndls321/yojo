@@ -209,12 +209,14 @@ public class MemberController {
 		FestReviewModel festReviewModel = new FestReviewModel();
 		FestivalModel festivalModel = new FestivalModel();
 		SpotReviewModel spotReviewModel = new SpotReviewModel();
-		
+		BoardModel boardModel = new BoardModel();
 		SpotModel spotModel = new SpotModel();
 		spotReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
+		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
+		List<BoardModel> boardList = 
 		int reviewListsize = reviewList.size();
 		int star = 0;
 		double avg=0;
@@ -255,6 +257,7 @@ public class MemberController {
 		System.out.println("memberModel셋 memNum  : " + memberModel);
 		memberModel = memberService.selectMemberWithMemNum(memberModel);
 		System.out.println("memberModel 다시 : " + memberModel);
+		
 		model.addObject("memberInfo", memberModel);
 		model.addObject("reviewListsize",reviewListsize);
 		model.addObject("avg",avg);
@@ -263,6 +266,7 @@ public class MemberController {
 		model.addObject("spotReviewList",spotReviewList);
 		model.addObject("spotList",spotList);
 		model.addObject("spotreviewListsize",spotreviewListsize);
+		System.out.println("memberprofile 최종");
 		model.setViewName("member/memberprofile.do");
 		return model;
 	}
