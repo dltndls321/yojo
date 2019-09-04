@@ -60,8 +60,9 @@ public class FoodController {
 	}
 	//관광지리스트뽑기
 	@RequestMapping(value = "food.do")	
-	public void test(FoodModel foodModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String foodCode) throws Exception {
-        request.setCharacterEncoding("utf-8");
+	public ModelAndView test(FoodModel foodModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String foodCode, @RequestParam int pageNum) throws Exception {
+		model.clear();
+		request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
         String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
@@ -77,6 +78,7 @@ public class FoodController {
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&cat1=A05&cat2=A0502&cat3=" + foodCode;
         parameter = parameter + "&" + "numOfRows=9";
+        parameter = parameter + "&" + "pageNo=" + pageNum;
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -110,7 +112,11 @@ public class FoodController {
 		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
 		 * System.out.println(totalCount.toString());
 		 */
-		 
+        
+        //페이징을 위한
+        Object total = parse_body.get("totalCount");
+        int totalCount = Integer.parseInt(total.toString());
+		 System.out.println("갯수"+totalCount);
         String finaldata="";
         for (int i = 0; i < parse_item.size(); i++) { 
         	JSONObject imsi = (JSONObject) parse_item.get(i);
@@ -155,11 +161,14 @@ public class FoodController {
 			 * 
 			 * System.out.println(i+"번째"+foodModel); addData(foodModel); Thread.sleep(100);
 			 */
-         	
+        	model.addObject("totalCount", totalCount);
+        	
         	}	
         out.append(finaldata);
         out.flush();
         out.close();
+        model.setViewName("tripInfo/food.do");
+		return model;
 
     }
 	public void addData(FoodModel foodModel) throws Exception {
@@ -342,6 +351,7 @@ public class FoodController {
     		        model.addObject("treatmenu",treatmenu);
     		        model.addObject("typeid", typeid);
     		        model.addObject("contid", contid);
+    		        
 	        	}
 	        }
 	        System.out.println(foodModel);

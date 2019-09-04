@@ -39,7 +39,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"></div>
+										<div class="avatar"><img src="/resources/images/food.png" alt="" /></div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 												${food[0]}
@@ -54,7 +54,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
+										<div class="avatar"><img src="/resources/images/spot.png" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${spot[0]} 
@@ -68,7 +68,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+										<div class="avatar"><img src="<img src="/resources/images/food.png" alt="" />" alt="" /></div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											
@@ -83,7 +83,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
+										<div class="avatar"><img src="<img src="/resources/images/spot.png" alt="" />" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${spot[1]} 
@@ -99,7 +99,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
+										<div class="avatar"><img src="<img src="/resources/images/food.png" alt="" />" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${food[2]} 
@@ -115,7 +115,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
+										<div class="avatar"><img src="<img src="/resources/images/festival.png" alt="" />" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${fest}

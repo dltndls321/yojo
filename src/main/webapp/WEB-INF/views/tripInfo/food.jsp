@@ -4,14 +4,32 @@
 <script>
 
 $(document).ready(function(){
+	var areaCode = $("#areacode option:selected").val();
+	var foodCode = $("#foodcode option:selected").val();
+	var pageNum = 1;
 	$('#search').click( function(){
-		var areaCode = $("#areacode option:selected").val();
-		var foodCode = $("#foodcode option:selected").val();
 		
 		$.ajax({        
 	        url: 'food.do',
 	        type: 'get',
-	        data : {"areaCode" : areaCode, "foodCode" :foodCode},
+	        data : {"areaCode" : areaCode, "foodCode" :foodCode, "pageNum" : pageNum},
+	        success: function(data){
+	            	$('#food').html(data);
+	            },
+	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	                alert("검색 결과가 없습니다.");
+	        }
+	        });	
+	});
+	$('#page2').click( function(){
+		pageNum = 2;
+		var areaCode = $("#areacode option:selected").val();
+		var foodCode = $("#foodcode option:selected").val();
+	
+		$.ajax({        
+	        url: 'food.do',
+	        type: 'get',
+	        data : {"areaCode" : areaCode, "foodCode" :foodCode, "pageNum" : pageNum},
 	        success: function(data){
 	            	$('#food').html(data);
 	            },
@@ -30,6 +48,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-md-12">
 				<h2>RESTAURANT</h2>
+				전체 식당 수:${totalCount}
 			</div>
 		</div>
 	</div>
@@ -92,18 +111,11 @@ $(document).ready(function(){
 
 		<div class="col-md-12">
 
-		
-
-
 			<div class="row" id ="food">
 
 				<!-- Listing Item -->
-				
-					
-			
+	
 				<!-- Listing Item / End -->
-
-				
 
 			</div>
 
@@ -115,9 +127,9 @@ $(document).ready(function(){
 					<div class="pagination-container margin-top-20 margin-bottom-40">
 						<nav class="pagination">
 							<ul>
-								<li><a href="#" class="current-page">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
+								<li><a href="#" class="current-page" id ="page1">1</a></li>
+								<li><a href="#" id ="page2">2</a></li>
+								<li><a href="#" id ="page3">3</a></li>
 								<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
 							</ul>
 						</nav>

@@ -30,19 +30,20 @@
     	from
     		adminCourse
     	where
-    		theme =${theme}
+    		theme =#{theme}
       	and
-        	${startDate}
+        	#{startDate}
     	between startDate and endDate
     	and
-    		areaCode = ${areaCode}
-    </select>
-  	<!-- 
-      	and
+    		areaCode = #{areaCode}
+    	and
         	foodCode 
-        like '%' ||  #{foodCode} || '%'
+        LIKE '%'|| #{foodCode} || '%'
       	and
         	spotCode
-       	like '%' ||  #{spotCode} || '%' -->
+       	like '%' ||  #{spotCode} || '%'
+    </select>
+
+
 
 </mapper>

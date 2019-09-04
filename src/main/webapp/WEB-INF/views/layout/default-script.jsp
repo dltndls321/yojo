@@ -15,6 +15,18 @@
 
 <script type="text/javascript" src="/resources/scripts/loginregister.js"></script>
 
+<!-- Leaflet // Docs: https://leafletjs.com/ -->
+<script src="/resources/scripts/leaflet.min.js"></script>
+
+<!-- Leaflet Maps Scripts -->
+<script src="/resources/scripts/leaflet-markercluster.min.js"></script>
+<script src="/resources/scripts/leaflet-gesture-handling.min.js"></script>
+<script src="/resources/scripts/leaflet-listeo.js"></script>
+
+<!-- Leaflet Geocoder + Search Autocomplete // Docs: https://github.com/perliedman/leaflet-control-geocoder -->
+<script src="/resources/scripts/leaflet-autocomplete.js"></script>
+<script src="/resources/scripts/leaflet-control-geocoder.js"></script>
+
 
 <!-- Google Autocomplete -->
 <script>

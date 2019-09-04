@@ -52,7 +52,7 @@
     	from
     		festival
     	where
-    		subject=#{subject}
+    		name=#{name}
     </select>
     
      <select id="selectFestAdmin"  parameterType="festModel" resultType="festModel">

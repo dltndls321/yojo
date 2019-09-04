@@ -421,7 +421,7 @@ public class FestController {
 		festReviewModel.setMemNum(memNum);
 		if(festReviewService.selectFestReviewOne(festReviewModel) == null) {
 			festReviewService.insertFestReview(festReviewModel);
-			System.out.println("됐을거아니야");
+			
 		} else {
 			festReviewService.updateFestReview(festReviewModel);
 		}
