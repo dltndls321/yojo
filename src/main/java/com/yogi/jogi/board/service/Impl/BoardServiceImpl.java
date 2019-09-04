@@ -82,4 +82,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectListGetCount(searchOption, keyword);
 	}
 
+	@Override
+	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectBoardListWidhMemnum(boardModel);
+	}
+
 }

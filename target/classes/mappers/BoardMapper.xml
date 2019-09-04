@@ -82,7 +82,14 @@
 		boardid=#{boardid}
 
 	</select>
+	<select id="selectBoardListWidhMemnum"
+		parameterType="boardModel" resultType="boardModel">
+		select * from
+		board
+		where
+		memNum=#{memNum}
 
+	</select>
 	<update id="updateReadcount" parameterType="boardModel">
 		update
 		board

@@ -89,5 +89,9 @@ public class BoardDao {
 		map.put("keyword", keyword);
 		return sqlSession.selectOne(Namespace + ".selectListGetCount", map);
 	}
+	
+	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardListWidhMemnum", boardModel);
+	}
 
 }
