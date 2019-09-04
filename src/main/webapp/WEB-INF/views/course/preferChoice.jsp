@@ -145,6 +145,37 @@ $(document).ready(function(){
 						</div>
 
 						<div class="submit-section">
+						<!-- Checkboxes -->
+						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
+						<div class="checkboxes in-row margin-bottom-20">
+					
+							<input id="A05020100" type="checkbox" name="foodchk" value="A05020100">
+							<label for="A05020100">한식</label>
+
+							<input id="A05020200" type="checkbox" name="foodchk" value="A05020200">
+							<label for="A05020200">양식</label>
+
+							<input id="A05020300" type="checkbox" name="foodchk" value="A05020300">
+							<label for="A05020300">일식</label>
+
+							<input id="A05020400" type="checkbox" name="foodchk" value="A05020400">
+							<label for="A05020400">중식</label>
+
+							<input id="A05020500" type="checkbox" name="foodchk" value="A01010100">
+							<label for="A05020500">아시아식</label>
+
+							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
+							<label for="A05020600">패밀리레스토랑</label>
+
+							<input id="A05020700" type="checkbox" name="foodchk" value="A05020700">
+							<label for="A05020700">이색음식점</label>	
+
+							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
+							<label for="A05020800">채식전문점</label>
+							
+							<input id="A05020900" type="checkbox" name="foodchk" value="A05020900">
+							<label for="A05020900">바/카페</label>
+						</div>
 							
 							<!-- Checkboxes -->
 						<h5 class="margin-top-30 margin-bottom-10">선호 관광지<span>(optional)</span></h5>
@@ -202,37 +233,7 @@ $(document).ready(function(){
 							<label for="A01011900">동굴</label>
 						</div>
 						<!-- Checkboxes / End -->
-						<!-- Checkboxes -->
-						<h5 class="margin-top-30 margin-bottom-10">선호 음식<span>(optional)</span></h5>
-						<div class="checkboxes in-row margin-bottom-20">
-					
-							<input id="A05020100" type="checkbox" name="foodchk" value="A05020100">
-							<label for="A05020100">한식</label>
-
-							<input id="A05020200" type="checkbox" name="foodchk" value="A05020200">
-							<label for="A05020200">양식</label>
-
-							<input id="A05020300" type="checkbox" name="foodchk" value="A05020300">
-							<label for="A05020300">일식</label>
-
-							<input id="A05020400" type="checkbox" name="foodchk" value="A05020400">
-							<label for="A05020400">중식</label>
-
-							<input id="A05020500" type="checkbox" name="foodchk" value="A01010100">
-							<label for="A05020500">아시아식</label>
-
-							<input id="A05020600" type="checkbox" name="foodchk" value="A05020600">
-							<label for="A05020600">패밀리레스토랑</label>
-
-							<input id="A05020700" type="checkbox" name="foodchk" value="A05020700">
-							<label for="A05020700">이색음식점</label>	
-
-							<input id="A05020800" type="checkbox" name="foodchk" value="A05020800">
-							<label for="A05020800">채식전문점</label>
-							
-							<input id="A05020900" type="checkbox" name="foodchk" value="A05020900">
-							<label for="A05020900">바/카페</label>
-						</div>
+						
 
 						</div>
 					</div>

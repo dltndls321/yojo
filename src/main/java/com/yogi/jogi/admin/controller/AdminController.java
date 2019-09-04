@@ -411,6 +411,7 @@ public class AdminController {
 		JSONArray jsonArray = new JSONArray();
 		try {
 			List<FestivalModel> festList = festService.selectFestAdmin(festivalModel);
+			System.out.println("여기"+festList);
 			if(festList != null && festList.size() >0) {
 				for (int i = 0; i < festList.size(); i++) {
 					jsonArray.add(festList.get(i));
