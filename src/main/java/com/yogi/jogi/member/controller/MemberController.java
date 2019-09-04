@@ -216,7 +216,6 @@ public class MemberController {
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
-		List<BoardModel> boardList = 
 		int reviewListsize = reviewList.size();
 		int star = 0;
 		double avg=0;
