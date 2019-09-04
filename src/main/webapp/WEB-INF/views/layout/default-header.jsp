@@ -77,40 +77,81 @@
 					</button>
 				</div>
 				<c:if test="${not empty SessionMemberMemnum }">
-				<!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
-
-						<li><a  href="#">Course</a>
-							<ul>
-								<li><a href="/course/recommend">Recommand</a></li>
-								<li><a href="/map/search">Route</a></li>
-
-							</ul>
-						</li>
-
-						
-
-						<li><a href="#">TripInfo</a>
-							<ul>
-								<li><a href="/food/list">Eat</a></li>
-								<li><a href="/festival/list">Festival</a></li>
-								<li><a href="/spot/list">Tourist Spot</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Community</a>
-							<ul>
-								<li><a href="/board/list?boarid=2">Notice</a></li>
-								<li><a href="/board/boardlist?boarid=1">Free Board</a></li>
-								<li><a href="dashboard-bookings.html">Q&A</a></li>
-							</ul>
-						</li>
-						
-					</ul>
-				</nav>
-				<div class="clearfix"></div>
-				<!-- Main Navigation / End -->
+					<c:choose>
+						<c:when test="${SessionMemberStatus eq 1}">
+										<!-- Main Navigation -->
+							<nav id="navigation" class="style-1">
+								<ul id="responsive">
+			
+									<li><a  href="#">Course</a>
+										<ul>
+											<li><a href="/member/profile">Recommand</a></li>
+											<li><a href="/member/profile">Route</a></li>
+			
+										</ul>
+									</li>
+			
+									
+			
+									<li><a href="#">TripInfo</a>
+										<ul>
+											<li><a href="/member/profile">Eat</a></li>
+											<li><a href="/member/profile">Festival</a></li>
+											<li><a href="/member/profile">Tourist Spot</a></li>
+										</ul>
+									</li>
+			
+									<li><a href="#">Community</a>
+										<ul>
+											<li><a href="/member/profile">Notice</a></li>
+											<li><a href="/member/profile">Free Board</a></li>
+											<li><a href="/member/profile">Q&A</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</nav>
+							<div class="clearfix"></div>
+							<!-- Main Navigation / End -->
+						</c:when>
+						<c:otherwise>
+									<!-- Main Navigation -->
+							<nav id="navigation" class="style-1">
+								<ul id="responsive">
+			
+									<li><a  href="#">Course</a>
+										<ul>
+											<li><a href="/course/recommend">Recommand</a></li>
+											<li><a href="/map/search">Route</a></li>
+			
+										</ul>
+									</li>
+			
+									
+			
+									<li><a href="#">TripInfo</a>
+										<ul>
+											<li><a href="/food/list">Eat</a></li>
+											<li><a href="/festival/list">Festival</a></li>
+											<li><a href="/spot/list">Tourist Spot</a></li>
+										</ul>
+									</li>
+			
+									<li><a href="#">Community</a>
+										<ul>
+											<li><a href="/board/list?boarid=2">Notice</a></li>
+											<li><a href="/board/boardlist?boarid=1">Free Board</a></li>
+											<li><a href="dashboard-bookings.html">Q&A</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</nav>
+							<div class="clearfix"></div>
+							<!-- Main Navigation / End -->
+						</c:otherwise>
+					</c:choose>
+				
 				</c:if>
 				
 				

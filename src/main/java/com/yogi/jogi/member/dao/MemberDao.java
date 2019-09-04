@@ -54,4 +54,8 @@ public class MemberDao {
 	public int updateMemberTokken(MemberModel memberModel) throws Exception {
 		return sqlSession.update(Namespace+".updateMemberTokken",memberModel);
 	}
+	
+	public int updateMemberStatus(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMemberStatus",memberModel);
+	}
 }
