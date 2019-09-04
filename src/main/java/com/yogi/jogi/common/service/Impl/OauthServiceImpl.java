@@ -11,7 +11,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -34,6 +33,7 @@ public class OauthServiceImpl implements OauthService{
     @Resource
     private RestTemplate restTemplate;
     
+  
     
     private static String kakaoRestApiKey = "55c143e0b9c2751bfa9c15f3aef22fd4";
     private static String kakaoRestAdminKey ="44e7930fbfba445bc7331c791e4a7726";
