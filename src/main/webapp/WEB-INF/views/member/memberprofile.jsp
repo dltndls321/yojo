@@ -13,9 +13,11 @@
 					<div class="user-profile-avatar"><img src="images/user-profile-avatar.jpg" alt=""></div>
 					<div class="user-profile-name">
 						<h2> ${memberInfo.name}</h2>
+						<c:if test="${memberInfo.status ne 1}">
 						<div class="star-rating" data-rating="${avg}">
 							<div class="rating-counter"> ${reviewListsize + spotreviewListsize}개 리뷰했어요! (${avg})</div>
 						</div>
+						</c:if>
 					</div>
 				</div>
 
@@ -37,9 +39,19 @@
 		<div class="col-lg-4 col-md-4 margin-top-0">
 				
 			<!-- Verified Badge -->
-			<div class="verified-badge with-tip" data-tip-content="Account has been verified and belongs to the person or organization represented.">
-				<i class="sl sl-icon-user-following"></i> Verified Account
-			</div>
+			<c:choose>
+				<c:when test="${memberInfo.status eq 1}">
+					<div class="verified-badge with-tip" data-tip-content="Account has been verified and belongs to the person or organization represented."style="background-color: red;">
+						<i class="sl sl-icon-user-unfollow"></i> 이메일을 확인해 주세요.
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="verified-badge with-tip" data-tip-content="Account has been verified and belongs to the person or organization represented.">
+						<i class="sl sl-icon-user-following"></i> 인증되었습니다.
+					</div>
+				</c:otherwise>
+			</c:choose>
+			
 
 			<!-- Contact -->
 			<div class="boxed-widget margin-top-30 margin-bottom-50">
@@ -50,9 +62,11 @@
 					<li><i class="fa fa-envelope-o"></i> 이메일 : ${memberInfo.email}</a></li>
 					<%-- <li><i class="fa fa-envelope-o"></i> <a href="#">빨간색 : ${memberInfo.email}</a></li> --%>
 				</ul>
+				<c:if test="${memberInfo.status ne 1}">
 				<br/>
 				<br/>
 				<a href="/member/updateMember" class="button"><i class="sl sl-icon-user"></i> 회원정보 수정</a>
+				</c:if>
 			</div>
 			<!-- Contact / End-->
 
@@ -62,7 +76,9 @@
 
 		<!-- Content
 		================================================== -->
-		<div class="col-lg-8 col-md-8 padding-left-30">
+		<c:choose>
+			<c:when test="${memberInfo.status ne 1}">
+			<div class="col-lg-8 col-md-8 padding-left-30">
 
 			<h3 class="margin-top-0 margin-bottom-40">Tom's Listings</h3>
 			<!-- Listings Container -->
@@ -253,10 +269,31 @@
 				<div class="clearfix"></div>
 				<!-- Pagination / End -->
 			</div>
-			
-
-
 		</div>
+			</c:when>
+		</c:choose>
+		<div class="col-lg-8 col-md-8 padding-left-30">
 
+			<h3 class="margin-top-0 margin-bottom-40">인증 번호 입력</h3>
+			<!-- Listings Container -->
+				<div class="row">
+					<!-- Listing Item -->
+					<div class="col-lg-12 col-md-12">
+						<div class="listing-item-container list-layout">
+							<a class="listing-item">
+								<!-- Content -->
+								<div class="listing-item-content">
+									<div class="listing-item-inner">
+										<input class="input-text" type="text" id="emailok" name="emailok">
+										<button class="button border fw margin-top-10" onclick="emailok();">인증번호 확인</button>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<!-- Listing Item / End -->
+				</div>
+			<!-- Listings Container / End -->
+		</div>
 	</div>
 </div>

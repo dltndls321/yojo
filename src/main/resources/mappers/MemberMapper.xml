@@ -98,7 +98,13 @@
     		memnum = #{memnum}   
 		   
 	</update>
-    
+    <update id="updateMemberStatus" parameterType="memberModel">
+		update member set
+    		status = #{status}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
      <delete id="deleteMember" parameterType="memberModel">
     	delete
     		from member

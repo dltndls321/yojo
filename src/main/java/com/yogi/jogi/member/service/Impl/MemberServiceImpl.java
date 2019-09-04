@@ -80,6 +80,12 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.updateMemberTokken(memberModel);
 	}
+
+	@Override
+	public int updateMemberStatus(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.updateMemberStatus(memberModel);
+	}
 	
 	
 }
