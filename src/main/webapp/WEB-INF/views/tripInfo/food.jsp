@@ -1,44 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <script>
-
 $(document).ready(function(){
-	var areaCode = $("#areacode option:selected").val();
-	var foodCode = $("#foodcode option:selected").val();
-	var pageNum = 1;
+	$("#total").empty();
 	$('#search').click( function(){
+		$("#food").empty();
+		
+		var pageNum = 1;
+		var areaCode = $("#areacode option:selected").val();
+		var foodCode = $("#foodcode option:selected").val();
 		
 		$.ajax({        
 	        url: 'food.do',
+	        dataType: 'json',
 	        type: 'get',
 	        data : {"areaCode" : areaCode, "foodCode" :foodCode, "pageNum" : pageNum},
 	        success: function(data){
-	            	$('#food').html(data);
-	            },
-	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	        	$("#total").html(data[2].pagedata.count);
+	        	$("#food").html(data[0].foodCont);	
+	        	$("#paging").html(data[1].pagingdata);
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) { 
 	                alert("검색 결과가 없습니다.");
 	        }
 	        });	
-	});
-	$('#page2').click( function(){
-		pageNum = 2;
-		var areaCode = $("#areacode option:selected").val();
-		var foodCode = $("#foodcode option:selected").val();
-	
-		$.ajax({        
-	        url: 'food.do',
-	        type: 'get',
-	        data : {"areaCode" : areaCode, "foodCode" :foodCode, "pageNum" : pageNum},
-	        success: function(data){
-	            	$('#food').html(data);
-	            },
-	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-	                alert("검색 결과가 없습니다.");
-	        }
-	        });	
-	});
 });
+});
+function goChange(num){
+	pageNum = num;
+	
+	var areaCode = $("#areacode option:selected").val();
+	var foodCode = $("#foodcode option:selected").val();
+	$.ajax({        
+        url: 'food.do',
+        dataType: 'json',
+        type: 'get',
+        data : {"areaCode" : areaCode, "foodCode" :foodCode, "pageNum" : pageNum},
+        success: function(data){
+        	$("#food").html(data[0].foodCont);	
+        	$("#paging").html(data[1].pagingdata);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("검색 결과가 없습니다.");
+        }
+        });	
+}
+
 
 </script>
 <!-- Titlebar
@@ -48,7 +55,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-md-12">
 				<h2>RESTAURANT</h2>
-				전체 식당 수:${totalCount}
+				<p style="font-weight: bold;">총 음식점 수:&nbsp;&nbsp;&nbsp;<a id ="total" style="color: #f91942; font-weight: bold;"></a><p>
 			</div>
 		</div>
 	</div>
@@ -91,14 +98,14 @@ $(document).ready(function(){
 					<select data-placeholder="All Categories" class="chosen-select" id="foodcode" >
 						<option value = "">관광지 분류</option>	
 						<option value ="A05020100">한식</option>
-						<option value ="A05010200">양식</option>
-						<option value ="A05010300">일식</option>
-						<option value ="A05010400">중식</option>
-						<option value ="A05010500">아시아음식점</option>
-						<option value ="A05010600">패밀리레스토랑</option>
-						<option value ="A05010700">이색음식점</option>
-						<option value ="A05010800">채식음식점</option>
-						<option value ="A05010900">바 / 카페</option>
+						<option value ="A05020200">양식</option>
+						<option value ="A05020300">일식</option>
+						<option value ="A05020400">중식</option>
+						<option value ="A05020500">아시아음식점</option>
+						<option value ="A05020600">패밀리레스토랑</option>
+						<option value ="A05020700">이색음식점</option>
+						<option value ="A05020800">채식음식점</option>
+						<option value ="A05020900">바 / 카페</option>
 					</select>
 				</div>
 		
@@ -123,14 +130,10 @@ $(document).ready(function(){
 			<div class="clearfix"></div>
 			<div class="row">
 				<div class="col-md-12">
-					<!-- Pagination -->
 					<div class="pagination-container margin-top-20 margin-bottom-40">
 						<nav class="pagination">
-							<ul>
-								<li><a href="#" class="current-page" id ="page1">1</a></li>
-								<li><a href="#" id ="page2">2</a></li>
-								<li><a href="#" id ="page3">3</a></li>
-								<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+							<ul id ="paging">
+								
 							</ul>
 						</nav>
 					</div>
