@@ -75,6 +75,7 @@ public class MapController {
 		
 		
 		if(startX > endX && startY > endY) {
+			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(endX,endY,startX,startY));
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(endX,endY,startX,startY));
@@ -83,9 +84,13 @@ public class MapController {
 			mv.addObject("swY",endX);
 			mv.addObject("neX",startY);
 			mv.addObject("neY",startX);
+			mv.addObject("seX",startY);
+			mv.addObject("seY",endX);
+			mv.addObject("nwX",endY);
+			mv.addObject("nwY",startX);
 			
 		}else if(startX < endX && startY > endY) {
-			
+			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(startX,endY,endX,startY));
 			mv.addObject("festList", festService.selectFestListXY(startX,endY,endX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,endY,endX,startY));
@@ -94,8 +99,12 @@ public class MapController {
 			mv.addObject("swY",startX);
 			mv.addObject("neX",startY);
 			mv.addObject("neY",endX);
+			mv.addObject("seX",startY); //x가 큰값
+			mv.addObject("seY",startX); // y가 작은값
+			mv.addObject("nwX",endY); // x가 작은값
+			mv.addObject("nwY",endX); //y가 큰값
 		}else if(startX < endX && startY < endY) {
-			
+			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(startX,startY,endX,endY));
 			mv.addObject("festList", festService.selectFestListXY(startX,startY,endX,endY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,startY,endX,endY));
@@ -104,6 +113,10 @@ public class MapController {
 			mv.addObject("swY",startX);
 			mv.addObject("neX",endY);
 			mv.addObject("neY",endX);
+			mv.addObject("seX",endY); //x가 큰값
+			mv.addObject("seY",startX); // y가 작은값
+			mv.addObject("nwX",startY); // x가 작은값
+			mv.addObject("nwY",endX); //y가 큰값
 		}else { 
 			//startX - 126.8  startY - 37.5 endX - 127.1 endY - 37.4
 			mv.addObject("foodList", mapService.getFoodList2(startY,endX,endY,startX));
@@ -114,6 +127,10 @@ public class MapController {
 			mv.addObject("swY",endX);
 			mv.addObject("neX",endY);
 			mv.addObject("neY",startX); 
+			mv.addObject("seX",endY); //x가 큰값
+			mv.addObject("seY",endX); // y가 작은값
+			mv.addObject("nwX",startY); // x가 작은값
+			mv.addObject("nwY",startX); //y가 큰값
 		}
 
 		mv.setViewName("maptest/mapResult.do"); //
@@ -191,6 +208,7 @@ public class MapController {
 		return mv;
 	}
 
+	
 
 
 }

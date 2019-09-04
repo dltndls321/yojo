@@ -101,7 +101,6 @@ public class AdminCourseModel {
 	public void setCourse6(String course6) {
 		this.course6 = course6;
 	}
-	
 	@Override
 	public String toString() {
 		return "AdminCourseModel [courseNum=" + courseNum + ", subject=" + subject + ", theme=" + theme + ", startDate="
@@ -109,6 +108,7 @@ public class AdminCourseModel {
 				+ ", spotCode=" + spotCode + ", course1=" + course1 + ", course2=" + course2 + ", course3=" + course3
 				+ ", course4=" + course4 + ", course5=" + course5 + ", course6=" + course6 + "]";
 	}
+	
 	
 	
 

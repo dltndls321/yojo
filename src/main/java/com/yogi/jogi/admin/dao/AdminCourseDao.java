@@ -16,7 +16,12 @@ public class AdminCourseDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String Namespace = "AdminCourseMapperNS";
+	
 	public int insertCourse(AdminCourseModel adminCourseModel) throws Exception {
 		return sqlSession.insert(Namespace + ".insertCourse" , adminCourseModel);
+	}
+	
+	public AdminCourseModel selectCourse(AdminCourseModel adminCourseModel) {
+		return sqlSession.selectOne(Namespace + ".selectCourse",adminCourseModel);
 	}
 }

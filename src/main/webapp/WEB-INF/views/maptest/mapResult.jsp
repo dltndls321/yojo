@@ -211,7 +211,9 @@ geocoder.addressSearch("${spotLists.area}", function(result, status) {
 
 
 var sw = new kakao.maps.LatLng("${swX}", "${swY}"), // 사각형 영역의 남서쪽 좌표
-ne = new kakao.maps.LatLng("${neX}",  "${neY}"); // 사각형 영역의 북동쪽 좌표
+ne = new kakao.maps.LatLng("${neX}",  "${neY}"), // 사각형 영역의 북동쪽 좌표
+se = new kakao.maps.LatLng("${seX}",  "${seY}"), // 남동쪽
+nw = new kakao.maps.LatLng("${nwX}",  "${nwY}"); // 북서쪽
 
 //사각형을 구성하는 영역정보를 생성합니다
 //사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
@@ -230,12 +232,14 @@ fillOpacity: 0.5 // 채우기 불투명도 입니다
 
 //지도에 사각형을 표시합니다
 rectangle.setMap(map);
+
+
 //다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
 var polygonPath = [
-    new kakao.maps.LatLng(33.45133510810506, 126.57159381623066),
-    new kakao.maps.LatLng(33.44955812811862, 126.5713551811832),
-    new kakao.maps.LatLng(33.449986291544086, 126.57263296172184),
-    new kakao.maps.LatLng(33.450682513554554, 126.57321034054742)
+    new kakao.maps.LatLng("${nwX}",  "${nwY}"),
+    new kakao.maps.LatLng("${neX}",  "${neY}"),
+    new kakao.maps.LatLng("${seX}",  "${seY}"),
+    new kakao.maps.LatLng("${swX}", "${swY}")
 ];
 
 // 지도에 표시할 다각형을 생성합니다
