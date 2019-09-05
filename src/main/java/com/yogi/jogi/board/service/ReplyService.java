@@ -10,7 +10,7 @@ public interface ReplyService {
     public int replyCount() throws Exception;
  
     // 댓글 목록
-    public List<ReplyModel> replyList() throws Exception;
+    public List<ReplyModel> replyList(int boardNum) throws Exception;
  
     // 댓글 작성
     public int replyInsert(ReplyModel replyModel) throws Exception;

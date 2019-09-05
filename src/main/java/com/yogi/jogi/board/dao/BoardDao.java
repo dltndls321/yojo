@@ -75,18 +75,13 @@ public class BoardDao {
 		return sqlSession.selectList(Namespace + ".selectBoardListWidhBoardid", boardid);
 	}
 
-	public List<BoardModel> selectSearchBoardList(String searchOption, String keyword) throws Exception {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		System.out.println(map);
+	public List<BoardModel> selectSearchBoardList(Map map) throws Exception {
+		
 		return sqlSession.selectList(Namespace + ".selectSearchBoardList", map);
 	}
 
-	public int selectListGetCount(String searchOption, String keyword) throws Exception {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
+	public int selectListGetCount(Map map) throws Exception {
+		
 		return sqlSession.selectOne(Namespace + ".selectListGetCount", map);
 	}
 	

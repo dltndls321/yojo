@@ -37,8 +37,7 @@
 			</div>
 			
 				<form name="form2" method="post" action="${path }/board/boardlist">
-					<select name="searchOption" style="width: 80px; height: 30px;">
-					<option value="all"<c:out value="${searchOption == 'all'?'selected':''}"/>>제목,이름,내용</option>			
+					<select name="searchOption" style="width: 150px; height: 30px;">
 					<option value="subject"<c:out value="${searchOption == 'subject'?'selected':''}"/>>제목</option>			
 					<option value="writer"<c:out value="${searchOption == 'writer'?'selected':''}"/>>이름</option>			
 					<option value="content"<c:out value="${searchOption == 'content'?'selected':''}"/>>내용</option>			
@@ -46,10 +45,12 @@
 					<input name="keyword" style="width: 150px; height: 30px;" value="${keyword }">	
 					<input type="submit" value="조회">
 					
-						
+							<!-- 게시물 수 -->
+					
+					${scount}개의 게시물이 있습니다.
+					
 					</form>
-					<!-- 게시물 수 -->
-					${count}개의 게시물이 있습니다.
+				
 					
 			<div class="row">
 
@@ -60,12 +61,13 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<c:if test="${sessionscope.memNum == list.memNum }">
+									
 										<th><a class="fa fa-edit fa-fw"
 											href="<%=request.getContextPath()%>/board/writeUploadForm?">Write</a></th>
-									</c:if>
+									
 									<th></th>
 									<th></th>
+
 									<th>No.</th>
 									<th>제목</th>
 									<th>작성자</th>
@@ -83,7 +85,7 @@
 									<a
 										href="<%=request.getContextPath()%>/board/content?boardNum=${list.boardNum}">
 										
-										<img src='<c:out value="${list.fname}"/>'>
+										<img  src='<c:out value="${list.fname}" /> ' ">
 									</a>
 								</div>
 								<div class="list-box-listing-content">

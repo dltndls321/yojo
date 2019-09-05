@@ -71,15 +71,26 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardModel> selectSearchBoardList(String searchOption, String keyword) throws Exception {
+	public List<BoardModel> selectSearchBoardList(int start,int end,String boardid,String searchOption, String keyword) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectSearchBoardList(searchOption, keyword);
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("boardid", boardid);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		System.out.println(map);
+		return dao.selectSearchBoardList(map);
 	}
 
 	@Override
-	public int selectListGetCount(String searchOption, String keyword) throws Exception {
+	public int selectListGetCount(String searchOption, String keyword,String boardid) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectListGetCount(searchOption, keyword);
+		Map map = new HashMap();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("boardid", boardid);
+		return dao.selectListGetCount(map);
 	}
 
 	@Override

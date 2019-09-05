@@ -97,14 +97,13 @@
 /* ---------------------------------- */
 /* Forms Reset & Styles
 ------------------------------------- */
-input,
+
 input[type="reset"],
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-textarea,
-select {
+textarea{
 	height: 51px;
 	line-height: 51px;
 	padding: 0 20px;
@@ -131,7 +130,7 @@ input:-webkit-autofill {
 }
 
 select {
-	padding: 15px 18px;
+	/* padding: 15px 18px; */
 	cursor: pointer;
 }
 

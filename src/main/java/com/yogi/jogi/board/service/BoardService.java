@@ -20,7 +20,12 @@ public interface BoardService {
 	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception;
 	
 	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception;
-	public List<BoardModel> selectSearchBoardList(String searchOption,String keyword) throws Exception;
-	public int selectListGetCount(String searchOption,String keyword) throws Exception; 
+
+	/*
+	 * public List<BoardModel> selectSearchBoardList(String searchOption,String
+	 * keyword) throws Exception;
+	 */	
+	public List<BoardModel> selectSearchBoardList(int start,int end,String boardid,String searchOption,String keyword) throws Exception;
+	public int selectListGetCount(String searchOption,String keyword,String boardid) throws Exception; 
 	
 }

@@ -133,20 +133,35 @@
 		where
 		boardNum = #{boardNum}
 	</select>
-	<select id="selectSearchBoardList" resultType="boardModel">
+	<select id="selectSearchBoardList" parameterType="hashmap"
+		resultType="boardModel"> <!-- parameter 추가  -->
 
-		select
+		<!-- select
 		boardNum,memNum,boardid,subject,writer,passwd,content,fname,fsize,readcount
-		,regdate,ref,reStep,reLevel from board
-		<include refid="search"></include>
-		order by boardNum, regdate desc
+		,regdate,ref,reStep,reLevel from board -->
+		select * from
+		(select rownum rnum,a.* from
+		(select
+		*
+		from
+		board
+        <include refid="search"></include>
+		and  boardid = #{boardid}
+		order by boardnum desc) a
+		)
+		where rnum between		
+		#{start} and #{end}
+		
+		<!-- order by boardNum, regdate desc -->
 	</select>
-	<select id="selectListGetCount" resultType="int">
+	<select id="selectListGetCount" parameterType="hashmap"
+		resultType="int">
 		select
 		count(*)
 		from
-		board
+		board 
 		<include refid="search"></include>
+		and boardid = #{boardid}
 
 	</select>
 	<sql id="search">

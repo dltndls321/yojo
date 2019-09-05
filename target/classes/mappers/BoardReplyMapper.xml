@@ -10,10 +10,11 @@
         from reply
     </select>
     
-    <select id="replyList" resultType="replyModel">
+    <select id="replyList" resultType="replyModel"  parameterType="int">
         select
             *
         from reply
+        where boardNum =#{boardNum}
         order by replyNum 
     </select>
     

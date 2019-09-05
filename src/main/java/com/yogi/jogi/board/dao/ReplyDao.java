@@ -20,10 +20,11 @@ public class ReplyDao {
 
 	private static final String Namespace = "boardReplyMapperNS";
 
-	public List<ReplyModel> replyList() throws Exception {
-		return sqlSession.selectList(Namespace + ".replyList");
+	public List<ReplyModel> replyList(int boardNum) throws Exception {
+		return sqlSession.selectList(Namespace + ".replyList", boardNum);
 	}
 	public int replyInsert(ReplyModel replyModel) throws Exception {
+		System.out.println(replyModel);
 		return sqlSession.insert(Namespace + ".replyInsert",replyModel);
 	}
 	public int replyUpdate(ReplyModel replyModel) throws Exception {
