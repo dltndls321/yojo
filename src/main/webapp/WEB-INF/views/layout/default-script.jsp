@@ -61,10 +61,6 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('42580803bc68d1e639dd665f90bfadc4');
-    Kakao.PlusFriend.createChatButton({
-        container: '#plusfriend-chat-button',
-        plusFriendId: '_xaxbIxiT' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
-      });
     // 카카오 로그인 버튼을 생성합니다.
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',

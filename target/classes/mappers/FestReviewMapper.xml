@@ -21,6 +21,8 @@
     		*
     	from
     		festReview
+    	order by
+    		frNum desc
     </select>
     
     <select id="selectFestReviewListWithFestNum"  parameterType="festReviewModel" resultType="festReviewModel">

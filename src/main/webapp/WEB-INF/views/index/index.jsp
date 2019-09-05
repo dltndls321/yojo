@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Banner
 ================================================== -->
 <!-- Revolution Slider -->
@@ -267,6 +268,8 @@
 <!-- Revolution Slider / End -->
 
 
+
+
 <!-- Content
 ================================================== -->
 <div class="container">
@@ -274,8 +277,7 @@
 
 		<div class="col-md-12">
 			<h3 class="headline centered margin-top-75">
-				Popular Categories
-				<span>Browse <i>the most desirable</i> categories</span>
+				카테고리
 			</h3>
 		</div>
 
@@ -283,359 +285,125 @@
 </div>
 
 
-<!-- Categories Carousel -->
-<div class="fullwidth-carousel-container margin-top-25">
-	<div class="fullwidth-slick-carousel category-carousel">
-
-		<!-- Item -->
-		<div class="fw-carousel-item">
-			<div class="category-box-container">
-				<a href="listings-half-screen-map-grid-1.do" class="category-box" data-background-image="/resources/images/category-box-01.jpg">
-					<div class="category-box-content">
-						<h3>Hotels</h3>
-						<span>64 listings</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Item -->
-		<div class="fw-carousel-item">
-			<div class="category-box-container">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="/resources/images/category-box-03.jpg">
-					<div class="category-box-content">
-						<h3>Events</h3>
-						<span>67 listings</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Item -->
-		<div class="fw-carousel-item">
-			<div class="category-box-container">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="/resources/images/category-box-04.jpg">
-					<div class="category-box-content">
-						<h3>Fitness</h3>
-						<span>27 listings</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Item -->
-		<div class="fw-carousel-item">
-			<div class="category-box-container">
-				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="/resources/images/category-box-05.jpg">
-					<div class="category-box-content">
-						<h3>Nightlife</h3>
-						<span>22 listings</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Item -->
-		<div class="fw-carousel-item">
-			<div class="category-box-container">
-				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="/resources/images/category-box-06.jpg">
-					<div class="category-box-content">
-						<h3>Eat & Drink</h3>
-						<span>130 listings</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-	</div>
-</div>
-<!-- Categories Carousel / End -->
-
-
-
-<!-- Fullwidth Section -->
-<section class="fullwidth margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f8f8f8">
-
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12">
-				<h3 class="headline centered margin-bottom-45">
-					Most Visited Places
-					<span>Discover top-rated local businesses</span>
-				</h3>
-			</div>
-
-			<div class="col-md-12">
-				<div class="simple-slick-carousel dots-nav">
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-01.jpg" alt="">
-
-							<div class="listing-badge now-open">Now Open</div>
-							
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Tom's Restaurant <i class="verified-icon"></i></h3>
-								<span>964 School Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="3.5">
-							<div class="rating-counter">(12 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-02.jpg" alt="">
-							<div class="listing-item-details">
-								<ul>
-									<li>Friday, August 10</li>
-								</ul>
-							</div>
-							<div class="listing-item-content">
-								<span class="tag">Events</span>
-								<h3>Sticky Band</h3>
-								<span>Bishop Avenue, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="5.0">
-							<div class="rating-counter">(23 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->		
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-03.jpg" alt="">
-							<div class="listing-item-details">
-								<ul>
-									<li>Starting from $59 per night</li>
-								</ul>
-							</div>
-							<div class="listing-item-content">
-								<span class="tag">Hotels</span>
-								<h3>Hotel Govendor</h3>
-								<span>778 Country Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="2.0">
-							<div class="rating-counter">(17 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-04.jpg" alt="">
-
-							<div class="listing-badge now-open">Now Open</div>
-
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Burger House <i class="verified-icon"></i></h3>
-								<span>2726 Shinn Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="5.0">
-							<div class="rating-counter">(31 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-05.jpg" alt="">
-							<div class="listing-item-content">
-								<span class="tag">Other</span>
-								<h3>Airport</h3>
-								<span>1512 Duncan Avenue, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="3.5">
-							<div class="rating-counter">(46 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="carousel-item">
-					<a href="listings-single-page.html" class="listing-item-container">
-						<div class="listing-item">
-							<img src="/resources/images/listing-item-06.jpg" alt="">
-
-							<div class="listing-badge now-closed">Now Closed</div>
-
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Think Coffee</h3>
-								<span>215 Terry Lane, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="4.5">
-							<div class="rating-counter">(15 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-				</div>
-				
-			</div>
-
-		</div>
-	</div>
-
-</section>
-<!-- Fullwidth Section / End -->
-
-
-<!-- Info Section -->
+<!-- Category Boxes -->
 <div class="container">
-
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<h2 class="headline centered margin-top-80">
-				Plan The Vacation of Your Dreams 
-				<span class="margin-top-25">Explore some of the best tips from around the world from our partners and friends.  Discover some of the most popular listings in Sydney.</span>
-			</h2>
+		<div class="col-md-12">
+			<div class="categories-boxes-container margin-top-5 margin-bottom-30">
+				
+				<!-- Box -->
+				<a href="/food/list" class="category-small-box">
+					<i class="im im-icon-Hamburger"></i>
+					<h4>Eat</h4>
+					<span class="category-box-counter">${foodCount }</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/festival/list" class="category-small-box">
+					<i class="im im-icon-Electric-Guitar"></i>
+					<h4>Festival</h4>
+					<span class="category-box-counter">${festCount }</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/spot/list" class="category-small-box">
+					<i class="im im-icon-Bridge"></i>
+					<h4>Tourist Spot</h4>
+					<span class="category-box-counter">${spotCount }</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/map/search" class="category-small-box">
+					<i class="im im-icon-Arrow-TurnRight"></i>
+					<h4>Route</h4>
+					<span>직접 값을 설정하세요!</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/course/recommend" class="category-small-box">
+					<i class="im im-icon-Business-Mens"></i>
+					<h4>Recommand</h4>
+					<span>관리자가 추천하는 코스!</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/board/list" class="category-small-box">
+					<i class="im im-icon-Blackboard"></i>
+					<h4>Notice</h4>
+					<span>다양한 소식을 접하세요!</span>
+				</a>
+
+			</div>
 		</div>
 	</div>
-
-	<div class="row icons-container">
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2 with-line">
-				<i class="im im-icon-Map2"></i>
-				<h3>Find Interesting Place</h3>
-				<p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
-			</div>
-		</div>
-
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2 with-line">
-				<i class="im im-icon-Mail-withAtSign"></i>
-				<h3>Contact a Few Owners</h3>
-				<p>Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum metus nullam viverra porta purus.</p>
-			</div>
-		</div>
-
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2">
-				<i class="im im-icon-Checked-User"></i>
-				<h3>Make a Reservation</h3>
-				<p>Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin feugiat pharetra consectetur.</p>
-			</div>
-		</div>
-	</div>
-
 </div>
-<!-- Info Section / End -->
+<!-- Category Boxes / End -->
 
 
-<!-- Recent Blog Posts -->
-<section class="fullwidth border-top margin-top-70 padding-top-75 padding-bottom-75" data-background-color="#fff">
+
+<section class="fullwidth margin-top-70 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
+	<!-- Info Section -->
 	<div class="container">
 
 		<div class="row">
-			<div class="col-md-12">
-				<h3 class="headline centered margin-bottom-45">
-					From The Blog
+			<div class="col-md-8 col-md-offset-2">
+				<h3 class="headline centered">
+					최근에 달린 리뷰
+					<span class="margin-top-25">가장 최근에 달린 댓글들을 확인해 보세요!</span>
 				</h3>
 			</div>
 		</div>
 
-		<div class="row">
-			<!-- Blog Post Item -->
-			<div class="col-md-4">
-				<a href="pages-blog-post.html" class="blog-compact-item-container">
-					<div class="blog-compact-item">
-						<img src="/resources/images/blog-compact-post-01.jpg" alt="">
-						<span class="blog-item-tag">Tips</span>
-						<div class="blog-compact-item-content">
-							<ul class="blog-post-tags">
-								<li>22 August 2019</li>
-							</ul>
-							<h3>Hotels for All Budgets</h3>
-							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<!-- Blog post Item / End -->
+	</div>
+	<!-- Info Section / End -->
 
-			<!-- Blog Post Item -->
-			<div class="col-md-4">
-				<a href="pages-blog-post.html" class="blog-compact-item-container">
-					<div class="blog-compact-item">
-						<img src="/resources/images/blog-compact-post-02.jpg" alt="">
-						<span class="blog-item-tag">Tips</span>
-						<div class="blog-compact-item-content">
-							<ul class="blog-post-tags">
-								<li>18 August 2019</li>
-							</ul>
-							<h3>The 50 Greatest Street Arts In London</h3>
-							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
-						</div>
-					</div>
-				</a>
+	<!-- Categories Carousel -->
+	<div class="fullwidth-carousel-container margin-top-20">
+		<div class="testimonial-carousel testimonials">
+			<c:if test="${!empty festreviewinfo }">
+			<!-- Item -->
+			<div class="fw-carousel-review">
+				<div class="testimonial-box">
+					<div class="testimonial">${festreviewinfo.fReview }</div>
+				</div>
+				<div class="testimonial-author">
+					<img src="images/happy-client-01.jpg" alt="">
+					<h4>${festmember.name } <span>Festival</span></h4>
+				</div>
 			</div>
-			<!-- Blog post Item / End -->
-
-			<!-- Blog Post Item -->
-			<div class="col-md-4">
-				<a href="pages-blog-post.html" class="blog-compact-item-container">
-					<div class="blog-compact-item">
-						<img src="/resources/images/blog-compact-post-03.jpg" alt="">
-						<span class="blog-item-tag">Tips</span>
-						<div class="blog-compact-item-content">
-							<ul class="blog-post-tags">
-								<li>10 August 2019</li>
-							</ul>
-							<h3>The Best Cofee Shops In Sydney Neighborhoods</h3>
-							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
-						</div>
-					</div>
-				</a>
+			
+			<!-- Item -->
+			</c:if>
+			<c:if test="${!empty foodreviewinfo }">
+			<div class="fw-carousel-review">
+				<div class="testimonial-box">
+					<div class="testimonial">${foodreviewinfo.fdReview }</div>
+				</div>
+				<div class="testimonial-author">
+					<img src="images/happy-client-02.jpg" alt="">
+					<h4>${foodmember.name } <span>Eat</span></h4>
+				</div>
 			</div>
-			<!-- Blog post Item / End -->
-
-			<div class="col-md-12 centered-content">
-				<a href="pages-blog.html" class="button border margin-top-10">View Blog</a>
+			</c:if>
+			
+			<c:if test="${!empty spotreviewinfo }">
+			<!-- Item -->
+			<div class="fw-carousel-review">
+				<div class="testimonial-box">
+					<div class="testimonial">${spotreviewinfo.sReview }</div>
+				</div>
+				<div class="testimonial-author">
+					<img src="images/happy-client-03.jpg" alt="">
+					<h4>${spotmember.name } <span>Tourist Spot</span></h4>
+				</div>
 			</div>
+			</c:if>
+			
 
 		</div>
-
 	</div>
+	<!-- Categories Carousel / End -->
+
 </section>
 <!-- Recent Blog Posts / End -->
 <!-- REVOLUTION SLIDER SCRIPT -->
