@@ -21,6 +21,8 @@
     		*
     	from
     		foodReview
+    	order by
+    		fdrNum desc
     </select>
     
     <select id="selectFoodReviewListWithFoodNum"  parameterType="foodReviewModel" resultType="foodReviewModel">

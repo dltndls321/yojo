@@ -21,6 +21,8 @@
     		*
     	from
     		spotReview
+    	order by
+    		srNum desc
     </select>
     
     <select id="selectSpotReviewListWithSpotNum"  parameterType="spotReviewModel" resultType="spotReviewModel">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Banner
 ================================================== -->
 <div class="main-search-container" data-background-image="/resources/images/main-search-background-01.jpg">
@@ -46,20 +47,6 @@
 </div>
 
 
-<!-- Content
-================================================== -->
-<div class="container">
-	<div class="row">
-
-		<div class="col-md-12">
-			<h3 class="headline centered margin-top-75">
-				Popular Categories
-				<span>Browse <i>the most desirable</i> categories</span>
-			</h3>
-		</div>
-
-	</div>
-</div>
 
 
 <!-- Content
@@ -69,7 +56,7 @@
 
 		<div class="col-md-12">
 			<h3 class="headline centered margin-top-75">
-				Browse Categories
+				카테고리
 			</h3>
 		</div>
 
@@ -84,45 +71,45 @@
 			<div class="categories-boxes-container margin-top-5 margin-bottom-30">
 				
 				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
+				<a href="/food/list" class="category-small-box">
 					<i class="im im-icon-Hamburger"></i>
-					<h4>Eat & Drink</h4>
-					<span class="category-box-counter">12</span>
+					<h4>Eat</h4>
+					<span class="category-box-counter">${foodCount }</span>
 				</a>
 
 				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
-					<i class="im  im-icon-Sleeping"></i>
-					<h4>Hotels</h4>
-					<span class="category-box-counter">32</span>
-				</a>
-
-				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
-					<i class="im im-icon-Shopping-Bag"></i>
-					<h4>Shops</h4>
-					<span class="category-box-counter">11</span>
-				</a>
-
-				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
-					<i class="im im-icon-Cocktail"></i>
-					<h4>Nightlife</h4>
-					<span class="category-box-counter">15</span>
-				</a>
-
-				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
+				<a href="/festival/list" class="category-small-box">
 					<i class="im im-icon-Electric-Guitar"></i>
-					<h4>Events</h4>
-					<span class="category-box-counter">21</span>
+					<h4>Festival</h4>
+					<span class="category-box-counter">${festCount }</span>
 				</a>
 
 				<!-- Box -->
-				<a href="listings-list-with-sidebar.html" class="category-small-box">
-					<i class="im im-icon-Dumbbell"></i>
-					<h4>Fitness</h4>
-					<span class="category-box-counter">28</span>
+				<a href="/spot/list" class="category-small-box">
+					<i class="im im-icon-Bridge"></i>
+					<h4>Tourist Spot</h4>
+					<span class="category-box-counter">${spotCount }</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/map/search" class="category-small-box">
+					<i class="im im-icon-Arrow-TurnRight"></i>
+					<h4>Route</h4>
+					<span>직접 값을 설정하세요!</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/course/recommend" class="category-small-box">
+					<i class="im im-icon-Business-Mens"></i>
+					<h4>Recommand</h4>
+					<span>관리자가 추천하는 코스!</span>
+				</a>
+
+				<!-- Box -->
+				<a href="/board/list" class="category-small-box">
+					<i class="im im-icon-Blackboard"></i>
+					<h4>Notice</h4>
+					<span>다양한 소식을 접하세요!</span>
 				</a>
 
 			</div>
@@ -152,39 +139,45 @@
 	<!-- Categories Carousel -->
 	<div class="fullwidth-carousel-container margin-top-20">
 		<div class="testimonial-carousel testimonials">
-
+			<c:if test="${!empty festreviewinfo }">
 			<!-- Item -->
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
-					<div class="testimonial">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation is on the runway heading towards a streamlined cloud solution user generated content.</div>
+					<div class="testimonial">${festreviewinfo.fReview }</div>
 				</div>
 				<div class="testimonial-author">
 					<img src="images/happy-client-01.jpg" alt="">
-					<h4>Jennie Smith <span>Eat</span></h4>
+					<h4>${festmember.name } <span>Festival</span></h4>
 				</div>
 			</div>
 			
 			<!-- Item -->
+			</c:if>
+			<c:if test="${!empty foodreviewinfo }">
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
-					<div class="testimonial">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop.</div>
+					<div class="testimonial">${foodreviewinfo.fdReview }</div>
 				</div>
 				<div class="testimonial-author">
 					<img src="images/happy-client-02.jpg" alt="">
-					<h4>Tom Baker <span>Clothing Store Owner</span></h4>
+					<h4>${foodmember.name } <span>Eat</span></h4>
 				</div>
 			</div>
-
+			</c:if>
+			
+			<c:if test="${!empty spotreviewinfo }">
 			<!-- Item -->
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
-					<div class="testimonial">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view.</div>
+					<div class="testimonial">${spotreviewinfo.sReview }</div>
 				</div>
 				<div class="testimonial-author">
 					<img src="images/happy-client-03.jpg" alt="">
-					<h4>Jack Paden <span>Restaurant Owner</span></h4>
+					<h4>${spotmember.name } <span>Tourist Spot</span></h4>
 				</div>
 			</div>
+			</c:if>
+			
 
 		</div>
 	</div>
