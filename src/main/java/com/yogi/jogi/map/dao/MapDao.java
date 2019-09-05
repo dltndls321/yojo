@@ -44,4 +44,14 @@ public class MapDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace + ".getFoodArea", name);
 	}
+	
+	public List<CourseModel> getCourseListPaging(Map map) throws Exception {
+		
+		return sqlSession.selectList(Namespace + ".getCourseListPaging", map);
+	}
+
+	public CourseModel getCourseListNumOne(int coursenum) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(Namespace + ".getCourseListNumOne",coursenum) ;
+	}
 }

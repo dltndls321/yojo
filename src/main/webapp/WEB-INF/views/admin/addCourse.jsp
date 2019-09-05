@@ -30,7 +30,7 @@ $(document).ready(function(){
                   }else {
                      $('#foodlist').append("<h5>"+foodCate+"</h5>");
                     $.each(data, function(i){ 
-                       $("#foodlist").append("<input type ='checkbox' name = 'foodchk' id='food"+data[i].foodNum+"'value = '"+data[i].name+"'>"
+                       $("#foodlist").append("<input type ='checkbox' foodCode = '"+foodCode+"'name = 'foodchk' id='food"+data[i].foodNum+"'value = '"+data[i].name+"'>"
                              +"<label for = 'food"+data[i].foodNum+"'>"+data[i].name+"</label>");
                        }); 
                     } 
@@ -41,6 +41,7 @@ $(document).ready(function(){
            }
            });   
    });
+   
    //축제
    $('#areafest').change(function(){
       var areaCode = $("#areafest option:selected").val();
@@ -60,9 +61,9 @@ $(document).ready(function(){
                   }else {
                      $('#festlist').empty();
                     $.each(data, function(i){ 
-                       $("#festlist").append("<input type ='checkbox' name = 'festchk' id='fest"+data[i].festNum+"'value = '"+data[i].subject+"'>"
-                          +"<label for = 'fest"+data[i].festNum+"'>"+data[i].subject+
-                          "("+(data[i].fdate1.month+1)+"/"+data[i].fdate1.date+"~"+(data[i].fdate2.month+1)+"/"+data[i].fdate2.date+")</label>");
+                       $("#festlist").append("<input type ='checkbox' areaCode = '"+areaCode+"' name = 'festchk' id='fest"+data[i].festNum+"'value = '"+data[i].name+"'>"
+                          +"<label for = 'fest"+data[i].festNum+"'>"+data[i].name+
+                          "("+(data[i].fdate1.month+1)+"/"+data[i].fdate1.date+"~"+(data[i].fdate2.month+1)+"/"+data[i].fdate2.date+")</label>"); 
                        }); 
                     } 
                   
@@ -93,8 +94,8 @@ $(document).ready(function(){
                      }else {
                         $('#spotlist').append("<h5>"+spotCote+"</h5>");
                        $.each(data, function(i){    
-                          $("#spotlist").append("<input type ='checkbox' name = 'spotchk' id='spot"+data[i].spotNum+"'value = '"+data[i].name+"'>"
-                                +"<label for = 'spot"+data[i].spotNum+"'>"+data[i].name+"</label>");
+                          $("#spotlist").append("<input type ='checkbox' spotCode = '"+spotCode+"'  name = 'spotchk' id='spot"+data[i].spotNum+"'value = '"+data[i].name+"'>"
+                                +"<label for ='spot"+data[i].spotNum+"'>"+data[i].name+"</label>");
                           }); 
                        } 
                      
@@ -117,33 +118,36 @@ $(document).ready(function(){
 
    //음식점이 코스에 추가되는거
    $(document).on("change",'input:checkbox[name="foodchk"]',function(){
-   
       var id = $(this).attr('id'); 
-      
-      $('#'+id).attr("checked",true);
-      var food = $('#'+id).val();
-      var newfood = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
-         newfood += "<td>";
-         newfood += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
-         newfood += "<div class='fm-input pricing-name'><input type='text' value='음식점'/></div>";
-         newfood +=  "<div class='fm-input pricing-ingredients'><input type='text' value ='"+food+"'/></div>";
-         newfood += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
-         newfood += "</td>";
-         newfood += "</tr>";
-   
-         $("#finalcourse").append(newfood);
-         $("#finaldata").append("<input type='hidden' name='food' value='"+food+"'>");    
-       
+      var foodCode = $(this).attr("foodCode");
+      if( $(this).is(":checked")){
+    	  $('#'+id).attr("checked",true);
+          var food = $('#'+id).val();
+          var newfood = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+             newfood += "<td>";
+             newfood += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
+             newfood += "<div class='fm-input pricing-name'><input type='text' value='음식점'/></div>";
+             newfood +=  "<div class='fm-input pricing-ingredients'><input type='text' value ='"+food+"'/></div>";
+             newfood += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
+             newfood += "</td>";
+             newfood += "</tr>";      
+             $("#finalcourse").append(newfood);
+             $("#finaldata").append("<input type='hidden' name='food' value='"+food+"'>"); 
+             $('#'+foodCode).attr("checked",true);
+      } else {
+    	  $("#finalcourse").remove(newfood);
+          $('#'+id).attr("checked",false);
+          $('#'+foodCode).attr("checked",false);
+      }     
    });
    
    //축제가 코스에 추가되는거
    $(document).on("change",'input:checkbox[name="festchk"]',function(){
-   
       var id = $(this).attr('id'); 
-      $('#'+id).attr("checked",true);
-      var fest = $('#'+id).val();
-                     
-      var newfest = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+      if( $(this).is(":checked")){
+      	$('#'+id).attr("checked",true);
+      	var fest = $('#'+id).val();
+        var newfest = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
          newfest += "<td>";
          newfest += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
          newfest += "<div class='fm-input pricing-name'><input type='text' value='축제'/></div>";
@@ -151,19 +155,22 @@ $(document).ready(function(){
          newfest += "<div class='fm-close'><a class='delete' href='#'><i class='fa fa-remove'></i></a></div>";
          newfest += "</td>";
          newfest += "</tr>";
-   
          $("#finalcourse").append(newfest);
-         $("#finaldata").append("<input type='hidden' name='fest' value='"+fest+"'>");    
+         $("#finaldata").append("<input type='hidden' name='fest' value='"+fest+"'>");   
+      } else {
+    	  $("#finalcourse").remove(newfest);
+    	  $('#'+id).attr("checked",false);   	  
+      }
        
    });
    //관광지가 코스에 추가되는거
-   $(document).on("change",'input:checkbox[name="spotchk"]',function(){
-   
-      var id = $(this).attr('id'); 
-      $('#'+id).attr("checked",true);
-      var spot = $('#'+id).val();
-      
-      var newspot = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
+   $(document).on("change",'input:checkbox[name="spotchk"]',function(){  
+      var id = $(this).attr('id');
+      var spotCode = $(this).attr("spotCode");
+      if( $(this).is(":checked")){
+      	$('#'+id).attr("checked",true);
+      	var spot = $('#'+id).val();
+     	var newspot = "<tr class='pricing-list-item pattern ui-sortable-handle' >";
          newspot += "<td>";
          newspot += "<div class='fm-move'><i class='sl sl-icon-cursor-move'></i></div>";
          newspot += "<div class='fm-input pricing-name'><input type='text' value='관광지'/></div>";
@@ -173,36 +180,26 @@ $(document).ready(function(){
          newspot += "</tr>";
          $("#finalcourse").append(newspot);
          $("#finaldata").append("<input type='hidden' name='spot' value='"+spot+"'>");    
+         $('#'+spotCode).attr("checked",true);
+      } else {
+    	  $("#finalcourse").remove(newspot);
+    	  $('#'+id).attr("checked",false); 
+    	  $('#'+spotCode).attr("checked",false);	
+      }
        
-   });
-   //마지막 체크부분
-   var arrayfood = new Array();
-   var arrayspot = new Array();
-   $(document).on("change",'input:checkbox[name="finalfood"]',function(){
-      
-      var id = $(this).attr('id'); 
-      $('#'+id).attr("checked",true);
-      var chk = $('#'+id).val();
-      
-      arrayfood.push($(this).val());
-      
-      
-   });
-   $(document).on("change",'input:checkbox[name="finalspot"]',function(){
-      
-      var id = $(this).attr('id'); 
-      $('#'+id).attr("checked",true);
-      var chk = $('#'+id).val();
-      
-      arrayspot.push($(this).val());
-      
-      
-      
-   
    });
 
    $(function(){
       $("#preview").click(function() {
+    	 var arrayfood = new Array();
+    	 var arrayspot = new Array();
+    	 $('input:checkbox[name="finalfood"]:checked').each(function (){
+    		 arrayfood.push($(this).val());
+    	 })
+    	 $('input:checkbox[name="finalspot"]:checked').each(function (){
+    		 arrayspot.push($(this).val());
+    	 })
+    	 
          $("#finaldata").append("<input type='hidden' name='arrayspot' id='arrayspot' value='"+arrayspot+"'>");
          $("#finaldata").append("<input type='hidden' name='arrayfood' id='arrayfood' value='"+arrayfood+"'>"); 
          //날짜넣기
@@ -210,11 +207,36 @@ $(document).ready(function(){
          var enddate = $("#enddate").val();
 
          $("#finaldata").append("<input type='hidden' name='startdate' id='startdate' value='"+startdate+"'>");
-         $("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");
-          
-      })
-         
-   })
+         $("#finaldata").append("<input type='hidden' name='enddate' id='enddate' value='"+enddate+"'>");    
+      });  
+   });
+   
+   //모든 체크박스에 해당
+   $(document).on("click",'input:checkbox',function(){   
+	var food = $('input:checkbox[name="foodchk"]:checked');
+	var spot = $('input:checkbox[name="spotchk"]:checked');
+	var fest = $('input:checkbox[name="festchk"]:checked');
+	   
+	//체크박스갯수 제한
+  	var foodCNT = $(food).length;   //체크갯수 확인
+  	var spotCNT = $(spot).length;   //체크갯수 확인
+  	var festCNT = $(fest).length;   //체크갯수 확인
+ 
+  	if(foodCNT>3){
+   		alert('음식점 갯수는 최대 3개까지 선택가능합니다.')
+   		$(this).prop('checked', false);
+  }
+  	if(spotCNT>2){
+   		alert('관광지 갯수는 최대 2개까지 선택가능합니다.')
+   		$(this).prop('checked', false);
+  }
+  	if(festCNT>1){
+   		alert('축제 갯수는 최대 1개까지 선택가능합니다.')
+   		$(this).prop('checked', false);
+  }
+ });
+ 
+
 
 </script>
 <div class="dashboard-content">
@@ -238,19 +260,19 @@ $(document).ready(function(){
 
                   <!-- Headline -->
                   <div class="add-listing-headline">
-                     <h3><i class="sl sl-icon-doc"></i>Trip Info</h3>
+                     <h3><i class="sl sl-icon-doc"></i>Course Info</h3>
                   </div>
 
                   <!-- Title -->
                   <div class="row with-forms">
                      <div class="col-md-6">
-                        <h5>Course Title <i class="tip" data-tip-content="추천코스의 이름으로 등록됩니다"></i></h5>
+                        <h5>제목 <i class="tip" data-tip-content="추천코스의 이름으로 등록됩니다"></i></h5>
                         <input class="search-field" id = "title" type="text" value=""/>
                      </div>
                      
                      <!-- Status -->
                      <div class="col-md-6">
-                        <h5>Category</h5>
+                        <h5>테마</h5>
                         <select class="chosen-select-no-single" id ="theme" >
                            <option label="blank">--선택--</option>   
                            <option value ="child">아이와 함께</option>
@@ -268,13 +290,17 @@ $(document).ready(function(){
                <!-- Section / End -->
                
                <!-- Section -->
-               <div class="add-listing-section margin-top-45">
+        <div class="add-listing-section margin-top-45">
 
                   <!-- Headline -->
                   <div class="add-listing-headline">
-                     <h3><i class="sl sl-icon-cup"></i>Eat<a href="#" class="button" style="float:right; margin-top:100" id="foodclear">clear</a></h3>
+                     <h3><i class="sl sl-icon-cup"></i>Eat</h3>
+                     <!-- Switcher -->
+                     <label class="switch"><input name="plusCourse" type="checkbox" checked ><span class="slider round"></span></label>
                      
                   </div>
+            <!-- Switcher ON-OFF Content -->
+            <div class="switcher-content">
                <div class="row with-forms">
                   <div class="col-md-6">
                            <h5>여행 지역</h5>
@@ -298,9 +324,9 @@ $(document).ready(function(){
                                  <option value ="38">전라남도</option>
                                  <option value ="39">제주도</option>
                            </select>
-                        </div>
+                     </div>
                         
-                        <div class="col-md-6">
+                     <div class="col-md-6">
                            <h5>음식 분류</h5>
                            <select class="chosen-select" id="foodcode">
                               <option value = "">--선택--</option>   
@@ -314,18 +340,23 @@ $(document).ready(function(){
                               <option value ="A05020800">채식음식점</option>
                               <option value ="A05020900">바 / 카페</option>
                            </select>
-                        </div>
+                      </div>
                   
-         
-                  <div class="col-md-12">
+         <div class="row">
+               <div class="col-md-8">
                         <!-- Checkboxes -->
                   <h5 class="margin-top-30 margin-bottom-10"><br/>음식점 선택</h5>
                   <div class="checkboxes in-row margin-bottom-20" id = "foodlist">
-                        </div>
-                        </div>
-                        </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+               		<a href="#" class="button" style="float:right; margin-top:100" id="festclear">clear</a>
+               </div>
+          </div>
 
                </div>
+           </div>
+        </div>
                <!-- Section / End -->
                
                <!-- Section -->

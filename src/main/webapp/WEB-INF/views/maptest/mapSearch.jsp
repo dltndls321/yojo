@@ -91,7 +91,7 @@
 				<input type="hidden" id="endX" name="endX" value=""/>
 				<input type="hidden" id="endY" name="endY" value=""/>
 <p>출발지 <input id ="startPoint" name="startPoint" type="text" value="마커를 클릭해 설정하세요"> 도착지 <input id ="endPoint" name="endPoint" type="text" value="마커를 클릭해 설정하세요"></p>
-<button type ="submit">검색하기</button>
+<button type ="submit">검색하기</button> <button type ="button" onclick="location.href='/map/Log'">내검색기록보기</button>
 </form>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13cd4e6df49574ac7ccc468bb2a978a2&libraries=services"></script>
 <script>

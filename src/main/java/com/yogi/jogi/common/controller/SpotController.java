@@ -60,7 +60,7 @@ public class SpotController {
 	}
 	//관광지리스트뽑기
 	@RequestMapping(value = "spot.do")	
-	public void test(SpotModel spotModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String spotCode) throws Exception {
+	public void test(SpotModel spotModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String spotCode, @RequestParam int pageNum) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
@@ -77,6 +77,7 @@ public class SpotController {
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&cat1=A01&cat2=A0101&cat3=" + spotCode;
         parameter = parameter + "&" + "numOfRows=9";
+        parameter = parameter + "&" + "pageNo=" + pageNum;
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -105,15 +106,33 @@ public class SpotController {
         JSONObject parse_body = (JSONObject) parse_response.get("body");
         JSONObject parse_items = (JSONObject) parse_body.get("items"); 
         JSONArray parse_item = (JSONArray) parse_items.get("item");
-       
-		/*
-		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
-		 * System.out.println(totalCount.toString());
-		 */
-		 
+        
+        //페이징
+        JSONArray spotjson = new JSONArray();
+        JSONObject spotdata = new JSONObject();
+        JSONObject pagedata = new JSONObject();
+        JSONObject pagingdata = new JSONObject();
+        
+        int pageSize = 9;
+        int bottomLine = 3;
+        int currentPage = pageNum;
+        Object total = parse_body.get("totalCount");
+        int count = Integer.parseInt(total.toString());
+        
+        int pageCount = count / pageSize + (count % pageSize ==0? 0 :1);
+        int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+        int endPage = startPage + bottomLine -1;//
+        if (endPage > pageCount)
+        	endPage = pageCount;
+    	JSONObject pdata = new JSONObject();
+    	pdata.put("count", total);
+		 System.out.println("여기"+pdata.toString());
         String finaldata="";
+        System.out.println("갯수"+total);
         for (int i = 0; i < parse_item.size(); i++) { 
         	JSONObject imsi = (JSONObject) parse_item.get(i);
+        	pagedata.put("pagedata", pdata);
+        	System.out.println("여기2"+pagedata.toString());
         	String addr1 = (String) imsi.get("addr1"); 
         	String firstimage = (String) imsi.get("firstimage"); 
         	String title = (String) imsi.get("title"); 
@@ -133,7 +152,7 @@ public class SpotController {
         			"<h3>"+title+"</h3>"+
         			"<span>"+addr1+"</span>"+
         			"</div>"+
-        			"<span class=\"like-icon\"></span>"+
+        			
         			"</div>"+
         			"</a>"+
         			"</div>";
@@ -172,7 +191,38 @@ public class SpotController {
          	Thread.sleep(100);
          	*/
         	}	
-        out.append(finaldata);
+       
+    	
+    	  
+        String paging = "";
+        if(startPage>bottomLine) {
+        	int prev = startPage - bottomLine;
+        	paging += "<li><a onclick =\"goChange("+prev+")\"}\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-left\"></i></a></li>" ;
+        }
+        
+        for (int j = startPage; j < endPage+1; j++) {
+        	if(j==pageNum) {
+        		paging += "<li><a class=\"current-page\" onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}else if(j!=pageNum) {
+        		paging += "<li><a  onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}
+		}
+        if(endPage<pageCount) {
+        	int next = startPage + bottomLine;
+        	paging += "<li><a onclick =\"goChange("+next+")\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-right\"></i></a></li>";
+        }
+        
+        Object spotCont = finaldata;
+        Object pagingdatas = paging;
+        spotdata.put("spotCont", spotCont);
+        pagingdata.put("pagingdata",pagingdatas);
+        spotjson.add(spotdata); 	//0
+        spotjson.add(pagingdata); 	//1
+        spotjson.add(pagedata);		//2
+        
+        
+        System.out.println(spotjson.toString());
+        out.print(spotjson.toString());
         out.flush();
         out.close();
 
