@@ -27,9 +27,8 @@
 					},
 					success : function(data) {
 						var a = '';
-						$
-								.each(
-										data,
+						$.each(
+								data,
 										function(key, value) {
 											a += '<div class="replyArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 											a += '<div class="replyInfo'+ value.replyNum +'">'
@@ -37,7 +36,8 @@
 													+ value.replyNum
 													+ ' / 작성자 : '
 													+ value.memNum;
-											if (value.memNum=='memNum') {
+											
+										
 											 a += '<a onclick="replyUpdate('
 													+ value.replyNum + ',\''
 													+ value.content
@@ -45,7 +45,7 @@
 											a += '<a onclick="replyDelete('
 													+ value.replyNum
 													+ ');"> 삭제 </a> </div>';
-											}
+											
 											a += '<div class="replyContent'+ value.replyNum +'"> <p> 내용 : '
 													+ value.content + '</p>';
 											a += '</div></div>';

@@ -140,8 +140,8 @@
 			
 									<li><a href="#">Community</a>
 										<ul>
-											<li><a href="/board/list?boarid=2">공지사항</a></li>
-											<li><a href="/board/boardlist?boarid=1">자유게시판</a></li>
+											<li><a href="/board/list">공지사항</a></li>
+											<li><a href="/board/boardlist">자유게시판</a></li>
 										</ul>
 									</li>
 									

@@ -19,6 +19,7 @@
 			alert("제목을 입력해주세요")
 			document.form.subject.focus();
 			return;
+		 board/boardlist
 		}
 		if (content == " ") {
 			alert("제목을 입력해주세요")
