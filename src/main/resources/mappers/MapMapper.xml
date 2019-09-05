@@ -42,7 +42,19 @@
     	where
     		subject = #{subject} 
     </select>
-
+	 <select id="getCourseListPaging" parameterType="hashmap" resultType="CourseModel">
+    	select *  from
+    		(select rownum rnum,a.* from
+    			(select 
+    				* 
+    			from 
+    				course
+    			where
+    				subject = #{subject} 
+    			order by coursenum desc) a
+    		)
+    		where rnum between #{start} and #{end}
+    </select>
 	<select id="getCourseListOne" parameterType="String" resultType="CourseModel">
     	select
     		*
@@ -52,6 +64,16 @@
     		subject = #{subject} and rownum = 1
     	order by coursenum desc
     </select>
+   <select id="getCourseListNumOne" parameterType="int" resultType="CourseModel">
+    	select
+    		*
+    	from
+    		course
+    	where
+    		coursenum = #{coursenum} 
+    </select>
+   
+   
    
    <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
     	select
