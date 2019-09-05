@@ -4,16 +4,22 @@
 <script>
 
 $(document).ready(function(){
+	$("#total").empty();
 	$('#search').click( function(){
+		$("#spot").empty();
+		var pageNum = 1;
 		var areaCode = $("#areacode option:selected").val();
 		var spotCode = $("#spotcode option:selected").val();
 		
 		$.ajax({        
 	        url: 'spot.do',
+	        dataType: 'json',
 	        type: 'get',
-	        data : {"areaCode" : areaCode, "spotCode" :spotCode},
+	        data : {"areaCode" : areaCode, "spotCode" :spotCode, "pageNum" : pageNum},
 	        success: function(data){
-	            	$('#spot').html(data);
+	        	$("#total").html(data[2].pagedata.count);
+	        	$("#spot").html(data[0].spotCont);	
+	        	$("#paging").html(data[1].pagingdata);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
 	                alert("검색 결과가 없습니다.");
@@ -21,6 +27,26 @@ $(document).ready(function(){
 	        });	
 	});
 });
+
+function goChange(num){
+	pageNum = num;
+	
+	var areaCode = $("#areacode option:selected").val();
+	var spotCode = $("#spotcode option:selected").val();
+	$.ajax({        
+        url: 'spot.do',
+        dataType: 'json',
+        type: 'get',
+        data : {"areaCode" : areaCode, "spotCode" :spotCode, "pageNum" : pageNum},
+        success: function(data){
+        	$("#spot").html(data[0].spotCont);	
+        	$("#paging").html(data[1].pagingdata);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("검색 결과가 없습니다.");
+        }
+        });	
+}
 
 </script>
 <!-- Titlebar
@@ -30,6 +56,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-md-12">
 				<h2>TOURIST SPOT</h2>
+				<p style="font-weight: bold;">총 관광지 수:&nbsp;&nbsp;&nbsp;<a id ="total" style="color: #f91942; font-weight: bold;"></a><p>
 			</div>
 		</div>
 	</div>
@@ -124,11 +151,8 @@ $(document).ready(function(){
 					<!-- Pagination -->
 					<div class="pagination-container margin-top-20 margin-bottom-40">
 						<nav class="pagination">
-							<ul>
-								<li><a href="#" class="current-page">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+							<ul id ="paging">
+								
 							</ul>
 						</nav>
 					</div>

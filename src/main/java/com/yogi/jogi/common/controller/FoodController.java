@@ -153,7 +153,6 @@ public class FoodController {
         			"<h3>"+title+"</h3>"+
         			"<span>"+addr1+"</span>"+
         			"</div>"+
-        			"<span class=\"like-icon\"></span>"+
         			"</div>"+
         			"</a>"+
         			"</div>";

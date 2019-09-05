@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <div class="dashboard-content">
@@ -29,7 +30,10 @@
 
 					<ul>
 					<li>테마 : ${theme}<br/>
-						여행기간 : ${startdate} ~ ${enddate}<br/>
+						여행기간 : 
+						<fmt:formatDate value="${startdate}" pattern="yyyy년 MM월 dd일" />
+						~
+						<fmt:formatDate value="${enddate}" pattern="yyyy년 MM월 dd일" /><br/>
 						지역코드 : ${area}<br/>
 						음식코드 : ${arrayfood}<br/>
 						관광지코드 : ${arrayspot}
@@ -68,7 +72,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="<img src="/resources/images/food.png" alt="" />" alt="" /></div>
+										<div class="avatar"><img src="/resources/images/food.png" alt="" /></div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											
@@ -83,7 +87,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="<img src="/resources/images/spot.png" alt="" />" alt="" /> </div>
+										<div class="avatar"><img src="/resources/images/spot.png" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${spot[1]} 
@@ -99,7 +103,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="<img src="/resources/images/food.png" alt="" />" alt="" /> </div>
+										<div class="avatar"><img src="/resources/images/food.png" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${food[2]} 
@@ -115,7 +119,7 @@
 							<div class="comments listing-reviews">
 								<ul>
 									<li>
-										<div class="avatar"><img src="<img src="/resources/images/festival.png" alt="" />" alt="" /> </div>
+										<div class="avatar"><img src="/resources/images/festival.png" alt="" /> </div>
 										<div class="comment-content"><div class="arrow-comment"></div>
 											<div class="comment-by">
 											${fest}

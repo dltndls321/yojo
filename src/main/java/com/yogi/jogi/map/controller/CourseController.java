@@ -210,7 +210,8 @@ public class CourseController {
 		}
 		 
 		mv.addObject("adminCourse", adminCourseModel);
-		mv.addObject("food1", food1);
+		//승해얌 여기서 x,y뽑으면 돼!!!!!!!!!!!!!! food1.x !!!!!!!!!!!!!!!!  
+		mv.addObject("food1", food1);           
 		mv.addObject("food2", food2);
 		mv.addObject("food3", food3);
 		mv.addObject("spot1", spot1);
