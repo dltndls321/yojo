@@ -1,6 +1,7 @@
 package com.yogi.jogi.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,29 @@ public class MemberDao {
 	}
 	
 	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectMemberWithId",memberModel);
+		return sqlSession.selectOne(Namespace + ".selectMemberWithMemNum",memberModel);
+	}
+	
+	public int updateMember(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMember",memberModel);
+	}
+	
+	public int deleteMember(MemberModel memberModel) throws Exception {
+		return sqlSession.delete(Namespace+".deleteMember",memberModel);
+	}
+	
+	public List<MemberModel> selectMemberListPaging(Map map) throws Exception {
+		return sqlSession.selectList(Namespace+".selectMemberListPaging",map);
+	}
+	public List<MemberModel> selectMemberbetweenDate(Map map) throws Exception {
+		return sqlSession.selectList(Namespace+".selectMemberbetweenDate",map);
+	}
+	
+	public int updateMemberTokken(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMemberTokken",memberModel);
+	}
+	
+	public int updateMemberStatus(MemberModel memberModel) throws Exception {
+		return sqlSession.update(Namespace+".updateMemberStatus",memberModel);
 	}
 }

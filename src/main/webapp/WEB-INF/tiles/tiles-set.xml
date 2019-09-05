@@ -27,9 +27,16 @@
         <put-attribute name="nav" value="/WEB-INF/views/layout/admin-nav.jsp" />
         <put-attribute name="content" value="" />
         <put-attribute name="script" value="/WEB-INF/views/layout/admin-script.jsp" />
-    </definition>
+      </definition>
 
    <definition name="*/*.admin" extends="admin-layout">      
       <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
+    
+
+    
+ 
+     
+    
+    
 </tiles-definitions>

@@ -1,50 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html> 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
 
-<body>
-<p class="w3-left"  style="padding-left:30px;">></p> 
-<div class="w3-container">
-
-<center><b>±€ºˆ¡§</b>
-<br>
-<form method="post" name="writeform" action="<%=request.getContextPath() %>/board/updatePro" >
-<input type="hidden" name="num" value="${article.num}">
-<input type="hidden" name="pageNum" value="${pageNum }">
-<table class="w3-table-all"  style="width:70%;" >
-   <tr>    <td align="right" colspan="2" >	 <a href="<%=request.getContextPath() %>/board/list"> ±€∏Ò∑œ</a>   </td>  </tr>
-   <tr>    <td  width="70"   align="center">¿Ã ∏ß</td>
-    <td  width="330">       <input type="text" size="10" maxlength="10" 
-       name="writer"   value="${article.writer}"></td>  </tr>
-  <tr>    <td  width="70"   align="center" >¡¶ ∏Ò    </td>    <td width="330">
-       <input type="text" size="40" maxlength="50" 
-       name="subject"    value="${article.subject}">   </td>  </tr>
-  <tr>    <td  width="70"   align="center">Email</td>
-    <td  width="330">
-       <input type="text" size="40" maxlength="30" 
-       name="email" value="${article.email}"></td>  </tr>  <tr>
-    <td  width="70"   align="center" >≥ª øÎ</td>
-    <td  width="330" >
-     <textarea name="content" rows="13" cols="40">${article.content}</textarea>
-      </td>  </tr>  <tr>
-    <td  width="70"   align="center" >∫Òπ–π¯»£</td>
-    <td  width="330" >
-     <input type="password" size="8" maxlength="12" name="passwd"> 	 </td>  </tr><tr>      
- <td colspan=2  align="center">   <input type="submit" value="±€æ≤±‚" >  
-  <input type="reset" value="¥ŸΩ√¿€º∫">
-    <input type="button" value="∏Ò∑œ∫∏±‚" OnClick="window.location='<%=request.getContextPath() %>/board/list'">
-</td></tr></table>    
-     
-</form>  </center></div>  
-
-</body>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>boardList</title>
 
 
 
-</html>
+<div class="page-wrapper">
+	<div class="container-fluid">
+		<div class="col-lg-8">
+
+			<div class="col-lg-12">
+				<h1 class="page-header">ÏàòÏ†ï</h1>
+			</div>
+			<div class="row">
+				<div class="col-lg-12"></div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">Í≤åÏãúÌåê ÏàòÏ†ï</div>
+				<div class="panel-body">
+					<form method="post" name="updateForm" enctype="multipart/form-data"
+						action="/board/updatePro">
+
+						<input type="hidden" name="boardid" value="${boardid}"> <input
+							type="hidden" name="boardNum" value="${boardNum}">
+
+						<div class="row form-group">
+
+							<label class="col-lg-2">Ï†úÎ™©</label>
+							<div class="col-lg-8">
+
+								<input type="text" class="form-control" id="subject"
+									name="subject" min="1" max="3" value="${list.subject }">
+							</div>
+						</div>
+						<div class="row form-group">
+
+							<label class="col-lg-2">Ïù¥Î¶Ñ</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" id="writer"
+									name="writer" min="1" max="3" value="${list.writer }">
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<label class="col-lg-2">ÎÇ¥Ïö©</label>
+							<div class="col-lg-8">
+								<textarea class="form-control" id="content" name="content">${list.content }</textarea>
+							</div>
+						</div>
+						<div class="row form-group">
+
+							<label class="col-lg-2">ÎπÑÎ∞ÄÎ≤àÌò∏</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" id="passwd"
+									name="passwd" min="1" max="3"> <input type="hidden"
+									id="passwd" name="passwd" value="${list.passwd }">
+							</div>
+						</div>
+						<div class="row form-group">
+
+							<table>
+								<tr>
+									<td width="70" align="center"></td>
+									<td width="260"><input type="file" size="40"
+										maxlength="30" name="uploadfile"
+										style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+								</tr>
+							</table>
+						</div>
+						<table>
+
+
+							<tr>
+								<td colspan=5 align="center"><input type="submit"
+									value="ÏàòÏ†ï" style="max-width: 100px; min-width: 99px;">
+									<input type="reset" value="Îã§ÏãúÏûÖÎ†•" style="max-width: 100px;">
+									</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+

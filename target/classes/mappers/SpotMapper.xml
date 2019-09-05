@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="SpotMapperNS">
+  	<insert id="insertSpot" parameterType="spotModel">
+  		Insert into spot(spotNum,category,area,name,x,y,zcode)	
+  		values(
+	  		spotSeq.NEXTVAL,
+	  		#{category},
+	  		#{area},
+	  		#{name},
+	  		#{x},
+	  		#{y},
+	  		#{zcode}
+  		)
+  	</insert>
+  	
+  	<select id="selectSpotList" resultType="spotModel">
+    	select
+    		*
+    	from
+    		spot
+    </select>
+    
+    <!-- 승해가 추가한부분 -->
+    <select id="selectSpotListXY" parameterType="hashmap" resultType="spotModel" >
+     <![CDATA[
+    select * from spot where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
+    ]]>	
+    </select>
+    <select id="getSpotArea"  parameterType="String" resultType="spotModel">
+    	select * from spot where name = #{name}
+   </select>
+   <!-- 끝 -->
+   
+    <select id="selectSpotWithSpotNum" parameterType="spotModel" resultType="spotModel">
+    	select
+    		*
+    	from
+    		spot
+    	where
+    		spotNum=#{spotNum}
+    </select>
+     <select id="selectSpotWithname" parameterType="spotModel" resultType="spotModel">
+    	select
+    		*
+    	from
+    		spot
+    	where
+    		name=#{name}
+    </select>
+    
+    <select id="selectSpotAdmin"  parameterType="spotModel" resultType="spotModel">
+    	select
+    		*
+    	from
+    		spot
+    	where
+    		category=#{category}
+    	and
+    		zcode=#{zcode}
+    </select>
+    
+    
+
+</mapper>

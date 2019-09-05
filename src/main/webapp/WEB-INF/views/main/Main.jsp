@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
 <input type="button" value="insert로 이동" onclick="location.href='http://localhost:9080/index.do'">
 <br>

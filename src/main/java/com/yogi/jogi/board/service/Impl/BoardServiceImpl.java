@@ -1,13 +1,17 @@
 package com.yogi.jogi.board.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yogi.jogi.board.dao.BoardDao;
 import com.yogi.jogi.board.model.BoardModel;
+import com.yogi.jogi.board.model.ReplyModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.member.model.MemberModel;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -16,56 +20,72 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao dao;
 
 	@Override
-	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
+	public List<BoardModel> selectBoardList() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectBoardList(boardModel);
+		return dao.selectBoardList();
 	}
 
 	@Override
-	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
+	public BoardModel selectBoard(int boardNum) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectBoard(boardModel);
+		return dao.selectBoard(boardNum);
 	}
 
-//	@Override
-//	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.selectMaxBoardNum(boardModel);
-//	}
-//	
-//	@Override
-//	public int updateReStep(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.updateReStep(boardModel);
-//	}
 	@Override
-	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
+	public int updateBoard(BoardModel boardModel) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.insertBoard(boardModel, boardid);
+		return dao.updateBoard(boardModel);
 	}
-//	@Override
-//	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.selectPasswdOneNum(boardModel);
-//	}
-//
-//	@Override
-//	public int updateReadCount(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.updateReadCount(boardModel);
-//	}
-//
-//	@Override
-//	public int updateBoard(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.updateBoard(boardModel);
-//	}
-//
-//	@Override
-//	public int deleteBoard(BoardModel boardModel) throws Exception {
-//		// TODO Auto-generated method stub
-//		return dao.deleteBoard(boardModel);
-//	}
-//	
-//	
+
+	@Override
+	public int deleteBoard(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.deleteBoard(boardModel);
+	}
+
+	@Override
+	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectPasswdOneNum(boardModel);
+	}
+
+	@Override
+	public int insertBoard(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.insertBoard(boardModel);
+	}
+
+	@Override
+	public List<BoardModel> selectBoardListPaging(int start, int end, String boardid) throws Exception {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("boardid", boardid);
+		return dao.selectBoardListPaging(map);
+	}
+
+	@Override
+	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectBoardListWidhBoardid(boardid);
+	}
+
+	@Override
+	public List<BoardModel> selectSearchBoardList(String searchOption, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSearchBoardList(searchOption, keyword);
+	}
+
+	@Override
+	public int selectListGetCount(String searchOption, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListGetCount(searchOption, keyword);
+	}
+
+	@Override
+	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectBoardListWidhMemnum(boardModel);
+	}
+
 }

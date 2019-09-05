@@ -6,12 +6,22 @@
     	 
     	 <typeAliases>
     	 	<typeAlias type="com.yogi.jogi.common.model.TestModel" alias="testVO"/>
-    	 	<typeAlias type="com.yogi.jogi.board.model.BoardModel" alias="boardModel"/>
     	 	<typeAlias type="com.yogi.jogi.member.model.MemberModel" alias="memberModel"/>
+    	 	<typeAlias type="com.yogi.jogi.board.model.BoardModel" alias="boardModel"/>
+    	 	<typeAlias type="com.yogi.jogi.board.model.ReplyModel" alias="replyModel"/>
     	 	<typeAlias type="com.yogi.jogi.map.model.MapModel" alias="mapModel"/>
-
+    	 	<typeAlias type="com.yogi.jogi.map.model.CourseModel" alias="CourseModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.FestivalModel" alias="festModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.FestReviewModel" alias="festReviewModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.SpotModel" alias="spotModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.SpotReviewModel" alias="spotReviewModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.FoodModel" alias="foodModel"/>
+			<typeAlias type="com.yogi.jogi.common.model.FoodReviewModel" alias="foodReviewModel"/>
+			<typeAlias type="com.yogi.jogi.admin.model.AdminCourseModel" alias="adminCourseModel"/>
         </typeAliases>
         <!-- <mappers>
         	<mapper resource="/mappers/Login_Register_Mapper.xml"/>
         </mappers> -->
     </configuration>
+ 
+ 
