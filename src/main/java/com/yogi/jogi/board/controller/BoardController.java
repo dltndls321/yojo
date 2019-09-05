@@ -118,7 +118,7 @@ public class BoardController {
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		session.setAttribute("memNum", memNum);
 		session.setAttribute("boardid",boardid);
-		mv.addObject("boardlist", list);
+		mv.addObject("boardlist", boardlist);  //boardlist list
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("count", count);
 		mv.addObject("pageNum", pageNum);
@@ -145,16 +145,11 @@ public class BoardController {
 			
 			int scount = boardService.selectListGetCount(searchOption, keyword);
 			
-			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("list", list);
-			map.put("scount", scount);
-			map.put("searchOption", searchOption);
-			map.put("keyword", keyword);
-			map.put("map", map);
+			
 		
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
-		int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
+		int count = boardService.selectBoardListWidhBoardid("1").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
 		if (count < endRow) {
@@ -173,7 +168,7 @@ public class BoardController {
 		int end = endRow;
 		
 		
-		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "2");
+		List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1, endRow, "1");
 
 		
 		/*

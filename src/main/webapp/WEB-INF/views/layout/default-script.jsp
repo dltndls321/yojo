@@ -15,40 +15,6 @@
 
 <script type="text/javascript" src="/resources/scripts/loginregister.js"></script>
 
-<!-- Leaflet // Docs: https://leafletjs.com/ -->
-<script src="/resources/scripts/leaflet.min.js"></script>
-
-<!-- Leaflet Maps Scripts -->
-<script src="/resources/scripts/leaflet-markercluster.min.js"></script>
-<script src="/resources/scripts/leaflet-gesture-handling.min.js"></script>
-<script src="/resources/scripts/leaflet-listeo.js"></script>
-
-<!-- Leaflet Geocoder + Search Autocomplete // Docs: https://github.com/perliedman/leaflet-control-geocoder -->
-<script src="/resources/scripts/leaflet-autocomplete.js"></script>
-<script src="/resources/scripts/leaflet-control-geocoder.js"></script>
-
-
-<!-- Google Autocomplete -->
-<script>
-  function initAutocomplete() {
-    var input = document.getElementById('autocomplete-input');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
-    autocomplete.addListener('place_changed', function() {
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        return;
-      }
-    });
-
-	if ($('.main-search-input-item')[0]) {
-	    setTimeout(function(){ 
-	        $(".pac-container").prependTo("#autocomplete-container");
-	    }, 300);
-	}
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"></script>
 
 <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 <script src="/resources/scripts/moment.min.js"></script>
