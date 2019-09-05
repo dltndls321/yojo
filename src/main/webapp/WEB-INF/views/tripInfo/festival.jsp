@@ -5,15 +5,21 @@
 <script>
 
 $(document).ready(function(){
+	$("#total").empty();
 	$('#search').click( function(){
+		$("#festival").empty();
+		var pageNum = 1;
 		var areaCode = $("#areacode option:selected").val();
 		var date = $("#date-picker").val();
 		$.ajax({        
 	        url: 'festival.do',
+	        dataType: 'json',
 	        type: 'get',
-	        data : {"areaCode" : areaCode, "eventStartDate" :date},
+	        data : {"areaCode" : areaCode, "eventStartDate" :date, "pageNum" : pageNum},
 	        success: function(data){
-	            	$('#festival').html(data);
+	        	$("#total").html(data[2].pagedata.count);
+	        	$("#festival").html(data[0].festCont);	
+	        	$("#paging").html(data[1].pagingdata);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) { 
 	            	alert("검색 결과가 없습니다.");
@@ -21,6 +27,25 @@ $(document).ready(function(){
 	        });	
 	});
 });
+function goChange(num){
+	pageNum = num;
+	
+	var areaCode = $("#areacode option:selected").val();
+	var date = $("#date-picker").val();
+	$.ajax({        
+        url: 'festival.do',
+        dataType: 'json',
+        type: 'get',
+        data : {"areaCode" : areaCode, "eventStartDate" :date, "pageNum" : pageNum},
+        success: function(data){
+        	$("#festival").html(data[0].festCont);	
+        	$("#paging").html(data[1].pagingdata);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("검색 결과가 없습니다.");
+        }
+        });	
+}
 
 </script>
 <!-- Titlebar
@@ -31,7 +56,7 @@ $(document).ready(function(){
 			<div class="col-md-12">
 
 				<h2>Festival</h2><span></span>
-
+				<p style="font-weight: bold;">총 축제 수:&nbsp;&nbsp;&nbsp;<a id ="total" style="color: #f91942; font-weight: bold;"></a><p>
 			</div>
 		</div>
 	</div>
@@ -105,11 +130,8 @@ $(document).ready(function(){
 					<!-- Pagination -->
 					<div class="pagination-container margin-top-20 margin-bottom-40">
 						<nav class="pagination">
-							<ul>
-								<li><a href="#" class="current-page">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+							<ul id ="paging">
+								
 							</ul>
 						</nav>
 					</div>
