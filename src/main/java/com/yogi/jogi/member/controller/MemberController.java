@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -156,8 +157,9 @@ public class MemberController {
 	
 
 	@RequestMapping(value = "loginmember")
-	public ModelAndView loginmember(MemberModel memberModel, HttpSession session) throws Exception {
+	public ModelAndView loginmember(HttpServletResponse response,MemberModel memberModel, HttpSession session,@RequestParam(required = false) String check) throws Exception {
 		System.out.println("loginmember : 시작");
+		System.out.println(check);
 		model.clear();
 		int nowuser = 0;
 		if(nowUser.getNowUser() <=0) {
@@ -177,6 +179,20 @@ public class MemberController {
 			model.setViewName("redirect:/admin/main");
 		} else {
 			model.setViewName("redirect:/main/main");
+		}
+		Cookie rememberCookieID = new Cookie("rememberCookieID", memberModel.getId());
+		Cookie rememberCookiePasswd = new Cookie("rememberCookiePasswd", memberModel.getPasswd());
+		if(check == null) {
+			rememberCookieID.setMaxAge(0);
+			response.addCookie(rememberCookieID);
+			rememberCookiePasswd.setMaxAge(0);
+			response.addCookie(rememberCookiePasswd);
+			
+		}else {
+			rememberCookieID.setMaxAge(60*60*24*7*30);
+			rememberCookiePasswd.setMaxAge(60*60*24*7*30);
+			response.addCookie(rememberCookieID);
+			response.addCookie(rememberCookiePasswd);
 		}
 		model.addObject("InfoMember", memberModel);
 		nowUser.setNowUser(nowuser);

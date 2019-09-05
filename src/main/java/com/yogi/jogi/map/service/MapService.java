@@ -13,5 +13,7 @@ public interface MapService {
 	public int insertCourse(CourseModel courseModel) throws Exception;
 	public List<CourseModel> getCourseList(String subject) throws Exception;
 	public CourseModel getCourseListOne(String subject) throws Exception;
+	public List<CourseModel> getCourseListPaging(int start,int end,String subject) throws Exception;
+	public CourseModel getCourseListNumOne(int coursenum) throws Exception;
 	
 }

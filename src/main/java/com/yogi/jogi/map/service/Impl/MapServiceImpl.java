@@ -56,6 +56,21 @@ public class MapServiceImpl implements MapService{
 		// TODO Auto-generated method stub
 		return dao.getFoodArea(name);
 	}
+
+	@Override
+	public List<CourseModel> getCourseListPaging(int start, int end, String subject) throws Exception {
+		Map map = new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("subject",subject);
+		return dao.getCourseListPaging(map);
+	}
+
+	@Override
+	public CourseModel getCourseListNumOne(int coursenum) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getCourseListNumOne(coursenum);
+	}
 	
 	
 	
