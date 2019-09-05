@@ -80,10 +80,10 @@ public class MapController {
 			mv.addObject("festList", festService.selectFestListXY(endX,endY,startX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(endX,endY,startX,startY));
 			System.out.println(mapService.getFoodList2(endX,endY,startX,startY));
-			mv.addObject("swX",(endY+startY)/2);
-			mv.addObject("swY",(endX+startX)/2);
-			mv.addObject("neX",(startY+endY)/2);
-			mv.addObject("neY",(endX+startX)/2);
+			mv.addObject("swX",endY);
+			mv.addObject("swY",endX);
+			mv.addObject("neX",startY);
+			mv.addObject("neY",startX);
 			mv.addObject("seX",startY);
 			mv.addObject("seY",endX);
 			mv.addObject("nwX",endY);
@@ -96,10 +96,10 @@ public class MapController {
 			mv.addObject("festList", festService.selectFestListXY(startX,endY,endX,startY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,endY,endX,startY));
 			System.out.println(mapService.getFoodList2(startX,endY,endX,startY));
-			mv.addObject("swX",(endY+centerY)/2);
-			mv.addObject("swY",(centerX+startX)/2);
-			mv.addObject("neX",(centerY+startY)/2);
-			mv.addObject("neY",(endX+centerX)/2);
+			mv.addObject("swX",endY);
+			mv.addObject("swY",startX);
+			mv.addObject("neX",startY);
+			mv.addObject("neY",endX);
 			mv.addObject("seX",startY); //x가 큰값
 			mv.addObject("seY",startX); // y가 작은값
 			mv.addObject("nwX",endY); // x가 작은값
@@ -110,10 +110,10 @@ public class MapController {
 			mv.addObject("festList", festService.selectFestListXY(startX,startY,endX,endY));
 			mv.addObject("spotList", spotService.selectSpotListXY(startX,startY,endX,endY));
 			System.out.println(mapService.getFoodList2(startX,startY,endX,endY));
-			mv.addObject("swX",startY+0.01);
-			mv.addObject("swY",startX+0.015);
-			mv.addObject("neX",endY-0.01);
-			mv.addObject("neY",endX-0.015);
+			mv.addObject("swX",startY);
+			mv.addObject("swY",startX);
+			mv.addObject("neX",endY);
+			mv.addObject("neY",endX);
 			mv.addObject("seX",endY); //x가 큰값
 			mv.addObject("seY",startX); // y가 작은값
 			mv.addObject("nwX",startY); // x가 작은값
@@ -124,10 +124,10 @@ public class MapController {
 			mv.addObject("festList", festService.selectFestListXY(startY,endX,endY,startX));
 			mv.addObject("spotList", spotService.selectSpotListXY(startY,endX,endY,startX));
 			System.out.println(mapService.getFoodList2(startY,endX,endY,startX));
-			mv.addObject("swX",startY+0.01);
-			mv.addObject("swY",endX+0.015);
-			mv.addObject("neX",endY-0.01);
-			mv.addObject("neY",startX-0.015); 
+			mv.addObject("swX",startY);
+			mv.addObject("swY",endX);
+			mv.addObject("neX",endY);
+			mv.addObject("neY",startX); 
 			mv.addObject("seX",endY); //x가 큰값
 			mv.addObject("seY",endX); // y가 작은값
 			mv.addObject("nwX",startY); // x가 작은값
@@ -147,6 +147,7 @@ public class MapController {
 		mv.setViewName("maptest/mapSearch.do"); //
 
 		return mv;
+		
 	}
 	
 	@RequestMapping("route")
@@ -193,13 +194,16 @@ public class MapController {
 		for(int i = 0 ; i<index.length;i++) {
 			
 		if(course[i].substring(index[i]+2).equals("맛집")) {
-				 mv.addObject("Area"+i,mapService.getFoodArea(course[i].substring(0,index[i]))); 
+				 mv.addObject("Area"+i,mapService.getFoodArea(course[i].substring(0,index[i])));
+				 mv.addObject("AreaF"+i,"맛집");
 			System.out.println("맛집");
 		}else if(course[i].substring(index[i]+2).equals("축제")) {
 				 mv.addObject("Area"+i,festService.getFestArea(course[i].substring(0,index[i]))); 
+				 mv.addObject("AreaF"+i,"축제");
 			System.out.println("축제");
 		}else {
 				 mv.addObject("Area"+i,spotService.getSpotArea(course[i].substring(0,index[i]))); 
+				 mv.addObject("AreaF"+i,"관광지");
 			System.out.println("관광지");
 		}
 		}
@@ -209,7 +213,19 @@ public class MapController {
 		return mv;
 	}
 
-	
+	@RequestMapping("Log") //
+	public ModelAndView Log(HttpSession session) throws Exception {
+
+		mv.clear();
+
+		
+		mv.addObject("CLog",mapService.getCourseList((String)session.getAttribute("SessionMemberId")));
+		
+		mv.setViewName("maptest/mapRouteLog.do"); //
+
+		return mv;
+		
+	}
 
 
 }
