@@ -557,3 +557,7 @@ function emailok(){
 });
 }
 
+function kakaotalkwithadmin(){
+	window.open("http://pf.kakao.com/_xaxbIxiT/chat","new","width=500,height=500,top=100,left=100,toolbar=no,status=no"); 
+}
+
