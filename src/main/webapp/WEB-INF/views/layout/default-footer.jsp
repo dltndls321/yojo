@@ -52,7 +52,7 @@
 		
 		<!-- Copyright -->
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" >
 				<div class="copyrights">© 2019 Listeo. All Rights Reserved.</div>
 			</div>
 		</div>
@@ -65,6 +65,8 @@
 
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
-<div id="plusfriend-chat-button"></div>
+<div id="plusfriend-chat-button" onclick="kakaotalkwithadmin()" style="cursor: pointer;">
+	<img src="/resources/images/consult_large_mono_pc.png"/>
+</div>
 
 </div>

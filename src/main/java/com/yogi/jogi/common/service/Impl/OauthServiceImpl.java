@@ -37,8 +37,7 @@ public class OauthServiceImpl implements OauthService{
     
     private static String kakaoRestApiKey = "55c143e0b9c2751bfa9c15f3aef22fd4";
     private static String kakaoRestAdminKey ="44e7930fbfba445bc7331c791e4a7726";
-    private static String serviceUrl = "http://211.63.89.29:31235";
-    
+	private static String serviceUrl = "211.63.89.75:9080";
     @Override
     public String getKakaoAuthUrl(String tokken) {
         OAuth20Service oauthService = new ServiceBuilder()

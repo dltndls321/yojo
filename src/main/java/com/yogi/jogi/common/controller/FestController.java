@@ -57,7 +57,7 @@ public class FestController {
 	}
 	//축제리스트뽑기
 	@RequestMapping(value = "festival.do")	
-	public void test(FestivalModel festivalModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String eventStartDate) throws Exception {
+	public void test(FestivalModel festivalModel, HttpServletRequest request, HttpServletResponse response,@RequestParam String areaCode, @RequestParam String eventStartDate, @RequestParam int pageNum) throws Exception {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
        
@@ -74,6 +74,7 @@ public class FestController {
         parameter = parameter + "&" + "eventEndDate=" + eventStartDate ;
         parameter = parameter + "&" + "areaCode=" + areaCode ;
         parameter = parameter + "&" + "numOfRows=9";
+        parameter = parameter + "&" + "pageNo=" + pageNum;
         parameter = parameter + "&" + "_type=json";
         
         addr = addr + serviceKey + parameter;
@@ -92,7 +93,6 @@ public class FestController {
  
         byte[] b = mbos.getBytes("UTF-8");
         String s = new String(b, "UTF-8"); 
-        //out.println(s);
         
         JSONParser paser = new JSONParser();
         JSONObject obj = (JSONObject) paser.parse(s);
@@ -102,14 +102,30 @@ public class FestController {
         JSONObject parse_body = (JSONObject) parse_response.get("body");
         JSONObject parse_items = (JSONObject) parse_body.get("items"); 
         JSONArray parse_item = (JSONArray) parse_items.get("item");
-		/*
-		 * JSONObject totalCount = (JSONObject) parse_body.get("totalCount");
-		 * System.out.println(totalCount.toString());
-		 */
-		 
+	
+        //페이징
+        JSONArray festjson = new JSONArray();
+        JSONObject festdata = new JSONObject();
+        JSONObject pagedata = new JSONObject();
+        JSONObject pagingdata = new JSONObject();
+        
+        int pageSize = 9;
+        int bottomLine = 3;
+        int currentPage = pageNum;
+        Object total = parse_body.get("totalCount");
+        int count = Integer.parseInt(total.toString());
+        
+        int pageCount = count / pageSize + (count % pageSize ==0? 0 :1);
+        int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
+        int endPage = startPage + bottomLine -1;//
+        if (endPage > pageCount)
+        	endPage = pageCount;
+    	JSONObject pdata = new JSONObject();
+    	pdata.put("count", total);
         String finaldata="";
         for (int i = 0; i < parse_item.size(); i++) { 
         	JSONObject imsi = (JSONObject) parse_item.get(i);
+        	pagedata.put("pagedata", pdata);
         	String addr1 = (String) imsi.get("addr1"); 
         	String firstimage = (String) imsi.get("firstimage"); 
         	String title = (String) imsi.get("title"); 
@@ -129,7 +145,7 @@ public class FestController {
         			"<h3>"+title+"</h3>"+
         			"<span>"+addr1+"</span>"+
         			"</div>"+
-        			"<span class=\"like-icon\"></span>"+
+        			
         			"</div>"+
         			"</a>"+
         			"</div>";
@@ -172,8 +188,36 @@ public class FestController {
 //        	System.out.println(i+"번째"+festivalModel);
 //        	addData(festivalModel);
 //        	Thread.sleep(100);
-        	}	
-        out.append(finaldata);
+        	}
+        String paging = "";
+        if(startPage>bottomLine) {
+        	int prev = startPage - bottomLine;
+        	paging += "<li><a onclick =\"goChange("+prev+")\"}\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-left\"></i></a></li>" ;
+        }
+        
+        for (int j = startPage; j < endPage+1; j++) {
+        	if(j==pageNum) {
+        		paging += "<li><a class=\"current-page\" onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}else if(j!=pageNum) {
+        		paging += "<li><a  onclick =\"goChange("+j+")\" style=\"cursor: pointer;\">"+j+"</a></li>";	
+        	}
+		}
+        if(endPage<pageCount) {
+        	int next = startPage + bottomLine;
+        	paging += "<li><a onclick =\"goChange("+next+")\" style=\"cursor: pointer;\"><i class=\"sl sl-icon-arrow-right\"></i></a></li>";
+        }
+        
+        Object festCont = finaldata;
+        Object pagingdatas = paging;
+        festdata.put("festCont", festCont);
+        pagingdata.put("pagingdata",pagingdatas);
+        festjson.add(festdata); 	//0
+        festjson.add(pagingdata); 	//1
+        festjson.add(pagedata);		//2
+        
+        
+        System.out.println(festjson.toString());
+        out.print(festjson.toString());
         out.flush();
         out.close();
 

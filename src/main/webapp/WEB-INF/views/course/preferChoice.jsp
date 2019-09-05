@@ -96,7 +96,7 @@ $(document).ready(function(){
 										<option value ="child">아이와 함께</option>
 										<option value ="parent">부모님과 함께</option>
 										<option value ="couple">연인과 함께</option>
-										<option value ="firend">친구와 함께</option>
+										<option value ="friend">친구와 함께</option>
 									</select>
 								</div>
 							<!-- City -->
