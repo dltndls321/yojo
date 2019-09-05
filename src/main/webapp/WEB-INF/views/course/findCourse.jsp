@@ -30,7 +30,7 @@
 				<div class="dashboard-list-box margin-top-0">
 
 
-					<h4>Course</h4> 
+					<h4>Course Title <  ${adminCourse.subject} > </h4> 
 
 					<ul>
 						<li>

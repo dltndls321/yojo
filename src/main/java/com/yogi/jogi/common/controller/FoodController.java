@@ -130,7 +130,6 @@ public class FoodController {
 
     	
     	String finaldata="";
-		System.out.println("갯수"+total);
         for (int i = 0; i < parse_item.size(); i++) { 
         	JSONObject imsi = (JSONObject) parse_item.get(i);   
         	pagedata.put("pagedata", pdata);	
@@ -217,6 +216,7 @@ public class FoodController {
 		 request.setCharacterEncoding("utf-8");
 	     response.setContentType("text/html; charset=utf-8");
 	        model.clear();
+	   
 	        List img = new ArrayList();
 	        //축제 정보
 	        for(int i=0;i<=2;i++) {
@@ -440,6 +440,7 @@ public class FoodController {
 	public String setFood(FoodModel foodmodel, FoodReviewModel foodReviewModel, HttpSession session,@RequestParam int typeid,@RequestParam int contid)throws Exception {	
 		
 		foodmodel = foodService.selectFoodWithname(foodmodel);
+		System.out.println(foodmodel);
 		int foodNum = foodmodel.getFoodNum();
 		// 축제 고유번호, memnum select
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");

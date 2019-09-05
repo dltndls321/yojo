@@ -31,12 +31,16 @@ import com.yogi.jogi.admin.model.AdminCourseModel;
 import com.yogi.jogi.admin.service.AdminCourseService;
 import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
+import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
 import com.yogi.jogi.common.model.FoodModel;
+import com.yogi.jogi.common.model.FoodReviewModel;
 import com.yogi.jogi.common.model.NowUserModel;
 import com.yogi.jogi.common.model.SpotModel;
+import com.yogi.jogi.common.model.SpotReviewModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.FoodReviewService;
 import com.yogi.jogi.common.service.FoodService;
 import com.yogi.jogi.common.service.SpotReviewService;
 import com.yogi.jogi.common.service.SpotService;
@@ -75,6 +79,8 @@ public class AdminController {
 	private SpotReviewService spotReviewService;
 	@Autowired
 	private FoodService foodService;
+	@Autowired
+	private FoodReviewService foodReviewService;
 	@Autowired
 	private AdminCourseService adminCourseService;
 	
@@ -364,8 +370,24 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "reviews")
-	public String moveReviews() {
-		return "admin/reviews.admin";
+	public ModelAndView  moveReviews() throws Exception{
+		mv.clear();
+		
+		FoodReviewModel foodReviewModel = new FoodReviewModel();
+		FestReviewModel festReviewModel = new FestReviewModel();
+		SpotReviewModel spotReviewModel = new SpotReviewModel();
+		
+		List<FoodReviewModel> foodReview = foodReviewService.selectFoodReviewList();
+		List<FestReviewModel> festReview = festReviewService.selectFestReviewList();
+		List<SpotReviewModel> spotReview = spotReviewService.selectSpotReviewList();
+		
+			
+		mv.addObject("foodReview", foodReview);
+		mv.addObject("festReview", festReview);
+		mv.addObject("spotReview", spotReview);
+		
+		mv.setViewName("admin/reviews.admin");
+		return mv;
 	}
 	@RequestMapping(value = "course")
 	public String addCourse() {
@@ -377,7 +399,6 @@ public class AdminController {
 		FoodModel foodModel = new FoodModel();
 		foodModel.setCategory(foodCode);
 		foodModel.setZcode(areaCode);
-		System.out.println(foodModel);
 		
 		JSONArray jsonArray = new JSONArray();
 		try {
@@ -402,16 +423,13 @@ public class AdminController {
 	
 	public void selectFest(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam Date date) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		System.out.println(date);
 		FestivalModel festivalModel = new FestivalModel();
 		festivalModel.setFdate2(date);
 		festivalModel.setZcode(areaCode);
-		System.out.println(festivalModel);
 		
 		JSONArray jsonArray = new JSONArray();
 		try {
 			List<FestivalModel> festList = festService.selectFestAdmin(festivalModel);
-			System.out.println("여기"+festList);
 			if(festList != null && festList.size() >0) {
 				for (int i = 0; i < festList.size(); i++) {
 					jsonArray.add(festList.get(i));
@@ -434,7 +452,6 @@ public class AdminController {
 		SpotModel spotModel = new SpotModel();
 		spotModel.setCategory(spotCode);
 		spotModel.setZcode(areaCode);
-		System.out.println(spotModel);
 		
 		JSONArray jsonArray = new JSONArray();
 		try {

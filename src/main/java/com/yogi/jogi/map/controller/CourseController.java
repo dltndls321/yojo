@@ -83,8 +83,11 @@ public class CourseController {
 		adminCourseModel.setSpotCode(spotCode);
 		adminCourseModel.setStartDate(date);
 		System.out.println(adminCourseModel);
-		
+		try {
+			
+	
 		adminCourseModel = adminCourseService.selectCourse(adminCourseModel);
+		
 		System.out.println(adminCourseModel);
 		//각각의 정보찾기
 		//음식점 (1,3,5)
@@ -218,7 +221,10 @@ public class CourseController {
 		mv.addObject("spot2", spot2);
 		mv.addObject("fest1", fest1);
 		mv.setViewName("course/findCourse.do"); 
-
+		} catch (Exception e) {
+			mv.setViewName("course/errorPage.do");
+		}
+		
 		return mv;
 	}
 

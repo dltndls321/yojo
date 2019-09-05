@@ -8,19 +8,12 @@
 
 			<ul data-submenu-title="Main">
 				<li class="active"><a href="/admin/main"><i class="sl sl-icon-settings"></i> Admin Main</a></li>
-				<li><a href="/admin/customerCenter"><i class="sl sl-icon-envelope-open"></i> Customer Center <span class="nav-tag messages">2</span></a></li>
-				<li><a href="/admin/booking"><i class="fa fa-calendar-check-o"></i> Booking</a></li>
 			</ul>
 			
 			<ul data-submenu-title="Listings">
-				<li><a><i class="sl sl-icon-layers"></i> Board</a>
-					<ul>
-						<li><a href="/admin/board">Board <span class="nav-tag green">6</span></a></li>
-						<li><a href="dashboard-my-listings.html">Pending <span class="nav-tag yellow">1</span></a></li>
-						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
-					</ul>	
-				</li>
-				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Reviews</a></li>
+				<li><a href="/admin/board"><i class="sl sl-icon-layers"></i> Board</a></li>
+				<li><a href="/admin/course"><i class="sl sl-icon-map"></i>Course</a></li>
+				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Review</a></li>
 				<li><a href="/admin/course"><i class="sl sl-icon-plus"></i>Add Course</a></li>
 			</ul>	
 

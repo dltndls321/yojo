@@ -237,13 +237,13 @@ public class BoardController {
 			throws Exception {
 
 		MultipartFile multi = multipart.getFile("uploadfile");
-		String fname = "http://211.63.89.83:8888/resources/fileSave/" + multi.getOriginalFilename();
+		String fname = "http://211.63.89.75:9080/resources/fileSave/" + multi.getOriginalFilename();
 //		String fname = "http://211.63.89.29:31235/resources/fileSave/" + multi.getOriginalFilename();
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println(boardModel);
-		if (fname != null && !fname.equals("http://211.63.89.83:8888/resources/fileSave/")) {
+		if (fname != null && !fname.equals("http://211.63.89.75:9080/resources/fileSave/")) {
 //		if (fname != null && !fname.equals("http://211.63.89.29:31235/resources/fileSave/")) {
-			String uploadPath = "D:/workspace/yojo/src/main/webapp/resources/fileSave/";
+			String uploadPath = "C:/hyeyeon/Java/WorkSpace/yojo/src/main/webapp/resources/fileSave/";
 //			String uploadPath = "C:/Users/PC/Desktop/soosoo/yogijogi/workspace/yojo/src/main/webapp/resources/fileSave/";
 			
 			FileCopyUtils.copy(multi.getInputStream(),
