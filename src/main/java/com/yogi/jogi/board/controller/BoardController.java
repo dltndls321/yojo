@@ -363,7 +363,7 @@ public class BoardController {
 		mv.clear();
 		mv.addObject("check", check);
 		mv.addObject("pageNum", pageNum);
-		mv.setViewName("board/deletePro");
+		mv.setViewName("board/deletePro.do");
 		return mv;
 
 	}
@@ -377,5 +377,11 @@ public class BoardController {
 		mv.setViewName("board/deletePro2.do");
 		return mv;
 
+	}
+	@RequestMapping("nextboard")
+	public ModelAndView nextboard(BoardModel boardModel,int boardNum) throws Exception{
+		
+		boardService.nextboard(boardNum);
+		return mv;
 	}
 }
