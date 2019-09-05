@@ -199,14 +199,14 @@
 								<p class="form-row form-row-wide">
 									<label for="username">아이디:
 										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="id" id="idLogin" value="" onfocus="onclickColorChange2('idLogin')"/>
+										<input type="text" class="input-text" name="id" id="idLogin" value="${cookie.rememberCookieID.value}" onfocus="onclickColorChange2('idLogin')"/>
 									</label>
 								</p>
 
 								<p class="form-row form-row-wide">
 									<label for="password">비밀번호:
 										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="passwd" id="passwdLogin" onfocus="onclickColorChange('passwdLogin')"/>
+										<input class="input-text" type="password" name="passwd" id="passwdLogin" value="${cookie.rememberCookiePasswd.value}" onfocus="onclickColorChange('passwdLogin')"/>
 									</label>
 									<span class="lost_password">
 										<a href="#" >Lost Your Password?</a>
@@ -216,7 +216,7 @@
 								<div class="form-row">
 									<button name="login" class="button border fw margin-top-10" id="loginSubmit" type="button" onclick="onclickloginSubmit('idLogin','passwdLogin','loginForm')">로그인</button>
 									<div class="checkboxes margin-top-10">
-										<input id="remember-me" type="checkbox" name="check">
+										<input id="remember-me" type="checkbox" name="check" value="true">
 										<label for="remember-me">Remember Me</label>
 									</div>
 								</div>
