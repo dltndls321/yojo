@@ -6,17 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<!-- Wrapper -->
-<div id="wrapper">
 
-	<div class="clearfix"></div>
-	<!-- Header Container / End -->
-
-
-	<!-- Dashboard -->
-	<div id="dashboard">
-
-		<div class="dashboard-content">
 
 			<!-- Titlebar -->
 			<div id="titlebar">
@@ -35,6 +25,12 @@
 					</div>
 				</div>
 			</div>
+			<!-- Content
+================================================== -->
+
+
+		<!-- Container -->
+		<div class="container">
 			
 				<form name="form2" method="post" action="${path }/board/boardlist">
 					<select name="searchOption" style="width: 150px; height: 30px;">
@@ -161,11 +157,6 @@
 		<!-- Content / End -->
 
 
-	</div>
-	<!-- Dashboard / End -->
 
-
-</div>
-<!-- Wrapper / End -->
 
 
