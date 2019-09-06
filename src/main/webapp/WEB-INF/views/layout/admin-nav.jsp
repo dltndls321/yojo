@@ -24,3 +24,6 @@
 			
 		</div>
 	</div>
+	<div id="plusfriend-chat-button" onclick="kakaotalkimadmin()" style="cursor: pointer;">
+			<img src="/resources/images/consult_large_mono_pc.png"/>
+	</div>
