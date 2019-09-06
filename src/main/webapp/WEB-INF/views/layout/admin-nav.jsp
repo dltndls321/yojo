@@ -12,13 +12,12 @@
 			
 			<ul data-submenu-title="Listings">
 				<li><a href="/admin/board"><i class="sl sl-icon-layers"></i> Board</a></li>
-				<li><a href="/admin/course"><i class="sl sl-icon-map"></i>Course</a></li>
 				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Review</a></li>
 				<li><a href="/admin/course"><i class="sl sl-icon-plus"></i>Add Course</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">
-				<li><a href="/admin/memberList"><i class="sl sl-icon-user"></i> Member List</a></li>
+				<li><a href="/admin/memberList"><i class="sl sl-icon-user"></i>Member List</a></li>
 				<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
 			</ul>
 			

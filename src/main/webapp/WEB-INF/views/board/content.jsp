@@ -122,15 +122,20 @@
 	});
 </script>
 
-<!-- Wrapper -->
-<div id="wrapper">
-
-	<!-- Header Container
-================================================== -->
 
 	<!-- Titlebar
 ================================================== -->
+<div id="titlebar" class="gradient">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
 
+				<h2><i class="sl sl-icon-plus"></i>자유게시판</h2>
+
+			</div>
+		</div>
+	</div>
+</div>
 
 	<!-- Content
 ================================================== -->
@@ -206,7 +211,7 @@
 				</div>
 			</div>
 			<!-- Blog Post / End -->
-
+	<div class="row">
 						<!-- Post Navigation -->
 			<ul id="posts-nav" class="margin-top-0 margin-bottom-45">
 			<c:choose>
@@ -221,52 +226,11 @@
 				</c:choose>
 			</ul>
 
-			<!-- Related Posts -->
-			<!-- <div class="clearfix"></div>
-			<h4 class="headline margin-top-25">최근 글</h4>
-			<div class="row">
-
-				Blog Post Item
-				<div class="col-md-6">
-					<a href="#" class="blog-compact-item-container">
-						<div class="blog-compact-item">
-							<img src="images/blog-compact-post-01.jpg" alt=""> <span
-								class="blog-item-tag">Tips</span>
-							<div class="blog-compact-item-content">
-								<ul class="blog-post-tags">
-
-								</ul>
-
-							</div>
-						</div>
-					</a>
-				</div>
-				Blog post Item / End
-
-				Blog Post Item
-				<div class="col-md-6">
-					<a href="#" class="blog-compact-item-container">
-						<div class="blog-compact-item">
-							<img src="images/blog-compact-post-03.jpg" alt=""> <span
-								class="blog-item-tag">Tips</span>
-							<div class="blog-compact-item-content">
-								<ul class="blog-post-tags">
-
-								</ul>
-
-							</div>
-						</div>
-					</a>
-				</div> -->
-				<!-- Blog post Item / End -->
-
-			</div>
+		</div>
 			<!-- Related Posts / End -->
 
 
-			<div class="margin-top-50"></div>
 
-			<!-- Reviews -->
 			<form name="replyInsertForm">
 				<div class="input-group">
 					<input type="hidden" name="boardNum" value="${list.boardNum}" /> <input
@@ -302,91 +266,11 @@
 
 		</div>
 
-	</div>
-	<!-- Reply Form {s} -->
-
-	<div class="my-3 p-3 bg-white rounded shadow-sm"
-		style="padding-top: 10px"></div>
-
-	<!-- Reply Form {e} -->
-
-
-
-	<!-- Reply List {s}-->
-
-	<div class="my-3 p-3 bg-white rounded shadow-sm"
-		style="padding-top: 10px">
-
-		<h6 class="border-bottom pb-2 mb-0"></h6>
-
-		<div id="replyList"></div>
-
-	</div>
-
-	<!-- Reply List {e}-->
-
 </div>
 
-
-
-
-<div class="clearfix"></div>
-
-
-<!-- Add Comment -->
-<div id="add-review" class="add-review-box">
-
-	<!-- Add Review -->
-	<h3 class="listing-desc-headline margin-bottom-35">Add Review</h3>
-
-	<!-- Review Comment -->
-	<form id="add-comment" class="add-comment">
-		<fieldset>
-
-			<div class="row">
-				<div class="col-md-6">
-					<label>Name:</label> <input type="text" value="" />
-				</div>
-
-				<div class="col-md-6">
-					<label>Email:</label> <input type="text" value="" />
-				</div>
-			</div>
-
-			<div>
-				<label>Comment:</label>
-				<textarea cols="40" rows="3"></textarea>
-			</div>
-
-		</fieldset>
-
-		<button class="button">Submit Comment</button>
-		<div class="clearfix"></div>
-	</form>
-
-</div>
-<!-- Add Review Box / End -->
-
-</div>
 <!-- Content / End -->
 
-<!-- Widget -->
-<div class="widget margin-top-40">
-	<h3 class="margin-bottom-25">Social</h3>
-	<ul class="social-icons rounded">
-		<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-		<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-		<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-		<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-	</ul>
 
-</div>
-<!-- Widget / End-->
-
-<div class="clearfix"></div>
-<div class="margin-bottom-40"></div>
-</div>
-</div>
 
 
 
