@@ -100,7 +100,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardModel> nextboard(int boardNum) throws Exception {
+	public BoardModel nextboard(int boardNum) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.nextboard(boardNum);
 	}

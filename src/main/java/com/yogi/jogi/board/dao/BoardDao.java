@@ -88,8 +88,8 @@ public class BoardDao {
 	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectBoardListWidhMemnum", boardModel);
 	}
-	public List<BoardModel> nextboard(int boardNum) throws Exception {
-		return sqlSession.selectList(Namespace + ".nextboard",boardNum);
+	public BoardModel nextboard(int boardNum) throws Exception {
+		return sqlSession.selectOne(Namespace + ".nextboard",boardNum);
 			
 	}
 }

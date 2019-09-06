@@ -27,5 +27,5 @@ public interface BoardService {
 	 */	
 	public List<BoardModel> selectSearchBoardList(int start,int end,String boardid,String searchOption,String keyword) throws Exception;
 	public int selectListGetCount(String searchOption,String keyword,String boardid) throws Exception; 
-	public List<BoardModel> nextboard(int boardNum) throws Exception;
+	public BoardModel nextboard(int boardNum) throws Exception;
 }

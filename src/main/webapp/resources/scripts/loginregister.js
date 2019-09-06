@@ -560,4 +560,7 @@ function emailok(){
 function kakaotalkwithadmin(){
 	window.open("http://pf.kakao.com/_xaxbIxiT/chat","new","width=500,height=500,top=100,left=100,toolbar=no,status=no"); 
 }
+function kakaotalkimadmin(){
+	window.open("http://center-pf.kakao.com/_xaxbIxiT/chats","new","width=1000,height=800,top=100,left=100,toolbar=no,status=no"); 
+}
 
