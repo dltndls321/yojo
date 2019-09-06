@@ -28,9 +28,11 @@ public class BoardReplyController {
     
     @RequestMapping("/list") //댓글 리스트
     @ResponseBody
-    private List<ReplyModel> replyList(ReplyModel replyModel) throws Exception{
-        
-        return replyService.replyList();
+    private List<ReplyModel> replyList(ReplyModel replyModel,int boardNum,HttpSession session) throws Exception{
+        int count = replyService.replyCount();
+        int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		session.setAttribute("memNum", memNum);
+        return replyService.replyList(boardNum);
     }
     
     @RequestMapping("/insert") //댓글 작성 

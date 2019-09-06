@@ -74,7 +74,7 @@ public class MapController {
 		System.out.println(mapService.getFoodList());
 
 		mv.addObject("foodList", mapService.getFoodList());
-		mv.setViewName("maptest/maptest.do"); //
+		mv.setViewName("index/index6.do"); //
 
 		return mv;
 	}

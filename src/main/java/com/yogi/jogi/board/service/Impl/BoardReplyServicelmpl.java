@@ -22,9 +22,9 @@ public class BoardReplyServicelmpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyModel> replyList() throws Exception {
+	public List<ReplyModel> replyList(int boardNum) throws Exception {
 		// TODO Auto-generated method stub
-		return replyDao.replyList();
+		return replyDao.replyList(boardNum);
 	}
 
 	@Override

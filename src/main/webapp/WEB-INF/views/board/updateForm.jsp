@@ -32,8 +32,8 @@
 					<form method="post" name="updateForm" enctype="multipart/form-data"
 						action="/board/updatePro">
 
-						<input type="hidden" name="boardid" value="${boardid}"> <input
-							type="hidden" name="boardNum" value="${boardNum}">
+						<input type="hidden" name="boardid" value="${list.boardid}"> <input
+							type="hidden" name="boardNum" value="${list.boardNum}">
 
 						<div class="row form-group">
 
@@ -71,12 +71,7 @@
 						<div class="row form-group">
 
 							<table>
-								<tr>
-									<td width="70" align="center"></td>
-									<td width="260"><input type="file" size="40"
-										maxlength="30" name="uploadfile"
-										style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
-								</tr>
+								
 							</table>
 						</div>
 						<table>

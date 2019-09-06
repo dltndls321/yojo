@@ -126,7 +126,6 @@ public class SpotController {
         	endPage = pageCount;
     	JSONObject pdata = new JSONObject();
     	pdata.put("count", total);
-		 System.out.println("여기"+pdata.toString());
         String finaldata="";
         System.out.println("갯수"+total);
         for (int i = 0; i < parse_item.size(); i++) { 

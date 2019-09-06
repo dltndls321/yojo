@@ -19,6 +19,7 @@
 			alert("제목을 입력해주세요")
 			document.form.subject.focus();
 			return;
+		 board/boardlist
 		}
 		if (content == " ") {
 			alert("제목을 입력해주세요")
@@ -49,13 +50,13 @@
 			<div class="col-lg-8">
 				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">게시판 관리</h1>
+					<h1 class="page-header"></h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12"></div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-heading">게시판</div>
+					<div class="panel-heading"></div>
 					<div class="panel-body">
 						<form method="post" name="writeUploadForm"
 							enctype="multipart/form-data" action="/board/writeUploadPro">

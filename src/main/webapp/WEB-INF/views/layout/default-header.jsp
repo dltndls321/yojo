@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
     function execDaumPostcode() {
         new daum.Postcode({
@@ -139,9 +140,8 @@
 			
 									<li><a href="#">Community</a>
 										<ul>
-											<li><a href="/board/list?boarid=2">Notice</a></li>
-											<li><a href="/board/boardlist?boarid=1">Free Board</a></li>
-											<li><a href="dashboard-bookings.html">Q&A</a></li>
+											<li><a href="/board/list">공지사항</a></li>
+											<li><a href="/board/boardlist">자유게시판</a></li>
 										</ul>
 									</li>
 									
