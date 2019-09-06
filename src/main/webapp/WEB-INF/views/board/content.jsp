@@ -200,16 +200,17 @@
 			</div>
 			<!-- Blog Post / End -->
 
-
-			<!-- Post Navigation -->
+						<!-- Post Navigation -->
 			<ul id="posts-nav" class="margin-top-0 margin-bottom-45">
-				<li class="next-post"><a onclick="document.location.href='/board/content?boardNum=<c:out value="${boardNum+1}'"/>"><span>다음글</span> 얌얌</a></li>
-				<li class="prev-post"><a onclick="document.location.href='/board/content?boardNum=<c:out value="${boardNum+1}'"/>"><span>이전글 </span>냠냠</a></li>
+			<c:choose>
+				<c:when test="${board.nextboardNum==0}">다음글이 없습니다.</c:when>
+				<c:otherwise><li class="next-post"><a href='/board/content?boardNum=${board.nextboardNum}'><span>다음글</span></a></li></c:otherwise>
+				</c:choose>
+				<c:choose>
+				<c:when test="${board.prevboardNum==0}">이전글이 없습니다.</c:when>
+				<c:otherwise><li class="prev-post"><a href='/board/content?boardNum=${board.prevboardNum}'><span>이전글 </span></a></li></c:otherwise>
+				</c:choose>
 			</ul>
-
-
-
-
 
 			<!-- Related Posts -->
 			<!-- <div class="clearfix"></div>

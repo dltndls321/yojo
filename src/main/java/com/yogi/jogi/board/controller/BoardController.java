@@ -285,7 +285,7 @@ public class BoardController {
 	@RequestMapping(value = "content", method = RequestMethod.GET)
 	public ModelAndView content(@RequestParam("boardNum") int boardNum, MemberModel memberModel, HttpSession session)
 			throws Exception {
-
+        System.out.println("content+++++++++++++++");
 		mv.clear();
 		int count = replyService.replyCount();
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
@@ -294,12 +294,19 @@ public class BoardController {
 		mv.addObject("memNum", memNum);
 		mv.addObject("count",replyService.replyCount());
 		mv.addObject("list", boardService.selectBoard(boardNum));
+		
+		BoardModel board = null;
+		board= boardService.nextboard(boardNum);
+		System.out.println("++++++++"+board);
+		
+		
+		
+		
 		System.out.println(boardNum);
+		mv.addObject("board", board);
 		mv.addObject("memberModel", new MemberModel());
 		mv.setViewName("board/content.do"); // 가야할 페이지
-
 		return mv;
-
 	}
 
 	/*
@@ -378,10 +385,5 @@ public class BoardController {
 		return mv;
 
 	}
-	@RequestMapping("nextboard")
-	public ModelAndView nextboard(BoardModel boardModel,int boardNum) throws Exception{
-		
-		boardService.nextboard(boardNum);
-		return mv;
-	}
+
 }
