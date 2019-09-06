@@ -35,7 +35,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<!-- 검색 기능 폼 -->
 				<form name="form2" method="post" action="${path }/board/boardlist">
 					<select name="searchOption" style="width: 150px; height: 30px;">
 					<option value="subject"<c:out value="${searchOption == 'subject'?'selected':''}"/>>제목</option>			

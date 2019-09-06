@@ -182,17 +182,24 @@
 
 
 					<!-- Share Buttons -->
-					<c:if test="${sessionScope.memNum == list.memNum}">
+					<c:if test="${list.memNum == list.memNum}">
 						<input type="submit" value="수정"
 							style="max-width: 100px; min-width: 99px;">
 						<input type="button" value="글삭제"
 							onclick="document.location.href='<%=request.getContextPath()%>/board/delete/${list.boardNum}'"
 							style="max-width: 100px;">
 					</c:if>
+						
+					<c:if test="${list.boardid== '1' }">
+						<input type="button" value=" 글목록"
+						onclick="document.location.href='/board/list?pageNum=${pageNum}'"
+						style="max-width: 100px;">
+						</c:if>
+								<c:if test="${list.boardid== '2' }">			
 					<input type="button" value=" 글목록"
 						onclick="document.location.href='/board/boardlist?pageNum=${pageNum}'"
 						style="max-width: 100px;">
-
+					</c:if>	
 
 					<div class="clearfix"></div>
 
@@ -204,10 +211,12 @@
 			<ul id="posts-nav" class="margin-top-0 margin-bottom-45">
 			<c:choose>
 				<c:when test="${board.nextboardNum==0}">다음글이 없습니다.</c:when>
+				<c:when test="${sessionScope.boardid==board.boardid  }"></c:when>
 				<c:otherwise><li class="next-post"><a href='/board/content?boardNum=${board.nextboardNum}'><span>다음글</span></a></li></c:otherwise>
 				</c:choose>
 				<c:choose>
 				<c:when test="${board.prevboardNum==0}">이전글이 없습니다.</c:when>
+				<c:when test="${sessionScope.boardid==board.boardid  }"></c:when>
 				<c:otherwise><li class="prev-post"><a href='/board/content?boardNum=${board.prevboardNum}'><span>이전글 </span></a></li></c:otherwise>
 				</c:choose>
 			</ul>

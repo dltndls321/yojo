@@ -75,7 +75,7 @@ public class BoardController {
 	public ModelAndView list2(HttpServletRequest request, HttpSession session, MemberModel memberModel,
 			@RequestParam(defaultValue = "subject") String searchOption,
 			@RequestParam( defaultValue = "") String keyword) throws Exception {
-	
+			//searchOption keyword는 view에서 값을 받기위해 Param으로 선언
 
 		int pageSize = 5;// 한 페이지에 최대로 띄울 갯수
 		int currentPage = pageNum;
@@ -99,7 +99,7 @@ public class BoardController {
 		int end = endRow;
 		
 		List<BoardModel> list = boardService.selectSearchBoardList(startRow +1, endRow, "1", searchOption, keyword);
-		
+		//서비스에서 sql를 실행한다.
 		/*
 		 * List<BoardModel> boardlist = boardService.selectBoardListPaging(startRow + 1,
 		 * endRow, "1");
@@ -111,7 +111,7 @@ public class BoardController {
 		 * String memNum = request.getParameter("memNum");
 		 * request.getSession().setAttribute("memNum", memNum);
 		 */
-		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
+		int memNum = (Integer) session.getAttribute("SessionMemberMemnum"); //memnum를 받기위해 session으로 멤버아이디를 가져온다
 		session.setAttribute("memNum", memNum);
 		session.setAttribute("boardid",boardid);
 		mv.addObject("boardlist", list);
@@ -144,7 +144,7 @@ public class BoardController {
 		int currentPage = pageNum;
 		//int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
 		int count = boardService.selectBoardListWidhBoardid("2").size(); // BoardDBBeanMyBatis에 설정해놓은 boardid
-		int scount = boardService.selectListGetCount(searchOption, keyword,"2");
+		int scount = boardService.selectListGetCount(searchOption, keyword,"2"); //scount는 회원이 search 했을때 페이징처리를 위해 사용
 		
 		int startRow = ((currentPage - 1) * pageSize);
 		int endRow = currentPage * pageSize;
@@ -231,7 +231,7 @@ public class BoardController {
 //		String fname = "http://211.63.89.29:31235/resources/fileSave/" + multi.getOriginalFilename();
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		System.out.println(boardModel);
-		if (fname != null && !fname.equals("http://211.63.89.75:9080/resources/fileSave/")) {
+		if (fname != null && !fname.equals("http://211.63.89.75:9080/resources/fileSave/")) { //자기의 ip주소에 따라 사용
 //		if (fname != null && !fname.equals("http://211.63.89.29:31235/resources/fileSave/")) {
 			String uploadPath = "C:/hyeyeon/Java/WorkSpace/yojo/src/main/webapp/resources/fileSave/";
 //			String uploadPath = "C:/Users/PC/Desktop/soosoo/yogijogi/workspace/yojo/src/main/webapp/resources/fileSave/";
@@ -285,23 +285,19 @@ public class BoardController {
 	@RequestMapping(value = "content", method = RequestMethod.GET)
 	public ModelAndView content(@RequestParam("boardNum") int boardNum, MemberModel memberModel, HttpSession session)
 			throws Exception {
-        System.out.println("content+++++++++++++++");
 		mv.clear();
 		int count = replyService.replyCount();
 		int memNum = (Integer) session.getAttribute("SessionMemberMemnum");
 		session.setAttribute("memNum", memNum);
 		session.setAttribute("boardNum", boardNum);
+		session.setAttribute("boardid", boardid);
 		mv.addObject("memNum", memNum);
 		mv.addObject("count",replyService.replyCount());
 		mv.addObject("list", boardService.selectBoard(boardNum));
 		
-		BoardModel board = null;
-		board= boardService.nextboard(boardNum);
-		System.out.println("++++++++"+board);
-		
-		
-		
-		
+		BoardModel board = null; //board를 리스트로 생성
+		board= boardService.nextboard(boardNum); //nextboard에 이전글 다음글에 값을 가져온후 뿌려준다
+
 		System.out.println(boardNum);
 		mv.addObject("board", board);
 		mv.addObject("memberModel", new MemberModel());
