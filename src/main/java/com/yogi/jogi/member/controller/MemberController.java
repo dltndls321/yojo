@@ -29,11 +29,15 @@ import com.yogi.jogi.board.model.BoardModel;
 import com.yogi.jogi.board.service.BoardService;
 import com.yogi.jogi.common.model.FestReviewModel;
 import com.yogi.jogi.common.model.FestivalModel;
+import com.yogi.jogi.common.model.FoodModel;
+import com.yogi.jogi.common.model.FoodReviewModel;
 import com.yogi.jogi.common.model.NowUserModel;
 import com.yogi.jogi.common.model.SpotModel;
 import com.yogi.jogi.common.model.SpotReviewModel;
 import com.yogi.jogi.common.service.FestReviewService;
 import com.yogi.jogi.common.service.FestService;
+import com.yogi.jogi.common.service.FoodReviewService;
+import com.yogi.jogi.common.service.FoodService;
 import com.yogi.jogi.common.service.MailService;
 import com.yogi.jogi.common.service.OauthService;
 import com.yogi.jogi.common.service.SpotReviewService;
@@ -67,6 +71,10 @@ public class MemberController {
 	private OauthService oauthService;
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private FoodService foodService;
+	@Autowired
+	private FoodReviewService foodReviewService;
 	/* 회원가입/로그인/로그아웃 */
 	@RequestMapping(value = "registemember")
 	public ModelAndView registemember(MemberDetailModel memberDetailModel, HttpSession session) throws Exception {
@@ -225,10 +233,13 @@ public class MemberController {
 		FestReviewModel festReviewModel = new FestReviewModel();
 		FestivalModel festivalModel = new FestivalModel();
 		SpotReviewModel spotReviewModel = new SpotReviewModel();
+		FoodReviewModel foodReviewModel = new FoodReviewModel();
 		BoardModel boardModel = new BoardModel();
 		SpotModel spotModel = new SpotModel();
+		FoodModel foodModel = new FoodModel();
 		spotReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		festReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
+		foodReviewModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		boardModel.setMemNum((Integer) session.getAttribute("SessionMemberMemnum"));
 		List<FestReviewModel> reviewList = festReviewService.selectFestReviewWithMemNum(festReviewModel);
 		List<FestivalModel> festList = new ArrayList<FestivalModel>();
@@ -236,6 +247,7 @@ public class MemberController {
 		int reviewListsize = reviewList.size();
 		int star = 0;
 		double avg=0;
+		double festavg=0;
 		if(reviewListsize!=0) {
 			for(int i = 0 ; i<reviewListsize;i++) {
 				star = star + reviewList.get(i).getStar();
@@ -244,7 +256,7 @@ public class MemberController {
 				festivalModel = festService.selectFestWithFestNum(festivalModel);
 				festList.add(festivalModel);
 			}
-			avg =((double)((star*10)/reviewListsize))/10;
+			festavg =((double)((star*10)/reviewListsize))/10;
 		}
 		List<SpotReviewModel> spotReviewList = spotReviewService.selectSpotReviewWithMemNum(spotReviewModel);
 		List<SpotModel> spotList = new ArrayList<SpotModel>();
@@ -261,11 +273,45 @@ public class MemberController {
 			}
 			spotavg =((double)((spotstar*10)/spotreviewListsize))/10;
 		}
-		if(avg != 0 && spotavg != 0) {
-			avg = (double)(((int)((avg+spotavg)*10))/2)/10;
-		}else if(avg==0 && spotavg != 0 ) {
+		List<FoodReviewModel> foodReviewList = foodReviewService.selectFoodReviewWithMemNum(foodReviewModel);
+		List<FoodModel> foodList = new ArrayList<FoodModel>();
+		int foodreviewListsize = foodReviewList.size();
+		int foodstar = 0;
+		double foodavg = 0;
+		if(foodreviewListsize!=0) {
+			for(int i =0 ; i<foodreviewListsize;i++) {
+				foodstar = foodstar+foodReviewList.get(i).getStar();
+				int foodNum = foodReviewList.get(i).getFoodNum();
+				foodModel.setFoodNum(foodNum);
+				foodModel = foodService.selectFoodWithFoodNum(foodModel);
+				foodList.add(foodModel);
+			}
+			foodavg=((double)((foodstar*10)/foodreviewListsize))/10;
+		}
+		if(festavg != 0 && foodavg != 0&& spotavg != 0) {
+			avg = (double)(((int)(((festavg*reviewListsize)+(spotavg*spotreviewListsize)+(foodavg*foodreviewListsize))*10))/(reviewListsize+spotreviewListsize+foodreviewListsize))/10;
+		}
+		else if(festavg != 0 && spotavg == 0 && foodavg != 0) {
+			avg = (double)(((int)(((festavg*reviewListsize)+(foodavg*foodreviewListsize))*10))/(reviewListsize+foodreviewListsize))/10;
+		}
+		else if(spotavg != 0 && festavg == 0 && foodavg != 0) {
+			avg = (double)(((int)(((spotavg*spotreviewListsize)+(foodavg*foodreviewListsize))*10))/(spotreviewListsize+foodreviewListsize))/10;
+		}
+		else if(spotavg != 0 && foodavg == 0 && festavg != 0) {
+			avg = (double)(((int)(((spotavg*spotreviewListsize)+(festavg*reviewListsize))*10))/(spotreviewListsize+reviewListsize))/10;
+		}
+		else if(spotavg != 0 && foodavg == 0 && festavg == 0) {
 			avg=spotavg;
 		}
+		else if(foodavg != 0 && spotavg == 0 && festavg == 0) {
+			avg=foodavg;
+		}
+		else if(festavg != 0 && foodavg == 0 && spotavg == 0) {
+			avg=festavg;
+		}
+		
+		
+		
 		System.out.println(avg);
 		System.out.println(spotavg);
 		System.out.println("세션번호  : " + (Integer) session.getAttribute("SessionMemberMemnum"));
@@ -282,6 +328,8 @@ public class MemberController {
 		model.addObject("spotReviewList",spotReviewList);
 		model.addObject("spotList",spotList);
 		model.addObject("spotreviewListsize",spotreviewListsize);
+		model.addObject("foodList",foodList);
+		model.addObject("foodReviewList",foodReviewList);
 		model.addObject("boardList",boardList);
 		System.out.println("memberprofile 최종");
 		model.setViewName("member/memberprofile.do");
