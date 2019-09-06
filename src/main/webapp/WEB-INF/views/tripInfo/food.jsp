@@ -96,7 +96,7 @@ function goChange(num){
 				
 				<div class="main-search-input-item">
 					<select data-placeholder="All Categories" class="chosen-select" id="foodcode" >
-						<option value = "">관광지 분류</option>	
+						<option value = "">음식 분류</option>	
 						<option value ="A05020100">한식</option>
 						<option value ="A05020200">양식</option>
 						<option value ="A05020300">일식</option>

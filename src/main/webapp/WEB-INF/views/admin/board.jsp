@@ -30,15 +30,12 @@
 						<c:forEach items="${boardlist}" var="boardlist">
 						<li>
 							<div class="list-box-listing">
-								<div class="list-box-listing-img"><img src="images/listing-item-01.jpg" alt=""></div>
+								<div class="list-box-listing-img"><img src='<c:out value="${boardlist.fname}" />' alt="" style="width: 150px;height: 100px;"></div>
 								<div class="list-box-listing-content">
 									<div class="inner">
 										<h3><a href="/admin/boardContent/${boardlist.boardNum }">${boardlist.subject }</a></h3>
 										<span>${boardlist.writer }</span>
 										<span>${boardlist.regdate }</span>
-										<div class="star-rating" data-rating="3.5">
-											<div class="rating-counter">(12 Reply)</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -47,26 +44,6 @@
 							</div>
 						</li>
 						</c:forEach>
-
-						<!-- <li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-02.jpg" alt=""></a></div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3><a href="#">글 제목</a></h3>
-										<span>작성자</span>
-										<span>작성일</span>
-										<div class="star-rating" data-rating="5.0">
-											<div class="rating-counter">(23 Reply)</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
-							</div>
-						</li> -->
 						
 					</ul>
 				</div>

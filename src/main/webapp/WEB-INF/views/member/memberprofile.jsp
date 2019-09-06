@@ -88,7 +88,7 @@
 				<!-- Listing Item -->
 				<div class="col-lg-12 col-md-12">
 					<div class="listing-item-container list-layout">
-						<a href="listings-single-page.html" class="listing-item">
+						<a href="/board/content?boardNum=${boardLists.boardNum }" class="listing-item">
 							<!-- Image -->
 							<div class="listing-item-image">
 								<img src="${boardLists.fname }" alt="" style="width: 194px;height: 220px;">

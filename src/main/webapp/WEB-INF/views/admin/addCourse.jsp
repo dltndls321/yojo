@@ -294,13 +294,11 @@ $(document).ready(function(){
 
                   <!-- Headline -->
                   <div class="add-listing-headline">
-                     <h3><i class="sl sl-icon-cup"></i>Eat</h3>
-                     <!-- Switcher -->
-                     <label class="switch"><input name="plusCourse" type="checkbox" checked ><span class="slider round"></span></label>
-                     
+                     <h3><i class="sl sl-icon-cup"></i>Eat<a href="#" class="button" style="float:right; margin-top:100" id="foodclear">clear</a></h3>
+                  
                   </div>
-            <!-- Switcher ON-OFF Content -->
-            <div class="switcher-content">
+        
+       
                <div class="row with-forms">
                   <div class="col-md-6">
                            <h5>여행 지역</h5>
@@ -342,20 +340,16 @@ $(document).ready(function(){
                            </select>
                       </div>
                   
-         <div class="row">
-               <div class="col-md-8">
+     
+               <div class="col-md-12">
                         <!-- Checkboxes -->
                   <h5 class="margin-top-30 margin-bottom-10"><br/>음식점 선택</h5>
                   <div class="checkboxes in-row margin-bottom-20" id = "foodlist">
                   </div>
                </div>
-               <div class="col-md-4">
-               		<a href="#" class="button" style="float:right; margin-top:100" id="festclear">clear</a>
-               </div>
-          </div>
+        
 
                </div>
-           </div>
         </div>
                <!-- Section / End -->
                
@@ -655,8 +649,12 @@ $(document).ready(function(){
                <!-- Section / End -->
 
                <form action = "chkCourse" id = "finaldata">
-               
+               <div class="row">
+                <div class="col-md-5"></div>
+               <div class="col-md-4">
                <input type="submit"  class="button preview" value="submit" id="preview"/> 
+               </div>
+                <div class="col-md-3"></div>
                </form>
 
             </div>
