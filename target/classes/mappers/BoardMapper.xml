@@ -176,5 +176,22 @@
 			</otherwise>
 		</choose>
 	</sql>
+	<select id="nextboard" resultType="boardModel">
+	
+	select 
+		* 
+		from
+		board
+		where boardNum=#{boardNum}
+		union all(
+		select * from board where <![CDATA[boardNum<#{boardNum]]> 
+		order by boardNum desc limit 2)
+		union all(
+		select * from board where <![CDATA[boardNum<#{boardNum]]> 
+		order by boardNum asc limit 2)
+		order by boardNum desc;
+		
+		
+	</select>
 </mapper>
 

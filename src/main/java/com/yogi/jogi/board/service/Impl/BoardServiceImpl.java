@@ -99,4 +99,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardListWidhMemnum(boardModel);
 	}
 
+	@Override
+	public List<BoardModel> nextboard(int boardNum) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.nextboard(boardNum);
+	}
+
 }

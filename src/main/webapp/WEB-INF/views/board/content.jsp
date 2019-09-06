@@ -36,8 +36,6 @@
 													+ value.replyNum
 													+ ' / 작성자 : '
 													+ value.memNum;
-											
-										
 											 a += '<a onclick="replyUpdate('
 													+ value.replyNum + ',\''
 													+ value.content
@@ -205,8 +203,8 @@
 
 			<!-- Post Navigation -->
 			<ul id="posts-nav" class="margin-top-0 margin-bottom-45">
-				<li class="next-post"><a href="#"><span>다음글</span> 얌얌</a></li>
-				<li class="prev-post"><a href="#"><span>이전글 </span>냠냠</a></li>
+				<li class="next-post"><a onclick="document.location.href='/board/content?boardNum=<c:out value="${boardNum+1}'"/>"><span>다음글</span> 얌얌</a></li>
+				<li class="prev-post"><a onclick="document.location.href='/board/content?boardNum=<c:out value="${boardNum+1}'"/>"><span>이전글 </span>냠냠</a></li>
 			</ul>
 
 
@@ -214,11 +212,11 @@
 
 
 			<!-- Related Posts -->
-			<div class="clearfix"></div>
+			<!-- <div class="clearfix"></div>
 			<h4 class="headline margin-top-25">최근 글</h4>
 			<div class="row">
 
-				<!-- Blog Post Item -->
+				Blog Post Item
 				<div class="col-md-6">
 					<a href="#" class="blog-compact-item-container">
 						<div class="blog-compact-item">
@@ -233,9 +231,9 @@
 						</div>
 					</a>
 				</div>
-				<!-- Blog post Item / End -->
+				Blog post Item / End
 
-				<!-- Blog Post Item -->
+				Blog Post Item
 				<div class="col-md-6">
 					<a href="#" class="blog-compact-item-container">
 						<div class="blog-compact-item">
@@ -249,7 +247,7 @@
 							</div>
 						</div>
 					</a>
-				</div>
+				</div> -->
 				<!-- Blog post Item / End -->
 
 			</div>

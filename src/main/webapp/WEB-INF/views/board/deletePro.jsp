@@ -11,7 +11,7 @@
 	<c:if test="${check==1}">
 
 		<meta http-equiv="Refresh"
-			content="0;url=<%=request.getContextPath() %>/board/boardlist?pageNum=${pageNum}">
+			content="0;url=<%=request.getContextPath() %>/board/list?pageNum=${pageNum}">
 			
 	</c:if>
 	<c:if test="${check!=1}">
