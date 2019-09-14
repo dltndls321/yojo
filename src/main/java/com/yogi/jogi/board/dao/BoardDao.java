@@ -1,8 +1,11 @@
 package com.yogi.jogi.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +13,9 @@ import com.yogi.jogi.board.model.BoardModel;
 
 @Repository
 public class BoardDao {
-	
+
 	private SqlSession sqlSession;
-	
+
 	@Autowired
 	public BoardDao(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -20,54 +23,73 @@ public class BoardDao {
 
 	private static final String Namespace = "boardMapperNS";
 
-	public List<BoardModel> selectBoardList(BoardModel boardModel) throws Exception {
-		System.out.println("before quering" + boardModel.toString());
-		String boardid = boardModel.getBoardid();
-		List<BoardModel> returnValue = sqlSession.selectList(Namespace + ".selectBoardList",boardModel);
+	public List<BoardModel> selectBoardList() throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardList");
+	}
 
-		System.out.println(returnValue.toString());
-		return returnValue;
+	BoardModel boardModel = new BoardModel();
+
+	public BoardModel selectBoard(int boardNum) throws Exception {
+		try {
+			int result = sqlSession.update(Namespace + ".updateReadcount", boardNum);
+			boardModel = (BoardModel) sqlSession.selectOne(Namespace + ".selectBoard", boardNum);
+
+		} finally {
+			return boardModel;
+		}
 
 	}
 
-	public BoardModel selectBoard(BoardModel boardModel) throws Exception {
-		return sqlSession.selectOne(Namespace+".selectBoard",boardModel);
-	}
-//
-//	public BoardModel selectMaxBoardNum(BoardModel boardModel) throws Exception {
-//		return sqlSession.selectOne(Namespace + ".selectMaxBoardNum", boardModel);
-//	}
-//
-//	public int updateReStep(BoardModel boardModel) throws Exception {
-//		return sqlSession.selectOne(Namespace + ".updateReStep", boardModel);
-//
-//	}
-//
-	public int insertBoard(BoardModel boardModel, String boardid) throws Exception {
+	public int insertBoard(BoardModel boardModel) throws Exception {
+		return sqlSession.insert(Namespace + ".insertBoard", boardModel);
 
-		return sqlSession.selectOne(Namespace + ".insertBoard",boardModel);
 	}
-//
-//	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
-//		try {
-//			return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
-//		} finally {
-//			sqlSession.close();
-//		}
-//	}
-//
-//	public int updateReadCount(BoardModel boardModel) throws Exception {
-//		
-//		
-//		return sqlSession.selectOne(Namespace + ".updateReadCount", boardModel);
-//
-//	}
-//	public int updateBoard(BoardModel boardModel) throws Exception {
-//		return sqlSession.selectOne(Namespace + ".updateBoard", boardModel);
-//
-//	}
-//	public int deleteBoard(BoardModel boardModel) throws Exception {
-//		return sqlSession.selectOne(Namespace + ".deleteBoard", boardModel);
-//
-//	}
+
+	public int updateBoard(BoardModel boardModel) throws Exception {
+		System.out.println(boardModel);
+		return sqlSession.update(Namespace + ".updateBoard", boardModel);
+
+	}
+
+	public int deleteBoard(BoardModel boardModel) throws Exception {
+		return sqlSession.delete(Namespace + ".deleteBoard", boardModel);
+
+	}
+
+	public BoardModel selectPasswdOneNum(BoardModel boardModel) throws Exception {
+
+		return sqlSession.selectOne(Namespace + ".selectPasswdOneNum", boardModel);
+
+	}
+
+	public List<BoardModel> selectBoardListPaging(Map map) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardListPaging", map);
+	}
+
+	public int updateReadcount(BoardModel boardModel) throws Exception {
+		return sqlSession.update(Namespace + ".updateReadcount", boardModel);
+
+	}
+
+	public List<BoardModel> selectBoardListWidhBoardid(String boardid) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardListWidhBoardid", boardid);
+	}
+
+	public List<BoardModel> selectSearchBoardList(Map map) throws Exception {
+		
+		return sqlSession.selectList(Namespace + ".selectSearchBoardList", map);
+	}
+
+	public int selectListGetCount(Map map) throws Exception {
+		
+		return sqlSession.selectOne(Namespace + ".selectListGetCount", map);
+	}
+	
+	public List<BoardModel> selectBoardListWidhMemnum(BoardModel boardModel) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectBoardListWidhMemnum", boardModel);
+	}
+	public BoardModel nextboard(int boardNum) throws Exception {
+		return sqlSession.selectOne(Namespace + ".nextboard",boardNum);
+			
+	}
 }

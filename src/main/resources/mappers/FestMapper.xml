@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="FestMapperNS">
+  	<insert id="insertFest" parameterType="festModel">
+  		Insert into festival(festNum,name,fdate1,area,fdate2,x,y,zcode)	
+  		values(
+	  		festSeq.NEXTVAL,
+	  		#{name},
+	  		#{fdate1},
+	  		#{area},
+	  		#{fdate2},
+	  		#{x},
+	  		#{y},
+	  		#{zcode}
+  		)
+  	</insert>
+  	
+  	<select id="selectFestList" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    </select>
+    
+    
+    <!-- 승해가 추가한부분 -->
+    <select id="selectFestListXY" parameterType="hashmap" resultType="festModel" >
+     <![CDATA[
+    select * from festival where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
+    ]]>	
+    </select>
+    <select id="getFestArea"  parameterType="String" resultType="festModel">
+    	select * from festival where name = #{name}
+   </select>
+   <!-- 끝 -->
+    
+    
+    <select id="selectFestWithFestNum" parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		festNum=#{festNum}
+    </select>
+     <select id="selectFestWithsubject" parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		name=#{name}
+    </select>
+    
+     <select id="selectFestAdmin"  parameterType="festModel" resultType="festModel">
+    	select
+    		*
+    	from
+    		festival
+    	where
+    		#{fdate2}
+    	between fdate1 and fdate2
+    	and
+    		zcode=#{zcode}
+    </select>
+    
+    
+</mapper>

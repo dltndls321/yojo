@@ -14,12 +14,9 @@
 
 <!-- Header Container
 ================================================== -->
-<c:if test="${empty SessionMemberMemnum }">
+
 	<tiles:insertAttribute name="header"/>
-</c:if>
-<c:if test="${not empty SessionMemberMemnum }">
-	<tiles:insertAttribute name="logheader"/>
-</c:if>
+
 
 
 <!-- Header Container / End -->

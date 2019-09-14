@@ -1,22 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<div class="page-wrapper">
+		<div class="container-fluid">
+			<div class="col-lg-8" align="center">
 
-<html><head><title>°Ô½ÃÆÇ</title></head><body>
-	<div class="w3-center">
-		<p class="w3-left" style="padding-left: 30px;">></p>
-		<div class="w3-container ">
-			<b>±Û»èÁ¦</b><br>
-			<form method="POST" name="deleteForm" action="<%=request.getContextPath() %>/board/deletePro">
-			<input type="hidden" name="num" value="${num }">
+				<div class="col-lg-12">
+					<h1 class="page-header"></h1>
+					<h1 class="page-header"></h1>
+					
+				</div>
+				<div class="row">
+					<div class="col-lg-12"></div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form method="POST" name="deleteForm" action="/board/deletePro">
+			<input type="hidden" name="boardNum" value="${boardNum }">
 			<input	type="hidden" name="pageNum" value="${pageNum }">
 				<table class="table-bordered" width="360">
-	<tr height="30"><td align=center><b>ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.</b></td></tr>
-	<tr height="30"><td align=center>ºñ¹Ð¹øÈ£ : <input type="password" name="passwd"
+	<tr height="30"><td align=center><b>ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.</b></td></tr>
+	<tr height="30"><td align=center>ë¹„ë°€ë²ˆí˜¸ : <input type="password" name="passwd"
 							size="8" maxlength="12"></td>
 					</tr>
 					<tr height="30">
-						<td align=center><input type="submit" value="±Û»èÁ¦">
-							<input type="button" value="±Û¸ñ·Ï"
-							onclick="document.location.href='<%=request.getContextPath() %>/board/list?pageNum=${pageNum }'">
-						</td>
-		</tr></table></form>	</div>	</div></body></html>
+						<td align=center><input type="submit" value="ê¸€ì‚­ì œ">
+						
+							<input type="button" value="ê¸€ëª©ë¡" style="max-width: 70px;"
+							onclick="document.location.href='<%=request.getContextPath() %>/board/boardlist?pageNum=${pageNum }'">
+							</td>
+							</tr>
+							</table>
+							</form>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

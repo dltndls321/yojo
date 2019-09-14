@@ -5,9 +5,75 @@
  
 <mapper namespace="MapMapperNS">
 
-  <select id="getFoodList"  resultType="mapModel">
-    	select * from foodtest3 where rownum between 1 and 5
+   <select id="getFoodList"  resultType="mapModel">
+    	select * from food
    </select>
+     
+   <select id="getFoodList2"  parameterType="hashmap"  resultType="mapModel" >
+   	 <![CDATA[
+    select * from food where x>#{startX} and x<#{endX} and y>#{startY} and y<#{endY}
+    ]]>	
+   </select>
+   <select id="getFoodArea"  parameterType="String" resultType="mapModel">
+    	select * from food where name = #{name}
+   </select>
+   <insert id="insertCourse" parameterType="CourseModel">
+  		Insert into course	
+  		values(
+	  		courseSeq.NEXTVAL,
+	  		#{subject},
+	  		sysdate,
+	  		#{starting},
+	  		#{destination},
+	  		#{course1},
+	  		#{course2},
+	  		#{course3},
+	  		#{course4},
+	  		#{course5},
+	  		#{course6}
+  		)
+  	</insert>
+  
+	<select id="getCourseList" parameterType="String" resultType="CourseModel">
+    	select
+    		*
+    	from
+    		course
+    	where
+    		subject = #{subject} 
+    </select>
+	 <select id="getCourseListPaging" parameterType="hashmap" resultType="CourseModel">
+    	select *  from
+    		(select rownum rnum,a.* from
+    			(select 
+    				* 
+    			from 
+    				course
+    			where
+    				subject = #{subject} 
+    			order by coursenum desc) a
+    		)
+    		where rnum between #{start} and #{end}
+    </select>
+	<select id="getCourseListOne" parameterType="String" resultType="CourseModel">
+    	select
+    		*
+    	from
+    		course
+    	where
+    		subject = #{subject} and rownum = 1
+    	order by coursenum desc
+    </select>
+   <select id="getCourseListNumOne" parameterType="int" resultType="CourseModel">
+    	select
+    		*
+    	from
+    		course
+    	where
+    		coursenum = #{coursenum} 
+    </select>
+   
+   
    
    <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
     	select

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="FoodReviewMapperNS">
+  	<insert id="insertFoodReview" parameterType="spotReviewModel">
+  		Insert into foodReview(fdrNum,foodNum,memNum,star,fdReview,regDate)	
+  		values(
+	  		foodReviewSeq.NEXTVAL,
+	  		#{foodNum},
+	  		#{memNum},
+	  		#{star},
+	  		#{fdReview},
+	  		sysdate
+  		)
+  	</insert>
+  	
+  	<select id="selectFoodReviewList" resultType="foodReviewModel">
+    	select
+    		*
+    	from
+    		foodReview
+    	order by
+    		fdrNum desc
+    </select>
+    
+    <select id="selectFoodReviewListWithFoodNum"  parameterType="foodReviewModel" resultType="foodReviewModel">
+    	select
+    		*
+    	from
+    		foodReview
+    	where
+    		foodNum = #{foodNum}
+    </select>
+    
+    <select id="selectFoodReviewWithMemNum"  parameterType="foodReviewModel" resultType="foodReviewModel">
+    	select
+    		*
+    	from
+    		foodReview
+    	where
+    		memNum = #{memNum}
+    </select>
+    
+    <select id="selectFoodReviewOne" parameterType="foodReviewModel" resultType="foodReviewModel">
+    	select
+    		*
+    	from
+    		foodReview
+    	where
+    		memNum = #{memNum}
+    	and
+    		foodNum = #{foodNum}
+    </select>
+  	
+  	<update id="updateFoodReview" parameterType="foodReviewModel">
+    	update foodReview set
+    		star = #{star},
+    		fdReview = #{fdReview}
+    	where
+    		memNum = #{memNum}
+    	and
+    		foodNum = #{foodNum}
+    </update>
+</mapper>

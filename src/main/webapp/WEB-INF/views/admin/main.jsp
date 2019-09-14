@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="dashboard-content">
 
 		<!-- Titlebar -->
@@ -34,7 +36,7 @@
 		<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-2">
-					<div class="dashboard-stat-content"><h4>1000</h4> <span>Total Visitor</span></div>
+					<div class="dashboard-stat-content"><h4> ${nowuser}</h4> <span>접속중인 회원수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
 				</div>
 			</div>
@@ -42,7 +44,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-3">
-					<div class="dashboard-stat-content"><h4>5</h4> <span>Total Member</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalmember}</h4> <span>총 회원 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
 				</div>
 			</div>
@@ -50,7 +52,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-1">
-					<div class="dashboard-stat-content"><h4>25</h4> <span>Total Course</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalboard}</h4> <span>총 게시글 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 				</div>
 			</div>
@@ -58,7 +60,7 @@
 			<!-- Item -->
 			<div class="col-lg-3 col-md-6">
 				<div class="dashboard-stat color-1">
-					<div class="dashboard-stat-content"><h4>50</h4> <span>Total TripInfo</span></div>
+					<div class="dashboard-stat-content"><h4> ${totalreview}</h4> <span>총 리뷰 수</span></div>
 					<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 				</div>
 			</div>
@@ -103,43 +105,19 @@
 				<div class="dashboard-list-box invoices with-icons margin-top-20">
 					<h4>New Member</h4>
 					<ul>
-						
+						<c:forEach items="${dateMembermodel }" var="dateMembermodels">
 						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>hyeyeon8752</strong>
+							<strong>${dateMembermodels.id }</strong>
 							<ul>
-								<li class="paid">이혜연</li>
-								<li>MemNum: 01</li>
-								<li>Date: 2019/08/22</li>
+								<li class="paid">${dateMembermodels.name }</li>
+								<li>MemNum: ${dateMembermodels.memnum }</li>
+								<li>Date: <fmt:formatDate value="${dateMembermodels.regdate }" pattern="yyyy년 MM월 dd일" /></li>
 							</ul>
 							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
+								<a href="/admin/memberProfile/${dateMembermodels.memnum}" class="button gray">View Info</a>
 							</div>
 						</li>
-						
-						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>euny</strong>
-							<ul>
-								<li class="paid">송은희</li>
-								<li>MemNum: 02</li>
-								<li>Date: 2019/08/22</li>
-							</ul>
-							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
-							</div>
-						</li>
-
-						<li><i class="list-box-icon sl sl-icon-doc"></i>
-							<strong>winsun</strong>
-							<ul>
-								<li class="paid">이승해</li>
-								<li>MemNum: 03</li>
-								<li>Date: 2019/08/22</li>
-							</ul>
-							<div class="buttons-to-right">
-								<a href="/admin/" class="button gray">View Info</a>
-							</div>
-						</li>
-
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

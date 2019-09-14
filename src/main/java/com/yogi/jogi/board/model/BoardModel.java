@@ -9,7 +9,7 @@ public class BoardModel {
 	private String subject;
 	private String writer;
 	private String passwd;
-	private String conetent;
+	private String content;
 	private String fname;
 	private int fsize;
 	private int readcount;
@@ -17,6 +17,11 @@ public class BoardModel {
 	private int ref;
 	private int reStep;
 	private int reLevel;
+	private int replycount;
+	private int prevboardNum;
+	private int nextboardNum;
+	private String nextsubject;
+	private String prevsubject;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -66,12 +71,12 @@ public class BoardModel {
 		this.passwd = passwd;
 	}
 
-	public String getConetent() {
-		return conetent;
+	public String getContent() {
+		return content;
 	}
 
-	public void setConetent(String conetent) {
-		this.conetent = conetent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getFname() {
@@ -130,12 +135,54 @@ public class BoardModel {
 		this.reLevel = reLevel;
 	}
 
+	public int getReplycount() {
+		return replycount;
+	}
+
+	public void setReplycount(int replycount) {
+		this.replycount = replycount;
+	}
+
+	public int getPrevboardNum() {
+		return prevboardNum;
+	}
+
+	public void setPrevboardNum(int prevboardNum) {
+		this.prevboardNum = prevboardNum;
+	}
+
+	public int getNextboardNum() {
+		return nextboardNum;
+	}
+
+	public void setNextboardNum(int nextboardNum) {
+		this.nextboardNum = nextboardNum;
+	}
+
+	public String getNextsubject() {
+		return nextsubject;
+	}
+
+	public void setNextsubject(String nextsubject) {
+		this.nextsubject = nextsubject;
+	}
+
+	public String getPrevsubject() {
+		return prevsubject;
+	}
+
+	public void setPrevsubject(String prevsubject) {
+		this.prevsubject = prevsubject;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardModel [boardNum=" + boardNum + ", memNum=" + memNum + ", boardid=" + boardid + ", subject="
-				+ subject + ", writer=" + writer + ", passwd=" + passwd + ", conetent=" + conetent + ", fname=" + fname
+				+ subject + ", writer=" + writer + ", passwd=" + passwd + ", content=" + content + ", fname=" + fname
 				+ ", fsize=" + fsize + ", readcount=" + readcount + ", regdate=" + regdate + ", ref=" + ref
-				+ ", reStep=" + reStep + ", reLevel=" + reLevel + "]";
+				+ ", reStep=" + reStep + ", reLevel=" + reLevel + ", replycount=" + replycount + ", prevboardNum="
+				+ prevboardNum + ", nextboardNum=" + nextboardNum + ", nextsubject=" + nextsubject + ", prevsubject="
+				+ prevsubject + "]";
 	}
 
 }

@@ -8,28 +8,21 @@
 
 			<ul data-submenu-title="Main">
 				<li class="active"><a href="/admin/main"><i class="sl sl-icon-settings"></i> Admin Main</a></li>
-				<li><a href="/admin/customerCenter"><i class="sl sl-icon-envelope-open"></i> Customer Center <span class="nav-tag messages">2</span></a></li>
-				<li><a href="/admin/booking"><i class="fa fa-calendar-check-o"></i> Booking</a></li>
-				<li><a href="dashboard-wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
 			</ul>
 			
 			<ul data-submenu-title="Listings">
-				<li><a><i class="sl sl-icon-layers"></i> Board</a>
-					<ul>
-						<li><a href="/admin/board">Board <span class="nav-tag green">6</span></a></li>
-						<li><a href="dashboard-my-listings.html">Pending <span class="nav-tag yellow">1</span></a></li>
-						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
-					</ul>	
-				</li>
-				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Reviews</a></li>
-				<li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
-				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
+				<li><a href="/admin/board"><i class="sl sl-icon-layers"></i> Board</a></li>
+				<li><a href="/admin/reviews"><i class="sl sl-icon-star"></i> Review</a></li>
+				<li><a href="/admin/course"><i class="sl sl-icon-plus"></i>Add Course</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">
-				<li><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-				<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+				<li><a href="/admin/memberList"><i class="sl sl-icon-user"></i>Member List</a></li>
+				<li><a href="/member/logout"><i class="sl sl-icon-power"></i> Logout</a></li>
 			</ul>
 			
 		</div>
+	</div>
+	<div id="plusfriend-chat-button" onclick="kakaotalkimadmin()" style="cursor: pointer;">
+			<img src="/resources/images/consult_large_mono_pc.png"/>
 	</div>

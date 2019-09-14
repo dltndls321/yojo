@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="FestReviewMapperNS">
+  	<insert id="insertFestReview" parameterType="festReviewModel">
+  		Insert into festReview(frNum,festNum,memNum,star,fReview,regDate)	
+  		values(
+	  		festReviewSeq.NEXTVAL,
+	  		#{festNum},
+	  		#{memNum},
+	  		#{star},
+	  		#{fReview},
+	  		sysdate
+  		)
+  	</insert>
+  	
+  	<select id="selectFestReviewList" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    	order by
+    		frNum desc
+    </select>
+    
+    <select id="selectFestReviewListWithFestNum"  parameterType="festReviewModel" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    	where
+    		festNum = #{festNum}
+    </select>
+    
+    <select id="selectFestReviewWithMemNum"  parameterType="festReviewModel" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    	where
+    		memNum = #{memNum}
+    </select>
+    
+    <select id="selectFestReviewOne" parameterType="festReviewModel" resultType="festReviewModel">
+    	select
+    		*
+    	from
+    		festReview
+    	where
+    		memNum = #{memNum}
+    	and
+    		festNum = #{festNum}
+    </select>
+  	
+  	<update id="updateFestReview" parameterType="festReviewModel">
+    	update festReview set
+    		star = #{star},
+    		fReview = #{fReview}
+    	where
+    		memNum = #{memNum}
+    	and
+    		festNum = #{festNum}
+    </update>
+</mapper>

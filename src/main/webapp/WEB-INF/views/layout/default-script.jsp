@@ -16,28 +16,6 @@
 <script type="text/javascript" src="/resources/scripts/loginregister.js"></script>
 
 
-<!-- Google Autocomplete -->
-<script>
-  function initAutocomplete() {
-    var input = document.getElementById('autocomplete-input');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
-    autocomplete.addListener('place_changed', function() {
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        return;
-      }
-    });
-
-	if ($('.main-search-input-item')[0]) {
-	    setTimeout(function(){ 
-	        $(".pac-container").prependTo("#autocomplete-container");
-	    }, 300);
-	}
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"></script>
-
 <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 <script src="/resources/scripts/moment.min.js"></script>
 <script src="/resources/scripts/daterangepicker.js"></script>
@@ -79,5 +57,43 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-hidden');
 });
 </script>
-
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('42580803bc68d1e639dd665f90bfadc4');
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      persistAccessToken : false,
+      throughTalk : false,
+      success: function(authObj) {
+          var JsonStr = JSON.stringify(authObj);
+          $.ajax({
+  			url : '/member/Kakaologin',
+  			type: 'post',
+  			datatype : 'json',
+  			data: JsonStr,
+  			contentType : "application/json",
+  			success:function(data){
+  				if(data =='1'){
+  					window.location.href ="/main/main"
+  	  			}else if(data == '2'){
+  	  				window.location.href ="/member/kakaoRegister"
+  	  	  		}else if(data == '3'){
+  	  	  	  		alert("모든 권한을 동의 해 주세요.")
+  	  	  			window.location.href ="/main/main"
+  	  	  	  	}
+  			},
+  			error: function (XMLHttpRequest, textStatus, errorThrown){
+  	        	alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+  	        }
+  	});
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
+   
+  //]]>
+</script>
 

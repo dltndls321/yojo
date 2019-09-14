@@ -5,7 +5,7 @@
  
 <mapper namespace="memberMapperNS">
   <insert id="insertMember" parameterType="memberModel">
-    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate)
+    	Insert Into member(memnum,id,passwd,name,jumin,address,phone,email,regdate,status,tokken)
     	values(
     		memberSeq.NEXTVAL,
     		#{id},
@@ -15,7 +15,9 @@
     		#{address},
     		#{phone},
     		#{email},
-    		sysdate
+    		sysdate,
+    		#{status},
+    		#{tokken}
     	)
     </insert>
   <!--  <select id="selectTest" parameterType="testVO" resultType="testVO">
@@ -31,6 +33,18 @@
     		*
     	from
     		member
+    </select>
+    <select id="selectMemberListPaging" parameterType="hashmap" resultType="memberModel">
+    	select *  from
+    		(select rownum rnum,a.* from
+    			(select 
+    				* 
+    			from 
+    				member
+    			order by memnum desc) a
+    		)
+    		where rnum between #{start} and #{end}
+    	
     </select>
      <select id="selectMemberWithId" parameterType="memberModel" resultType="memberModel">
     	select
@@ -56,19 +70,53 @@
     	where
     		memnum=#{memnum}
     </select>
-    
-    
-    <!--  <delete id="deleteTest" parameterType="int">
-    	delete
-    		from test
+    <select id="selectMemberbetweenDate" parameterType="hashmap" resultType="memberModel">
+    	select
+    		*
+    	from
+    		member
     	where
-    		num = #{num}
+    		regdate between #{start} and #{end}
+    </select>
+	<update id="updateMember" parameterType="memberModel">
+		update member set
+    		id = #{id},
+    		passwd = #{passwd},
+    		name = #{name},
+    		jumin = #{jumin},
+    		address = #{address},
+    		phone = #{phone},
+    		email = #{email}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
+	<update id="updateMemberTokken" parameterType="memberModel">
+		update member set
+    		tokken = #{tokken}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
+    <update id="updateMemberStatus" parameterType="memberModel">
+		update member set
+    		status = #{status}
+    	where
+    		memnum = #{memnum}   
+		   
+	</update>
+     <delete id="deleteMember" parameterType="memberModel">
+    	delete
+    		from member
+    	where
+    		memnum = #{memnum}
     </delete>
-    <update id="updateTest" parameterType="testVO">
+                                                                                 
+    <!-- <update id="updateTest" parameterType="testVO">
     	update test set
     		name = #{name}
     	where
     		num = #{num}
-    </update>
-      -->
+    </update> -->
+     
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="footer" class="sticky-footer">
 	<!-- Main -->
 	<div class="container">
@@ -52,7 +53,7 @@
 		
 		<!-- Copyright -->
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" >
 				<div class="copyrights">© 2019 Listeo. All Rights Reserved.</div>
 			</div>
 		</div>
@@ -65,6 +66,18 @@
 
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
+<c:choose>
+	<c:when test="${SessionMemberId eq 'admin'}">
+		<div id="plusfriend-chat-button" onclick="kakaotalkimadmin()" style="cursor: pointer;">
+			<img src="/resources/images/consult_large_mono_pc.png"/>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div id="plusfriend-chat-button" onclick="kakaotalkwithadmin()" style="cursor: pointer;">
+			<img src="/resources/images/consult_large_mono_pc.png"/>
+		</div>
+	</c:otherwise>
+</c:choose>
 
 
 </div>

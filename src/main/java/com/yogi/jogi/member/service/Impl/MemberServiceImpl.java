@@ -1,6 +1,9 @@
 package com.yogi.jogi.member.service.Impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +45,46 @@ public class MemberServiceImpl implements MemberService{
 	public MemberModel selectMemberWithMemNum(MemberModel memberModel) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectMemberWithMemNum(memberModel);
+	}
+
+	@Override
+	public int updateMember(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.updateMember(memberModel);
+	}
+
+	@Override
+	public int deleteMember(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(memberModel);
+	}
+
+	@Override
+	public List<MemberModel> selectMemberListPaging(int start, int end) throws Exception {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.selectMemberListPaging(map);
+	}
+
+	@Override
+	public List<MemberModel> selectMemberbetweenDate(Date start, Date end) throws Exception {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.selectMemberbetweenDate(map);
+	}
+
+	@Override
+	public int updateMemberTokken(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.updateMemberTokken(memberModel);
+	}
+
+	@Override
+	public int updateMemberStatus(MemberModel memberModel) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.updateMemberStatus(memberModel);
 	}
 	
 	
